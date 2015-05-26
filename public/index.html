@@ -26,49 +26,190 @@
 
 <div class="container">
     <div class="div-principal">
-        <button type="button" class="btn btn-primary btn-large nova-brassagem" style="width: 170px">Nova Brassagem</button>
+        <button type="button" class="btn btn-primary btn-large nova-brassagem" style="width: 195px">Nova Brassagem</button>
     </div>
+    <!-- BRASSAGEM -->
     <div class="div-brassagem" style="display: none">
-        <button type="button" class="btn btn-primary btn-large hlt" style="margin-bottom: 10px; width: 170px">HLT</button></br>
-        <button type="button" class="btn btn-primary btn-large mash" style="margin-bottom: 10px; width: 170px">Mash</button></br>
-        <button type="button" class="btn btn-primary btn-large bol" style="margin-bottom: 10px; width: 170px">BOL</button></br>
-        <button type="button" class="btn btn-primary btn-large disabled finalizar-brassagem" style="margin-bottom: 50px; width: 170px">Finalizar Brassagem</button></br>
-        <button type="button" class="btn btn-primary btn-large cancelar-brassagem" style="width: 170px">Cancelar Brassagem</button>
+        <button type="button" class="btn btn-primary btn-large hlt" style="margin-bottom: 5px; width: 95px">HLT</button>
+        <button type="button" class="btn btn-primary btn-large herms" style="margin-bottom: 5px; width: 95px">Herms</button></br>
+        <button type="button" class="btn btn-primary btn-large mash" style="margin-bottom: 5px; width: 95px">Mash</button>
+        <button type="button" class="btn btn-primary btn-large rampa" style="margin-bottom: 5px; width: 95px">Rampa</button></br>
+        <button type="button" class="btn btn-primary btn-large bol" style="margin-bottom: 5px; width: 195px">BOL</button></br>
+        <button type="button" class="btn btn-primary btn-large resfriar" style="margin-bottom: 5px; width: 95px">Resfriar</button>
+        <button type="button" class="btn btn-primary btn-large whirlpool" style="margin-bottom: 5px; width: 95px">Whirlpool</button></br>
+        <button type="button" class="btn btn-primary btn-large disabled finalizar-brassagem" style="margin-bottom: 20px; width: 195px">Finalizar Brassagem</button></br>
+        <button type="button" class="btn btn-primary btn-large cancelar-brassagem" style="width: 195px">Cancelar Brassagem</button>
     </div>
+
+    <!--HLT -->
     <div class="div-hlt div-hlt-vazio" style="display: none">
-        <button type="button" class="btn btn-primary btn-large encher-hlt" style="margin-bottom: 10px; width: 170px">Encher HLT</button></br>
-        <button type="button" class="btn btn-primary btn-large disabled aquecer-hlt" style="margin-bottom: 50px; width: 170px">Aquecer HLT</button></br>
-        <button type="button" class="btn btn-primary btn-large voltar-hlt" style="width: 170px">Voltar</button>
+        <button type="button" class="btn btn-primary btn-large encher-hlt" style="margin-bottom: 5px; width: 195px">Encher HLT</button></br>
+        <button type="button" class="btn btn-primary btn-large disabled aquecer-hlt" style="margin-bottom: 50px; width: 195px">Aquecer HLT</button></br>
+        <button type="button" class="btn btn-primary btn-large voltar-hlt" style="width: 195px">Voltar</button>
     </div>
     <div class="div-hlt div-hlt-enchendo" style="display: none">
-        <button type="button" class="btn btn-primary btn-large parar-enchimento-hlt" style="margin-bottom: 10px; margin-right: 5px; width: 170px">Parar Enchimento HLT</button><label id="hlt-cheio">Cheio</label></br>
-        <button type="button" class="btn btn-primary btn-large disabled aquecer-hlt" style="margin-bottom: 50px; width: 170px">Aquecer HLT</button></br>
-        <button type="button" class="btn btn-primary btn-large voltar-hlt" style="width: 170px">Voltar</button>
+        <button type="button" class="btn btn-primary btn-large parar-enchimento-hlt" style="margin-bottom: 5px; margin-right: 5px; width: 195px">Parar Enchimento HLT</button><label id="hlt-cheio">Cheio</label></br>
+        <button type="button" class="btn btn-primary btn-large disabled aquecer-hlt" style="margin-bottom: 5px; width: 195px; margin-right: 5px">Aquecer HLT</button><label class="hlt-temperatura"></label></br>
+        <button type="button" class="btn btn-primary btn-large voltar-hlt" style="width: 195px; margin-top: 45px">Voltar</button>
     </div>
     <div class="div-hlt div-hlt-cheio" style="display: none">
-        <button type="button" class="btn btn-primary btn-large disabled encher-hlt" style="margin-bottom: 10px; width: 170px">Encher HLT</button></br>
-        <button type="button" class="btn btn-primary btn-large aquecer-hlt" style="margin-bottom: 50px; width: 170px">Aquecer HLT</button></br>
-        <button type="button" class="btn btn-primary btn-large voltar-hlt" style="width: 170px">Voltar</button>
+        <button type="button" class="btn btn-primary btn-large encher-hlt" style="margin-bottom: 5px; width: 195px">Encher HLT</button></br>
+        <button type="button" class="btn btn-primary btn-large aquecer-hlt" style="margin-bottom: 5px; width: 195px; margin-right: 5px">Aquecer HLT</button><label class="hlt-temperatura"></label></br>
+        <button type="button" class="btn btn-primary btn-large voltar-hlt" style="width: 195px; margin-top: 45px">Voltar</button>
     </div>
     <div class="div-hlt div-hlt-aquecer" style="display: none">
         <button type="button" class="btn btn-primary btn-large diminuir-temperatura-hlt" style="width: 40px; float:left"><</button>
-        <input type="text" class="form-control temperatura-hlt" value="0" maxlength="3" style="width: 80px; float:left; margin-left: 5px; margin-right: 5px" readonly/>
-        <button type="button" class="btn btn-primary btn-large aumentar-temperatura-hlt" style="width: 40px">></button></br>
-        <button type="button" class="btn btn-primary btn-large temperatura-aquecer-hlt" style="margin-top: 10px; margin-bottom: 50px; width: 170px">Aquecer HLT</button></br>
-        <button type="button" class="btn btn-primary btn-large voltar-hlt" style="width: 170px">Voltar</button>
+        <input type="text" class="form-control temperatura-hlt" value="0" maxlength="3" style="width: 105px; float:left; margin-left: 5px; margin-right: 5px" readonly/>
+        <button type="button" class="btn btn-primary btn-large aumentar-temperatura-hlt" style="width: 40px; margin-right: 5px">></button><label>C</label></br>
+        <button type="button" class="btn btn-primary btn-large temperatura-aquecer-hlt" style="margin-top: 5px; margin-bottom: 5px; width: 195px; margin-right: 5px">Aquecer HLT</button></br>
+        <button type="button" class="btn btn-primary btn-large voltar-hlt" style="width: 195px; margin-top: 45px">Voltar</button>
     </div>
     <div class="div-hlt div-hlt-aquecendo" style="display: none">
-        <button type="button" class="btn btn-primary btn-large disabled encher-hlt" style="margin-bottom: 10px; width: 170px">Encher HLT</button></br>
-        <button type="button" class="btn btn-primary btn-large parar-aquecimento-hlt" style="margin-bottom: 10px; width: 170px; margin-right: 5px">Parar Aquecimento HLT</button><label id="hlt-temperatura"></label></br>
-        <button type="button" class="btn btn-primary btn-large alterar-temperatura-hlt" style="margin-bottom: 50px; width: 170px">Alterar Temperatura</button></br>
-        <button type="button" class="btn btn-primary btn-large voltar-hlt" style="width: 170px">Voltar</button>
+        <button type="button" class="btn btn-primary btn-large disabled encher-hlt" style="margin-bottom: 5px; width: 195px">Encher HLT</button></br>
+        <button type="button" class="btn btn-primary btn-large parar-aquecimento-hlt" style="margin-bottom: 5px; width: 195px">Parar Aquecimento HLT</button></br>
+        <button type="button" class="btn btn-primary btn-large alterar-temperatura-hlt" style="margin-bottom: 5px; width: 195px; margin-right: 5px">Alterar Temperatura</button><label class="hlt-temperatura"></label></br>
+        <button type="button" class="btn btn-primary btn-large voltar-hlt" style="width: 195px; margin-top: 45px">Voltar</button>
     </div>
     <div class="div-hlt div-hlt-alterar-temperatura" style="display: none">
         <button type="button" class="btn btn-primary btn-large diminuir-temperatura-hlt" style="width: 40px; float:left"><</button>
-        <input type="text" class="form-control temperatura-hlt" value="0" maxlength="3" style="width: 80px; float:left; margin-left: 5px; margin-right: 5px" readonly/>
-        <button type="button" class="btn btn-primary btn-large aumentar-temperatura-hlt" style="width: 40px">></button></br>
-        <button type="button" class="btn btn-primary btn-large temperatura-aquecer-hlt" style="margin-top: 10px; margin-bottom: 50px; width: 170px">Alterar Temperatura</button></br>
-        <button type="button" class="btn btn-primary btn-large voltar-hlt" style="width: 170px">Voltar</button>
+        <input type="text" class="form-control temperatura-hlt" value="0" maxlength="3" style="width: 105px; float:left; margin-left: 5px; margin-right: 5px" readonly/>
+        <button type="button" class="btn btn-primary btn-large aumentar-temperatura-hlt" style="width: 40px; margin-right: 5px">></button><label>C</label></br>
+        <button type="button" class="btn btn-primary btn-large temperatura-aquecer-hlt" style="margin-top: 5px; margin-bottom: 5px; width: 195px">Alterar Temperatura</button></br>
+        <button type="button" class="btn btn-primary btn-large voltar-hlt" style="width: 195px; margin-top: 45px">Voltar</button>
+    </div>
+
+    <!-- HERMS -->
+    <div class="div-herms div-herms-vazio" style="display: none">
+        <button type="button" class="btn btn-primary btn-large encher-herms" style="margin-bottom: 5px; width: 195px">Encher Herms</button></br>
+        <button type="button" class="btn btn-primary btn-large disabled aquecer-herms" style="margin-bottom: 5px; width: 195px">Aquecer Herms</button></br>
+        <button type="button" class="btn btn-primary btn-large voltar-herms" style="width: 195px; margin-top: 45px">Voltar</button>
+    </div>
+    <div class="div-herms div-herms-enchendo" style="display: none">
+        <button type="button" class="btn btn-primary btn-large parar-enchimento-herms" style="margin-bottom: 5px; margin-right: 5px; width: 195px">Parar Enchimento Herms</button><label id="herms-cheio">Cheio</label></br>
+        <button type="button" class="btn btn-primary btn-large disabled aquecer-herms" style="margin-bottom: 5px; width: 195px; margin-right: 5px">Aquecer Herms</button><label class="herms-temperatura"></label></br>
+        <button type="button" class="btn btn-primary btn-large voltar-herms" style="width: 195px; margin-top: 45px">Voltar</button>
+    </div>
+    <div class="div-herms div-herms-cheio" style="display: none">
+        <button type="button" class="btn btn-primary btn-large encher-herms" style="margin-bottom: 5px; width: 195px">Encher Herms</button></br>
+        <button type="button" class="btn btn-primary btn-large aquecer-herms" style="margin-bottom: 5px; width: 195px; margin-right: 5px">Aquecer Herms</button><label class="herms-temperatura"></label></br>
+        <button type="button" class="btn btn-primary btn-large voltar-herms" style="width: 195px; margin-top: 45px">Voltar</button>
+    </div>
+    <div class="div-herms div-herms-aquecer" style="display: none">
+        <button type="button" class="btn btn-primary btn-large diminuir-temperatura-herms" style="width: 40px; float:left"><</button>
+        <input type="text" class="form-control temperatura-herms" value="0" maxlength="3" style="width: 105px; float:left; margin-left: 5px; margin-right: 5px" readonly/>
+        <button type="button" class="btn btn-primary btn-large aumentar-temperatura-herms" style="width: 40px; margin-right: 5px">></button><label>C</label></br>
+        <button type="button" class="btn btn-primary btn-large temperatura-aquecer-herms" style="margin-top: 5px; margin-bottom: 5px; width: 195px">Aquecer Herms</button></br>
+        <button type="button" class="btn btn-primary btn-large voltar-herms" style="width: 195px; margin-top: 45px">Voltar</button>
+    </div>
+    <div class="div-herms div-herms-aquecendo" style="display: none">
+        <button type="button" class="btn btn-primary btn-large disabled encher-herms" style="margin-bottom: 5px; width: 195px">Encher Herms</button></br>
+        <button type="button" class="btn btn-primary btn-large parar-aquecimento-herms" style="margin-bottom: 5px; width: 195px; margin-right: 5px">Parar Aquecimento Herms</button></br>
+        <button type="button" class="btn btn-primary btn-large alterar-temperatura-herms" style="margin-bottom: 5px; width: 195px; margin-right: 5px">Alterar Temperatura</button><label class="herms-temperatura"></label></br>
+        <button type="button" class="btn btn-primary btn-large voltar-herms" style="width: 195px; margin-top: 45px">Voltar</button>
+    </div>
+    <div class="div-herms div-herms-alterar-temperatura" style="display: none">
+        <button type="button" class="btn btn-primary btn-large diminuir-temperatura-herms" style="width: 40px; float:left"><</button>
+        <input type="text" class="form-control temperatura-herms" value="0" maxlength="3" style="width: 105px; float:left; margin-left: 5px; margin-right: 5px" readonly/>
+        <button type="button" class="btn btn-primary btn-large aumentar-temperatura-herms" style="width: 40px; margin-right: 5px">></button><label>C</label></br>
+        <button type="button" class="btn btn-primary btn-large temperatura-aquecer-herms" style="margin-top: 5px; margin-bottom: 5px; width: 195px">Alterar Temperatura</button></br>
+        <button type="button" class="btn btn-primary btn-large voltar-herms" style="width: 195px; margin-top: 45px">Voltar</button>
+    </div>
+
+
+    <!-- MASH -->
+    <div class="div-mash div-mash-vazio" style="display: none">
+        <button type="button" class="btn btn-primary btn-large encher-mash" style="margin-bottom: 0px; width: 195px">Encher Mash</button></br>
+        <button type="button" class="btn btn-primary btn-large voltar-mash" style="width: 195px; margin-top: 45px">Voltar</button>
+    </div>
+    <div class="div-mash div-mash-enchendo" style="display: none">
+        <button type="button" class="btn btn-primary btn-large parar-enchimento-mash" style="margin-right: 5px; width: 195px">Parar Enchimento Mash</button><label id="mash-cheio">Cheio</label></br>
+        <button type="button" class="btn btn-primary btn-large voltar-mash" style="width: 195px; margin-top: 45px">Voltar</button>
+    </div>
+
+
+    <!-- BOL -->
+    <div class="div-bol div-bol-vazio" style="display: none">
+        <button type="button" class="btn btn-primary btn-large encher-bol" style="margin-bottom: 5px; width: 195px">Encher BOL</button></br>
+        <button type="button" class="btn btn-primary btn-large disabled ferver-bol" style="margin-bottom: 5px; width: 195px">Ferver BOL</button></br>
+        <button type="button" class="btn btn-primary btn-large voltar-bol" style="width: 195px; margin-top: 45px">Voltar</button>
+    </div>
+    <div class="div-bol div-bol-enchendo" style="display: none">
+        <button type="button" class="btn btn-primary btn-large parar-enchimento-bol" style="margin-bottom: 5px; margin-right: 5px; width: 195px">Parar Enchimento BOL</button><label id="bol-cheio">Cheio</label></br>
+        <button type="button" class="btn btn-primary btn-large disabled ferver-bol" style="margin-bottom: 5px; width: 195px; margin-right: 5px">Ferver BOL</button><label class="bol-temperatura"> </label><label class="bol-minuto"></label></br>
+        <button type="button" class="btn btn-primary btn-large voltar-bol" style="width: 195px; margin-top: 45px">Voltar</button>
+    </div>
+    <div class="div-bol div-bol-cheio" style="display: none">
+        <button type="button" class="btn btn-primary btn-large encher-bol" style="margin-bottom: 5px; width: 195px">Encher BOL</button></br>
+        <button type="button" class="btn btn-primary btn-large ferver-bol" style="margin-bottom: 5px; width: 195px; margin-right: 5px">Ferver BOL</button><label class="bol-temperatura"></label> <label class="bol-minuto"></label></br>
+        <button type="button" class="btn btn-primary btn-large voltar-bol" style="width: 195px; margin-top: 45px">Voltar</button>
+    </div>
+    <div class="div-bol div-bol-ferver" style="display: none">
+        <button type="button" class="btn btn-primary btn-large diminuir-temperatura-bol" style="margin-bottom: 5px; width: 40px; float:left"><</button>
+        <input type="text" class="form-control temperatura-bol" value="0" maxlength="3" style="margin-bottom: 5px; width: 105px; float:left; margin-left: 5px; margin-right: 5px" readonly/>
+        <button type="button" class="btn btn-primary btn-large aumentar-temperatura-bol" style="margin-bottom: 5px; width: 40px; margin-right: 5px">></button><label>C</label></br>
+        <button type="button" class="btn btn-primary btn-large diminuir-minuto-bol" style="width: 40px; float:left"><</button>
+        <input type="text" class="form-control minuto-bol" value="0" maxlength="3" style="width: 105px; float:left; margin-left: 5px; margin-right: 5px" readonly/>
+        <button type="button" class="btn btn-primary btn-large aumentar-minuto-bol" style="width: 40px; margin-right: 5px">></button><label>Min</label></br>
+        <button type="button" class="btn btn-primary btn-large temperatura-ferver-bol" style="margin-top: 5px; margin-bottom: 5px; width: 195px">Ferver BOL</button></br>
+        <button type="button" class="btn btn-primary btn-large voltar-bol" style="width: 195px; margin-top: 45px">Voltar</button>
+    </div>
+    <div class="div-bol div-bol-fervendo" style="display: none">
+        <button type="button" class="btn btn-primary btn-large disabled encher-bol" style="margin-bottom: 5px; width: 195px">Encher BOL</button></br>
+        <button type="button" class="btn btn-primary btn-large parar-fervura-bol" style="margin-bottom: 5px; width: 195px; margin-right: 5px">Parar Fervura BOL</button><label class="bol-temperatura"></label> <label class="bol-minuto"></label></br>
+        <button type="button" class="btn btn-primary btn-large voltar-bol" style="width: 195px; margin-top: 45px">Voltar</button>
+    </div>
+
+
+
+    <!--RESFRIAR -->
+    <div class="div-resfriar div-resfriar-cheio" style="display: none">
+        <button type="button" class="btn btn-primary btn-large resfriar-mash" style="margin-bottom: 5px; width: 195px; margin-right: 5px">Resfriar Mash</button><label class="resfriar-temperatura"></label></br>
+        <button type="button" class="btn btn-primary btn-large voltar-resfriar" style="width: 195px; margin-top: 45px">Voltar</button>
+    </div>
+    <div class="div-resfriar div-resfriar-mash" style="display: none">
+        <button type="button" class="btn btn-primary btn-large diminuir-temperatura-resfriar" style="width: 40px; float:left"><</button>
+        <input type="text" class="form-control temperatura-resfriar" value="0" maxlength="3" style="width: 105px; float:left; margin-left: 5px; margin-right: 5px" readonly/>
+        <button type="button" class="btn btn-primary btn-large aumentar-temperatura-resfriar" style="width: 40px; margin-right: 5px">></button><label>C</label></br>
+        <button type="button" class="btn btn-primary btn-large temperatura-resfriar-mash" style="margin-top: 5px; margin-bottom: 5px; width: 195px; margin-right: 5px">Resfriar Mash</button></br>
+        <button type="button" class="btn btn-primary btn-large voltar-resfriar" style="width: 195px; margin-top: 45px">Voltar</button>
+    </div>
+    <div class="div-resfriar div-resfriar-resfriando" style="display: none">
+        <button type="button" class="btn btn-primary btn-large parar-resfriamento-mash" style="margin-bottom: 5px; width: 195px">Parar Resfriamento Mash</button></br>
+        <button type="button" class="btn btn-primary btn-large alterar-temperatura-resfriar" style="margin-bottom: 5px; width: 195px; margin-right: 5px">Alterar Temperatura</button><label class="resfriar-temperatura"></label></br>
+        <button type="button" class="btn btn-primary btn-large voltar-resfriar" style="width: 195px; margin-top: 45px">Voltar</button>
+    </div>
+    <div class="div-resfriar div-resfriar-alterar-temperatura" style="display: none">
+        <button type="button" class="btn btn-primary btn-large diminuir-temperatura-resfriar" style="width: 40px; float:left"><</button>
+        <input type="text" class="form-control temperatura-resfriar" value="0" maxlength="3" style="width: 105px; float:left; margin-left: 5px; margin-right: 5px" readonly/>
+        <button type="button" class="btn btn-primary btn-large aumentar-temperatura-resfriar" style="width: 40px; margin-right: 5px">></button><label>C</label></br>
+        <button type="button" class="btn btn-primary btn-large temperatura-resfriar-mash" style="margin-top: 5px; margin-bottom: 5px; width: 195px">Alterar Temperatura</button></br>
+        <button type="button" class="btn btn-primary btn-large voltar-resfriar" style="width: 195px; margin-top: 45px">Voltar</button>
+    </div>
+
+
+    <!--WHIRLPOOL -->
+    <div class="div-whirlpool div-whirlpool-cheio" style="display: none">
+        <button type="button" class="btn btn-primary btn-large whirlpool-rodar" style="margin-bottom: 5px; width: 195px; margin-right: 5px">Rodar Whirlpool</button><label class="whirlpool-minuto"></label></br>
+        <button type="button" class="btn btn-primary btn-large voltar-whirlpool" style="width: 195px; margin-top: 45px">Voltar</button>
+    </div>
+    <div class="div-whirlpool div-whirlpool-rodar" style="display: none">
+        <button type="button" class="btn btn-primary btn-large diminuir-minuto-whirlpool" style="width: 40px; float:left"><</button>
+        <input type="text" class="form-control minuto-whirlpool" value="0" maxlength="3" style="width: 105px; float:left; margin-left: 5px; margin-right: 5px" readonly/>
+        <button type="button" class="btn btn-primary btn-large aumentar-minuto-whirlpool" style="width: 40px; margin-right: 5px">></button><label>Min</label></br>
+        <button type="button" class="btn btn-primary btn-large minuto-whirlpool-mash" style="margin-top: 5px; margin-bottom: 5px; width: 195px; margin-right: 5px">Rodar Whirlpool</button></br>
+        <button type="button" class="btn btn-primary btn-large voltar-whirlpool" style="width: 195px; margin-top: 45px">Voltar</button>
+    </div>
+    <div class="div-whirlpool div-whirlpool-rodando" style="display: none">
+        <button type="button" class="btn btn-primary btn-large parar-whirlpool-rodando" style="margin-bottom: 5px; width: 195px">Parar Whirlpool</button></br>
+        <button type="button" class="btn btn-primary btn-large alterar-minuto-whirlpool" style="margin-bottom: 5px; width: 195px; margin-right: 5px">Alterar Tempo</button><label class="whirlpool-minuto"></label></br>
+        <button type="button" class="btn btn-primary btn-large voltar-whirlpool" style="width: 195px; margin-top: 45px">Voltar</button>
+    </div>
+    <div class="div-whirlpool div-whirlpool-alterar-minuto" style="display: none">
+        <button type="button" class="btn btn-primary btn-large diminuir-minuto-whirlpool" style="width: 40px; float:left"><</button>
+        <input type="text" class="form-control minuto-whirlpool" value="0" maxlength="3" style="width: 105px; float:left; margin-left: 5px; margin-right: 5px" readonly/>
+        <button type="button" class="btn btn-primary btn-large aumentar-minuto-whirlpool" style="width: 40px; margin-right: 5px">></button><label>Min</label></br>
+        <button type="button" class="btn btn-primary btn-large minuto-whirlpool-mash" style="margin-top: 5px; margin-bottom: 5px; width: 195px">Alterar Tempo</button></br>
+        <button type="button" class="btn btn-primary btn-large voltar-whirlpool" style="width: 195px; margin-top: 45px">Voltar</button>
     </div>
 </div>
 <!-- /container -->
@@ -78,6 +219,7 @@
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="lib/jquery-1.8.2.min.js"></script>
 <script type="text/javascript">
+    // BRASSAGEM
     $(".nova-brassagem").click(function () {
         $(".div-principal").hide();
         $(".div-brassagem").show();
@@ -86,6 +228,8 @@
         $(".div-brassagem").hide();
         $(".div-principal").show();
     });
+
+    // HLT
     $(".hlt").click(function () {
         $(".div-brassagem").hide();
         $(".div-hlt-vazio").show();
@@ -95,34 +239,33 @@
         $(".div-brassagem").show();
     });
     $(".encher-hlt").click(function () {
-        $(".div-hlt-vazio").hide();
+        $(".div-hlt").hide();
         $(".div-hlt-enchendo").show();
     });
     $(".parar-enchimento-hlt").click(function () {
-        $(".div-hlt-enchendo").hide();
+        $(".div-hlt").hide();
         $(".div-hlt-vazio").show();
     });
     $("#hlt-cheio").click(function () {
-        $(".div-hlt-enchendo").hide();
+        $(".div-hlt").hide();
         $(".div-hlt-cheio").show();
     });
     $(".aquecer-hlt").click(function () {
-        $(".div-hlt-cheio").hide();
+        $(".div-hlt").hide();
         $(".div-hlt-aquecer").show();
     });
     $(".temperatura-aquecer-hlt").click(function () {
         var valor = parseInt($(".temperatura-hlt").val())
-        $("#hlt-temperatura").text(valor + "C");
-        $(".div-hlt-aquecer").hide();
-        $(".div-hlt-alterar-temperatura").hide();
+        $(".hlt-temperatura").text(valor + "C");
+        $(".div-hlt").hide();
         $(".div-hlt-aquecendo").show();
     });
     $(".alterar-temperatura-hlt").click(function () {
-        $(".div-hlt-aquecendo").hide();
+        $(".div-hlt").hide();
         $(".div-hlt-alterar-temperatura").show();
     });
     $(".parar-aquecimento-hlt").click(function () {
-        $(".div-hlt-aquecendo").hide();
+        $(".div-hlt").hide();
         $(".div-hlt-cheio").show();
     });
     $(".diminuir-temperatura-hlt").click(function () {
@@ -136,6 +279,230 @@
         if (valor < 0)
             valor = 0;
         $(".temperatura-hlt").val(valor);
+    });
+
+    // HERMS
+    $(".herms").click(function () {
+        $(".div-brassagem").hide();
+        $(".div-herms-vazio").show();
+    });
+    $(".voltar-herms").click(function () {
+        $(".div-herms").hide();
+        $(".div-brassagem").show();
+    });
+    $(".encher-herms").click(function () {
+        $(".div-herms").hide();
+        $(".div-herms-enchendo").show();
+    });
+    $(".parar-enchimento-herms").click(function () {
+        $(".div-herms").hide();
+        $(".div-herms-vazio").show();
+    });
+    $("#herms-cheio").click(function () {
+        $(".div-herms").hide();
+        $(".div-herms-cheio").show();
+    });
+    $(".aquecer-herms").click(function () {
+        $(".div-herms").hide();
+        $(".div-herms-aquecer").show();
+    });
+    $(".temperatura-aquecer-herms").click(function () {
+        var valor = parseInt($(".temperatura-herms").val())
+        $(".herms-temperatura").text(valor + "C");
+        $(".div-herms").hide();
+        $(".div-herms-aquecendo").show();
+    });
+    $(".alterar-temperatura-herms").click(function () {
+        $(".div-herms").hide();
+        $(".div-herms-alterar-temperatura").show();
+    });
+    $(".parar-aquecimento-herms").click(function () {
+        $(".div-herms").hide();
+        $(".div-herms-cheio").show();
+    });
+    $(".diminuir-temperatura-herms").click(function () {
+        var valor = $(".temperatura-herms").val() - 1;
+        if (valor < 0)
+            valor = 0;
+        $(".temperatura-herms").val(valor);
+    });
+    $(".aumentar-temperatura-herms").click(function () {
+        var valor = parseInt($(".temperatura-herms").val()) + 1;
+        if (valor < 0)
+            valor = 0;
+        $(".temperatura-herms").val(valor);
+    });
+
+
+    // MASH
+    $(".mash").click(function () {
+        $(".div-brassagem").hide();
+        $(".div-mash-vazio").show();
+    });
+    $(".voltar-mash").click(function () {
+        $(".div-mash").hide();
+        $(".div-brassagem").show();
+    });
+    $(".encher-mash").click(function () {
+        $(".div-mash").hide();
+        $(".div-mash-enchendo").show();
+    });
+    $(".parar-enchimento-mash").click(function () {
+        $(".div-mash").hide();
+        $(".div-mash-vazio").show();
+    });
+    $("#mash-cheio").click(function () {
+        $(".div-mash").hide();
+        $(".div-mash-vazio").show();
+    });
+
+
+    // BOL
+    $(".bol").click(function () {
+        $(".div-brassagem").hide();
+        $(".div-bol-vazio").show();
+    });
+    $(".voltar-bol").click(function () {
+        $(".div-bol").hide();
+        $(".div-brassagem").show();
+    });
+    $(".encher-bol").click(function () {
+        $(".div-bol").hide();
+        $(".div-bol-enchendo").show();
+    });
+    $(".parar-enchimento-bol").click(function () {
+        $(".div-bol").hide();
+        $(".div-bol-vazio").show();
+    });
+    $("#bol-cheio").click(function () {
+        $(".div-bol").hide();
+        $(".div-bol-cheio").show();
+    });
+    $(".ferver-bol").click(function () {
+        $(".div-bol").hide();
+        $(".div-bol-ferver").show();
+    });
+    $(".temperatura-ferver-bol").click(function () {
+        var valorTemperatura = parseInt($(".temperatura-bol").val())
+        $(".bol-temperatura").text(valorTemperatura + "C");
+
+        var valorMinuto = parseInt($(".minuto-bol").val())
+        $(".bol-minuto").text(valorMinuto + "Min");
+
+        $(".div-bol").hide();
+        $(".div-bol-fervendo").show();
+    });
+    $(".parar-fervura-bol").click(function () {
+        $(".div-bol").hide();
+        $(".div-bol-cheio").show();
+    });
+    $(".diminuir-temperatura-bol").click(function () {
+        var valor = $(".temperatura-bol").val() - 1;
+        if (valor < 0)
+            valor = 0;
+        $(".temperatura-bol").val(valor);
+    });
+    $(".aumentar-temperatura-bol").click(function () {
+        var valor = parseInt($(".temperatura-bol").val()) + 1;
+        if (valor < 0)
+            valor = 0;
+        $(".temperatura-bol").val(valor);
+    });
+    $(".diminuir-minuto-bol").click(function () {
+        var valor = $(".minuto-bol").val() - 1;
+        if (valor < 0)
+            valor = 0;
+        $(".minuto-bol").val(valor);
+    });
+    $(".aumentar-minuto-bol").click(function () {
+        var valor = parseInt($(".minuto-bol").val()) + 1;
+        if (valor < 0)
+            valor = 0;
+        $(".minuto-bol").val(valor);
+    });
+
+
+
+    // RESFRIAR
+    $(".resfriar").click(function () {
+        $(".div-brassagem").hide();
+        $(".div-resfriar-cheio").show();
+    });
+    $(".voltar-resfriar").click(function () {
+        $(".div-resfriar").hide();
+        $(".div-brassagem").show();
+    });
+    $(".resfriar-mash").click(function () {
+        $(".div-resfriar").hide();
+        $(".div-resfriar-mash").show();
+    });
+    $(".temperatura-resfriar-mash").click(function () {
+        var valor = parseInt($(".temperatura-resfriar").val())
+        $(".resfriar-temperatura").text(valor + "C");
+        $(".div-resfriar").hide();
+        $(".div-resfriar-resfriando").show();
+    });
+    $(".alterar-temperatura-resfriar").click(function () {
+        $(".div-resfriar").hide();
+        $(".div-resfriar-alterar-temperatura").show();
+    });
+    $(".parar-resfriamento-mash").click(function () {
+        $(".div-resfriar").hide();
+        $(".div-resfriar-cheio").show();
+    });
+    $(".diminuir-temperatura-resfriar").click(function () {
+        var valor = $(".temperatura-resfriar").val() - 1;
+        if (valor < 0)
+            valor = 0;
+        $(".temperatura-resfriar").val(valor);
+    });
+    $(".aumentar-temperatura-resfriar").click(function () {
+        var valor = parseInt($(".temperatura-resfriar").val()) + 1;
+        if (valor < 0)
+            valor = 0;
+        $(".temperatura-resfriar").val(valor);
+    });
+
+
+
+    // WHIRLPOOL
+    $(".whirlpool").click(function () {
+        $(".div-brassagem").hide();
+        $(".div-whirlpool-cheio").show();
+    });
+    $(".voltar-whirlpool").click(function () {
+        $(".div-whirlpool").hide();
+        $(".div-brassagem").show();
+    });
+    $(".whirlpool-rodar").click(function () {
+        $(".div-whirlpool").hide();
+        $(".div-whirlpool-rodar").show();
+    });
+    $(".minuto-whirlpool-mash").click(function () {
+        var valor = parseInt($(".minuto-whirlpool").val())
+        $(".whirlpool-minuto").text(valor + "Min");
+        $(".div-whirlpool").hide();
+        $(".div-whirlpool-rodando").show();
+    });
+    $(".alterar-minuto-whirlpool").click(function () {
+        $(".div-whirlpool").hide();
+        $(".div-whirlpool-alterar-minuto").show();
+    });
+    $(".parar-whirlpool-rodando").click(function () {
+        $(".div-whirlpool").hide();
+        $(".div-whirlpool-cheio").show();
+    });
+    $(".diminuir-minuto-whirlpool").click(function () {
+        var valor = $(".minuto-whirlpool").val() - 1;
+        if (valor < 0)
+            valor = 0;
+        $(".minuto-whirlpool").val(valor);
+    });
+    $(".aumentar-minuto-whirlpool").click(function () {
+        var valor = parseInt($(".minuto-whirlpool").val()) + 1;
+        if (valor < 0)
+            valor = 0;
+        $(".minuto-whirlpool").val(valor);
     });
 </script>
 </body>
