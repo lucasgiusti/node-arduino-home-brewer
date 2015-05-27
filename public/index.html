@@ -37,8 +37,7 @@
         <button type="button" class="btn btn-primary btn-large bol" style="margin-bottom: 5px; width: 195px">BOL</button></br>
         <button type="button" class="btn btn-primary btn-large resfriar" style="margin-bottom: 5px; width: 95px">Resfriar</button>
         <button type="button" class="btn btn-primary btn-large whirlpool" style="margin-bottom: 5px; width: 95px">Whirlpool</button></br>
-        <button type="button" class="btn btn-primary btn-large disabled finalizar-brassagem" style="margin-bottom: 20px; width: 195px">Finalizar Brassagem</button></br>
-        <button type="button" class="btn btn-primary btn-large cancelar-brassagem" style="width: 195px">Cancelar Brassagem</button>
+        <button type="button" class="btn btn-primary btn-large finalizar-brassagem" style="margin-bottom: 20px; width: 195px">Finalizar Brassagem</button></br>
     </div>
 
     <!--HLT -->
@@ -245,7 +244,7 @@
         $(".div-principal").hide();
         $(".div-brassagem").show();
     });
-    $(".cancelar-brassagem").click(function () {
+    $(".finalizar-brassagem").click(function () {
         $(".div-brassagem").hide();
         $(".div-principal").show();
     });
