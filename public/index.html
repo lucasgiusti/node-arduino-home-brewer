@@ -211,6 +211,27 @@
         <button type="button" class="btn btn-primary btn-large minuto-whirlpool-mash" style="margin-top: 5px; margin-bottom: 5px; width: 195px">Alterar Tempo</button></br>
         <button type="button" class="btn btn-primary btn-large voltar-whirlpool" style="width: 195px; margin-top: 45px">Voltar</button>
     </div>
+
+
+    <!-- RAMPA -->
+    <div class="div-rampa div-rampa-cheio" style="display: none">
+        <button type="button" class="btn btn-primary btn-large nova-rampa" style="margin-bottom: 5px; width: 195px; margin-right: 5px">Nova Rampa</button><label class="rampa-temperatura"></label> <label class="rampa-minuto"></label></br>
+        <button type="button" class="btn btn-primary btn-large voltar-rampa" style="width: 195px; margin-top: 45px">Voltar</button>
+    </div>
+    <div class="div-rampa div-rampa-iniciar" style="display: none">
+        <button type="button" class="btn btn-primary btn-large diminuir-temperatura-rampa" style="margin-bottom: 5px; width: 40px; float:left"><</button>
+        <input type="text" class="form-control temperatura-rampa" value="0" maxlength="3" style="margin-bottom: 5px; width: 105px; float:left; margin-left: 5px; margin-right: 5px" readonly/>
+        <button type="button" class="btn btn-primary btn-large aumentar-temperatura-rampa" style="margin-bottom: 5px; width: 40px; margin-right: 5px">></button><label>C</label></br>
+        <button type="button" class="btn btn-primary btn-large diminuir-minuto-rampa" style="width: 40px; float:left"><</button>
+        <input type="text" class="form-control minuto-rampa" value="0" maxlength="3" style="width: 105px; float:left; margin-left: 5px; margin-right: 5px" readonly/>
+        <button type="button" class="btn btn-primary btn-large aumentar-minuto-rampa" style="width: 40px; margin-right: 5px">></button><label>Min</label></br>
+        <button type="button" class="btn btn-primary btn-large temperatura-iniciar-rampa" style="margin-top: 5px; margin-bottom: 5px; width: 195px">Iniciar Rampa</button></br>
+        <button type="button" class="btn btn-primary btn-large voltar-rampa" style="width: 195px; margin-top: 45px">Voltar</button>
+    </div>
+    <div class="div-rampa div-rampa-rodando" style="display: none">
+        <button type="button" class="btn btn-primary btn-large finalizar-rampa" style="margin-bottom: 5px; width: 195px; margin-right: 5px">Finalizar Rampa</button><label class="rampa-temperatura"></label> <label class="rampa-minuto"></label></br>
+        <button type="button" class="btn btn-primary btn-large voltar-rampa" style="width: 195px; margin-top: 45px">Voltar</button>
+    </div>
 </div>
 <!-- /container -->
 
@@ -503,6 +524,64 @@
         if (valor < 0)
             valor = 0;
         $(".minuto-whirlpool").val(valor);
+    });
+
+
+
+    // RAMPA
+    $(".rampa").click(function () {
+        $(".div-brassagem").hide();
+        $(".div-rampa-cheio").show();
+    });
+    $(".voltar-rampa").click(function () {
+        $(".div-rampa").hide();
+        $(".div-brassagem").show();
+    });
+    $("#rampa-cheio").click(function () {
+        $(".div-rampa").hide();
+        $(".div-rampa-cheio").show();
+    });
+    $(".nova-rampa").click(function () {
+        $(".div-rampa").hide();
+        $(".div-rampa-iniciar").show();
+    });
+    $(".temperatura-iniciar-rampa").click(function () {
+        var valorTemperatura = parseInt($(".temperatura-rampa").val())
+        $(".rampa-temperatura").text(valorTemperatura + "C");
+
+        var valorMinuto = parseInt($(".minuto-rampa").val())
+        $(".rampa-minuto").text(valorMinuto + "Min");
+
+        $(".div-rampa").hide();
+        $(".div-rampa-rodando").show();
+    });
+    $(".finalizar-rampa").click(function () {
+        $(".div-rampa").hide();
+        $(".div-rampa-cheio").show();
+    });
+    $(".diminuir-temperatura-rampa").click(function () {
+        var valor = $(".temperatura-rampa").val() - 1;
+        if (valor < 0)
+            valor = 0;
+        $(".temperatura-rampa").val(valor);
+    });
+    $(".aumentar-temperatura-rampa").click(function () {
+        var valor = parseInt($(".temperatura-rampa").val()) + 1;
+        if (valor < 0)
+            valor = 0;
+        $(".temperatura-rampa").val(valor);
+    });
+    $(".diminuir-minuto-rampa").click(function () {
+        var valor = $(".minuto-rampa").val() - 1;
+        if (valor < 0)
+            valor = 0;
+        $(".minuto-rampa").val(valor);
+    });
+    $(".aumentar-minuto-rampa").click(function () {
+        var valor = parseInt($(".minuto-rampa").val()) + 1;
+        if (valor < 0)
+            valor = 0;
+        $(".minuto-rampa").val(valor);
     });
 </script>
 </body>
