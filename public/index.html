@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -33,7 +33,8 @@
         <button type="button" class="btn btn-primary btn-medio herms">Herms</button></br>
         <button type="button" class="btn btn-primary btn-medio mash">Mash</button>
         <button type="button" class="btn btn-primary btn-medio rampa">Rampa</button></br>
-        <button type="button" class="btn btn-primary btn-grande bol">BOL</button></br>
+        <button type="button" class="btn btn-primary btn-medio bol">BOL</button>
+        <button type="button" class="btn btn-primary btn-medio sparge">Sparge</button></br>
         <button type="button" class="btn btn-primary btn-medio resfriar">Resfriar</button>
         <button type="button" class="btn btn-primary btn-medio whirlpool">Whirlpool</button></br>
         <button type="button" class="btn btn-primary btn-grande fermentador">Fermentador</button></br>
@@ -297,6 +298,21 @@
         <button type="button" class="btn btn-primary btn-grande parar-enchimento-fermentador btn-com-legenda">Parar Enchimento</button>
         <label id="fermentador-cheio">Cheio</label></br>
         <button type="button" class="btn btn-primary btn-grande voltar-fermentador voltar-1-botao">Voltar</button>
+    </div>
+
+
+
+    <!-- SPARGE -->
+    <div class="div-tela div-sparge div-sparge-vazio">
+        <label class="lbl-titulo">Sparge</label></br>
+        <button type="button" class="btn btn-primary btn-grande rodar-sparge">Rodar</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar-sparge voltar-1-botao">Voltar</button>
+    </div>
+    <div class="div-tela div-sparge div-sparge-rodando">
+        <label class="lbl-titulo">Sparge</label></br>
+        <button type="button" class="btn btn-primary btn-grande parar-rodar-sparge btn-com-legenda">Parar Sparge</button>
+        <label id="sparge-feito">Feito</label></br>
+        <button type="button" class="btn btn-primary btn-grande voltar-sparge voltar-1-botao">Voltar</button>
     </div>
 </div>
 <!-- /container -->
@@ -724,6 +740,30 @@
     $("#fermentador-cheio").click(function () {
         $(".div-fermentador").hide();
         $(".div-fermentador-vazio").show();
+    });
+
+
+
+    // SPARGE
+    $(".sparge").click(function () {
+        $(".div-brassagem").hide();
+        $(".div-sparge-vazio").show();
+    });
+    $(".voltar-sparge").click(function () {
+        $(".div-sparge").hide();
+        $(".div-brassagem").show();
+    });
+    $(".rodar-sparge").click(function () {
+        $(".div-sparge").hide();
+        $(".div-sparge-rodando").show();
+    });
+    $(".parar-rodar-sparge").click(function () {
+        $(".div-sparge").hide();
+        $(".div-sparge-vazio").show();
+    });
+    $("#sparge-feito").click(function () {
+        $(".div-sparge").hide();
+        $(".div-sparge-vazio").show();
     });
 </script>
 </body>
