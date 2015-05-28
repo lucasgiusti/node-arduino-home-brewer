@@ -17,7 +17,9 @@
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/bootstrap-modal.css" rel="stylesheet">
     <link href="css/datepicker.css" rel="stylesheet">
-    
+    <link href="css/sweet-alert.css" rel="stylesheet">
+
+    <script src="lib/sweet-alert.js"></script>
 </head>
 
 <body>
@@ -366,8 +368,27 @@
         $(".div-brassagem").show();
     });
     $(".finalizar-brassagem").click(function () {
-        $(".div-brassagem").hide();
-        $(".div-principal").show();
+        //$(".div-brassagem").hide();
+        //$(".div-principal").show();
+
+
+        swal({
+            title: "",
+            text: "Finalizar Brassagem ?",
+            type: "warning",
+            showCancelButton: true,
+            cancelButtonText: "Não",
+            confirmButtonColor: '#428bca',
+            confirmButtonText: 'Sim',
+            closeOnConfirm: false
+        },
+	function () {
+	    swal({ title: "", text: "Brassagem Finalizada!", confirmButtonColor: '#428bca', type: "success" });
+	    $(".div-brassagem").hide();
+	    $(".div-principal").show();
+	});
+
+
     });
 
 
