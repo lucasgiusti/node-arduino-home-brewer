@@ -1,12 +1,5 @@
 ﻿
 function defineLayout() {
-    $(".btn-medio").css("width", "95px");
-    $(".btn-grande").css("width", "195px");
-    $(".diminuir").css("width", "40px");
-    $(".aumentar").css("width", "40px");
-    $(".txt-valor").css("width", "105px");
-    $(".lbl-titulo").css("width", "195px");
-
     $(".btn-medio").css("margin-bottom", "5px");
     $(".btn-grande").css("margin-bottom", "5px");
     $(".btn-com-legenda").css("margin-right", "1px");
