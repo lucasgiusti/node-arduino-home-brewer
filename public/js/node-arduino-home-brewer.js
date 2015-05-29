@@ -1,9 +1,14 @@
 ﻿
 function defineLayout() {
-    $(".btn-medio").css("margin-bottom", "5px");
     $(".btn-medio").css("width", "95px");
-    $(".btn-grande").css("margin-bottom", "5px");
     $(".btn-grande").css("width", "195px");
+    $(".diminuir").css("width", "40px");
+    $(".aumentar").css("width", "40px");
+    $(".txt-valor").css("width", "105px");
+    $(".lbl-titulo").css("width", "195px");
+
+    $(".btn-medio").css("margin-bottom", "5px");
+    $(".btn-grande").css("margin-bottom", "5px");
     $(".btn-com-legenda").css("margin-right", "1px");
     $(".voltar-1-botao").css("margin-top", "156px");
     $(".voltar-1-botao-2-legendas").css("margin-top", "106px");
@@ -21,16 +26,12 @@ function defineLayout() {
     $(".log-3-botoes").css("margin-top", "78px");
     $(".log-3-botoes-1-legenda").css("margin-top", "14px");
     $(".log-5-botoes").css("margin-top", "0px");
-    $(".diminuir").css("width", "40px");
     $(".diminuir").css("float", "left");
-    $(".aumentar").css("width", "40px");
     $(".aumentar").css("margin-right", "5px");
     $(".aumentar").css("margin-bottom", "5px");
-    $(".txt-valor").css("width", "105px");
     $(".txt-valor").css("float", "left");
     $(".txt-valor").css("margin-left", "5px");
     $(".txt-valor").css("margin-right", "5px");
-    $(".lbl-titulo").css("width", "195px");
     $(".lbl-titulo").css("text-align", "center");
     $(".temperatura").css("margin-right", "20px");
     $(".minuto").css("margin-right", "20px");
