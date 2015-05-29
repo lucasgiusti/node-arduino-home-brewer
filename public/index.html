@@ -1,16 +1,854 @@
-﻿<!doctype html>
-<html>
-  <head>
-    <title>Simple Nodejs and Arduino Relay (with socket.io)</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
-  </head>
-  <body>
-    <session>
-    <article><h4>Simple Nodejs and Arduino Relay (with socket.io)</h4></article>
-      <article><button type="button" id="btnOn" class="btn btn-primary" style="margin-top: 10px; margin-left: 10px; width: 150px">On</button></article>
-      <article><button type="button" id="btnOff" class="btn btn-primary" style="margin-top: 10px; margin-left: 10px; width: 150px">Off</button></article>
-      </session>
-  </body>
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Arduino Home Brewer</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    
+    <style>
+        body {
+            padding-top: 30px; /* 60px to make the container go all the way to the bottom of the topbar */
+        }
+    </style>
+    <link href="css/styles.css" rel="stylesheet">
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/bootstrap-modal.css" rel="stylesheet">
+    <link href="css/datepicker.css" rel="stylesheet">
+    <link href="css/sweet-alert.css" rel="stylesheet">
+
+    <script src="lib/sweet-alert.js"></script>
+</head>
+
+<body>
+<div class="container" style="margin-top: -15px">
+    <div class="div-principal">
+        <label class="lbl-titulo">Node Arduino Home Brewer</label></br>
+        <button type="button" class="btn btn-primary btn-grande nova-brassagem">Nova Brassagem</button>
+    </div>
+    <!-- BRASSAGEM -->
+    <div class="div-tela div-brassagem">
+        <label class="lbl-titulo">Brassagem</label></br>
+        <button type="button" class="btn btn-primary btn-medio hlt">HLT</button>
+        <button type="button" class="btn btn-primary btn-medio herms">Herms</button></br>
+        <button type="button" class="btn btn-primary btn-medio mash">Mash</button>
+        <button type="button" class="btn btn-primary btn-medio rampa">Rampa</button></br>
+        <button type="button" class="btn btn-primary btn-medio bol">BOL</button>
+        <button type="button" class="btn btn-primary btn-medio sparge">Sparge</button></br>
+        <button type="button" class="btn btn-primary btn-medio resfriar">Resfriar</button>
+        <button type="button" class="btn btn-primary btn-medio whirlpool">Whirlpool</button></br>
+        <button type="button" class="btn btn-primary btn-grande fermentador">Fermentador</button></br>
+        <button type="button" class="btn btn-primary btn-grande finalizar-brassagem voltar-5-botoes">Finalizar Brassagem</button></br>
+    </div>
+
+    <!--HLT -->
+    <div class="div-tela div-hlt div-hlt-vazio">
+        <label class="lbl-titulo">HLT</label></br>
+        <button type="button" class="btn btn-primary btn-grande encher-hlt">Encher</button></br>
+        <button type="button" class="btn btn-primary btn-grande disabled aquecer-hlt">Aquecer</button></br>
+        <button type="button" class="btn btn-primary btn-grande log-hlt log-2-botoes">Log</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar-hlt">Voltar</button>
+    </div>
+    <div class="div-tela div-hlt div-hlt-enchendo">
+        <label class="lbl-titulo">HLT</label></br>
+        <button type="button" class="btn btn-primary btn-grande parar-enchimento-hlt btn-com-legenda">Parar Enchimento</button>
+        <label id="hlt-cheio">Cheio</label></br>
+        <button type="button" class="btn btn-primary btn-grande disabled aquecer-hlt btn-com-legenda">Aquecer</button></br>
+        <button type="button" class="btn btn-primary btn-grande log-hlt log-2-botoes">Log</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar-hlt">Voltar</button>
+    </div>
+    <div class="div-tela div-hlt div-hlt-cheio">
+        <label class="lbl-titulo">HLT</label></br>
+        <button type="button" class="btn btn-primary btn-grande encher-hlt">Encher</button></br>
+        <button type="button" class="btn btn-primary btn-grande aquecer-hlt btn-com-legenda">Aquecer</button></br>
+        <button type="button" class="btn btn-primary btn-grande log-hlt log-2-botoes">Log</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar-hlt">Voltar</button>
+    </div>
+    <div class="div-tela div-hlt div-hlt-aquecer">
+        <label class="lbl-titulo">HLT</label></br>
+        <button type="button" class="btn btn-primary diminuir-temperatura-hlt btn-diminuir"><</button>
+        <input type="text" class="form-control temperatura-hlt txt-valor" value="30" maxlength="3" readonly/>
+        <button type="button" class="btn btn-primary aumentar-temperatura-hlt btn-aumentar">></button>
+        <label>ºC</label></br>
+        <button type="button" class="btn btn-primary btn-grande temperatura-aquecer-hlt">Aquecer</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar-hlt voltar-2-botoes">Voltar</button>
+    </div>
+    <div class="div-tela div-hlt div-hlt-aquecendo">
+        <label class="lbl-titulo">HLT</label></br>
+        <button type="button" class="btn btn-primary btn-grande disabled encher-hlt">Encher</button></br>
+        <button type="button" class="btn btn-primary btn-grande parar-aquecimento-hlt">Parar Aquecimento</button></br>
+        <button type="button" class="btn btn-primary btn-grande alterar-temperatura-hlt btn-com-legenda">Alterar Temperatura</button></br>
+        <label class="temperatura hlt-temperatura"></label><label class="hlt-temperatura-atual"></label></br>
+        <button type="button" class="btn btn-primary btn-grande log-hlt log-3-botoes-1-legenda">Log</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar-hlt">Voltar</button>
+    </div>
+    <div class="div-tela div-hlt div-hlt-alterar-temperatura">
+        <label class="lbl-titulo">HLT</label></br>
+        <button type="button" class="btn btn-primary diminuir-temperatura-hlt btn-diminuir"><</button>
+        <input type="text" class="form-control temperatura-hlt txt-valor" value="30" maxlength="3" readonly/>
+        <button type="button" class="btn btn-primary aumentar-temperatura-hlt btn-aumentar">></button>
+        <label>ºC</label></br>
+        <button type="button" class="btn btn-primary btn-grande temperatura-aquecer-hlt">Alterar Temperatura</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar-hlt voltar-2-botoes">Voltar</button>
+    </div>
+
+    <!-- HERMS -->
+    <div class="div-tela div-herms div-herms-vazio">
+        <label class="lbl-titulo">Herms</label></br>
+        <button type="button" class="btn btn-primary btn-grande encher-herms">Encher</button></br>
+        <button type="button" class="btn btn-primary btn-grande disabled aquecer-herms">Aquecer</button></br>
+        <button type="button" class="btn btn-primary btn-grande log-herms log-2-botoes">Log</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar-herms">Voltar</button>
+    </div>
+    <div class="div-tela div-herms div-herms-enchendo">
+        <label class="lbl-titulo">Herms</label></br>
+        <button type="button" class="btn btn-primary btn-grande parar-enchimento-herms btn-com-legenda">Parar Enchimento</button>
+        <label id="herms-cheio">Cheio</label></br>
+        <button type="button" class="btn btn-primary btn-grande disabled aquecer-herms btn-com-legenda">Aquecer</button></br>
+        <button type="button" class="btn btn-primary btn-grande log-herms log-2-botoes">Log</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar-herms">Voltar</button>
+    </div>
+    <div class="div-tela div-herms div-herms-cheio">
+        <label class="lbl-titulo">Herms</label></br>
+        <button type="button" class="btn btn-primary btn-grande encher-herms">Encher</button></br>
+        <button type="button" class="btn btn-primary btn-grande aquecer-herms btn-com-legenda">Aquecer</button></br>
+        <button type="button" class="btn btn-primary btn-grande log-herms log-2-botoes">Log</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar-herms">Voltar</button>
+    </div>
+    <div class="div-tela div-herms div-herms-aquecer">
+        <label class="lbl-titulo">Herms</label></br>
+        <button type="button" class="btn btn-primary diminuir-temperatura-herms btn-diminuir"><</button>
+        <input type="text" class="form-control temperatura-herms txt-valor" value="30" maxlength="3" readonly/>
+        <button type="button" class="btn btn-primary aumentar-temperatura-herms btn-aumentar">></button>
+        <label>ºC</label></br>
+        <button type="button" class="btn btn-primary btn-grande temperatura-aquecer-herms">Aquecer</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar-herms voltar-2-botoes">Voltar</button>
+    </div>
+    <div class="div-tela div-herms div-herms-aquecendo">
+        <label class="lbl-titulo">Herms</label></br>
+        <button type="button" class="btn btn-primary btn-grande disabled encher-herms">Encher</button></br>
+        <button type="button" class="btn btn-primary btn-grande parar-aquecimento-herms">Parar Aquecimento</button></br>
+        <button type="button" class="btn btn-primary btn-grande alterar-temperatura-herms btn-com-legenda">Alterar Temperatura</button></br>
+        <label class="temperatura herms-temperatura"></label><label class="herms-temperatura-atual"></label></br>
+        <button type="button" class="btn btn-primary btn-grande log-herms log-3-botoes-1-legenda">Log</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar-herms">Voltar</button>
+    </div>
+    <div class="div-tela div-herms div-herms-alterar-temperatura">
+        <label class="lbl-titulo">Herms</label></br>
+        <button type="button" class="btn btn-primary diminuir-temperatura-herms btn-diminuir"><</button>
+        <input type="text" class="form-control temperatura-herms txt-valor" value="30" maxlength="3" readonly/>
+        <button type="button" class="btn btn-primary aumentar-temperatura-herms btn-aumentar">></button>
+        <label>ºC</label></br>
+        <button type="button" class="btn btn-primary btn-grande temperatura-aquecer-herms">Alterar Temperatura</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar-herms voltar-2-botoes">Voltar</button>
+    </div>
+
+
+    <!-- MASH -->
+    <div class="div-tela div-mash div-mash-vazio">
+        <label class="lbl-titulo">Mash</label></br>
+        <button type="button" class="btn btn-primary btn-grande encher-mash">Encher</button></br>
+        <button type="button" class="btn btn-primary btn-grande log-mash log-1-botao">Log</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar-mash">Voltar</button>
+    </div>
+    <div class="div-tela div-mash div-mash-enchendo">
+        <label class="lbl-titulo">Mash</label></br>
+        <button type="button" class="btn btn-primary btn-grande parar-enchimento-mash btn-com-legenda">Parar Enchimento</button>
+        <label id="mash-cheio">Cheio</label></br>
+        <button type="button" class="btn btn-primary btn-grande log-mash log-1-botao">Log</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar-mash">Voltar</button>
+    </div>
+
+
+    <!-- BOL -->
+    <div class="div-tela div-bol div-bol-vazio">
+        <label class="lbl-titulo">BOL</label></br>
+        <button type="button" class="btn btn-primary btn-grande encher-bol">Encher</button></br>
+        <button type="button" class="btn btn-primary btn-grande disabled ferver-bol">Ferver</button></br>
+        <button type="button" class="btn btn-primary btn-grande log-bol log-2-botoes">Log</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar-bol">Voltar</button>
+    </div>
+    <div class="div-tela div-bol div-bol-enchendo">
+        <label class="lbl-titulo">BOL</label></br>
+        <button type="button" class="btn btn-primary btn-grande parar-enchimento-bol btn-com-legenda">Parar Enchimento</button>
+        <label id="bol-cheio">Cheio</label></br>
+        <button type="button" class="btn btn-primary btn-grande disabled ferver-bol btn-com-legenda">Ferver</button></br>
+        <button type="button" class="btn btn-primary btn-grande log-bol log-2-botoes">Log</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar-bol">Voltar</button>
+    </div>
+    <div class="div-tela div-bol div-bol-cheio">
+        <label class="lbl-titulo">BOL</label></br>
+        <button type="button" class="btn btn-primary btn-grande encher-bol">Encher</button></br>
+        <button type="button" class="btn btn-primary btn-grande ferver-bol btn-com-legenda">Ferver</button></br>
+        <button type="button" class="btn btn-primary btn-grande log-bol log-2-botoes">Log</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar-bol">Voltar</button>
+    </div>
+    <div class="div-tela div-bol div-bol-ferver">
+        <label class="lbl-titulo">BOL</label></br>
+        <button type="button" class="btn btn-primary diminuir-temperatura-bol btn-diminuir"><</button>
+        <input type="text" class="form-control temperatura-bol txt-valor" value="30" maxlength="3" readonly/>
+        <button type="button" class="btn btn-primary aumentar-temperatura-bol btn-aumentar">></button>
+        <label>ºC</label></br>
+        <button type="button" class="btn btn-primary diminuir-minuto-bol btn-diminuir"><</button>
+        <input type="text" class="form-control minuto-bol txt-valor" value="60" maxlength="3" readonly/>
+        <button type="button" class="btn btn-primary aumentar-minuto-bol btn-aumentar">></button>
+        <label>M</label></br>
+        <button type="button" class="btn btn-primary btn-grande temperatura-ferver-bol">Ferver</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar-bol voltar-3-botoes">Voltar</button>
+    </div>
+    <div class="div-tela div-bol div-bol-fervendo">
+        <label class="lbl-titulo">BOL</label></br>
+        <button type="button" class="btn btn-primary btn-grande disabled encher-bol">Encher</button></br>
+        <button type="button" class="btn btn-primary btn-grande parar-fervura-bol btn-com-legenda">Parar Fervura</button></br>
+        <label class="temperatura bol-temperatura"></label><label class="bol-temperatura-atual"></label></br>
+        <label class="minuto bol-minuto"></label><label class="bol-minuto-atual"></label></br>
+        <button type="button" class="btn btn-primary btn-grande log-bol log-2-botoes-2-legendas">Log</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar-bol">Voltar</button>
+    </div>
+
+
+
+    <!--RESFRIAR -->
+    <div class="div-tela div-resfriar div-resfriar-cheio">
+        <label class="lbl-titulo">Resfriar</label></br>
+        <button type="button" class="btn btn-primary btn-grande resfriar-mash btn-com-legenda">Resfriar</button></br>
+        <button type="button" class="btn btn-primary btn-grande log-resfriar log-1-botao">Log</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar-resfriar">Voltar</button>
+    </div>
+    <div class="div-tela div-resfriar div-resfriar-mash">
+        <label class="lbl-titulo">Resfriar</label></br>
+        <button type="button" class="btn btn-primary diminuir-temperatura-resfriar btn-diminuir"><</button>
+        <input type="text" class="form-control temperatura-resfriar txt-valor" value="30" maxlength="3" readonly/>
+        <button type="button" class="btn btn-primary aumentar-temperatura-resfriar btn-aumentar">></button>
+        <label>ºC</label></br>
+        <button type="button" class="btn btn-primary btn-grande temperatura-resfriar-mash">Resfriar</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar-resfriar voltar-2-botoes">Voltar</button>
+    </div>
+    <div class="div-tela div-resfriar div-resfriar-resfriando">
+        <label class="lbl-titulo">Resfriar</label></br>
+        <button type="button" class="btn btn-primary btn-grande parar-resfriamento-mash">Parar Resfriamento</button></br>
+        <button type="button" class="btn btn-primary btn-grande alterar-temperatura-resfriar btn-com-legenda">Alterar Temperatura</button></br>
+        <label class="temperatura resfriar-temperatura"></label><label class="resfriar-temperatura-atual"></label></br>
+        <button type="button" class="btn btn-primary btn-grande log-resfriar log-2-botoes-1-legenda">Log</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar-resfriar">Voltar</button>
+    </div>
+    <div class="div-tela div-resfriar div-resfriar-alterar-temperatura">
+        <label class="lbl-titulo">Resfriar</label></br>
+        <button type="button" class="btn btn-primary diminuir-temperatura-resfriar btn-diminuir"><</button>
+        <input type="text" class="form-control temperatura-resfriar txt-valor" value="30" maxlength="3" readonly/>
+        <button type="button" class="btn btn-primary aumentar-temperatura-resfriar btn-aumentar">></button>
+        <label>ºC</label></br>
+        <button type="button" class="btn btn-primary btn-grande temperatura-resfriar-mash">Alterar Temperatura</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar-resfriar voltar-2-botoes">Voltar</button>
+    </div>
+
+
+    <!--WHIRLPOOL -->
+    <div class="div-tela div-whirlpool div-whirlpool-cheio">
+        <label class="lbl-titulo">Whirlpool</label></br>
+        <button type="button" class="btn btn-primary btn-grande whirlpool-rodar btn-com-legenda">Rodar</button></br>
+        <button type="button" class="btn btn-primary btn-grande log-whirlpool log-1-botao">Log</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar-whirlpool">Voltar</button>
+    </div>
+    <div class="div-tela div-whirlpool div-whirlpool-rodar">
+        <label class="lbl-titulo">Whirlpool</label></br>
+        <button type="button" class="btn btn-primary diminuir-minuto-whirlpool btn-diminuir"><</button>
+        <input type="text" class="form-control minuto-whirlpool txt-valor" value="60" maxlength="3" readonly/>
+        <button type="button" class="btn btn-primary aumentar-minuto-whirlpool btn-aumentar">></button>
+        <label>M</label></br>
+        <button type="button" class="btn btn-primary btn-grande minuto-whirlpool-mash">Rodar</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar-whirlpool voltar-2-botoes">Voltar</button>
+    </div>
+    <div class="div-tela div-whirlpool div-whirlpool-rodando">
+        <label class="lbl-titulo">Whirlpool</label></br>
+        <button type="button" class="btn btn-primary btn-grande parar-whirlpool-rodando">Parar Whirlpool</button></br>
+        <button type="button" class="btn btn-primary btn-grande alterar-minuto-whirlpool btn-com-legenda">Alterar Tempo</button></br>
+        <label class="minuto whirlpool-minuto"></label><label class="whirlpool-minuto-atual"></label></br>
+        <button type="button" class="btn btn-primary btn-grande log-whirlpool log-2-botoes-1-legenda">Log</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar-whirlpool">Voltar</button>
+    </div>
+    <div class="div-tela div-whirlpool div-whirlpool-alterar-minuto">
+        <label class="lbl-titulo">Whirlpool</label></br>
+        <button type="button" class="btn btn-primary diminuir-minuto-whirlpool btn-diminuir"><</button>
+        <input type="text" class="form-control minuto-whirlpool txt-valor" value="60" maxlength="3" readonly/>
+        <button type="button" class="btn btn-primary aumentar-minuto-whirlpool btn-aumentar">></button>
+        <label>M</label></br>
+        <button type="button" class="btn btn-primary btn-grande minuto-whirlpool-mash">Alterar Tempo</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar-whirlpool voltar-2-botoes">Voltar</button>
+    </div>
+
+
+    <!-- RAMPA -->
+    <div class="div-tela div-rampa div-rampa-cheio">
+        <label class="lbl-titulo">Rampa</label><label class="rampa-numero">1</label></br>
+        <button type="button" class="btn btn-primary btn-grande nova-rampa btn-com-legenda">Nova</button></br>
+        <button type="button" class="btn btn-primary btn-grande log-rampa log-1-botao">Log</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar-rampa">Voltar</button>
+    </div>
+    <div class="div-tela div-rampa div-rampa-iniciar">
+        <label class="lbl-titulo">Rampa</label><label class="rampa-numero">1</label></br>
+        <button type="button" class="btn btn-primary diminuir-temperatura-rampa btn-diminuir"><</button>
+        <input type="text" class="form-control temperatura-rampa txt-valor" value="30" maxlength="3" readonly/>
+        <button type="button" class="btn btn-primary aumentar-temperatura-rampa btn-aumentar">></button>
+        <label>ºC</label></br>
+        <button type="button" class="btn btn-primary diminuir-minuto-rampa btn-diminuir"><</button>
+        <input type="text" class="form-control minuto-rampa txt-valor" value="60" maxlength="3" readonly/>
+        <button type="button" class="btn btn-primary aumentar-minuto-rampa btn-aumentar">></button>
+        <label>M</label></br>
+        <button type="button" class="btn btn-primary btn-grande temperatura-iniciar-rampa">Iniciar</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar-rampa voltar-rampa2 voltar-3-botoes">Voltar</button>
+    </div>
+    <div class="div-tela div-rampa div-rampa-rodando">
+        <label class="lbl-titulo">Rampa</label><label class="rampa-numero">1</label></br>
+        <button type="button" class="btn btn-primary btn-grande finalizar-rampa btn-com-legenda">Finalizar</button></br>
+        <label class="temperatura rampa-temperatura"></label><label class="rampa-temperatura-atual"></label></br>
+        <label class="minuto rampa-minuto"></label><label class="rampa-minuto-atual"></label></br>
+        <button type="button" class="btn btn-primary btn-grande log-rampa log-1-botao-2-legendas">Log</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar-rampa">Voltar</button>
+    </div>
+
+    <!-- FERMENTADOR -->
+    <div class="div-tela div-fermentador div-fermentador-vazio">
+        <label class="lbl-titulo">Fermentador</label></br>
+        <button type="button" class="btn btn-primary btn-grande encher-fermentador">Encher</button></br>
+        <button type="button" class="btn btn-primary btn-grande log-fermentador log-1-botao">Log</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar-fermentador">Voltar</button>
+    </div>
+    <div class="div-tela div-fermentador div-fermentador-enchendo">
+        <label class="lbl-titulo">Fermentador</label></br>
+        <button type="button" class="btn btn-primary btn-grande parar-enchimento-fermentador btn-com-legenda">Parar Enchimento</button>
+        <label id="fermentador-cheio">Cheio</label></br>
+        <button type="button" class="btn btn-primary btn-grande log-fermentador log-1-botao">Log</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar-fermentador">Voltar</button>
+    </div>
+
+
+
+    <!-- SPARGE -->
+    <div class="div-tela div-sparge div-sparge-vazio">
+        <label class="lbl-titulo">Sparge</label></br>
+        <button type="button" class="btn btn-primary btn-grande rodar-sparge">Rodar</button></br>
+        <button type="button" class="btn btn-primary btn-grande log-sparge log-1-botao">Log</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar-sparge">Voltar</button>
+    </div>
+    <div class="div-tela div-sparge div-sparge-rodando">
+        <label class="lbl-titulo">Sparge</label></br>
+        <button type="button" class="btn btn-primary btn-grande parar-rodar-sparge btn-com-legenda">Parar Sparge</button>
+        <label id="sparge-feito">Feito</label></br>
+        <button type="button" class="btn btn-primary btn-grande log-sparge log-1-botao">Log</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar-sparge">Voltar</button>
+    </div>
+</div>
+<!-- /container -->
+
+<!-- Le javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="lib/jquery-1.8.2.min.js"></script>
+<script type="text/javascript">
+
+    $(".btn-medio").css("margin-bottom", "5px");
+    $(".btn-medio").css("width", "95px");
+
+    $(".btn-grande").css("margin-bottom", "5px");
+    $(".btn-grande").css("width", "195px");
+
+    $(".btn-com-legenda").css("margin-right", "1px");
+
+    $(".voltar-1-botao").css("margin-top", "156px");
+    $(".voltar-1-botao-2-legendas").css("margin-top", "106px");
+    $(".voltar-2-botoes").css("margin-top", "117px");
+    $(".voltar-2-botoes-2-legendas").css("margin-top", "67px");
+    $(".voltar-2-botoes-1-legenda").css("margin-top", "92px");
+    $(".voltar-3-botoes").css("margin-top", "78px");
+    $(".voltar-3-botoes-1-legenda").css("margin-top", "53px");
+    $(".voltar-5-botoes").css("margin-top", "0px");
+
+    $(".log-1-botao").css("margin-top", "117px");
+    $(".log-1-botao-2-legendas").css("margin-top", "67px");
+    $(".log-2-botoes").css("margin-top", "78px");
+    $(".log-2-botoes-2-legendas").css("margin-top", "28px");
+    $(".log-2-botoes-1-legenda").css("margin-top", "53px");
+    $(".log-3-botoes").css("margin-top", "78px");
+    $(".log-3-botoes-1-legenda").css("margin-top", "14px");
+    $(".log-5-botoes").css("margin-top", "0px");
+
+    $(".btn-diminuir").css("width", "40px");
+    $(".btn-diminuir").css("float", "left");
+
+    $(".btn-aumentar").css("width", "40px");
+    $(".btn-aumentar").css("margin-right", "5px");
+    $(".btn-aumentar").css("margin-bottom", "5px");
+
+    $(".txt-valor").css("width", "105px");
+    $(".txt-valor").css("float", "left");
+    $(".txt-valor").css("margin-left", "5px");
+    $(".txt-valor").css("margin-right", "5px");
+
+
+    $(".lbl-titulo").css("width", "195px");
+    $(".lbl-titulo").css("text-align", "center");
+
+    $(".temperatura").css("margin-right", "20px");
+    $(".minuto").css("margin-right", "20px");
+
+    
+    // BRASSAGEM
+    $(".nova-brassagem").click(function () {
+        $(".div-principal").hide();
+        $(".div-brassagem").show();
+    });
+    $(".finalizar-brassagem").click(function () {
+        swal({
+            title: "",
+            text: "Finalizar Brassagem ?",
+            type: "warning",
+            showCancelButton: true,
+            cancelButtonText: "Não",
+            confirmButtonColor: '#428bca',
+            confirmButtonText: 'Sim',
+            closeOnConfirm: false
+        },
+	function () {
+	    swal({ title: "", text: "Brassagem Finalizada!", confirmButtonColor: '#428bca', type: "success" });
+	    $(".div-brassagem").hide();
+	    $(".div-principal").show();
+	});
+
+
+    });
+
+
+
+    // HLT
+    $(".hlt").click(function () {
+        $(".div-brassagem").hide();
+        $(".div-hlt-vazio").show();
+    });
+    $(".voltar-hlt").click(function () {
+        $(".div-hlt").hide();
+        $(".div-brassagem").show();
+    });
+    $(".encher-hlt").click(function () {
+        $(".div-hlt").hide();
+        $(".div-hlt-enchendo").show();
+    });
+    $(".parar-enchimento-hlt").click(function () {
+        $(".div-hlt").hide();
+        $(".div-hlt-vazio").show();
+    });
+    $("#hlt-cheio").click(function () {
+        $(".div-hlt").hide();
+        $(".div-hlt-cheio").show();
+    });
+    $(".aquecer-hlt").click(function () {
+        $(".div-hlt").hide();
+        $(".div-hlt-aquecer").show();
+    });
+    $(".temperatura-aquecer-hlt").click(function () {
+        var valor = parseInt($(".temperatura-hlt").val())
+        $(".hlt-temperatura").text("Temp. " + valor + "ºC");
+        $(".hlt-temperatura-atual").text("Atual. " + valor + "ºC");
+        $(".div-hlt").hide();
+        $(".div-hlt-aquecendo").show();
+    });
+    $(".alterar-temperatura-hlt").click(function () {
+        $(".div-hlt").hide();
+        $(".div-hlt-alterar-temperatura").show();
+    });
+    $(".parar-aquecimento-hlt").click(function () {
+        $(".div-hlt").hide();
+        $(".div-hlt-cheio").show();
+    });
+    $(".diminuir-temperatura-hlt").click(function () {
+        var valor = $(".temperatura-hlt").val()-1;
+        if (valor < 0)
+            valor = 0;
+        $(".temperatura-hlt").val(valor);
+    });
+    $(".aumentar-temperatura-hlt").click(function () {
+        var valor = parseInt($(".temperatura-hlt").val()) + 1;
+        if (valor < 0)
+            valor = 0;
+        $(".temperatura-hlt").val(valor);
+    });
+    $(".log-hlt").click(function () {
+        swal({ title: "", text: "Enchimento Iniciado\nEnchimento Parado\nEnchimento Finalizado\nAquecimento Iniciado\nAquecimento Parado", confirmButtonColor: '#428bca' });
+    });
+
+
+
+
+    // HERMS
+    $(".herms").click(function () {
+        $(".div-brassagem").hide();
+        $(".div-herms-vazio").show();
+    });
+    $(".voltar-herms").click(function () {
+        $(".div-herms").hide();
+        $(".div-brassagem").show();
+    });
+    $(".encher-herms").click(function () {
+        $(".div-herms").hide();
+        $(".div-herms-enchendo").show();
+    });
+    $(".parar-enchimento-herms").click(function () {
+        $(".div-herms").hide();
+        $(".div-herms-vazio").show();
+    });
+    $("#herms-cheio").click(function () {
+        $(".div-herms").hide();
+        $(".div-herms-cheio").show();
+    });
+    $(".aquecer-herms").click(function () {
+        $(".div-herms").hide();
+        $(".div-herms-aquecer").show();
+    });
+    $(".temperatura-aquecer-herms").click(function () {
+        var valor = parseInt($(".temperatura-herms").val())
+        $(".herms-temperatura").text("Temp. " + valor + "ºC");
+        $(".herms-temperatura-atual").text("Atual. " + valor + "ºC");
+
+        $(".div-herms").hide();
+        $(".div-herms-aquecendo").show();
+    });
+    $(".alterar-temperatura-herms").click(function () {
+        $(".div-herms").hide();
+        $(".div-herms-alterar-temperatura").show();
+    });
+    $(".parar-aquecimento-herms").click(function () {
+        $(".div-herms").hide();
+        $(".div-herms-cheio").show();
+    });
+    $(".diminuir-temperatura-herms").click(function () {
+        var valor = $(".temperatura-herms").val() - 1;
+        if (valor < 0)
+            valor = 0;
+        $(".temperatura-herms").val(valor);
+    });
+    $(".aumentar-temperatura-herms").click(function () {
+        var valor = parseInt($(".temperatura-herms").val()) + 1;
+        if (valor < 0)
+            valor = 0;
+        $(".temperatura-herms").val(valor);
+    });
+    $(".log-herms").click(function () {
+        swal({ title: "", text: "Enchimento Iniciado\nEnchimento Parado\nEnchimento Finalizado\nAquecimento Iniciado\nAquecimento Parado", confirmButtonColor: '#428bca' });
+    });
+
+
+
+    // MASH
+    $(".mash").click(function () {
+        $(".div-brassagem").hide();
+        $(".div-mash-vazio").show();
+    });
+    $(".voltar-mash").click(function () {
+        $(".div-mash").hide();
+        $(".div-brassagem").show();
+    });
+    $(".encher-mash").click(function () {
+        $(".div-mash").hide();
+        $(".div-mash-enchendo").show();
+    });
+    $(".parar-enchimento-mash").click(function () {
+        $(".div-mash").hide();
+        $(".div-mash-vazio").show();
+    });
+    $("#mash-cheio").click(function () {
+        $(".div-mash").hide();
+        $(".div-mash-vazio").show();
+    });
+    $(".log-mash").click(function () {
+        swal({ title: "", text: "Enchimento Iniciado\nEnchimento Parado\nEnchimento Finalizado", confirmButtonColor: '#428bca' });
+    });
+
+
+    // BOL
+    $(".bol").click(function () {
+        $(".div-brassagem").hide();
+        $(".div-bol-vazio").show();
+    });
+    $(".voltar-bol").click(function () {
+        $(".div-bol").hide();
+        $(".div-brassagem").show();
+    });
+    $(".encher-bol").click(function () {
+        $(".div-bol").hide();
+        $(".div-bol-enchendo").show();
+    });
+    $(".parar-enchimento-bol").click(function () {
+        $(".div-bol").hide();
+        $(".div-bol-vazio").show();
+    });
+    $("#bol-cheio").click(function () {
+        $(".div-bol").hide();
+        $(".div-bol-cheio").show();
+    });
+    $(".ferver-bol").click(function () {
+        $(".div-bol").hide();
+        $(".div-bol-ferver").show();
+    });
+    $(".temperatura-ferver-bol").click(function () {
+        var valorTemperatura = parseInt($(".temperatura-bol").val())
+        $(".bol-temperatura").text("Temp. " + valorTemperatura + "ºC");
+        $(".bol-temperatura-atual").text("Atual. " + valorTemperatura + "ºC");
+
+        var valorMinuto = parseInt($(".minuto-bol").val())
+        $(".bol-minuto").text("Min. " + valorMinuto + "M");
+        $(".bol-minuto-atual").text("Rest. " + valorMinuto + "M");
+
+        $(".div-bol").hide();
+        $(".div-bol-fervendo").show();
+    });
+    $(".parar-fervura-bol").click(function () {
+        $(".div-bol").hide();
+        $(".div-bol-cheio").show();
+    });
+    $(".diminuir-temperatura-bol").click(function () {
+        var valor = $(".temperatura-bol").val() - 1;
+        if (valor < 0)
+            valor = 0;
+        $(".temperatura-bol").val(valor);
+    });
+    $(".aumentar-temperatura-bol").click(function () {
+        var valor = parseInt($(".temperatura-bol").val()) + 1;
+        if (valor < 0)
+            valor = 0;
+        $(".temperatura-bol").val(valor);
+    });
+    $(".diminuir-minuto-bol").click(function () {
+        var valor = $(".minuto-bol").val() - 1;
+        if (valor < 0)
+            valor = 0;
+        $(".minuto-bol").val(valor);
+    });
+    $(".aumentar-minuto-bol").click(function () {
+        var valor = parseInt($(".minuto-bol").val()) + 1;
+        if (valor < 0)
+            valor = 0;
+        $(".minuto-bol").val(valor);
+    });
+    $(".log-bol").click(function () {
+        swal({ title: "", text: "Enchimento Iniciado\nEnchimento Parado\nEnchimento Finalizado\nFervura Iniciada\nFervura Finalizada", confirmButtonColor: '#428bca' });
+    });
+
+
+
+    // RESFRIAR
+    $(".resfriar").click(function () {
+        $(".div-brassagem").hide();
+        $(".div-resfriar-cheio").show();
+    });
+    $(".voltar-resfriar").click(function () {
+        $(".div-resfriar").hide();
+        $(".div-brassagem").show();
+    });
+    $(".resfriar-mash").click(function () {
+        $(".div-resfriar").hide();
+        $(".div-resfriar-mash").show();
+    });
+    $(".temperatura-resfriar-mash").click(function () {
+        var valor = parseInt($(".temperatura-resfriar").val())
+
+        $(".resfriar-temperatura").text("Temp. " + valor + "ºC");
+        $(".resfriar-temperatura-atual").text("Atual. " + valor + "ºC");
+
+        $(".div-resfriar").hide();
+        $(".div-resfriar-resfriando").show();
+    });
+    $(".alterar-temperatura-resfriar").click(function () {
+        $(".div-resfriar").hide();
+        $(".div-resfriar-alterar-temperatura").show();
+    });
+    $(".parar-resfriamento-mash").click(function () {
+        $(".div-resfriar").hide();
+        $(".div-resfriar-cheio").show();
+    });
+    $(".diminuir-temperatura-resfriar").click(function () {
+        var valor = $(".temperatura-resfriar").val() - 1;
+        if (valor < 0)
+            valor = 0;
+        $(".temperatura-resfriar").val(valor);
+    });
+    $(".aumentar-temperatura-resfriar").click(function () {
+        var valor = parseInt($(".temperatura-resfriar").val()) + 1;
+        if (valor < 0)
+            valor = 0;
+        $(".temperatura-resfriar").val(valor);
+    });
+    $(".log-resfriar").click(function () {
+        swal({ title: "", text: "Resfriamento Iniciado\nResfriamento Parado\nResfriamento Finalizado", confirmButtonColor: '#428bca' });
+    });
+
+
+
+    // WHIRLPOOL
+    $(".whirlpool").click(function () {
+        $(".div-brassagem").hide();
+        $(".div-whirlpool-cheio").show();
+    });
+    $(".voltar-whirlpool").click(function () {
+        $(".div-whirlpool").hide();
+        $(".div-brassagem").show();
+    });
+    $(".whirlpool-rodar").click(function () {
+        $(".div-whirlpool").hide();
+        $(".div-whirlpool-rodar").show();
+    });
+    $(".minuto-whirlpool-mash").click(function () {
+        var valor = parseInt($(".minuto-whirlpool").val())
+
+        $(".whirlpool-minuto").text("Min. " + valor + "M");
+        $(".whirlpool-minuto-atual").text("Rest. " + valor + "M");
+
+        $(".div-whirlpool").hide();
+        $(".div-whirlpool-rodando").show();
+    });
+    $(".alterar-minuto-whirlpool").click(function () {
+        $(".div-whirlpool").hide();
+        $(".div-whirlpool-alterar-minuto").show();
+    });
+    $(".parar-whirlpool-rodando").click(function () {
+        $(".div-whirlpool").hide();
+        $(".div-whirlpool-cheio").show();
+    });
+    $(".diminuir-minuto-whirlpool").click(function () {
+        var valor = $(".minuto-whirlpool").val() - 1;
+        if (valor < 0)
+            valor = 0;
+        $(".minuto-whirlpool").val(valor);
+    });
+    $(".aumentar-minuto-whirlpool").click(function () {
+        var valor = parseInt($(".minuto-whirlpool").val()) + 1;
+        if (valor < 0)
+            valor = 0;
+        $(".minuto-whirlpool").val(valor);
+    });
+    $(".log-whirlpool").click(function () {
+        swal({ title: "", text: "Whirlpool Iniciado\nWhirlpool Parado", confirmButtonColor: '#428bca' });
+    });
+
+
+
+    // RAMPA
+    $(".rampa").click(function () {
+        $(".div-brassagem").hide();
+        $(".div-rampa-cheio").show();
+    });
+    $(".voltar-rampa").click(function () {
+        $(".div-rampa").hide();
+        $(".div-brassagem").show();
+    });
+    $("#rampa-cheio").click(function () {
+        $(".div-rampa").hide();
+        $(".div-rampa-cheio").show();
+    });
+    $(".nova-rampa").click(function () {
+        $(".div-rampa").hide();
+        $(".div-rampa-iniciar").show();
+    });
+    $(".temperatura-iniciar-rampa").click(function () {
+        var valorTemperatura = parseInt($(".temperatura-rampa").val())
+        $(".rampa-temperatura").text("Temp. " + valorTemperatura + "ºC");
+        $(".rampa-temperatura-atual").text("Atual. " + valorTemperatura + "ºC");
+
+        var valorMinuto = parseInt($(".minuto-rampa").val())
+        $(".rampa-minuto").text("Min. " + valorMinuto + "M");
+        $(".rampa-minuto-atual").text("Rest. " + valorMinuto + "M");
+
+        $(".div-rampa").hide();
+        $(".div-rampa-rodando").show();
+    });
+    $(".finalizar-rampa").click(function () {
+        $(".div-rampa").hide();
+        $(".div-rampa-cheio").show();
+    });
+    $(".diminuir-temperatura-rampa").click(function () {
+        var valor = $(".temperatura-rampa").val() - 1;
+        if (valor < 0)
+            valor = 0;
+        $(".temperatura-rampa").val(valor);
+    });
+    $(".aumentar-temperatura-rampa").click(function () {
+        var valor = parseInt($(".temperatura-rampa").val()) + 1;
+        if (valor < 0)
+            valor = 0;
+        $(".temperatura-rampa").val(valor);
+    });
+    $(".diminuir-minuto-rampa").click(function () {
+        var valor = $(".minuto-rampa").val() - 1;
+        if (valor < 0)
+            valor = 0;
+        $(".minuto-rampa").val(valor);
+    });
+    $(".aumentar-minuto-rampa").click(function () {
+        var valor = parseInt($(".minuto-rampa").val()) + 1;
+        if (valor < 0)
+            valor = 0;
+        $(".minuto-rampa").val(valor);
+    });
+    $(".log-rampa").click(function () {
+        swal({ title: "", text: "Rampa 1 Iniciada\nRampa 1 Finalizada", confirmButtonColor: '#428bca' });
+    });
+
+
+    // FERMENTADOR
+    $(".fermentador").click(function () {
+        $(".div-brassagem").hide();
+        $(".div-fermentador-vazio").show();
+    });
+    $(".voltar-fermentador").click(function () {
+        $(".div-fermentador").hide();
+        $(".div-brassagem").show();
+    });
+    $(".encher-fermentador").click(function () {
+        $(".div-fermentador").hide();
+        $(".div-fermentador-enchendo").show();
+    });
+    $(".parar-enchimento-fermentador").click(function () {
+        $(".div-fermentador").hide();
+        $(".div-fermentador-vazio").show();
+    });
+    $("#fermentador-cheio").click(function () {
+        $(".div-fermentador").hide();
+        $(".div-fermentador-vazio").show();
+    });
+    $(".log-fermentador").click(function () {
+        swal({ title: "", text: "Enchimento Iniciado\nEnchimento Parado\nEnchimento Finalizado", confirmButtonColor: '#428bca' });
+    });
+
+
+
+    // SPARGE
+    $(".sparge").click(function () {
+        $(".div-brassagem").hide();
+        $(".div-sparge-vazio").show();
+    });
+    $(".voltar-sparge").click(function () {
+        $(".div-sparge").hide();
+        $(".div-brassagem").show();
+    });
+    $(".rodar-sparge").click(function () {
+        $(".div-sparge").hide();
+        $(".div-sparge-rodando").show();
+    });
+    $(".parar-rodar-sparge").click(function () {
+        $(".div-sparge").hide();
+        $(".div-sparge-vazio").show();
+    });
+    $("#sparge-feito").click(function () {
+        $(".div-sparge").hide();
+        $(".div-sparge-vazio").show();
+    });
+    $(".log-sparge").click(function () {
+        swal({ title: "", text: "Sparge Iniciado\nSparge Parado\nSparge Finalizado", confirmButtonColor: '#428bca' });
+    });
+</script>
+</body>
 </html>
+
+
+
