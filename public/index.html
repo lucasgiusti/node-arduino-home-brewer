@@ -1,38 +1,384 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bootstrap Example</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <meta charset="UTF-8">
+    <title>Node Arduino Home Brewer</title>
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+    <link href="css/styles.css" rel="stylesheet">
+<!--    <link href="css/bootstrap.css" rel="stylesheet">-->
+    <link href="css/sweet-alert.css" rel="stylesheet">
 </head>
 <body>
-
 <div class="container">
-  <div class="jumbotron">
-    <h1>My First Bootstrap Page</h1>
-    <p>Resize this responsive page to see the effect!</p> 
-  </div>
-  <div class="row">
+
+    <!-- PRINCIPAL -->
+    <div class="div-principal">
+        <label class="lbl-titulo">Node Arduino Home Brewer</label></br>
+        <button type="button" class="btn btn-primary btn-grande nova-brassagem">Nova Brassagem</button>
+    </div>
+
+    <!-- BRASSAGEM -->
+    <div class="div-tela div-brassagem">
+<div class="row">
+        <label class="lbl-titulo">Brassagem</label></br>
     <div class="col-sm-4">
-      <h3>Column 1</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+        <button type="button" class="btn btn-primary btn-medio item hlt">HLT</button>
+        <button type="button" class="btn btn-primary btn-medio item herms">Herms</button>
     </div>
     <div class="col-sm-4">
-      <h3>Column 2</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+        <button type="button" class="btn btn-primary btn-medio item mash">Mash</button>
+        <button type="button" class="btn btn-primary btn-medio item rampa">Rampa</button>
     </div>
     <div class="col-sm-4">
-      <h3>Column 3</h3>        
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+        <button type="button" class="btn btn-primary btn-medio item bol">BOL</button>
+        <button type="button" class="btn btn-primary btn-medio item sparge">Sparge</button>
     </div>
-  </div>
+    <div class="col-sm-4">
+        <button type="button" class="btn btn-primary btn-medio item resfriar">Resfriar</button>
+        <button type="button" class="btn btn-primary btn-medio item whirlpool">Whirlpool</button>
+    </div>
+    <div class="col-sm-4">
+        <button type="button" class="btn btn-primary btn-grande item fermentador">Fermentador</button></br>
+        <button type="button" class="btn btn-primary btn-grande finalizar-brassagem voltar-5-botoes">Finalizar Brassagem</button></br>
+    </div>
+    </div>
 </div>
 
+    <!-- HLT -->
+    <div class="div-tela div-hlt div-hlt-vazio">
+        <label class="lbl-titulo">HLT</label></br>
+        <button type="button" class="btn btn-primary btn-grande encher">Encher</button></br>
+        <button type="button" class="btn btn-primary btn-grande disabled aquecer">Aquecer</button></br>
+        <button type="button" class="btn btn-primary btn-grande log log-2-botoes">Log</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar">Voltar</button>
+    </div>
+    <div class="div-tela div-hlt div-hlt-enchendo">
+        <label class="lbl-titulo">HLT</label></br>
+        <button type="button" class="btn btn-primary btn-grande parar-enchimento btn-com-legenda">Parar Enchimento</button>
+        <label class="cheio">Cheio</label></br>
+        <button type="button" class="btn btn-primary btn-grande disabled aquecer btn-com-legenda">Aquecer</button></br>
+        <button type="button" class="btn btn-primary btn-grande log log-2-botoes">Log</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar">Voltar</button>
+    </div>
+    <div class="div-tela div-hlt div-hlt-cheio">
+        <label class="lbl-titulo">HLT</label></br>
+        <button type="button" class="btn btn-primary btn-grande encher">Encher</button></br>
+        <button type="button" class="btn btn-primary btn-grande aquecer btn-com-legenda">Aquecer</button></br>
+        <button type="button" class="btn btn-primary btn-grande log log-2-botoes">Log</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar">Voltar</button>
+    </div>
+    <div class="div-tela div-hlt div-hlt-aquecer">
+        <label class="lbl-titulo">HLT</label></br>
+        <button type="button" class="btn btn-primary diminuir"><</button>
+        <input type="text" class="form-control temperatura-hlt txt-valor" value="30" maxlength="3" readonly/>
+        <button type="button" class="btn btn-primary aumentar">></button>
+        <label>ºC</label></br>
+        <button type="button" class="btn btn-primary btn-grande temperatura-aquecer">Aquecer</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar voltar-2-botoes">Voltar</button>
+    </div>
+    <div class="div-tela div-hlt div-hlt-aquecendo">
+        <label class="lbl-titulo">HLT</label></br>
+        <button type="button" class="btn btn-primary btn-grande disabled encher">Encher</button></br>
+        <button type="button" class="btn btn-primary btn-grande parar-aquecimento">Parar Aquecimento</button></br>
+        <button type="button" class="btn btn-primary btn-grande alterar-temperatura btn-com-legenda">Alterar Temperatura</button></br>
+        <label class="temperatura hlt-temperatura"></label><label class="hlt-temperatura-atual"></label></br>
+        <button type="button" class="btn btn-primary btn-grande log log-3-botoes-1-legenda">Log</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar">Voltar</button>
+    </div>
+    <div class="div-tela div-hlt div-hlt-alterar-temperatura">
+        <label class="lbl-titulo">HLT</label></br>
+        <button type="button" class="btn btn-primary hlt diminuir"><</button>
+        <input type="text" class="form-control temperatura-hlt txt-valor" value="30" maxlength="3" readonly/>
+        <button type="button" class="btn btn-primary aumentar">></button>
+        <label>ºC</label></br>
+        <button type="button" class="btn btn-primary btn-grande temperatura-aquecer">Alterar Temperatura</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar voltar-2-botoes">Voltar</button>
+    </div>
+
+    <!-- HERMS -->
+    <div class="div-tela div-herms div-herms-vazio">
+        <label class="lbl-titulo">Herms</label></br>
+        <button type="button" class="btn btn-primary btn-grande encher">Encher</button></br>
+        <button type="button" class="btn btn-primary btn-grande disabled aquecer">Aquecer</button></br>
+        <button type="button" class="btn btn-primary btn-grande log log-2-botoes">Log</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar">Voltar</button>
+    </div>
+    <div class="div-tela div-herms div-herms-enchendo">
+        <label class="lbl-titulo">Herms</label></br>
+        <button type="button" class="btn btn-primary btn-grande parar-enchimento btn-com-legenda">Parar Enchimento</button>
+        <label class="cheio">Cheio</label></br>
+        <button type="button" class="btn btn-primary btn-grande disabled aquecer btn-com-legenda">Aquecer</button></br>
+        <button type="button" class="btn btn-primary btn-grande log log-2-botoes">Log</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar">Voltar</button>
+    </div>
+    <div class="div-tela div-herms div-herms-cheio">
+        <label class="lbl-titulo">Herms</label></br>
+        <button type="button" class="btn btn-primary btn-grande encher">Encher</button></br>
+        <button type="button" class="btn btn-primary btn-grande aquecer btn-com-legenda">Aquecer</button></br>
+        <button type="button" class="btn btn-primary btn-grande log log-2-botoes">Log</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar">Voltar</button>
+    </div>
+    <div class="div-tela div-herms div-herms-aquecer">
+        <label class="lbl-titulo">Herms</label></br>
+        <button type="button" class="btn btn-primary diminuir"><</button>
+        <input type="text" class="form-control temperatura-herms txt-valor" value="30" maxlength="3" readonly/>
+        <button type="button" class="btn btn-primary aumentar">></button>
+        <label>ºC</label></br>
+        <button type="button" class="btn btn-primary btn-grande temperatura-aquecer">Aquecer</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar voltar-2-botoes">Voltar</button>
+    </div>
+    <div class="div-tela div-herms div-herms-aquecendo">
+        <label class="lbl-titulo">Herms</label></br>
+        <button type="button" class="btn btn-primary btn-grande disabled encher">Encher</button></br>
+        <button type="button" class="btn btn-primary btn-grande parar-aquecimento">Parar Aquecimento</button></br>
+        <button type="button" class="btn btn-primary btn-grande alterar-temperatura btn-com-legenda">Alterar Temperatura</button></br>
+        <label class="temperatura herms-temperatura"></label><label class="herms-temperatura-atual"></label></br>
+        <button type="button" class="btn btn-primary btn-grande log log-3-botoes-1-legenda">Log</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar">Voltar</button>
+    </div>
+    <div class="div-tela div-herms div-herms-alterar-temperatura">
+        <label class="lbl-titulo">Herms</label></br>
+        <button type="button" class="btn btn-primary diminuir"><</button>
+        <input type="text" class="form-control temperatura-herms txt-valor" value="30" maxlength="3" readonly/>
+        <button type="button" class="btn btn-primary aumentar">></button>
+        <label>ºC</label></br>
+        <button type="button" class="btn btn-primary btn-grande temperatura-aquecer">Alterar Temperatura</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar voltar-2-botoes">Voltar</button>
+    </div>
+
+    <!-- MASH -->
+    <div class="div-tela div-mash div-mash-vazio">
+        <label class="lbl-titulo">Mash</label></br>
+        <button type="button" class="btn btn-primary btn-grande encher">Encher</button></br>
+        <button type="button" class="btn btn-primary btn-grande log log-1-botao">Log</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar">Voltar</button>
+    </div>
+    <div class="div-tela div-mash div-mash-enchendo">
+        <label class="lbl-titulo">Mash</label></br>
+        <button type="button" class="btn btn-primary btn-grande parar-enchimento btn-com-legenda">Parar Enchimento</button>
+        <label class="cheio">Cheio</label></br>
+        <button type="button" class="btn btn-primary btn-grande log log-1-botao">Log</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar">Voltar</button>
+    </div>
+    <div class="div-tela div-mash div-mash-cheio">
+        <label class="lbl-titulo">Mash</label></br>
+        <button type="button" class="btn btn-primary btn-grande encher">Encher</button></br>
+        <button type="button" class="btn btn-primary btn-grande log log-1-botao">Log</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar">Voltar</button>
+    </div>
+
+    <!-- RAMPA -->
+    <div class="div-tela div-rampa div-rampa-vazio">
+        <label class="lbl-titulo">Rampa</label><label class="rampa-numero">1</label></br>
+        <button type="button" class="btn btn-primary btn-grande aquecer btn-com-legenda">Nova</button></br>
+        <button type="button" class="btn btn-primary btn-grande log log-1-botao">Log</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar">Voltar</button>
+    </div>
+    <div class="div-tela div-rampa div-rampa-aquecer">
+        <label class="lbl-titulo">Rampa</label><label class="rampa-numero">1</label></br>
+        <button type="button" class="btn btn-primary diminuir"><</button>
+        <input type="text" class="form-control temperatura-rampa txt-valor" value="30" maxlength="3" readonly/>
+        <button type="button" class="btn btn-primary aumentar">></button>
+        <label>ºC</label></br>
+        <button type="button" class="btn btn-primary diminuir"><</button>
+        <input type="text" class="form-control minuto-rampa txt-valor" value="60" maxlength="3" readonly/>
+        <button type="button" class="btn btn-primary aumentar">></button>
+        <label>M</label></br>
+        <button type="button" class="btn btn-primary btn-grande temperatura-minuto-aquecer">Iniciar</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar voltar-3-botoes">Voltar</button>
+    </div>
+    <div class="div-tela div-rampa div-rampa-aquecendo">
+        <label class="lbl-titulo">Rampa</label><label class="rampa-numero">1</label></br>
+        <button type="button" class="btn btn-primary btn-grande parar-aquecimento btn-com-legenda">Finalizar</button></br>
+        <label class="temperatura rampa-temperatura"></label><label class="rampa-temperatura-atual"></label></br>
+        <label class="minuto rampa-minuto"></label><label class="rampa-minuto-atual"></label></br>
+        <button type="button" class="btn btn-primary btn-grande log log-1-botao-2-legendas">Log</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar">Voltar</button>
+    </div>
+    <div class="div-tela div-rampa div-rampa-cheio">
+        <label class="lbl-titulo">Rampa</label><label class="rampa-numero">1</label></br>
+        <button type="button" class="btn btn-primary btn-grande aquecer btn-com-legenda">Nova</button></br>
+        <button type="button" class="btn btn-primary btn-grande log log-1-botao">Log</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar">Voltar</button>
+    </div>
+
+    <!-- BOL -->
+    <div class="div-tela div-bol div-bol-vazio">
+        <label class="lbl-titulo">BOL</label></br>
+        <button type="button" class="btn btn-primary btn-grande encher">Encher</button></br>
+        <button type="button" class="btn btn-primary btn-grande disabled aquecer">Ferver</button></br>
+        <button type="button" class="btn btn-primary btn-grande log log-2-botoes">Log</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar">Voltar</button>
+    </div>
+    <div class="div-tela div-bol div-bol-enchendo">
+        <label class="lbl-titulo">BOL</label></br>
+        <button type="button" class="btn btn-primary btn-grande parar-enchimento btn-com-legenda">Parar Enchimento</button>
+        <label class="cheio">Cheio</label></br>
+        <button type="button" class="btn btn-primary btn-grande disabled aquecer btn-com-legenda">Ferver</button></br>
+        <button type="button" class="btn btn-primary btn-grande log log-2-botoes">Log</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar">Voltar</button>
+    </div>
+    <div class="div-tela div-bol div-bol-cheio">
+        <label class="lbl-titulo">BOL</label></br>
+        <button type="button" class="btn btn-primary btn-grande encher">Encher</button></br>
+        <button type="button" class="btn btn-primary btn-grande aquecer btn-com-legenda">Ferver</button></br>
+        <button type="button" class="btn btn-primary btn-grande log log-2-botoes">Log</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar">Voltar</button>
+    </div>
+    <div class="div-tela div-bol div-bol-aquecer">
+        <label class="lbl-titulo">BOL</label></br>
+        <button type="button" class="btn btn-primary diminuir"><</button>
+        <input type="text" class="form-control temperatura-bol txt-valor" value="30" maxlength="3" readonly/>
+        <button type="button" class="btn btn-primary bol aumentar">></button>
+        <label>ºC</label></br>
+        <button type="button" class="btn btn-primary diminuir"><</button>
+        <input type="text" class="form-control minuto-bol txt-valor" value="60" maxlength="3" readonly/>
+        <button type="button" class="btn btn-primary aumentar">></button>
+        <label>M</label></br>
+        <button type="button" class="btn btn-primary btn-grande temperatura-minuto-aquecer">Ferver</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar voltar-3-botoes">Voltar</button>
+    </div>
+    <div class="div-tela div-bol div-bol-aquecendo">
+        <label class="lbl-titulo">BOL</label></br>
+        <button type="button" class="btn btn-primary btn-grande disabled encher">Encher</button></br>
+        <button type="button" class="btn btn-primary btn-grande parar-aquecimento btn-com-legenda">Parar Fervura</button></br>
+        <label class="temperatura bol-temperatura"></label><label class="bol-temperatura-atual"></label></br>
+        <label class="minuto bol-minuto"></label><label class="bol-minuto-atual"></label></br>
+        <button type="button" class="btn btn-primary btn-grande log log-2-botoes-2-legendas">Log</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar">Voltar</button>
+    </div>
+
+    <!-- SPARGE -->
+    <div class="div-tela div-sparge div-sparge-vazio">
+        <label class="lbl-titulo">Sparge</label></br>
+        <button type="button" class="btn btn-primary btn-grande encher">Rodar</button></br>
+        <button type="button" class="btn btn-primary btn-grande log log-1-botao">Log</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar">Voltar</button>
+    </div>
+    <div class="div-tela div-sparge div-sparge-enchendo">
+        <label class="lbl-titulo">Sparge</label></br>
+        <button type="button" class="btn btn-primary btn-grande parar-enchimento btn-com-legenda">Parar Sparge</button>
+        <label class="cheio">Feito</label></br>
+        <button type="button" class="btn btn-primary btn-grande log log-1-botao">Log</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar">Voltar</button>
+    </div>
+    <div class="div-tela div-sparge div-sparge-cheio">
+        <label class="lbl-titulo">Sparge</label></br>
+        <button type="button" class="btn btn-primary btn-grande encher">Rodar</button></br>
+        <button type="button" class="btn btn-primary btn-grande log log-1-botao">Log</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar">Voltar</button>
+    </div>
+
+    <!-- RESFRIAR -->
+    <div class="div-tela div-resfriar div-resfriar-vazio">
+        <label class="lbl-titulo">Resfriar</label></br>
+        <button type="button" class="btn btn-primary btn-grande aquecer btn-com-legenda">Resfriar</button></br>
+        <button type="button" class="btn btn-primary btn-grande log log-1-botao">Log</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar">Voltar</button>
+    </div>
+    <div class="div-tela div-resfriar div-resfriar-aquecer">
+        <label class="lbl-titulo">Resfriar</label></br>
+        <button type="button" class="btn btn-primary diminuir"><</button>
+        <input type="text" class="form-control temperatura-resfriar txt-valor" value="30" maxlength="3" readonly/>
+        <button type="button" class="btn btn-primary aumentar">></button>
+        <label>ºC</label></br>
+        <button type="button" class="btn btn-primary btn-grande temperatura-aquecer">Resfriar</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar voltar-2-botoes">Voltar</button>
+    </div>
+    <div class="div-tela div-resfriar div-resfriar-aquecendo">
+        <label class="lbl-titulo">Resfriar</label></br>
+        <button type="button" class="btn btn-primary btn-grande parar-aquecimento">Parar Resfriamento</button></br>
+        <button type="button" class="btn btn-primary btn-grande alterar-temperatura btn-com-legenda">Alterar Temperatura</button></br>
+        <label class="temperatura resfriar-temperatura"></label><label class="resfriar-temperatura-atual"></label></br>
+        <button type="button" class="btn btn-primary btn-grande log log-2-botoes-1-legenda">Log</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar">Voltar</button>
+    </div>
+    <div class="div-tela div-resfriar div-resfriar-cheio">
+        <label class="lbl-titulo">Resfriar</label></br>
+        <button type="button" class="btn btn-primary btn-grande aquecer btn-com-legenda">Resfriar</button></br>
+        <button type="button" class="btn btn-primary btn-grande log log-1-botao">Log</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar">Voltar</button>
+    </div>
+    <div class="div-tela div-resfriar div-resfriar-alterar-temperatura">
+        <label class="lbl-titulo">Resfriar</label></br>
+        <button type="button" class="btn btn-primary diminuir"><</button>
+        <input type="text" class="form-control temperatura-resfriar txt-valor" value="30" maxlength="3" readonly/>
+        <button type="button" class="btn btn-primary aumentar">></button>
+        <label>ºC</label></br>
+        <button type="button" class="btn btn-primary btn-grande temperatura-aquecer">Alterar Temperatura</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar voltar-2-botoes">Voltar</button>
+    </div>
+
+    <!-- WHIRLPOOL -->
+    <div class="div-tela div-whirlpool div-whirlpool-vazio">
+        <label class="lbl-titulo">Whirlpool</label></br>
+        <button type="button" class="btn btn-primary btn-grande aquecer btn-com-legenda">Rodar</button></br>
+        <button type="button" class="btn btn-primary btn-grande log log-1-botao">Log</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar">Voltar</button>
+    </div>
+    <div class="div-tela div-whirlpool div-whirlpool-aquecer">
+        <label class="lbl-titulo">Whirlpool</label></br>
+        <button type="button" class="btn btn-primary diminuir"><</button>
+        <input type="text" class="form-control minuto-whirlpool txt-valor" value="60" maxlength="3" readonly/>
+        <button type="button" class="btn btn-primary aumentar">></button>
+        <label>M</label></br>
+        <button type="button" class="btn btn-primary btn-grande minuto-aquecer">Rodar</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar voltar-2-botoes">Voltar</button>
+    </div>
+    <div class="div-tela div-whirlpool div-whirlpool-aquecendo">
+        <label class="lbl-titulo">Whirlpool</label></br>
+        <button type="button" class="btn btn-primary btn-grande parar-aquecimento">Parar Whirlpool</button></br>
+        <button type="button" class="btn btn-primary btn-grande alterar-minuto btn-com-legenda">Alterar Tempo</button></br>
+        <label class="minuto whirlpool-minuto"></label><label class="whirlpool-minuto-atual"></label></br>
+        <button type="button" class="btn btn-primary btn-grande log log-2-botoes-1-legenda">Log</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar">Voltar</button>
+    </div>
+    <div class="div-tela div-whirlpool div-whirlpool-cheio">
+        <label class="lbl-titulo">Whirlpool</label></br>
+        <button type="button" class="btn btn-primary btn-grande aquecer btn-com-legenda">Rodar</button></br>
+        <button type="button" class="btn btn-primary btn-grande log log-1-botao">Log</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar">Voltar</button>
+    </div>
+    <div class="div-tela div-whirlpool div-whirlpool-alterar-minuto">
+        <label class="lbl-titulo">Whirlpool</label></br>
+        <button type="button" class="btn btn-primary diminuir"><</button>
+        <input type="text" class="form-control minuto-whirlpool txt-valor" value="60" maxlength="3" readonly/>
+        <button type="button" class="btn btn-primary aumentar">></button>
+        <label>M</label></br>
+        <button type="button" class="btn btn-primary btn-grande minuto-aquecer">Alterar Tempo</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar voltar-2-botoes">Voltar</button>
+    </div>
+
+    <!-- FERMENTADOR -->
+    <div class="div-tela div-fermentador div-fermentador-vazio">
+        <label class="lbl-titulo">Fermentador</label></br>
+        <button type="button" class="btn btn-primary btn-grande encher">Encher</button></br>
+        <button type="button" class="btn btn-primary btn-grande log log-1-botao">Log</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar">Voltar</button>
+    </div>
+    <div class="div-tela div-fermentador div-fermentador-enchendo">
+        <label class="lbl-titulo">Fermentador</label></br>
+        <button type="button" class="btn btn-primary btn-grande parar-enchimento btn-com-legenda">Parar Enchimento</button>
+        <label class="cheio">Cheio</label></br>
+        <button type="button" class="btn btn-primary btn-grande log log-1-botao">Log</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar">Voltar</button>
+    </div>
+    <div class="div-tela div-fermentador div-fermentador-cheio">
+        <label class="lbl-titulo">Fermentador</label></br>
+        <button type="button" class="btn btn-primary btn-grande encher">Encher</button></br>
+        <button type="button" class="btn btn-primary btn-grande log log-1-botao">Log</button></br>
+        <button type="button" class="btn btn-primary btn-grande voltar">Voltar</button>
+    </div>
+
+</div>
 </body>
 </html>
+
+<script src="lib/sweet-alert.js"></script>
+<script src="js/node-arduino-home-brewer.js"></script>
