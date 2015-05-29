@@ -73,6 +73,10 @@ legend {
     font-family: 'Andika';
 }
 
+body {
+    padding-top: 30px;
+}
+
 .home-hero {
     font-family: "Andika";
     font-size: 36;
