@@ -1,6 +1,6 @@
 ﻿
 function defineLayout() {
-    $(".btn-medio").css("width", "95px");
+    $(".btn-medio").css("width", "49%");
    // $(".btn-grande").css("width", "195px");
     $(".diminuir").css("width", "40px");
     $(".aumentar").css("width", "40px");
@@ -8,7 +8,7 @@ function defineLayout() {
     $(".lbl-titulo").css("width", "195px");
 
     $(".btn-medio").css("margin-bottom", "5px");
-//    $(".btn-grande").css("margin-bottom", "5px");
+    $(".btn-grande").css("margin-bottom", "5px");
     $(".btn-com-legenda").css("margin-right", "1px");
     $(".voltar-1-botao").css("margin-top", "156px");
     $(".voltar-1-botao-2-legendas").css("margin-top", "106px");
