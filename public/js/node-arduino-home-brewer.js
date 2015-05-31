@@ -216,4 +216,4 @@ $(".log").click(function () {
     swal({ title: "", text: texto, confirmButtonColor: '#428bca' });
 });
 
-defineLayout();
+//defineLayout();
