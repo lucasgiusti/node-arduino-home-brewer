@@ -18,7 +18,7 @@ function defineLayout() {
     $(".voltar-5-botoes").css("margin-top", "0px");
     $(".log-1-botao").css("margin-top", "117px");
     $(".log-1-botao-2-legendas").css("margin-top", "67px");
-    $(".log-2-botoes").css("margin-top", "78px");
+    $(".log-2-botoes").css("margin-top", "130px");
     $(".log-2-botoes-2-legendas").css("margin-top", "28px");
     $(".log-2-botoes-1-legenda").css("margin-top", "53px");
     $(".log-3-botoes").css("margin-top", "78px");
