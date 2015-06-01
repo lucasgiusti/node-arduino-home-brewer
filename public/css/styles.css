@@ -39,4 +39,8 @@ body {
 }
 .div-tela {
     display: none; 
+    text-align: center;
+}
+.div-principal{
+   text-align: center;
 }
