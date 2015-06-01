@@ -70,6 +70,8 @@ function () {
 });
 });
 
+
+
 $(".voltar").click(function () {
     var classes = $(this).parent().attr("class").split(" ");
     $("." + classes[classes.length - 1]).hide();
@@ -80,44 +82,6 @@ $(".item").click(function () {
     var classes = $(this).attr("class").split(" ");
     $(".div-brassagem").hide();
     $(".div-" + classes[classes.length - 1] + "-vazio").show();
-});
-
-$(".aumentar").click(function () {
-    var objValor = $(this).prev();
-    var classes = $(objValor).attr("class").split(" ");
-    var valor = parseInt($(objValor).val()) + 1;
-    if (valor < 0)
-        valor = 0;
-
-    $("." + classes[1]).each(function (index) {
-        $(this).val(valor);
-    })
-});
-
-$(".diminuir").click(function () {
-    var objValor = $(this).next();
-    var classes = $(objValor).attr("class").split(" ");
-    var valor = parseInt($(objValor).val()) - 1;
-    if (valor < 0)
-        valor = 0;
-
-    $("." + classes[1]).each(function (index) {
-        $(this).val(valor);
-    })
-});
-
-$(".alterar-minuto").click(function () {
-    var classes = $(this).parent().attr("class").split(" ");
-
-    $("." + classes[1]).hide();
-    $("." + classes[1] + "-alterar-minuto").show();
-});
-
-$(".alterar-temperatura").click(function () {
-    var classes = $(this).parent().attr("class").split(" ");
-
-    $("." + classes[1]).hide();
-    $("." + classes[1] + "-alterar-temperatura").show();
 });
 
 $(".encher").click(function () {
@@ -131,12 +95,6 @@ $(".parar-enchimento").click(function () {
     var classes = $(this).parent().attr("class").split(" ");
     $("." + classes[1]).hide();
     $("." + classes[1] + "-vazio").show();
-});
-
-$(".cheio").click(function () {
-    var classes = $(this).parent().attr("class").split(" ");
-    $("." + classes[1]).hide();
-    $("." + classes[1] + "-cheio").show();
 });
 
 $(".aquecer").click(function () {
@@ -225,6 +183,53 @@ $(".log").click(function () {
     }
 
     swal({ title: "", text: texto, confirmButtonColor: '#428bca' });
+});
+
+$(".cheio").click(function () {
+    var classes = $(this).parent().attr("class").split(" ");
+    $("." + classes[1]).hide();
+    $("." + classes[1] + "-cheio").show();
+});
+
+
+
+
+$(".aumentar").click(function () {
+    var objValor = $(this).prev();
+    var classes = $(objValor).attr("class").split(" ");
+    var valor = parseInt($(objValor).val()) + 1;
+    if (valor < 0)
+        valor = 0;
+
+    $("." + classes[1]).each(function (index) {
+        $(this).val(valor);
+    })
+});
+
+$(".diminuir").click(function () {
+    var objValor = $(this).next();
+    var classes = $(objValor).attr("class").split(" ");
+    var valor = parseInt($(objValor).val()) - 1;
+    if (valor < 0)
+        valor = 0;
+
+    $("." + classes[1]).each(function (index) {
+        $(this).val(valor);
+    })
+});
+
+$(".alterar-minuto").click(function () {
+    var classes = $(this).parent().attr("class").split(" ");
+
+    $("." + classes[1]).hide();
+    $("." + classes[1] + "-alterar-minuto").show();
+});
+
+$(".alterar-temperatura").click(function () {
+    var classes = $(this).parent().attr("class").split(" ");
+
+    $("." + classes[1]).hide();
+    $("." + classes[1] + "-alterar-temperatura").show();
 });
 
 defineLayout();
