@@ -1,8 +1,8 @@
 ﻿
 function defineLayout() {
     $(".btn-medio").css("width", "48%");
-    $(".diminuir").css("width", "25%");
-    $(".aumentar").css("width", "25%");
+    $(".diminuir").css("width", "24%");
+    $(".aumentar").css("width", "24%");
     $(".txt-valor").css("width", "45%");
 
     $(".btn-medio").css("margin-bottom", "5px");
