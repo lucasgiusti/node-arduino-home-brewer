@@ -1,7 +1,6 @@
 ﻿
 function defineLayout() {
     $(".btn-medio").css("width", "49%");
-   // $(".btn-grande").css("width", "195px");
     $(".diminuir").css("width", "25%");
     $(".aumentar").css("width", "25%");
     $(".txt-valor").css("width", "45%");
