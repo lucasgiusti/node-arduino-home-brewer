@@ -6,16 +6,22 @@ var application_root = __dirname,
     cookieParser = require('cookie-parser'),
     bodyParser = require('body-parser'),
     path = require("path"),
-    http = require('http'),
     fs = require('fs'),
     mongoose = require('mongoose'),
     app = express(),
+    http = require('http').Server(app),
+    io = require('socket.io')(http),
+    rest = require('restler'),
     passport = require('passport'),
     LocalStrategy = require('passport-local').Strategy,
     iz = require('iz'),
     ObjectID = require('mongodb').ObjectID,
-    passportLocalMongoose = require('passport-local-mongoose');
+    passportLocalMongoose = require('passport-local-mongoose'),
 
+    accountRoute = require("./routes/account"),
+    userRoute = require("./routes/user"),
+    utilRoute = require("./routes/util");
+    brassagemRoute = require("./routes/Brassagem");
 
 // Config
         app.set('port', process.env.PORT || 3000);
@@ -41,8 +47,51 @@ var application_root = __dirname,
 //************************************************************
 
 
+        var AccountModel = accountRoute.AccountModel;
+        var UserModel = userRoute.UserModel;
+        var auth = accountRoute.auth;
+        var isAuthorized = accountRoute.isAuthorized;
 
-// Launch server
-http.createServer(app).listen(app.get('port'), function () {
-    console.log("Node Home Brewer Application server listening on port " + app.get('port'));
-});
+
+        //************************************************************
+        var connectionString = require('./models/conn');
+        mongoose.connect(connectionString);
+
+        accountRoute.CreateAdmUser();
+
+
+
+
+        //************************************************************
+        // ACCOUNT
+        app.get('/account/:username', auth, accountRoute.findByUserName);
+        app.put('/account/:id', auth, accountRoute.putAccount);
+        app.get('/loggedtest', accountRoute.loggedtest);
+        app.post('/login', accountRoute.login);
+        app.get('/logout', accountRoute.logout);
+
+
+
+
+        app.get('/', function (req, res) {
+            res.sendfile('index.html');
+        });
+
+        io.on('connection', function (socket) {
+            brassagemRoute.getBrassagem(socket);
+
+            socket.on('nova-brassagem', function () {
+                brassagemRoute.novaBrassagem(io);
+            });
+
+            socket.on('finalizar-brassagem', function () {
+                brassagemRoute.finalizaBrassagem(io);
+            });
+        });
+
+        
+
+        // Launch server
+        http.listen(3000, function () {
+            console.log('listening on *:3000');
+        });

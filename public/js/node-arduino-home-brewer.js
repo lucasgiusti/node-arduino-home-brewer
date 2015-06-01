@@ -1,4 +1,17 @@
-﻿
+﻿var socket = io();
+var socketCliente = io.connect('http://localhost');
+
+socket.on('atualizaBrassagem', function (brassagem) {
+    if (!brassagem) {
+        $(".div-tela").hide();
+        $('.div-principal').show();
+    }
+    else {
+        $('.div-principal').hide();
+        $('.div-brassagem').show();
+    }
+});
+
 function defineLayout() {
     $(".btn-medio").css("width", "48%");
     $(".diminuir").css("width", "24%");
@@ -36,9 +49,9 @@ function defineLayout() {
 }
 
 $(".nova-brassagem").click(function () {
-        $(".div-principal").hide();
-        $(".div-brassagem").show();
+    socketCliente.emit("nova-brassagem", function (data) {
     });
+});
 
 $(".finalizar-brassagem").click(function () {
     swal({
@@ -52,8 +65,8 @@ $(".finalizar-brassagem").click(function () {
         closeOnConfirm: true
     },
 function () {
-    $(".div-brassagem").hide();
-    $(".div-principal").show();
+    socketCliente.emit("finalizar-brassagem", function (data) {
+    });
 });
 });
 
