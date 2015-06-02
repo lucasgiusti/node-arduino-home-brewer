@@ -17,9 +17,36 @@ socket.on('atualizaBrassagem', function (brassagem) {
             $('.div-principal').hide();
             $('.div-brassagem').show();
         }
-        
+        else {
+            if(telaExibida.substring(1,7) == "div-hlt"){
+                ExibeTelaHLT();
+            }
+        }
     }
 });
+
+function ExibeTelaHLT() {
+    if(telaExibida == "div-hlt-aquecer" || telaExibida == "div-hlt-alterar-temperatura"){
+        return;
+    }
+
+    if (objBrassagem.HLTVazio) {
+        $(".div-hlt-vazio").show();
+        telaExibida = 'div-hlt-vazio';
+    }
+    else if (objBrassagem.HLTEnchendo) {
+        $(".div-hlt-enchendo").show();
+        telaExibida = 'div-hlt-enchendo';
+    }
+    else if (objBrassagem.HLTCheio) {
+        $(".div-hlt-cheio").show();
+        telaExibida = 'div-hlt-cheio';
+    }
+    else if (objBrassagem.HLTAquecendo) {
+        $(".div-hlt-aquecendo").show();
+        telaExibida = 'div-hlt-aquecendo';
+    }
+}
 
 function defineLayout() {
     $(".btn-medio").css("width", "48%");
@@ -87,8 +114,12 @@ $(".voltar").click(function () {
 
 $(".item").click(function () {
     var classes = $(this).attr("class").split(" ");
+    var telas = classes[classes.length - 1];
     $(".div-brassagem").hide();
-    $(".div-" + classes[classes.length - 1] + "-vazio").show();
+
+    if (telas == 'hlt') {
+        ExibeTelaHLT();
+    }
 });
 
 $(".encher").click(function () {
