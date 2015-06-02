@@ -78,20 +78,14 @@ var application_root = __dirname,
         });
 
         io.on('connection', function (socket) {
-            brassagemRoute.getBrassagem(socket);
-
-            socket.on('nova-brassagem', function () {
-                brassagemRoute.novaBrassagem(io);
-            });
-
-            socket.on('finalizar-brassagem', function () {
-                brassagemRoute.finalizaBrassagem(io);
-            });
+            brassagemRoute.atualizaBrassagem(socket);
         });
 
-        
+        app.post('/nova-brassagem', function (req, res) { brassagemRoute.novaBrassagem(req, res, io); });
+        app.post('/finalizar-brassagem', function (req, res) { brassagemRoute.finalizaBrassagem(req, res, io); });
 
-        // Launch server
+
+// Launch server
         http.listen(3000, function () {
             console.log('listening on *:3000');
         });

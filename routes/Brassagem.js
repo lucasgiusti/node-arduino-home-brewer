@@ -88,22 +88,19 @@ var Brassagem = new Schema({
 var BrassagemModel = mongoose.model('brassagens', Brassagem);
 
 
-var getBrassagem = function (socket) {
+var atualizaBrassagem = function (socket) {
     BrassagemModel = mongoose.model('brassagens', Brassagem);
     return BrassagemModel.findOne({ 'BrassagemFinalizada': false }, function (err, brassagem) {
         if (!err) {
-            if (brassagem) {
                 socket.emit('atualizaBrassagem', brassagem);
-            }
-            else
-                socket.emit('atualizaBrassagem', '');
-        } else {
+        }
+        else {
             console.log(err);
         }
     });
 };
 
-var novaBrassagem = function (io) {
+var novaBrassagem = function (req, res, io) {
     BrassagemModel = mongoose.model('brassagens', Brassagem);
     BrassagemModel = new BrassagemModel(
         {
@@ -166,24 +163,27 @@ var novaBrassagem = function (io) {
         if (err) {
             console.log('Error inserting brassagem: ' + err);
         } else {
-            io.emit('atualizaBrassagem', brassagem);
+            atualizaBrassagem(io);
         }
     });
+
+    res.send();
 };
 
-var finalizaBrassagem = function (io) {
+var finalizaBrassagem = function (req, res, io) {
     BrassagemModel = mongoose.model('brassagens', Brassagem);
     return BrassagemModel.update({ 'BrassagemFinalizada': false }, { 'BrassagemFinalizada': true, dataFinalizacao: new Date() }, function (err, brassagem) {
         if (!err) {
-            getBrassagem(io);
+            atualizaBrassagem(io);
         }
         else {
             console.log(err);
         }
     });
+    res.send();
 };
 
 module.exports.BrassagemModel = BrassagemModel;
-module.exports.getBrassagem = getBrassagem;
+module.exports.atualizaBrassagem = atualizaBrassagem;
 module.exports.novaBrassagem = novaBrassagem;
 module.exports.finalizaBrassagem = finalizaBrassagem;

@@ -1,5 +1,4 @@
 ﻿var socket = io();
-var socketCliente = io.connect('http://localhost');
 
 socket.on('atualizaBrassagem', function (brassagem) {
     if (!brassagem) {
@@ -49,8 +48,8 @@ function defineLayout() {
 }
 
 $(".nova-brassagem").click(function () {
-    socketCliente.emit("nova-brassagem", function (data) {
-    });
+    $.post("nova-brassagem", function (data) { })
+        .fail(function () { alert("erro"); });
 });
 
 $(".finalizar-brassagem").click(function () {
@@ -65,8 +64,8 @@ $(".finalizar-brassagem").click(function () {
         closeOnConfirm: true
     },
 function () {
-    socketCliente.emit("finalizar-brassagem", function (data) {
-    });
+    $.post("finalizar-brassagem", function (data) { })
+        .fail(function () { alert("erro"); });
 });
 });
 
