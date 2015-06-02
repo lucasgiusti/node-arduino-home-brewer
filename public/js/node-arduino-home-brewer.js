@@ -59,7 +59,7 @@ function defineLayout() {
 
 $(".nova-brassagem").click(function () {
     $.post("nova-brassagem", function (data) { })
-        .fail(function () { alert("erro"); });
+        .fail(function () { sweetAlert("", "Erro ao criar nova brassagem", "error"); });
 });
 
 $(".finalizar-brassagem").click(function () {
@@ -75,11 +75,9 @@ $(".finalizar-brassagem").click(function () {
     },
 function () {
     $.post("finalizar-brassagem", function (data) { })
-        .fail(function () { alert("erro"); });
+        .fail(function () { sweetAlert("", "Erro ao finalizar brassagem", "error"); });
 });
 });
-
-
 
 $(".voltar").click(function () {
     var classes = $(this).parent().attr("class").split(" ");
