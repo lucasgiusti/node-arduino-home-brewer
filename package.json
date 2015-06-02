@@ -16,8 +16,8 @@
     "iz": "0.6.0",
     "path": "0.4.9",
     "mime": "1.2.11",
-	"restler": "3.2.2",
-    "socket.io": "1.1.0"
+    "restler": "3.2.2",
+    "socket.io": "1.3.5"
     },
     "engines": {
         "node": "0.10.21"
