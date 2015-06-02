@@ -1,13 +1,23 @@
 ﻿var socket = io();
+var objBrassagem = null;
+var telaExibida = 'div-principal';
 
 socket.on('atualizaBrassagem', function (brassagem) {
-    if (!brassagem) {
+    objBrassagem = brassagem;
+    if (!objBrassagem) {
+        telaExibida = 'div-principal';
+
         $(".div-tela").hide();
         $('.div-principal').show();
     }
     else {
-        $('.div-principal').hide();
-        $('.div-brassagem').show();
+        if (telaExibida == 'div-principal') {
+            telaExibida = 'div-brassagem';
+
+            $('.div-principal').hide();
+            $('.div-brassagem').show();
+        }
+        
     }
 });
 
