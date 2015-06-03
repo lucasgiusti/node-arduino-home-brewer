@@ -83,8 +83,18 @@ var application_root = __dirname,
 
         app.post('/nova-brassagem', function (req, res) { brassagemRoute.novaBrassagem(req, res, io); });
         app.post('/finalizar-brassagem', function (req, res) { brassagemRoute.finalizaBrassagem(req, res, io); });
+
         app.post('/enchehlt', function (req, res) { brassagemRoute.encheHLT(req, res, io); });
+        app.post('/paraenchimentohlt', function (req, res) { brassagemRoute.paraEnchimentoHLT(req, res, io); });
+        app.post('/hltcheio', function (req, res) { brassagemRoute.HLTCheio(req, res, io); });
+
         app.post('/encheherms', function (req, res) { brassagemRoute.encheHerms(req, res, io); });
+        app.post('/paraenchimentoherms', function (req, res) { brassagemRoute.paraEnchimentoHerms(req, res, io); });
+        app.post('/hermscheio', function (req, res) { brassagemRoute.HermsCheio(req, res, io); });
+
+        app.post('/enchemash', function (req, res) { brassagemRoute.encheMash(req, res, io); });
+        app.post('/paraenchimentomash', function (req, res) { brassagemRoute.paraEnchimentoMash(req, res, io); });
+        app.post('/mashcheio', function (req, res) { brassagemRoute.MashCheio(req, res, io); });
 
 
 // Launch server

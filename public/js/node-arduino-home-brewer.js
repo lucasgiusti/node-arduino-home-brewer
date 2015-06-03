@@ -9,11 +9,7 @@ function ExibeTelaHLT() {
 
     $(".div-hlt").hide();
 
-    if (objBrassagem.HLTVazio) {
-        $(".div-hlt-vazio").show();
-        telaExibida = 'div-hlt-vazio';
-    }
-    else if (objBrassagem.HLTEnchendo) {
+    if (objBrassagem.HLTEnchendo) {
         $(".div-hlt-enchendo").show();
         telaExibida = 'div-hlt-enchendo';
     }
@@ -24,6 +20,10 @@ function ExibeTelaHLT() {
     else if (objBrassagem.HLTAquecendo) {
         $(".div-hlt-aquecendo").show();
         telaExibida = 'div-hlt-aquecendo';
+    }
+    else {
+        $(".div-hlt-vazio").show();
+        telaExibida = 'div-hlt-vazio';
     }
 }
 
@@ -52,6 +52,27 @@ function ExibeTelaHerms() {
     }
 }
 
+function ExibeTelaMash() {
+    $(".div-mash").hide();
+
+    if (objBrassagem.MashEnchendo) {
+        $(".div-mash-enchendo").show();
+        telaExibida = 'div-mash-enchendo';
+    }
+    else if (objBrassagem.MashCheio) {
+        $(".div-mash-cheio").show();
+        telaExibida = 'div-mash-cheio';
+    }
+    else if (objBrassagem.MashAquecendo) {
+        $(".div-mash-aquecendo").show();
+        telaExibida = 'div-mash-aquecendo';
+    }
+    else {
+        $(".div-mash-vazio").show();
+        telaExibida = 'div-mash-vazio';
+    }
+}
+
 function VerificaTelaExibir(telas) {
     if (!objBrassagem) {
         telaExibida = 'div-principal';
@@ -75,6 +96,9 @@ function VerificaTelaExibir(telas) {
     }
     else if (telas == 'herms') {
         ExibeTelaHerms();
+    }
+    else if (telas == 'mash') {
+        ExibeTelaMash();
     }
 }
 
@@ -123,7 +147,10 @@ socket.on('atualizaBrassagem', function (brassagem) {
 
 $(".nova-brassagem").click(function () {
     $.post("nova-brassagem", function (data) { })
-        .fail(function () { sweetAlert("", "Erro ao criar nova brassagem", "error"); });
+        .fail(function (error) {
+            sweetAlert("", "Erro ao criar nova brassagem\n" + $.parseJSON(error.responseText).error, "error");
+            telaExibida = 'div-brassagem';
+        });
 });
 
 $(".finalizar-brassagem").click(function () {
@@ -139,7 +166,10 @@ $(".finalizar-brassagem").click(function () {
     },
 function () {
     $.post("finalizar-brassagem", function (data) { })
-        .fail(function () { sweetAlert("", "Erro ao finalizar brassagem", "error"); });
+        .fail(function (error) {
+            sweetAlert("", "Erro ao finalizar brassagem\n" + $.parseJSON(error.responseText).error, "error");
+            telaExibida = 'div-brassagem';
+        });
 });
 });
 
@@ -164,16 +194,22 @@ $(".encher").click(function () {
     telaExibida = 'div-' + tela + '-enchendo';
 
     $.post("enche" + tela, function (data) { })
-        .fail(function () {
-            sweetAlert("", "Erro ao encher " + tela, "error");
+        .fail(function (error) {
+            sweetAlert("", "Erro ao encher " + tela + "\n" + $.parseJSON(error.responseText).error, "error");
             telaExibida = 'div-brassagem';
         });
 });
 
 $(".parar-enchimento").click(function () {
     var classes = $(this).parent().attr("class").split(" ");
-    $("." + classes[1]).hide();
-    $("." + classes[1] + "-vazio").show();
+    var tela = classes[classes.length - 1].split("-")[1];
+    telaExibida = 'div-' + tela + '-cheio';
+
+    $.post("paraenchimento" + tela, function (data) { })
+        .fail(function (error) {
+            sweetAlert("", "Erro ao parar enchimento " + tela + "\n" + $.parseJSON(error.responseText).error, "error");
+            telaExibida = 'div-brassagem';
+        });
 });
 
 $(".aquecer").click(function () {
@@ -266,8 +302,14 @@ $(".log").click(function () {
 
 $(".cheio").click(function () {
     var classes = $(this).parent().attr("class").split(" ");
-    $("." + classes[1]).hide();
-    $("." + classes[1] + "-cheio").show();
+    var tela = classes[classes.length - 1].split("-")[1];
+    telaExibida = 'div-' + tela + '-cheio';
+
+    $.post(tela + "cheio", function (data) { })
+        .fail(function (error) {
+            sweetAlert("", "Erro ao marcar " + tela + "como cheio\n" + $.parseJSON(error.responseText).error, "error");
+            telaExibida = 'div-brassagem';
+        });
 });
 
 $(".aumentar").click(function () {
@@ -308,7 +350,7 @@ $(".alterar-temperatura").click(function () {
     var classes = $(this).parent().attr("class").split(" ");
     var tela = classes[1];
 
-    telaExibida = tela + "-alterar-minuto";
+    telaExibida = tela + "-alterar-temperatura";
 
     $("." + tela).hide();
     $("." + tela + "-alterar-temperatura").show();
