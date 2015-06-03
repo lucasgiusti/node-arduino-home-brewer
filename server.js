@@ -83,6 +83,8 @@ var application_root = __dirname,
 
         app.post('/nova-brassagem', function (req, res) { brassagemRoute.novaBrassagem(req, res, io); });
         app.post('/finalizar-brassagem', function (req, res) { brassagemRoute.finalizaBrassagem(req, res, io); });
+        app.post('/enchehlt', function (req, res) { brassagemRoute.encheHLT(req, res, io); });
+        app.post('/encheherms', function (req, res) { brassagemRoute.encheHerms(req, res, io); });
 
 
 // Launch server

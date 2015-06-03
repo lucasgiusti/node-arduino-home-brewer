@@ -183,7 +183,36 @@ var finalizaBrassagem = function (req, res, io) {
     res.send();
 };
 
+var encheHLT = function (req, res, io) {
+    BrassagemModel = mongoose.model('brassagens', Brassagem);
+    return BrassagemModel.update({ 'BrassagemFinalizada': false }, { 'HLTVazio': false, 'HLTEnchendo': true }, function (err, brassagem) {
+        if (!err) {
+            atualizaBrassagem(io);
+        }
+        else {
+            console.log(err);
+        }
+    });
+    res.send();
+};
+
+var encheHerms = function (req, res, io) {
+    BrassagemModel = mongoose.model('brassagens', Brassagem);
+    return BrassagemModel.update({ 'BrassagemFinalizada': false }, { 'HermsVazio': false, 'HermsEnchendo': true }, function (err, brassagem) {
+        if (!err) {
+            atualizaBrassagem(io);
+        }
+        else {
+            console.log(err);
+        }
+    });
+    res.send();
+};
+
 module.exports.BrassagemModel = BrassagemModel;
 module.exports.atualizaBrassagem = atualizaBrassagem;
 module.exports.novaBrassagem = novaBrassagem;
 module.exports.finalizaBrassagem = finalizaBrassagem;
+
+module.exports.encheHLT = encheHLT;
+module.exports.encheHerms = encheHerms;

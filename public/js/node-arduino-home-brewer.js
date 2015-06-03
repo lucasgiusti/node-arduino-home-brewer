@@ -4,6 +4,7 @@ var telaExibida = 'div-principal';
 
 socket.on('atualizaBrassagem', function (brassagem) {
     objBrassagem = brassagem;
+
     if (!objBrassagem) {
         telaExibida = 'div-principal';
 
@@ -18,8 +19,11 @@ socket.on('atualizaBrassagem', function (brassagem) {
             $('.div-brassagem').show();
         }
         else {
-            if(telaExibida.substring(1,7) == "div-hlt"){
+            if(telaExibida.substring(0,7) == "div-hlt"){
                 ExibeTelaHLT();
+            }
+            else if (telaExibida.substring(0, 7) == "div-herms") {
+                ExibeTelaHerms();
             }
         }
     }
@@ -29,6 +33,8 @@ function ExibeTelaHLT() {
     if(telaExibida == "div-hlt-aquecer" || telaExibida == "div-hlt-alterar-temperatura"){
         return;
     }
+
+    $(".div-hlt").hide();
 
     if (objBrassagem.HLTVazio) {
         $(".div-hlt-vazio").show();
@@ -120,13 +126,19 @@ $(".item").click(function () {
     if (telas == 'hlt') {
         ExibeTelaHLT();
     }
+    else if (telas == 'herms') {
+        ExibeTelaHerms();
+    }
 });
 
 $(".encher").click(function () {
     var classes = $(this).parent().attr("class").split(" ");
+    var tela = classes[classes.length - 1].split("-")[1];
+    
+    telaExibida = 'div-' + tela + '-enchendo';
 
-    $("." + classes[1]).hide();
-    $("." + classes[1] + "-enchendo").show();
+    $.post("enche" + tela, function (data) { })
+        .fail(function () { sweetAlert("", "Erro ao encher " + tela, "error"); });
 });
 
 $(".parar-enchimento").click(function () {
