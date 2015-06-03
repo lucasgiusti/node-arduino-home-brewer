@@ -2,35 +2,8 @@
 var objBrassagem = null;
 var telaExibida = 'div-principal';
 
-socket.on('atualizaBrassagem', function (brassagem) {
-    objBrassagem = brassagem;
-
-    if (!objBrassagem) {
-        telaExibida = 'div-principal';
-
-        $(".div-tela").hide();
-        $('.div-principal').show();
-    }
-    else {
-        if (telaExibida == 'div-principal') {
-            telaExibida = 'div-brassagem';
-
-            $('.div-principal').hide();
-            $('.div-brassagem').show();
-        }
-        else {
-            if(telaExibida.substring(0,7) == "div-hlt"){
-                ExibeTelaHLT();
-            }
-            else if (telaExibida.substring(0, 7) == "div-herms") {
-                ExibeTelaHerms();
-            }
-        }
-    }
-});
-
 function ExibeTelaHLT() {
-    if(telaExibida == "div-hlt-aquecer" || telaExibida == "div-hlt-alterar-temperatura"){
+    if (telaExibida == "div-hlt-aquecer" || telaExibida == "div-hlt-alterar-temperatura") {
         return;
     }
 
@@ -51,6 +24,57 @@ function ExibeTelaHLT() {
     else if (objBrassagem.HLTAquecendo) {
         $(".div-hlt-aquecendo").show();
         telaExibida = 'div-hlt-aquecendo';
+    }
+}
+
+function ExibeTelaHerms() {
+    if (telaExibida == "div-herms-aquecer" || telaExibida == "div-herms-alterar-temperatura") {
+        return;
+    }
+
+    $(".div-herms").hide();
+
+    if (objBrassagem.HermsVazio) {
+        $(".div-herms-vazio").show();
+        telaExibida = 'div-herms-vazio';
+    }
+    else if (objBrassagem.HermsEnchendo) {
+        $(".div-herms-enchendo").show();
+        telaExibida = 'div-herms-enchendo';
+    }
+    else if (objBrassagem.HermsCheio) {
+        $(".div-herms-cheio").show();
+        telaExibida = 'div-herms-cheio';
+    }
+    else if (objBrassagem.HermsAquecendo) {
+        $(".div-herms-aquecendo").show();
+        telaExibida = 'div-herms-aquecendo';
+    }
+}
+
+function VerificaTelaExibir(telas) {
+    if (!objBrassagem) {
+        telaExibida = 'div-principal';
+        telas = telaExibida.split('-')[1];
+    }
+    else if (objBrassagem && telaExibida == 'div-principal') {
+        telaExibida = 'div-brassagem';
+        telas = telaExibida.split('-')[1];
+    }
+
+    if (telas == 'principal') {
+        $(".div-tela").hide();
+        $('.div-principal').show();
+    }
+    else if (telas == 'brassagem') {
+        $('.div-principal').hide();
+        $('.div-brassagem').show();
+    }
+    else if (telas == 'hlt') {
+        ExibeTelaHLT();
+    }
+    else if (telas == 'herms') {
+        ExibeTelaHerms();
     }
 }
 
@@ -90,6 +114,13 @@ function defineLayout() {
     $(".minuto").css("margin-right", "20px");
 }
 
+socket.on('atualizaBrassagem', function (brassagem) {
+    objBrassagem = brassagem;
+
+    var telas = telaExibida.split('-')[1];
+    VerificaTelaExibir(telas);
+});
+
 $(".nova-brassagem").click(function () {
     $.post("nova-brassagem", function (data) { })
         .fail(function () { sweetAlert("", "Erro ao criar nova brassagem", "error"); });
@@ -123,12 +154,7 @@ $(".item").click(function () {
     var telas = classes[classes.length - 1];
     $(".div-brassagem").hide();
 
-    if (telas == 'hlt') {
-        ExibeTelaHLT();
-    }
-    else if (telas == 'herms') {
-        ExibeTelaHerms();
-    }
+    VerificaTelaExibir(telas);
 });
 
 $(".encher").click(function () {
@@ -138,7 +164,10 @@ $(".encher").click(function () {
     telaExibida = 'div-' + tela + '-enchendo';
 
     $.post("enche" + tela, function (data) { })
-        .fail(function () { sweetAlert("", "Erro ao encher " + tela, "error"); });
+        .fail(function () {
+            sweetAlert("", "Erro ao encher " + tela, "error");
+            telaExibida = 'div-brassagem';
+        });
 });
 
 $(".parar-enchimento").click(function () {
@@ -241,9 +270,6 @@ $(".cheio").click(function () {
     $("." + classes[1] + "-cheio").show();
 });
 
-
-
-
 $(".aumentar").click(function () {
     var objValor = $(this).prev();
     var classes = $(objValor).attr("class").split(" ");
@@ -270,16 +296,22 @@ $(".diminuir").click(function () {
 
 $(".alterar-minuto").click(function () {
     var classes = $(this).parent().attr("class").split(" ");
+    var tela = classes[1];
 
-    $("." + classes[1]).hide();
-    $("." + classes[1] + "-alterar-minuto").show();
+    telaExibida = tela + "-alterar-minuto";
+
+    $("." + tela).hide();
+    $("." + tela + "-alterar-minuto").show();
 });
 
 $(".alterar-temperatura").click(function () {
     var classes = $(this).parent().attr("class").split(" ");
+    var tela = classes[1];
 
-    $("." + classes[1]).hide();
-    $("." + classes[1] + "-alterar-temperatura").show();
+    telaExibida = tela + "-alterar-minuto";
+
+    $("." + tela).hide();
+    $("." + tela + "-alterar-temperatura").show();
 });
 
 defineLayout();
