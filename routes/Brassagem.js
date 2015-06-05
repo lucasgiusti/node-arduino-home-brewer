@@ -890,6 +890,67 @@ var paraResfriamento = function (req, res, io) {
     });
 };
 
+var rodaWhirlpool = function (req, res, io) {
+    var minuto = req.params.minuto;
+    if (!minuto && minuto == '') {
+        minuto = "0";
+    }
+    BrassagemModel = mongoose.model('brassagens', Brassagem);
+    return BrassagemModel.findOne({ 'BrassagemFinalizada': false }, function (err, brassagem) {
+        if (!err) {
+            if (brassagem) {
+                if (brassagem.BOLVazio) {
+                    res.status('500').send({ status: 500, error: 'O bol está vazio' });
+                }
+                else if (brassagem.BOLEnchendo) {
+                    res.status('500').send({ status: 500, error: 'O bol está enchendo' });
+                }
+                else {
+                    brassagem.WhirlpoolRodando = true;
+                    brassagem.WhirlpoolRodandoMinuto = minuto;
+                    brassagem.save(function () {
+                        atualizaBrassagem(io);
+                        res.send();
+                    });
+                }
+            }
+            else {
+                atualizaBrassagem(io);
+                res.send();
+            }
+        }
+        else {
+            res.status('500').send({ status: 500, error: err.message });
+        }
+    });
+};
+var paraWhirlpool = function (req, res, io) {
+    BrassagemModel = mongoose.model('brassagens', Brassagem);
+    return BrassagemModel.findOne({ 'BrassagemFinalizada': false }, function (err, brassagem) {
+        if (!err) {
+            if (brassagem) {
+                brassagem.WhirlpoolRodando = false;
+                brassagem.save(function (err) {
+                    if (!err) {
+                        atualizaBrassagem(io);
+                        res.send();
+                    }
+                    else {
+                        res.status('500').send({ status: 500, error: err.message });
+                    }
+                });
+            }
+            else {
+                atualizaBrassagem(io);
+                res.send();
+            }
+        }
+        else {
+            res.status('500').send({ status: 500, error: err.message });
+        }
+    });
+};
+
 module.exports.BrassagemModel = BrassagemModel;
 module.exports.atualizaBrassagem = atualizaBrassagem;
 module.exports.novaBrassagem = novaBrassagem;
@@ -925,3 +986,6 @@ module.exports.BOLCheio = BOLCheio;
 
 module.exports.rodaResfriamento = rodaResfriamento;
 module.exports.paraResfriamento = paraResfriamento;
+
+module.exports.rodaWhirlpool = rodaWhirlpool;
+module.exports.paraWhirlpool = paraWhirlpool;
