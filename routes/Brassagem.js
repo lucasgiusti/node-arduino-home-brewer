@@ -424,6 +424,66 @@ var HermsCheio = function (req, res, io) {
         }
     });
 };
+var aqueceHerms = function (req, res, io) {
+    var temperatura = req.params.temperatura;
+    if (!temperatura && temperatura == '') {
+        temperatura = "0";
+    }
+    BrassagemModel = mongoose.model('brassagens', Brassagem);
+    return BrassagemModel.findOne({ 'BrassagemFinalizada': false }, function (err, brassagem) {
+        if (!err) {
+            if (brassagem) {
+                if (brassagem.HermsVazio) {
+                    res.status('500').send({ status: 500, error: 'O herms está vazio' });
+                }
+                else if (brassagem.HermsEnchendo) {
+                    res.status('500').send({ status: 500, error: 'O herms está enchendo' });
+                }
+                else {
+                    brassagem.HermsAquecendo = true;
+                    brassagem.HermsAquecendoTemperatura = temperatura;
+                    brassagem.save(function () {
+                        atualizaBrassagem(io);
+                        res.send();
+                    });
+                }
+            }
+            else {
+                atualizaBrassagem(io);
+                res.send();
+            }
+        }
+        else {
+            res.status('500').send({ status: 500, error: err.message });
+        }
+    });
+};
+var paraAquecimentoHerms = function (req, res, io) {
+    BrassagemModel = mongoose.model('brassagens', Brassagem);
+    return BrassagemModel.findOne({ 'BrassagemFinalizada': false }, function (err, brassagem) {
+        if (!err) {
+            if (brassagem) {
+                brassagem.HermsAquecendo = false;
+                brassagem.save(function (err) {
+                    if (!err) {
+                        atualizaBrassagem(io);
+                        res.send();
+                    }
+                    else {
+                        res.status('500').send({ status: 500, error: err.message });
+                    }
+                });
+            }
+            else {
+                atualizaBrassagem(io);
+                res.send();
+            }
+        }
+        else {
+            res.status('500').send({ status: 500, error: err.message });
+        }
+    });
+};
 
 var encheMash = function (req, res, io) {
     BrassagemModel = mongoose.model('brassagens', Brassagem);
@@ -769,6 +829,67 @@ var BOLCheio = function (req, res, io) {
     });
 };
 
+var rodaResfriamento = function (req, res, io) {
+    var temperatura = req.params.temperatura;
+    if (!temperatura && temperatura == '') {
+        temperatura = "0";
+    }
+    BrassagemModel = mongoose.model('brassagens', Brassagem);
+    return BrassagemModel.findOne({ 'BrassagemFinalizada': false }, function (err, brassagem) {
+        if (!err) {
+            if (brassagem) {
+                if (brassagem.BOLVazio) {
+                    res.status('500').send({ status: 500, error: 'O bol está vazio' });
+                }
+                else if (brassagem.BOLEnchendo) {
+                    res.status('500').send({ status: 500, error: 'O bol está enchendo' });
+                }
+                else {
+                    brassagem.ResfriarRodando = true;
+                    brassagem.ResfriarRodandoTemperatura = temperatura;
+                    brassagem.save(function () {
+                        atualizaBrassagem(io);
+                        res.send();
+                    });
+                }
+            }
+            else {
+                atualizaBrassagem(io);
+                res.send();
+            }
+        }
+        else {
+            res.status('500').send({ status: 500, error: err.message });
+        }
+    });
+};
+var paraResfriamento = function (req, res, io) {
+    BrassagemModel = mongoose.model('brassagens', Brassagem);
+    return BrassagemModel.findOne({ 'BrassagemFinalizada': false }, function (err, brassagem) {
+        if (!err) {
+            if (brassagem) {
+                brassagem.ResfriarRodando = false;
+                brassagem.save(function (err) {
+                    if (!err) {
+                        atualizaBrassagem(io);
+                        res.send();
+                    }
+                    else {
+                        res.status('500').send({ status: 500, error: err.message });
+                    }
+                });
+            }
+            else {
+                atualizaBrassagem(io);
+                res.send();
+            }
+        }
+        else {
+            res.status('500').send({ status: 500, error: err.message });
+        }
+    });
+};
+
 module.exports.BrassagemModel = BrassagemModel;
 module.exports.atualizaBrassagem = atualizaBrassagem;
 module.exports.novaBrassagem = novaBrassagem;
@@ -783,6 +904,8 @@ module.exports.paraAquecimentoHLT = paraAquecimentoHLT;
 module.exports.encheHerms = encheHerms;
 module.exports.paraEnchimentoHerms = paraEnchimentoHerms;
 module.exports.HermsCheio = HermsCheio;
+module.exports.aqueceHerms = aqueceHerms;
+module.exports.paraAquecimentoHerms = paraAquecimentoHerms;
 
 module.exports.encheMash = encheMash;
 module.exports.paraEnchimentoMash = paraEnchimentoMash;
@@ -799,3 +922,6 @@ module.exports.SpargeCheio = SpargeCheio;
 module.exports.encheBOL = encheBOL;
 module.exports.paraEnchimentoBOL = paraEnchimentoBOL;
 module.exports.BOLCheio = BOLCheio;
+
+module.exports.rodaResfriamento = rodaResfriamento;
+module.exports.paraResfriamento = paraResfriamento;

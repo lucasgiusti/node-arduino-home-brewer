@@ -37,9 +37,12 @@ function ExibeTelaHerms() {
 
     $(".div-herms").hide();
 
-    if (objBrassagem.HermsVazio) {
-        $(".div-herms-vazio").show();
-        telaExibida = 'div-herms-vazio';
+    if (objBrassagem.HermsAquecendo) {
+        $(".herms-temperatura").text("Temp. " + objBrassagem.HermsAquecendoTemperatura + "ºC");
+        $(".herms-temperatura-atual").text("Atual. " + objBrassagem.HermsTemperaturaAtual + "ºC");
+
+        $(".div-herms-aquecendo").show();
+        telaExibida = 'div-herms-aquecendo';
     }
     else if (objBrassagem.HermsEnchendo) {
         $(".div-herms-enchendo").show();
@@ -49,10 +52,11 @@ function ExibeTelaHerms() {
         $(".div-herms-cheio").show();
         telaExibida = 'div-herms-cheio';
     }
-    else if (objBrassagem.HermsAquecendo) {
-        $(".div-herms-aquecendo").show();
-        telaExibida = 'div-herms-aquecendo';
+    else {
+        $(".div-herms-vazio").show();
+        telaExibida = 'div-herms-vazio';
     }
+
 }
 
 function ExibeTelaMash() {
@@ -148,7 +152,10 @@ function ExibeTelaResfriar() {
     $(".div-resfriar").hide();
 
     if (objBrassagem.ResfriarRodando) {
-        $(".div-resfriar-enchendo").show();
+        $(".resfriar-temperatura").text("Temp. " + objBrassagem.ResfriarRodandoTemperatura + "ºC");
+        $(".resfriar-temperatura-atual").text("Atual. " + objBrassagem.ResfriarTemperaturaAtual + "ºC");
+
+        $(".div-resfriar-aquecendo").show();
         telaExibida = 'div-resfriar-aquecendo';
     }
     else {
@@ -164,7 +171,7 @@ function ExibeTelaWhirlpool() {
         $("." + item + "-minuto").text("Temp. " + objBrassagem.WhirlpoolRodandoMinuto + "M");
         $("." + item + "-minuto-atual").text("Rest. " + objBrassagem.WhirlpoolRodandoMinutoRestante + "M");
 
-        $(".div-whirlpool-enchendo").show();
+        $(".div-whirlpool-aquecendo").show();
         telaExibida = 'div-whirlpool-aquecendo';
     }
     else {

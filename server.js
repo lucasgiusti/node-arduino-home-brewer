@@ -93,6 +93,8 @@ var application_root = __dirname,
         app.post('/encheherms', function (req, res) { brassagemRoute.encheHerms(req, res, io); });
         app.post('/paraenchimentoherms', function (req, res) { brassagemRoute.paraEnchimentoHerms(req, res, io); });
         app.post('/hermscheio', function (req, res) { brassagemRoute.HermsCheio(req, res, io); });
+        app.post('/aqueceherms/:temperatura', function (req, res) { brassagemRoute.aqueceHerms(req, res, io); });
+        app.post('/paraaquecimentoherms', function (req, res) { brassagemRoute.paraAquecimentoHerms(req, res, io); });
 
         app.post('/enchemash', function (req, res) { brassagemRoute.encheMash(req, res, io); });
         app.post('/paraenchimentomash', function (req, res) { brassagemRoute.paraEnchimentoMash(req, res, io); });
@@ -109,6 +111,9 @@ var application_root = __dirname,
         app.post('/enchebol', function (req, res) { brassagemRoute.encheBOL(req, res, io); });
         app.post('/paraenchimentobol', function (req, res) { brassagemRoute.paraEnchimentoBOL(req, res, io); });
         app.post('/bolcheio', function (req, res) { brassagemRoute.BOLCheio(req, res, io); });
+
+        app.post('/aqueceresfriar/:temperatura', function (req, res) { brassagemRoute.rodaResfriamento(req, res, io); });
+        app.post('/paraaquecimentoresfriar', function (req, res) { brassagemRoute.paraResfriamento(req, res, io); });
 
 
 // Launch server
