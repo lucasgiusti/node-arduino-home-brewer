@@ -103,6 +103,23 @@ function ExibeTelaSparge() {
     }
 }
 
+function ExibeTelaBOL() {
+    $(".div-bol").hide();
+
+    if (objBrassagem.BOLEnchendo) {
+        $(".div-bol-enchendo").show();
+        telaExibida = 'div-bol-enchendo';
+    }
+    else if (objBrassagem.BOLCheio) {
+        $(".div-bol-cheio").show();
+        telaExibida = 'div-bol-cheio';
+    }
+    else {
+        $(".div-bol-vazio").show();
+        telaExibida = 'div-bol-vazio';
+    }
+}
+
 function VerificaTelaExibir(telas) {
     if (!objBrassagem) {
         telaExibida = 'div-principal';
@@ -135,6 +152,9 @@ function VerificaTelaExibir(telas) {
     }
     else if (telas == 'sparge') {
         ExibeTelaSparge();
+    }
+    else if (telas == 'bol') {
+        ExibeTelaBOL();
     }
 }
 

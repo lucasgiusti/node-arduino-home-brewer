@@ -104,6 +104,10 @@ var application_root = __dirname,
         app.post('/paraenchimentosparge', function (req, res) { brassagemRoute.paraEnchimentoSparge(req, res, io); });
         app.post('/spargecheio', function (req, res) { brassagemRoute.SpargeCheio(req, res, io); });
 
+        app.post('/enchebol', function (req, res) { brassagemRoute.encheBOL(req, res, io); });
+        app.post('/paraenchimentobol', function (req, res) { brassagemRoute.paraEnchimentoBOL(req, res, io); });
+        app.post('/bolcheio', function (req, res) { brassagemRoute.BOLCheio(req, res, io); });
+
 
 // Launch server
         http.listen(3000, function () {
