@@ -63,13 +63,43 @@ function ExibeTelaMash() {
         $(".div-mash-cheio").show();
         telaExibida = 'div-mash-cheio';
     }
-    else if (objBrassagem.MashAquecendo) {
-        $(".div-mash-aquecendo").show();
-        telaExibida = 'div-mash-aquecendo';
-    }
     else {
         $(".div-mash-vazio").show();
         telaExibida = 'div-mash-vazio';
+    }
+}
+
+function ExibeTelaFermentador() {
+    $(".div-fermentador").hide();
+
+    if (objBrassagem.FermentadorEnchendo) {
+        $(".div-fermentador-enchendo").show();
+        telaExibida = 'div-fermentador-enchendo';
+    }
+    else if (objBrassagem.FermentadorCheio) {
+        $(".div-fermentador-cheio").show();
+        telaExibida = 'div-fermentador-cheio';
+    }
+    else {
+        $(".div-fermentador-vazio").show();
+        telaExibida = 'div-fermentador-vazio';
+    }
+}
+
+function ExibeTelaSparge() {
+    $(".div-sparge").hide();
+
+    if (objBrassagem.SpargeRodando) {
+        $(".div-sparge-enchendo").show();
+        telaExibida = 'div-sparge-enchendo';
+    }
+    else if (objBrassagem.SpargeFinalizado) {
+        $(".div-sparge-cheio").show();
+        telaExibida = 'div-sparge-cheio';
+    }
+    else {
+        $(".div-sparge-vazio").show();
+        telaExibida = 'div-sparge-vazio';
     }
 }
 
@@ -99,6 +129,12 @@ function VerificaTelaExibir(telas) {
     }
     else if (telas == 'mash') {
         ExibeTelaMash();
+    }
+    else if (telas == 'fermentador') {
+        ExibeTelaFermentador();
+    }
+    else if (telas == 'sparge') {
+        ExibeTelaSparge();
     }
 }
 

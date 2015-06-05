@@ -451,6 +451,178 @@ var MashCheio = function (req, res, io) {
     });
 };
 
+var encheFermentador = function (req, res, io) {
+    BrassagemModel = mongoose.model('brassagens', Brassagem);
+    return BrassagemModel.findOne({ 'BrassagemFinalizada': false }, function (err, brassagem) {
+        if (!err) {
+            if (brassagem) {
+                if (brassagem.BOLVazio) {
+                    res.status('500').send({ status: 500, error: 'O bol está vazio' });
+                }
+                else if (brassagem.BOLEnchendo) {
+                    res.status('500').send({ status: 500, error: 'O bol está enchendo' });
+                }
+                else {
+                    brassagem.FermentadorVazio = false;
+                    brassagem.FermentadorEnchendo = true;
+                    brassagem.save(function () {
+                        atualizaBrassagem(io);
+                        res.send();
+                    });
+                }
+            }
+            else {
+                atualizaBrassagem(io);
+                res.send();
+            }
+        }
+        else {
+            res.status('500').send({ status: 500, error: err.message });
+        }
+    });
+};
+var paraEnchimentoFermentador = function (req, res, io) {
+    BrassagemModel = mongoose.model('brassagens', Brassagem);
+    return BrassagemModel.findOne({ 'BrassagemFinalizada': false }, function (err, brassagem) {
+        if (!err) {
+            if (brassagem) {
+                brassagem.FermentadorEnchendo = false;
+                brassagem.FermentadorCheio = true;
+                brassagem.save(function (err) {
+                    if (!err) {
+                        atualizaBrassagem(io);
+                        res.send();
+                    }
+                    else {
+                        res.status('500').send({ status: 500, error: err.message });
+                    }
+                });
+            }
+            else {
+                atualizaBrassagem(io);
+                res.send();
+            }
+        }
+        else {
+            res.status('500').send({ status: 500, error: err.message });
+        }
+    });
+};
+var FermentadorCheio = function (req, res, io) {
+    BrassagemModel = mongoose.model('brassagens', Brassagem);
+    return BrassagemModel.findOne({ 'BrassagemFinalizada': false }, function (err, brassagem) {
+        if (!err) {
+            if (brassagem) {
+                brassagem.FermentadorVazio = false;
+                brassagem.FermentadorEnchendo = false;
+                brassagem.FermentadorCheio = true;
+                brassagem.save(function (err) {
+                    if (!err) {
+                        atualizaBrassagem(io);
+                        res.send();
+                    }
+                    else {
+                        res.status('500').send({ status: 500, error: err.message });
+                    }
+                });
+            }
+            else {
+                atualizaBrassagem(io);
+                res.send();
+            }
+        }
+        else {
+            res.status('500').send({ status: 500, error: err.message });
+        }
+    });
+};
+
+var encheSparge = function (req, res, io) {
+    BrassagemModel = mongoose.model('brassagens', Brassagem);
+    return BrassagemModel.findOne({ 'BrassagemFinalizada': false }, function (err, brassagem) {
+        if (!err) {
+            if (brassagem) {
+                if (brassagem.HLTVazio) {
+                    res.status('500').send({ status: 500, error: 'O hlt está vazio' });
+                }
+                else if (brassagem.HLTEnchendo) {
+                    res.status('500').send({ status: 500, error: 'O hlt está enchendo' });
+                }
+                else {
+                    brassagem.SpargeVazio = false;
+                    brassagem.SpargeRodando = true;
+                    brassagem.save(function () {
+                        atualizaBrassagem(io);
+                        res.send();
+                    });
+                }
+            }
+            else {
+                atualizaBrassagem(io);
+                res.send();
+            }
+        }
+        else {
+            res.status('500').send({ status: 500, error: err.message });
+        }
+    });
+};
+var paraEnchimentoSparge = function (req, res, io) {
+    BrassagemModel = mongoose.model('brassagens', Brassagem);
+    return BrassagemModel.findOne({ 'BrassagemFinalizada': false }, function (err, brassagem) {
+        if (!err) {
+            if (brassagem) {
+                brassagem.SpargeRodando = false;
+                brassagem.SpargeFinalizado = true;
+                brassagem.save(function (err) {
+                    if (!err) {
+                        atualizaBrassagem(io);
+                        res.send();
+                    }
+                    else {
+                        res.status('500').send({ status: 500, error: err.message });
+                    }
+                });
+            }
+            else {
+                atualizaBrassagem(io);
+                res.send();
+            }
+        }
+        else {
+            res.status('500').send({ status: 500, error: err.message });
+        }
+    });
+};
+var SpargeCheio = function (req, res, io) {
+    BrassagemModel = mongoose.model('brassagens', Brassagem);
+    return BrassagemModel.findOne({ 'BrassagemFinalizada': false }, function (err, brassagem) {
+        if (!err) {
+            if (brassagem) {
+                brassagem.SpargeVazio = false;
+                brassagem.SpargeRodando = false;
+                brassagem.SpargeFinalizado = true;
+                brassagem.save(function (err) {
+                    if (!err) {
+                        atualizaBrassagem(io);
+                        res.send();
+                    }
+                    else {
+                        res.status('500').send({ status: 500, error: err.message });
+                    }
+                });
+            }
+            else {
+                atualizaBrassagem(io);
+                res.send();
+            }
+        }
+        else {
+            res.status('500').send({ status: 500, error: err.message });
+        }
+    });
+};
+
 module.exports.BrassagemModel = BrassagemModel;
 module.exports.atualizaBrassagem = atualizaBrassagem;
 module.exports.novaBrassagem = novaBrassagem;
@@ -467,3 +639,11 @@ module.exports.HermsCheio = HermsCheio;
 module.exports.encheMash = encheMash;
 module.exports.paraEnchimentoMash = paraEnchimentoMash;
 module.exports.MashCheio = MashCheio;
+
+module.exports.encheFermentador = encheFermentador;
+module.exports.paraEnchimentoFermentador = paraEnchimentoFermentador;
+module.exports.FermentadorCheio = FermentadorCheio;
+
+module.exports.encheSparge = encheSparge;
+module.exports.paraEnchimentoSparge = paraEnchimentoSparge;
+module.exports.SpargeCheio = SpargeCheio;

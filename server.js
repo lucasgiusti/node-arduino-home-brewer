@@ -96,6 +96,14 @@ var application_root = __dirname,
         app.post('/paraenchimentomash', function (req, res) { brassagemRoute.paraEnchimentoMash(req, res, io); });
         app.post('/mashcheio', function (req, res) { brassagemRoute.MashCheio(req, res, io); });
 
+        app.post('/enchefermentador', function (req, res) { brassagemRoute.encheFermentador(req, res, io); });
+        app.post('/paraenchimentofermentador', function (req, res) { brassagemRoute.paraEnchimentoFermentador(req, res, io); });
+        app.post('/fermentadorcheio', function (req, res) { brassagemRoute.FermentadorCheio(req, res, io); });
+
+        app.post('/enchesparge', function (req, res) { brassagemRoute.encheSparge(req, res, io); });
+        app.post('/paraenchimentosparge', function (req, res) { brassagemRoute.paraEnchimentoSparge(req, res, io); });
+        app.post('/spargecheio', function (req, res) { brassagemRoute.SpargeCheio(req, res, io); });
+
 
 // Launch server
         http.listen(3000, function () {
