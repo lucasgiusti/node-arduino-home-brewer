@@ -281,6 +281,66 @@ var HLTCheio = function (req, res, io) {
         }
     });
 };
+var aqueceHLT = function (req, res, io) {
+    var temperatura = req.params.temperatura;
+    if (!temperatura && temperatura == '') {
+        temperatura = "0";
+    }
+    BrassagemModel = mongoose.model('brassagens', Brassagem);
+    return BrassagemModel.findOne({ 'BrassagemFinalizada': false }, function (err, brassagem) {
+        if (!err) {
+            if (brassagem) {
+                if (brassagem.HLTVazio) {
+                    res.status('500').send({ status: 500, error: 'O hlt está vazio' });
+                }
+                else if (brassagem.HLTEnchendo) {
+                    res.status('500').send({ status: 500, error: 'O hlt está enchendo' });
+                }
+                else {
+                    brassagem.HLTAquecendo = true;
+                    brassagem.HLTAquecendoTemperatura = temperatura;
+                    brassagem.save(function () {
+                        atualizaBrassagem(io);
+                        res.send();
+                    });
+                }
+            }
+            else {
+                atualizaBrassagem(io);
+                res.send();
+            }
+        }
+        else {
+            res.status('500').send({ status: 500, error: err.message });
+        }
+    });
+};
+var paraAquecimentoHLT = function (req, res, io) {
+    BrassagemModel = mongoose.model('brassagens', Brassagem);
+    return BrassagemModel.findOne({ 'BrassagemFinalizada': false }, function (err, brassagem) {
+        if (!err) {
+            if (brassagem) {
+                brassagem.HLTAquecendo = false;
+                brassagem.save(function (err) {
+                    if (!err) {
+                        atualizaBrassagem(io);
+                        res.send();
+                    }
+                    else {
+                        res.status('500').send({ status: 500, error: err.message });
+                    }
+                });
+            }
+            else {
+                atualizaBrassagem(io);
+                res.send();
+            }
+        }
+        else {
+            res.status('500').send({ status: 500, error: err.message });
+        }
+    });
+};
 
 var encheHerms = function (req, res, io) {
     BrassagemModel = mongoose.model('brassagens', Brassagem);
@@ -717,6 +777,8 @@ module.exports.finalizaBrassagem = finalizaBrassagem;
 module.exports.encheHLT = encheHLT;
 module.exports.paraEnchimentoHLT = paraEnchimentoHLT;
 module.exports.HLTCheio = HLTCheio;
+module.exports.aqueceHLT = aqueceHLT;
+module.exports.paraAquecimentoHLT = paraAquecimentoHLT;
 
 module.exports.encheHerms = encheHerms;
 module.exports.paraEnchimentoHerms = paraEnchimentoHerms;

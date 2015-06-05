@@ -87,6 +87,8 @@ var application_root = __dirname,
         app.post('/enchehlt', function (req, res) { brassagemRoute.encheHLT(req, res, io); });
         app.post('/paraenchimentohlt', function (req, res) { brassagemRoute.paraEnchimentoHLT(req, res, io); });
         app.post('/hltcheio', function (req, res) { brassagemRoute.HLTCheio(req, res, io); });
+        app.post('/aquecehlt/:temperatura', function (req, res) { brassagemRoute.aqueceHLT(req, res, io); });
+        app.post('/paraaquecimentohlt', function (req, res) { brassagemRoute.paraAquecimentoHLT(req, res, io); });
 
         app.post('/encheherms', function (req, res) { brassagemRoute.encheHerms(req, res, io); });
         app.post('/paraenchimentoherms', function (req, res) { brassagemRoute.paraEnchimentoHerms(req, res, io); });
