@@ -113,9 +113,24 @@ function ExibeTelaSparge() {
 function ExibeTelaBOL() {
     $(".div-bol").hide();
 
-    if (objBrassagem.BOLEnchendo) {
+    if (objBrassagem.BOLFervendo) {
+        $(".bol-temperatura").text("Temp. " + objBrassagem.BOLFervendoTemperatura + "ºC");
+        $(".bol-temperatura-atual").text("Atual. " + objBrassagem.BOLTemperaturaAtual + "ºC");
+
+        $(".bol-minuto").text("Temp. " + objBrassagem.BOLFervendoMinuto + "M");
+        $(".bol-minuto-atual").text("Rest. " + objBrassagem.BOLFervendoMinutoRestante + "M");
+
+
+        $(".div-bol-aquecendo").show();
+        telaExibida = 'div-bol-aquecendo';
+    }
+    else if (objBrassagem.BOLEnchendo) {
         $(".div-bol-enchendo").show();
         telaExibida = 'div-bol-enchendo';
+    }
+    else if (objBrassagem.FervuraFinalizada) {
+        $(".div-bol-cheio").show();
+        telaExibida = 'div-bol-cheio';
     }
     else if (objBrassagem.BOLCheio) {
         $(".div-bol-cheio").show();
@@ -135,6 +150,15 @@ function ExibeTelaRampa() {
     $(".div-rampa").hide();
 
     if (objBrassagem.RampaRodando) {
+        $(".rampa-temperatura").text("Temp. " + objBrassagem.RampaRodandoTemperatura + "ºC");
+        $(".rampa-temperatura-atual").text("Atual. " + objBrassagem.RampaTemperaturaAtual + "ºC");
+
+        $(".rampa-minuto").text("Temp. " + objBrassagem.RampaRodandoMinuto + "M");
+        $(".rampa-minuto-atual").text("Rest. " + objBrassagem.RampaRodandoMinutoRestante + "M");
+
+        $(".rampa-numero").text("Rampa " + objBrassagem.RampaRodandoNumero);
+
+
         $(".div-rampa-aquecendo").show();
         telaExibida = 'div-rampa-aquecendo';
     }
@@ -385,18 +409,17 @@ $(".minuto-aquecer").click(function () {
 
 $(".temperatura-minuto-aquecer").click(function () {
     var classes = $(this).parent().attr("class").split(" ");
-    var item = classes[1].replace("div-", "");
+    var tela = classes[classes.length - 1].split("-")[1];
+    var valorTemperatura = parseInt($(".temperatura-" + tela).val());
+    var valorMinuto = parseInt($(".minuto-" + tela).val());
 
-    var valorTemperatura = parseInt($(".temperatura-" + item).val())
-    $("." + item + "-temperatura").text("Temp. " + valorTemperatura + "ºC");
-    $("." + item + "-temperatura-atual").text("Atual. " + valorTemperatura + "ºC");
+    telaExibida = 'div-' + tela + '-aquecendo';
 
-    var valor = parseInt($(".minuto-" + item).val())
-    $("." + item + "-minuto").text("Temp. " + valor + "M");
-    $("." + item + "-minuto-atual").text("Atual. " + valor + "M");
-
-    $("." + classes[1]).hide();
-    $("." + classes[1] + "-aquecendo").show();
+    $.post("aquece" + tela + "/" + valorTemperatura + "/" + valorMinuto, function (data) { })
+        .fail(function (error) {
+            sweetAlert("", "Erro ao aquecer " + tela + "\n" + $.parseJSON(error.responseText).error, "error");
+            telaExibida = 'div-brassagem';
+        });
 });
 
 $(".log").click(function () {

@@ -828,6 +828,154 @@ var BOLCheio = function (req, res, io) {
         }
     });
 };
+var ferveBOL = function (req, res, io) {
+    var temperatura = req.params.temperatura;
+    if (!temperatura && temperatura == '') {
+        temperatura = "0";
+    }
+    var minuto = req.params.minuto;
+    if (!minuto && minuto == '') {
+        minuto = "0";
+    }
+    BrassagemModel = mongoose.model('brassagens', Brassagem);
+    return BrassagemModel.findOne({ 'BrassagemFinalizada': false }, function (err, brassagem) {
+        if (!err) {
+            if (brassagem) {
+                if (brassagem.BOLVazio) {
+                    res.status('500').send({ status: 500, error: 'O bol está vazio' });
+                }
+                else if (brassagem.BOLEnchendo) {
+                    res.status('500').send({ status: 500, error: 'O bol está enchendo' });
+                }
+                else {
+                    brassagem.BOLFervendo = true;
+                    brassagem.BOLFervendoTemperatura = temperatura;
+                    brassagem.BOLFervendoMinuto = minuto;
+                    brassagem.BOLFervendoMinutoRestante = minuto;
+                    brassagem.save(function () {
+                        atualizaBrassagem(io);
+                        res.send();
+                    });
+                }
+            }
+            else {
+                atualizaBrassagem(io);
+                res.send();
+            }
+        }
+        else {
+            res.status('500').send({ status: 500, error: err.message });
+        }
+    });
+};
+var paraFervuraBOL = function (req, res, io) {
+    BrassagemModel = mongoose.model('brassagens', Brassagem);
+    return BrassagemModel.findOne({ 'BrassagemFinalizada': false }, function (err, brassagem) {
+        if (!err) {
+            if (brassagem) {
+                brassagem.BOLFervendo = false;
+                brassagem.save(function (err) {
+                    if (!err) {
+                        atualizaBrassagem(io);
+                        res.send();
+                    }
+                    else {
+                        res.status('500').send({ status: 500, error: err.message });
+                    }
+                });
+            }
+            else {
+                atualizaBrassagem(io);
+                res.send();
+            }
+        }
+        else {
+            res.status('500').send({ status: 500, error: err.message });
+        }
+    });
+};
+
+var iniciaRampa = function (req, res, io) {
+    var temperatura = req.params.temperatura;
+    if (!temperatura && temperatura == '') {
+        temperatura = "0";
+    }
+    var minuto = req.params.minuto;
+    if (!minuto && minuto == '') {
+        minuto = "0";
+    }
+    BrassagemModel = mongoose.model('brassagens', Brassagem);
+    return BrassagemModel.findOne({ 'BrassagemFinalizada': false }, function (err, brassagem) {
+        if (!err) {
+            if (brassagem) {
+                if (brassagem.MashVazio) {
+                    res.status('500').send({ status: 500, error: 'O mash está vazio' });
+                }
+                else if (brassagem.MashEnchendo) {
+                    res.status('500').send({ status: 500, error: 'O mash está enchendo' });
+                }
+                else if (brassagem.HermsVazio) {
+                    res.status('500').send({ status: 500, error: 'O herms está vazio' });
+                }
+                else if (brassagem.HermsEnchendo) {
+                    res.status('500').send({ status: 500, error: 'O herms está enchendo' });
+                }
+                else {
+                    brassagem.RampaRodando = true;
+                    brassagem.RampaRodandoTemperatura = temperatura;
+                    brassagem.RampaRodandoMinuto = minuto;
+                    brassagem.RampaRodandoMinutoRestante = minuto;
+
+                    if (!brassagem.RampaRodandoNumero) {
+                        brassagem.RampaRodandoNumero = "1";
+                    }
+                    else {
+                        brassagem.RampaRodandoNumero = parseInt(brassagem.RampaRodandoNumero) + 1;
+                    }
+
+                    brassagem.save(function () {
+                        atualizaBrassagem(io);
+                        res.send();
+                    });
+                }
+            }
+            else {
+                atualizaBrassagem(io);
+                res.send();
+            }
+        }
+        else {
+            res.status('500').send({ status: 500, error: err.message });
+        }
+    });
+};
+var finalizaRampa = function (req, res, io) {
+    BrassagemModel = mongoose.model('brassagens', Brassagem);
+    return BrassagemModel.findOne({ 'BrassagemFinalizada': false }, function (err, brassagem) {
+        if (!err) {
+            if (brassagem) {
+                brassagem.RampaRodando = false;
+                brassagem.RampaFinalizada = true;
+                brassagem.save(function (err) {
+                    if (!err) {
+                        atualizaBrassagem(io);
+                        res.send();
+                    }
+                    else {
+                        res.status('500').send({ status: 500, error: err.message });
+                    }
+                });
+            }
+            else {
+                atualizaBrassagem(io);
+                res.send();
+            }
+        }
+        else {
+            res.status('500').send({ status: 500, error: err.message });
+        }
+    });
+};
 
 var rodaResfriamento = function (req, res, io) {
     var temperatura = req.params.temperatura;
@@ -908,6 +1056,7 @@ var rodaWhirlpool = function (req, res, io) {
                 else {
                     brassagem.WhirlpoolRodando = true;
                     brassagem.WhirlpoolRodandoMinuto = minuto;
+                    brassagem.WhirlpoolRodandoMinutoRestante = minuto;
                     brassagem.save(function () {
                         atualizaBrassagem(io);
                         res.send();
@@ -983,6 +1132,11 @@ module.exports.SpargeCheio = SpargeCheio;
 module.exports.encheBOL = encheBOL;
 module.exports.paraEnchimentoBOL = paraEnchimentoBOL;
 module.exports.BOLCheio = BOLCheio;
+module.exports.ferveBOL = ferveBOL;
+module.exports.paraFervuraBOL = paraFervuraBOL;
+
+module.exports.iniciaRampa = iniciaRampa;
+module.exports.finalizaRampa = finalizaRampa;
 
 module.exports.rodaResfriamento = rodaResfriamento;
 module.exports.paraResfriamento = paraResfriamento;

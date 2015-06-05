@@ -112,11 +112,17 @@ var application_root = __dirname,
         app.post('/paraenchimentobol', function (req, res) { brassagemRoute.paraEnchimentoBOL(req, res, io); });
         app.post('/bolcheio', function (req, res) { brassagemRoute.BOLCheio(req, res, io); });
 
-        app.post('/aquecerwhirlpool/:minuto', function (req, res) { brassagemRoute.rodaWhirlpool(req, res, io); });
+        app.post('/aquecewhirlpool/:minuto', function (req, res) { brassagemRoute.rodaWhirlpool(req, res, io); });
         app.post('/paraaquecimentowhirlpool', function (req, res) { brassagemRoute.paraWhirlpool(req, res, io); });
 
         app.post('/aqueceresfriar/:temperatura', function (req, res) { brassagemRoute.rodaResfriamento(req, res, io); });
         app.post('/paraaquecimentoresfriar', function (req, res) { brassagemRoute.paraResfriamento(req, res, io); });
+
+        app.post('/aquecebol/:temperatura/:minuto', function (req, res) { brassagemRoute.ferveBOL(req, res, io); });
+        app.post('/paraaquecimentobol', function (req, res) { brassagemRoute.paraFervuraBOL(req, res, io); });
+
+        app.post('/aquecerampa/:temperatura/:minuto', function (req, res) { brassagemRoute.iniciaRampa(req, res, io); });
+        app.post('/paraaquecimentorampa', function (req, res) { brassagemRoute.finalizaRampa(req, res, io); });
 
 
 // Launch server
