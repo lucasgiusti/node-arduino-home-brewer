@@ -120,6 +120,53 @@ function ExibeTelaBOL() {
     }
 }
 
+function ExibeTelaRampa() {
+    if (telaExibida == "div-rampa-aquecer" || telaExibida == "div-rampa-alterar-temperatura") {
+        return;
+    }
+
+    $(".div-rampa").hide();
+
+    if (objBrassagem.RampaRodando) {
+        $(".div-rampa-aquecendo").show();
+        telaExibida = 'div-rampa-aquecendo';
+    }
+    else if (objBrassagem.RampaFinalizada) {
+        $(".div-rampa-cheio").show();
+        telaExibida = 'div-rampa-cheio';
+    }
+    else {
+        $(".div-rampa-vazio").show();
+        telaExibida = 'div-rampa-vazio';
+    }
+}
+
+function ExibeTelaResfriar() {
+    $(".div-resfriar").hide();
+
+    if (objBrassagem.ResfriarRodando) {
+        $(".div-resfriar-enchendo").show();
+        telaExibida = 'div-resfriar-aquecendo';
+    }
+    else {
+        $(".div-resfriar-vazio").show();
+        telaExibida = 'div-resfriar-vazio';
+    }
+}
+
+function ExibeTelaWhirlpool() {
+    $(".div-whirlpool").hide();
+
+    if (objBrassagem.WhirlpoolRodando) {
+        $(".div-whirlpool-enchendo").show();
+        telaExibida = 'div-whirlpool-aquecendo';
+    }
+    else {
+        $(".div-whirlpool-vazio").show();
+        telaExibida = 'div-whirlpool-vazio';
+    }
+}
+
 function VerificaTelaExibir(telas) {
     if (!objBrassagem) {
         telaExibida = 'div-principal';
@@ -155,6 +202,15 @@ function VerificaTelaExibir(telas) {
     }
     else if (telas == 'bol') {
         ExibeTelaBOL();
+    }
+    else if (telas == 'rampa') {
+        ExibeTelaRampa();
+    }
+    else if (telas == 'resfriar') {
+        ExibeTelaResfriar();
+    }
+    else if (telas == 'whirlpool') {
+        ExibeTelaWhirlpool();
     }
 }
 
