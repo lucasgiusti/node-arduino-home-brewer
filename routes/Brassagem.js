@@ -162,12 +162,11 @@ var novaBrassagem = function (req, res, io) {
     BrassagemModel.save(function (err, brassagem, result) {
         if (!err) {
             atualizaBrassagem(io); 
+            res.send();
         } else {
             res.status('500').send({ status: 500, error: err.message });
         }
     });
-
-    res.send();
 };
 
 var finalizaBrassagem = function (req, res, io) {
@@ -181,6 +180,7 @@ var finalizaBrassagem = function (req, res, io) {
                     brassagem.save(function (err) {
                         if (!err) {
                             atualizaBrassagem(io);
+                            res.send();
                         }
                         else {
                             res.status('500').send({ status: 500, error: err.message });
@@ -189,13 +189,13 @@ var finalizaBrassagem = function (req, res, io) {
             }
             else {
                 atualizaBrassagem(io);
+                res.send();
             }
         }
         else {
             res.status('500').send({ status: 500, error: err.message });
         }
     });
-    res.send();
 };
 
 var encheHLT = function (req, res, io) {
@@ -209,6 +209,7 @@ var encheHLT = function (req, res, io) {
                 brassagem.save(function (err) {
                     if (!err) {
                         atualizaBrassagem(io);
+                        res.send();
                     }
                     else {
                         res.status('500').send({ status: 500, error: err.message });
@@ -217,13 +218,13 @@ var encheHLT = function (req, res, io) {
             }
             else {
                 atualizaBrassagem(io);
+                res.send();
             }
         }
         else {
             res.status('500').send({ status: 500, error: err.message });
         }
     });
-    res.send();
 };
 var paraEnchimentoHLT = function (req, res, io) {
     BrassagemModel = mongoose.model('brassagens', Brassagem);
@@ -235,6 +236,7 @@ var paraEnchimentoHLT = function (req, res, io) {
                 brassagem.save(function (err) {
                     if (!err) {
                         atualizaBrassagem(io);
+                        res.send();
                     }
                     else {
                         res.status('500').send({ status: 500, error: err.message });
@@ -243,13 +245,13 @@ var paraEnchimentoHLT = function (req, res, io) {
             }
             else {
                 atualizaBrassagem(io);
+                res.send();
             }
         }
         else {
             res.status('500').send({ status: 500, error: err.message });
         }
     });
-    res.send();
 };
 var HLTCheio = function (req, res, io) {
     BrassagemModel = mongoose.model('brassagens', Brassagem);
@@ -262,6 +264,7 @@ var HLTCheio = function (req, res, io) {
                 brassagem.save(function (err) {
                     if (!err) {
                         atualizaBrassagem(io);
+                        res.send();
                     }
                     else {
                         res.status('500').send({ status: 500, error: err.message });
@@ -270,13 +273,13 @@ var HLTCheio = function (req, res, io) {
             }
             else {
                 atualizaBrassagem(io);
+                res.send();
             }
         }
         else {
             res.status('500').send({ status: 500, error: err.message });
         }
     });
-    res.send();
 };
 
 var encheHerms = function (req, res, io) {
@@ -289,6 +292,7 @@ var encheHerms = function (req, res, io) {
                 brassagem.save(function (err) {
                     if (!err) {
                         atualizaBrassagem(io);
+                        res.send();
                     }
                     else {
                         res.status('500').send({ status: 500, error: err.message });
@@ -297,13 +301,13 @@ var encheHerms = function (req, res, io) {
             }
             else {
                 atualizaBrassagem(io);
+                res.send();
             }
         }
         else {
             res.status('500').send({ status: 500, error: err.message });
         }
     });
-    res.send();
 };
 var paraEnchimentoHerms = function (req, res, io) {
     BrassagemModel = mongoose.model('brassagens', Brassagem);
@@ -315,6 +319,7 @@ var paraEnchimentoHerms = function (req, res, io) {
                 brassagem.save(function (err) {
                     if (!err) {
                         atualizaBrassagem(io);
+                        res.send();
                     }
                     else {
                         res.status('500').send({ status: 500, error: err.message });
@@ -323,13 +328,13 @@ var paraEnchimentoHerms = function (req, res, io) {
             }
             else {
                 atualizaBrassagem(io);
+                res.send();
             }
         }
         else {
             res.status('500').send({ status: 500, error: err.message });
         }
     });
-    res.send();
 };
 var HermsCheio = function (req, res, io) {
     BrassagemModel = mongoose.model('brassagens', Brassagem);
@@ -342,6 +347,7 @@ var HermsCheio = function (req, res, io) {
                 brassagem.save(function (err) {
                     if (!err) {
                         atualizaBrassagem(io);
+                        res.send();
                     }
                     else {
                         res.status('500').send({ status: 500, error: err.message });
@@ -350,13 +356,13 @@ var HermsCheio = function (req, res, io) {
             }
             else {
                 atualizaBrassagem(io);
+                res.send();
             }
         }
         else {
             res.status('500').send({ status: 500, error: err.message });
         }
     });
-    res.send();
 };
 
 var encheMash = function (req, res, io) {
@@ -375,18 +381,19 @@ var encheMash = function (req, res, io) {
                     brassagem.MashEnchendo = true;
                     brassagem.save(function () {
                         atualizaBrassagem(io);
+                        res.send();
                     });
                 }
             }
             else {
                 atualizaBrassagem(io);
+                res.send();
             }
         }
         else {
             res.status('500').send({ status: 500, error: err.message });
         }
     });
-    res.send();
 };
 var paraEnchimentoMash = function (req, res, io) {
     BrassagemModel = mongoose.model('brassagens', Brassagem);
@@ -398,6 +405,7 @@ var paraEnchimentoMash = function (req, res, io) {
                 brassagem.save(function (err) {
                     if (!err) {
                         atualizaBrassagem(io);
+                        res.send();
                     }
                     else {
                         res.status('500').send({ status: 500, error: err.message });
@@ -406,13 +414,13 @@ var paraEnchimentoMash = function (req, res, io) {
             }
             else {
                 atualizaBrassagem(io);
+                res.send();
             }
         }
         else {
             res.status('500').send({ status: 500, error: err.message });
         }
     });
-    res.send();
 };
 var MashCheio = function (req, res, io) {
     BrassagemModel = mongoose.model('brassagens', Brassagem);
@@ -425,6 +433,7 @@ var MashCheio = function (req, res, io) {
                 brassagem.save(function (err) {
                     if (!err) {
                         atualizaBrassagem(io);
+                        res.send();
                     }
                     else {
                         res.status('500').send({ status: 500, error: err.message });
@@ -433,13 +442,13 @@ var MashCheio = function (req, res, io) {
             }
             else {
                 atualizaBrassagem(io);
+                res.send();
             }
         }
         else {
             res.status('500').send({ status: 500, error: err.message });
         }
     });
-    res.send();
 };
 
 module.exports.BrassagemModel = BrassagemModel;
