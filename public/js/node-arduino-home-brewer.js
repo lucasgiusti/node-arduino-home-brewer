@@ -324,7 +324,10 @@ function () {
 
 $(".voltar").click(function () {
     var classes = $(this).parent().attr("class").split(" ");
-    $("." + classes[classes.length - 1]).hide();
+    var telas = classes[classes.length - 1].split("-")[1];
+    $(".div-" + telas).hide();
+
+    telaExibida = 'div-brassagem';
     $(".div-brassagem").show();
 });
 

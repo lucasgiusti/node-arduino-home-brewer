@@ -869,7 +869,47 @@ var BOLCheio = function (req, res, io) {
         }
     });
 };
+
+var timerMinutoBOL = null;
+
+var atualizaMinutoBOL = function(io){
+ BrassagemModel = mongoose.model('brassagens', Brassagem);
+    return BrassagemModel.findOne({ 'BrassagemFinalizada': false }, function (err, brassagem) {
+        if (!err) {
+            if (brassagem) {
+                if(brassagem.BOLFervendo == false){
+                    clearInterval(timerMinutoBOL);
+                }
+                if (brassagem.BOLFervendoMinutoRestante == "1") {
+                    brassagem.BOLFervendo = false;
+                    brassagem.BOLFervendoMinutoRestante = "0";
+                    brassagem.BOLFervendoMinutoAtingido = false;
+                    brassagem.BOLLog += '\n' + utilRoute.getTime() + ' - fervura parada';
+                    clearInterval(timerMinutoBOL);
+                }
+                else{
+                    brassagem.BOLFervendoMinutoRestante = parseInt(brassagem.BOLFervendoMinutoRestante)-1;
+                }
+
+                    brassagem.save(function () {
+                        atualizaBrassagem(io);
+                    });
+            }
+            else {
+                clearInterval(timerMinutoBOL);
+            }
+        }
+        else {
+            clearInterval(timerMinutoBOL);
+        }
+    });
+}
+
 var ferveBOL = function (req, res, io) {
+    if(timerMinutoBOL){
+        clearInterval(timerMinutoBOL);
+    }
+
     var temperatura = req.params.temperatura;
     if (!temperatura && temperatura == '') {
         temperatura = "0";
@@ -896,6 +936,7 @@ var ferveBOL = function (req, res, io) {
                     brassagem.BOLLog += '\n' + utilRoute.getTime() + ' - fervura iniciada ' + temperatura + 'ºC ' + minuto + 'M';
                     brassagem.save(function () {
                         atualizaBrassagem(io);
+                        timerMinutoBOL = setInterval(function(){atualizaMinutoBOL(io);},60*1000);
                         res.send();
                     });
                 }
@@ -938,7 +979,46 @@ var paraFervuraBOL = function (req, res, io) {
     });
 };
 
+var timerMinutoRampa = null;
+
+var atualizaMinutoRampa = function(io){
+ BrassagemModel = mongoose.model('brassagens', Brassagem);
+    return BrassagemModel.findOne({ 'BrassagemFinalizada': false }, function (err, brassagem) {
+        if (!err) {
+            if (brassagem) {
+                if(brassagem.RampaRodando == false){
+                    clearInterval(timerMinutoRampa);
+                }
+                if (brassagem.RampaRodandoMinutoRestante == "1") {
+                    brassagem.RampaRodando = false;
+                    brassagem.RampaRodandoMinutoRestante = "0";
+                    brassagem.RampaFinalizada
+                    brassagem.RampaLog += '\n' + utilRoute.getTime() + ' - rampa ' + brassagem.RampaRodandoNumero + ' finalizada';
+                    clearInterval(timerMinutoRampa);
+                }
+                else{
+                   brassagem.RampaRodandoMinutoRestante = parseInt(brassagem.RampaRodandoMinutoRestante)-1;
+                }
+
+                    brassagem.save(function () {
+                        atualizaBrassagem(io);
+                    });
+            }
+            else {
+                clearInterval(timerMinutoRampa);
+            }
+        }
+        else {
+            clearInterval(timerMinutoRampa);
+        }
+    });
+}
+
 var iniciaRampa = function (req, res, io) {
+    if(timerMinutoRampa){
+        clearInterval(timerMinutoRampa);
+    }
+
     var temperatura = req.params.temperatura;
     if (!temperatura && temperatura == '') {
         temperatura = "0";
@@ -979,6 +1059,7 @@ var iniciaRampa = function (req, res, io) {
                     brassagem.RampaLog += '\n' + utilRoute.getTime() + ' - rampa ' + brassagem.RampaRodandoNumero + ' iniciada ' + temperatura + 'ºC ' + minuto + 'M';
                     brassagem.save(function () {
                         atualizaBrassagem(io);
+                        timerMinutoRampa = setInterval(function(){atualizaMinutoRampa(io);},60*1000);
                         res.send();
                     });
                 }
@@ -1085,7 +1166,46 @@ var paraResfriamento = function (req, res, io) {
     });
 };
 
+var timerMinutoWhirlpool = null;
+
+var atualizaMinutoWhirlpool = function(io){
+ BrassagemModel = mongoose.model('brassagens', Brassagem);
+    return BrassagemModel.findOne({ 'BrassagemFinalizada': false }, function (err, brassagem) {
+        if (!err) {
+            if (brassagem) {
+                if(brassagem.WhirlpoolRodando == false){
+                    clearInterval(timerMinutoWhirlpool);
+                }
+                if (brassagem.WhirlpoolRodandoMinutoRestante == "1") {
+                    brassagem.WhirlpoolRodando = false;
+                    brassagem.WhirlpoolRodandoMinutoRestante = "0";
+                    brassagem.WhirlpoolRodandoMinutoAtingido = false;
+                    brassagem.WhirlpoolLog += '\n' + utilRoute.getTime() + ' - whirlpool parado';
+                    clearInterval(timerMinutoWhirlpool);
+                }
+                else{
+                    brassagem.WhirlpoolRodandoMinutoRestante = parseInt(brassagem.WhirlpoolRodandoMinutoRestante)-1;
+                }
+
+                    brassagem.save(function () {
+                        atualizaBrassagem(io);
+                    });
+            }
+            else {
+                clearInterval(timerMinutoWhirlpool);
+            }
+        }
+        else {
+            clearInterval(timerMinutoWhirlpool);
+        }
+    });
+}
+
 var rodaWhirlpool = function (req, res, io) {
+    if(timerMinutoWhirlpool){
+        clearInterval(timerMinutoWhirlpool);
+    }
+
     var minuto = req.params.minuto;
     if (!minuto && minuto == '') {
         minuto = "0";
@@ -1107,6 +1227,7 @@ var rodaWhirlpool = function (req, res, io) {
                     brassagem.WhirlpoolLog += '\n' + utilRoute.getTime() + ' - whirlpool iniciado ' + minuto + 'M';
                     brassagem.save(function () {
                         atualizaBrassagem(io);
+                        timerMinutoWhirlpool = setInterval(function(){atualizaMinutoWhirlpool(io);},60*1000);
                         res.send();
                     });
                 }
