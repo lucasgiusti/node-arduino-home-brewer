@@ -41,3 +41,9 @@ body {
     display: none; 
     text-align: center;
 }
+.footer {
+    margin-top: 5px;
+    padding-top: 5px;
+    color: #999;
+    border-top: solid 1px #ddd;
+}

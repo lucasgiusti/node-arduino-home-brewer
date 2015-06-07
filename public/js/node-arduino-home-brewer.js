@@ -256,6 +256,7 @@ function defineLayout() {
     $(".diminuir").css("width", "24%");
     $(".aumentar").css("width", "24%");
     $(".txt-valor").css("width", "45%");
+    $(".nova-brassagem").css("height", "250px");
 
     $(".btn-medio").css("margin-bottom", "5px");
     $(".btn-grande").css("margin-bottom", "5px");
@@ -267,7 +268,7 @@ function defineLayout() {
     $(".voltar-2-botoes-1-legenda").css("margin-top", "92px");
     $(".voltar-3-botoes").css("margin-top", "130px");
     $(".voltar-3-botoes-1-legenda").css("margin-top", "53px");
-    $(".voltar-5-botoes").css("margin-top", "0px");
+    $(".voltar-5-botoes").css("margin-top", "7px");
     $(".log-1-botao").css("margin-top", "180px");
     $(".log-1-botao-2-legendas").css("margin-top", "105px");
     $(".log-2-botoes").css("margin-top", "130px");
@@ -280,11 +281,12 @@ function defineLayout() {
     $(".aumentar").css("margin-right", "5px");
     $(".aumentar").css("margin-bottom", "5px");
     $(".txt-valor").css("float", "left");
-    $(".txt-valor").css("margin-left", "5px");
-    $(".txt-valor").css("margin-right", "5px");
+    $(".txt-valor").css("margin-left", "8px");
+    $(".txt-valor").css("margin-right", "8px");
     $(".lbl-titulo").css("text-align", "center");
     $(".temperatura").css("margin-right", "20px");
     $(".minuto").css("margin-right", "20px");
+    $(".sobre").css("margin-top", "30px");
 }
 
 socket.on('atualizaBrassagem', function (brassagem) {
@@ -462,6 +464,11 @@ $(".log").click(function () {
 
     swal({ title: "", text: texto, confirmButtonColor: '#428bca' });
 });
+
+$(".sobre").click(function(){
+swal({ title: "", text: "Node Arduino Home Brewer\n\nVersão 1.0.0", confirmButtonColor: '#428bca' });    
+});
+
 
 $(".cheio").click(function () {
     var classes = $(this).parent().attr("class").split(" ");
