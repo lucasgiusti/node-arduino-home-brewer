@@ -12,6 +12,7 @@ var
     passport = require('passport'),
     LocalStrategy = require('passport-local').Strategy,
     passportLocalMongoose = require('passport-local-mongoose');
+    utilRoute = require("./util");
 //************************************************************
 
 
@@ -29,6 +30,7 @@ var Brassagem = new Schema({
     HLTAquecendo: { type: Boolean, required: true, Default: false },
     HLTAquecendoTemperatura: { type: String, required: false, Default: '' },
     HLTTemperaturaAtual: { type: String, required: false, Default: '' },
+    HLTLog: { type: String, required: false, Default: '' },
 
     HermsVazio: { type: Boolean, required: true, Default: true },
     HermsEnchendo: { type: Boolean, required: true, Default: false },
@@ -36,10 +38,12 @@ var Brassagem = new Schema({
     HermsAquecendo: { type: Boolean, required: true, Default: false },
     HermsAquecendoTemperatura: { type: String, required: false, Default: '' },
     HermsTemperaturaAtual: { type: String, required: false, Default: '' },
+    HermsLog: { type: String, required: false, Default: '' },
 
     MashVazio: { type: Boolean, required: true, Default: true },
     MashEnchendo: { type: Boolean, required: true, Default: false },
     MashCheio: { type: Boolean, required: true, Default: false },
+    MashLog: { type: String, required: false, Default: '' },
 
     BOLVazio: { type: Boolean, required: true, Default: true },
     BOLEnchendo: { type: Boolean, required: true, Default: false },
@@ -50,20 +54,24 @@ var Brassagem = new Schema({
     BOLFervendoMinutoRestante: { type: String, required: false, Default: '' },
     BOLFervuraFinalizada: { type: Boolean, required: true, Default: false },
     BOLTemperaturaAtual: { type: String, required: false, Default: '' },
+    BOLLog: { type: String, required: false, Default: '' },
 
     ResfriarRodando: { type: Boolean, required: true, Default: false },
     ResfriarRodandoTemperatura: { type: String, required: false, Default: '' },
     ResfriarRodandoTemperaturaAtingida: { type: Boolean, required: true, Default: false },
     ResfriarTemperaturaAtual: { type: String, required: false, Default: '' },
+    ResfriarLog: { type: String, required: false, Default: '' },
 
     WhirlpoolRodando: { type: Boolean, required: true, Default: false },
     WhirlpoolRodandoMinuto: { type: String, required: false, Default: '' },
     WhirlpoolRodandoMinutoRestante: { type: String, required: false, Default: '' },
     WhirlpoolRodandoMinutoAtingido: { type: String, required: false, Default: '' },
+    WhirlpoolLog: { type: String, required: false, Default: '' },
 
     SpargeVazio: { type: Boolean, required: true, Default: true },
     SpargeRodando: { type: Boolean, required: true, Default: false },
     SpargeFinalizado: { type: Boolean, required: true, Default: false },
+    SpargeLog: { type: String, required: false, Default: '' },
 
     RampaRodando: { type: Boolean, required: true, Default: false },
     RampaRodandoNumero: { type: String, required: false, Default: '' },
@@ -73,10 +81,12 @@ var Brassagem = new Schema({
     RampaRodandoMinutoRestante: { type: String, required: false, Default: '' },
     RampaTemperaturaAtual: { type: String, required: false, Default: '' },
     RampaFinalizada: { type: Boolean, required: true, Default: false },
+    RampaLog: { type: String, required: false, Default: '' },
 
     FermentadorVazio: { type: Boolean, required: true, Default: true },
     FermentadorEnchendo: { type: Boolean, required: true, Default: false },
     FermentadorCheio: { type: Boolean, required: true, Default: false },
+    FermentadorLog: { type: String, required: false, Default: '' },
 
     ComunicacaoComArduinoOk: { type: Boolean, required: true, Default: true },
     ComunicacaoComArduinoErroMensagem: { type: String, required: false, Default: '' },
@@ -112,15 +122,18 @@ var novaBrassagem = function (req, res, io) {
             HLTAquecendo: false,
             HLTAquecendoTemperatura: null,
             HLTTemperaturaAtual: null,
+            HLTLog: '',
             HermsVazio: true,
             HermsEnchendo: false,
             HermsCheio: false,
             HermsAquecendo: false,
             HermsAquecendoTemperatura: null,
             HermsTemperaturaAtual: null,
+            HermsLog: '',
             MashVazio: true,
             MashEnchendo: false,
             MashCheio: false,
+            MashLog: '',
             BOLVazio: true,
             BOLEnchendo: false,
             BOLCheio: false,
@@ -130,17 +143,21 @@ var novaBrassagem = function (req, res, io) {
             BOLFervendoMinutoRestante: null,
             BOLFervuraFinalizada: false,
             BOLTemperaturaAtual: null,
+            BOLLog: '',
             ResfriarRodando: false,
             ResfriarRodandoTemperatura: null,
             ResfriarRodandoTemperaturaAtingida: false,
             ResfriarTemperaturaAtual: null,
+            ResfriarLog: '',
             WhirlpoolRodando: false,
             WhirlpoolRodandoMinuto: null,
             WhirlpoolRodandoMinutoRestante: null,
             WhirlpoolRodandoMinutoAtingido: null,
+            WhirlpoolLog: '',
             SpargeVazio: true,
             SpargeRodando: false,
             SpargeFinalizado: false,
+            SpargeLog: '',
             RampaRodando: false,
             RampaRodandoNumero: null,
             RampaRodandoTemperatura: null,
@@ -149,9 +166,11 @@ var novaBrassagem = function (req, res, io) {
             RampaRodandoMinutoRestante: null,
             RampaTemperaturaAtual: null,
             RampaFinalizada: false,
+            RampaLog: '',
             FermentadorVazio: true,
             FermentadorEnchendo: false,
             FermentadorCheio: false,
+            FermentadorLog: '',
             ComunicacaoComArduinoOk: true,
             ComunicacaoComArduinoErroMensagem: null,
             dataInclusao: new Date()
@@ -206,6 +225,7 @@ var encheHLT = function (req, res, io) {
             if (brassagem) {
                 brassagem.HLTVazio = false;
                 brassagem.HLTEnchendo = true;
+                brassagem.HLTLog += '\n' + utilRoute.getTime() + ' - enchimento iniciado';
                 brassagem.save(function (err) {
                     if (!err) {
                         atualizaBrassagem(io);
@@ -233,6 +253,7 @@ var paraEnchimentoHLT = function (req, res, io) {
             if (brassagem) {
                 brassagem.HLTEnchendo = false;
                 brassagem.HLTCheio = true;
+                brassagem.HLTLog += '\n' + utilRoute.getTime() + ' - enchimento parado';
                 brassagem.save(function (err) {
                     if (!err) {
                         atualizaBrassagem(io);
@@ -261,6 +282,7 @@ var HLTCheio = function (req, res, io) {
                 brassagem.HLTVazio = false;
                 brassagem.HLTEnchendo = false;
                 brassagem.HLTCheio = true;
+                brassagem.HLTLog += '\n' + utilRoute.getTime() + ' - enchimento finalizado';
                 brassagem.save(function (err) {
                     if (!err) {
                         atualizaBrassagem(io);
@@ -299,6 +321,7 @@ var aqueceHLT = function (req, res, io) {
                 else {
                     brassagem.HLTAquecendo = true;
                     brassagem.HLTAquecendoTemperatura = temperatura;
+                    brassagem.HLTLog += '\n' + utilRoute.getTime() + ' - aquecimento iniciado ' + temperatura + 'ºC';
                     brassagem.save(function () {
                         atualizaBrassagem(io);
                         res.send();
@@ -321,6 +344,7 @@ var paraAquecimentoHLT = function (req, res, io) {
         if (!err) {
             if (brassagem) {
                 brassagem.HLTAquecendo = false;
+                brassagem.HLTLog += '\n' + utilRoute.getTime() + ' - aquecimento parado';
                 brassagem.save(function (err) {
                     if (!err) {
                         atualizaBrassagem(io);
@@ -349,6 +373,7 @@ var encheHerms = function (req, res, io) {
             if (brassagem) {
                 brassagem.HermsVazio = false;
                 brassagem.HermsEnchendo = true;
+                brassagem.HermsLog += '\n' + utilRoute.getTime() + ' - enchimento iniciado';
                 brassagem.save(function (err) {
                     if (!err) {
                         atualizaBrassagem(io);
@@ -376,6 +401,7 @@ var paraEnchimentoHerms = function (req, res, io) {
             if (brassagem) {
                 brassagem.HermsEnchendo = false;
                 brassagem.HermsCheio = true;
+                brassagem.HermsLog += '\n' + utilRoute.getTime() + ' - enchimento parado';
                 brassagem.save(function (err) {
                     if (!err) {
                         atualizaBrassagem(io);
@@ -404,6 +430,7 @@ var HermsCheio = function (req, res, io) {
                 brassagem.HermsVazio = false;
                 brassagem.HermsEnchendo = false;
                 brassagem.HermsCheio = true;
+                brassagem.HermsLog += '\n' + utilRoute.getTime() + ' - enchimento finalizado';
                 brassagem.save(function (err) {
                     if (!err) {
                         atualizaBrassagem(io);
@@ -442,6 +469,7 @@ var aqueceHerms = function (req, res, io) {
                 else {
                     brassagem.HermsAquecendo = true;
                     brassagem.HermsAquecendoTemperatura = temperatura;
+                    brassagem.HermsLog += '\n' + utilRoute.getTime() + ' - aquecimento iniciado ' + temperatura + 'ºC';
                     brassagem.save(function () {
                         atualizaBrassagem(io);
                         res.send();
@@ -464,6 +492,7 @@ var paraAquecimentoHerms = function (req, res, io) {
         if (!err) {
             if (brassagem) {
                 brassagem.HermsAquecendo = false;
+                brassagem.HermsLog += '\n' + utilRoute.getTime() + ' - aquecimento parado';
                 brassagem.save(function (err) {
                     if (!err) {
                         atualizaBrassagem(io);
@@ -499,6 +528,7 @@ var encheMash = function (req, res, io) {
                 else {
                     brassagem.MashVazio = false;
                     brassagem.MashEnchendo = true;
+                    brassagem.MashLog += '\n' + utilRoute.getTime() + ' - enchimento iniciado';
                     brassagem.save(function () {
                         atualizaBrassagem(io);
                         res.send();
@@ -522,6 +552,7 @@ var paraEnchimentoMash = function (req, res, io) {
             if (brassagem) {
                 brassagem.MashEnchendo = false;
                 brassagem.MashCheio = true;
+                brassagem.MashLog += '\n' + utilRoute.getTime() + ' - enchimento parado';
                 brassagem.save(function (err) {
                     if (!err) {
                         atualizaBrassagem(io);
@@ -550,6 +581,7 @@ var MashCheio = function (req, res, io) {
                 brassagem.MashVazio = false;
                 brassagem.MashEnchendo = false;
                 brassagem.MashCheio = true;
+                brassagem.MashLog += '\n' + utilRoute.getTime() + ' - enchimento finalizado';
                 brassagem.save(function (err) {
                     if (!err) {
                         atualizaBrassagem(io);
@@ -585,6 +617,7 @@ var encheFermentador = function (req, res, io) {
                 else {
                     brassagem.FermentadorVazio = false;
                     brassagem.FermentadorEnchendo = true;
+                    brassagem.FermentadorLog += '\n' + utilRoute.getTime() + ' - enchimento iniciado';
                     brassagem.save(function () {
                         atualizaBrassagem(io);
                         res.send();
@@ -608,6 +641,7 @@ var paraEnchimentoFermentador = function (req, res, io) {
             if (brassagem) {
                 brassagem.FermentadorEnchendo = false;
                 brassagem.FermentadorCheio = true;
+                brassagem.FermentadorLog += '\n' + utilRoute.getTime() + ' - enchimento parado';
                 brassagem.save(function (err) {
                     if (!err) {
                         atualizaBrassagem(io);
@@ -636,6 +670,7 @@ var FermentadorCheio = function (req, res, io) {
                 brassagem.FermentadorVazio = false;
                 brassagem.FermentadorEnchendo = false;
                 brassagem.FermentadorCheio = true;
+                brassagem.FermentadorLog += '\n' + utilRoute.getTime() + ' - enchimento finalizado';
                 brassagem.save(function (err) {
                     if (!err) {
                         atualizaBrassagem(io);
@@ -671,6 +706,7 @@ var encheSparge = function (req, res, io) {
                 else {
                     brassagem.SpargeVazio = false;
                     brassagem.SpargeRodando = true;
+                    brassagem.SpargeLog += '\n' + utilRoute.getTime() + ' - sparge iniciado';
                     brassagem.save(function () {
                         atualizaBrassagem(io);
                         res.send();
@@ -694,6 +730,7 @@ var paraEnchimentoSparge = function (req, res, io) {
             if (brassagem) {
                 brassagem.SpargeRodando = false;
                 brassagem.SpargeFinalizado = true;
+                brassagem.SpargeLog += '\n' + utilRoute.getTime() + ' - sparge finalizado';
                 brassagem.save(function (err) {
                     if (!err) {
                         atualizaBrassagem(io);
@@ -722,6 +759,7 @@ var SpargeCheio = function (req, res, io) {
                 brassagem.SpargeVazio = false;
                 brassagem.SpargeRodando = false;
                 brassagem.SpargeFinalizado = true;
+                brassagem.SpargeLog += '\n' + utilRoute.getTime() + ' - sparge finalizado';
                 brassagem.save(function (err) {
                     if (!err) {
                         atualizaBrassagem(io);
@@ -757,6 +795,7 @@ var encheBOL = function (req, res, io) {
                 else {
                     brassagem.BOLVazio = false;
                     brassagem.BOLEnchendo = true;
+                    brassagem.BOLLog += '\n' + utilRoute.getTime() + ' - enchimento iniciado';
                     brassagem.save(function () {
                         atualizaBrassagem(io);
                         res.send();
@@ -780,6 +819,7 @@ var paraEnchimentoBOL = function (req, res, io) {
             if (brassagem) {
                 brassagem.BOLEnchendo = false;
                 brassagem.BOLCheio = true;
+                brassagem.BOLLog += '\n' + utilRoute.getTime() + ' - enchimento parado';
                 brassagem.save(function (err) {
                     if (!err) {
                         atualizaBrassagem(io);
@@ -808,6 +848,7 @@ var BOLCheio = function (req, res, io) {
                 brassagem.BOLVazio = false;
                 brassagem.BOLEnchendo = false;
                 brassagem.BOLCheio = true;
+                brassagem.BOLLog += '\n' + utilRoute.getTime() + ' - enchimento finalizado';
                 brassagem.save(function (err) {
                     if (!err) {
                         atualizaBrassagem(io);
@@ -852,6 +893,7 @@ var ferveBOL = function (req, res, io) {
                     brassagem.BOLFervendoTemperatura = temperatura;
                     brassagem.BOLFervendoMinuto = minuto;
                     brassagem.BOLFervendoMinutoRestante = minuto;
+                    brassagem.BOLLog += '\n' + utilRoute.getTime() + ' - fervura iniciada ' + temperatura + 'ºC ' + minuto + 'M';
                     brassagem.save(function () {
                         atualizaBrassagem(io);
                         res.send();
@@ -874,6 +916,7 @@ var paraFervuraBOL = function (req, res, io) {
         if (!err) {
             if (brassagem) {
                 brassagem.BOLFervendo = false;
+                brassagem.BOLLog += '\n' + utilRoute.getTime() + ' - fervura parada';
                 brassagem.save(function (err) {
                     if (!err) {
                         atualizaBrassagem(io);
@@ -933,6 +976,7 @@ var iniciaRampa = function (req, res, io) {
                         brassagem.RampaRodandoNumero = parseInt(brassagem.RampaRodandoNumero) + 1;
                     }
 
+                    brassagem.RampaLog += '\n' + utilRoute.getTime() + ' - rampa ' + brassagem.RampaRodandoNumero + ' iniciada ' + temperatura + 'ºC ' + minuto + 'M';
                     brassagem.save(function () {
                         atualizaBrassagem(io);
                         res.send();
@@ -956,6 +1000,7 @@ var finalizaRampa = function (req, res, io) {
             if (brassagem) {
                 brassagem.RampaRodando = false;
                 brassagem.RampaFinalizada = true;
+                brassagem.RampaLog += '\n' + utilRoute.getTime() + ' - rampa ' + brassagem.RampaRodandoNumero + ' finalizada';
                 brassagem.save(function (err) {
                     if (!err) {
                         atualizaBrassagem(io);
@@ -995,6 +1040,7 @@ var rodaResfriamento = function (req, res, io) {
                 else {
                     brassagem.ResfriarRodando = true;
                     brassagem.ResfriarRodandoTemperatura = temperatura;
+                    brassagem.ResfriarLog += '\n' + utilRoute.getTime() + ' - resfriamento iniciado ' + temperatura + 'ºC';
                     brassagem.save(function () {
                         atualizaBrassagem(io);
                         res.send();
@@ -1017,6 +1063,7 @@ var paraResfriamento = function (req, res, io) {
         if (!err) {
             if (brassagem) {
                 brassagem.ResfriarRodando = false;
+                brassagem.ResfriarLog += '\n' + utilRoute.getTime() + ' - resfriamento parado';
                 brassagem.save(function (err) {
                     if (!err) {
                         atualizaBrassagem(io);
@@ -1057,6 +1104,7 @@ var rodaWhirlpool = function (req, res, io) {
                     brassagem.WhirlpoolRodando = true;
                     brassagem.WhirlpoolRodandoMinuto = minuto;
                     brassagem.WhirlpoolRodandoMinutoRestante = minuto;
+                    brassagem.WhirlpoolLog += '\n' + utilRoute.getTime() + ' - whirlpool iniciado ' + minuto + 'M';
                     brassagem.save(function () {
                         atualizaBrassagem(io);
                         res.send();
@@ -1079,6 +1127,7 @@ var paraWhirlpool = function (req, res, io) {
         if (!err) {
             if (brassagem) {
                 brassagem.WhirlpoolRodando = false;
+                brassagem.WhirlpoolLog += '\n' + utilRoute.getTime() + ' - whirlpool parado';
                 brassagem.save(function (err) {
                     if (!err) {
                         atualizaBrassagem(io);

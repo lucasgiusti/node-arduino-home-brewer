@@ -192,8 +192,8 @@ function ExibeTelaWhirlpool() {
     $(".div-whirlpool").hide();
 
     if (objBrassagem.WhirlpoolRodando) {
-        $("." + item + "-minuto").text("Temp. " + objBrassagem.WhirlpoolRodandoMinuto + "M");
-        $("." + item + "-minuto-atual").text("Rest. " + objBrassagem.WhirlpoolRodandoMinutoRestante + "M");
+        $(".whirlpool-minuto").text("Temp. " + objBrassagem.WhirlpoolRodandoMinuto + "M");
+        $(".whirlpool-minuto-atual").text("Rest. " + objBrassagem.WhirlpoolRodandoMinutoRestante + "M");
 
         $(".div-whirlpool-aquecendo").show();
         telaExibida = 'div-whirlpool-aquecendo';
@@ -429,31 +429,31 @@ $(".log").click(function () {
     var texto = "";
     switch (item) {
         case "bol":
-            texto = "Enchimento Iniciado\nEnchimento Parado\nEnchimento Finalizado\nFervura Iniciada\nFervura Finalizada";
+            texto = objBrassagem.BOLLog;
             break;
         case "rampa":
-            texto = "Rampa 1 Iniciada\nRampa 1 Finalizada";
+            texto = objBrassagem.RampaLog;
             break;
         case "hlt":
-            texto = "Enchimento Iniciado\nEnchimento Parado\nEnchimento Finalizado\nAquecimento Iniciado\nAquecimento Parado";
+            texto = objBrassagem.HLTLog;
             break;
         case "herms":
-            texto = "Enchimento Iniciado\nEnchimento Parado\nEnchimento Finalizado\nAquecimento Iniciado\nAquecimento Parado";
+            texto = objBrassagem.HermsLog;
             break;
         case "resfriar":
-            texto = "Resfriamento Iniciado\nResfriamento Parado\nResfriamento Finalizado";
+            texto = objBrassagem.ResfriarLog;
             break;
         case "mash":
-            texto = "Enchimento Iniciado\nEnchimento Parado\nEnchimento Finalizado";
+            texto = objBrassagem.MashLog;
             break;
         case "sparge":
-            texto = "Sparge Iniciado\nSparge Parado\nSparge Finalizado";
+            texto = objBrassagem.SpargeLog;
             break;
         case "whirlpool":
-            texto = "Whirlpool Iniciado\nWhirlpool Parado";
+            texto = objBrassagem.WhirlpoolLog;
             break;
         case "fermentador":
-            texto = "Enchimento Iniciado\nEnchimento Parado\nEnchimento Finalizado";
+            texto = objBrassagem.FermentadorLog;
             break;
     }
 
