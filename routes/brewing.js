@@ -225,7 +225,7 @@ var fillHLT = function (req, res, io) {
             if (brewing) {
                 brewing.HLTEmpty = false;
                 brewing.HLTFilling = true;
-                brewing.HLTLog += '\n' + utilRoute.getTime() + ' - filling';
+                brewing.HLTLog += '\n' + utilRoute.getTime() + ' - start fill';
                 brewing.save(function (err) {
                     if (!err) {
                         updateBrewing(io);
@@ -282,7 +282,7 @@ var HLTFull = function (req, res, io) {
                 brewing.HLTEmpty = false;
                 brewing.HLTFilling = false;
                 brewing.HLTFull = true;
-                brewing.HLTLog += '\n' + utilRoute.getTime() + ' - fill finished';
+                brewing.HLTLog += '\n' + utilRoute.getTime() + ' - finished fill';
                 brewing.save(function (err) {
                     if (!err) {
                         updateBrewing(io);
@@ -313,15 +313,15 @@ var heatHLT = function (req, res, io) {
         if (!err) {
             if (brewing) {
                 if (brewing.HLTEmpty) {
-                    res.status('500').send({ status: 500, error: 'O hlt está empty' });
+                    res.status('500').send({ status: 500, error: 'hlt is empty' });
                 }
                 else if (brewing.HLTFilling) {
-                    res.status('500').send({ status: 500, error: 'O hlt está filling' });
+                    res.status('500').send({ status: 500, error: 'hlt is filling' });
                 }
                 else {
                     brewing.HLTHeating = true;
                     brewing.HLTHeatingTemperature = temperature;
-                    brewing.HLTLog += '\n' +    utilRoute.getTime() + ' - heat iniciado ' + temperature + 'ºC';
+                    brewing.HLTLog += '\n' +    utilRoute.getTime() + ' - start heat ' + temperature + 'ºC';
                     brewing.save(function () {
                         updateBrewing(io);
                         res.send();
@@ -344,7 +344,7 @@ var stopHeatHLT = function (req, res, io) {
         if (!err) {
             if (brewing) {
                 brewing.HLTHeating = false;
-                brewing.HLTLog += '\n' + utilRoute.getTime() + ' - heat parado';
+                brewing.HLTLog += '\n' + utilRoute.getTime() + ' - stop heat';
                 brewing.save(function (err) {
                     if (!err) {
                         updateBrewing(io);
@@ -373,7 +373,7 @@ var fillHerms = function (req, res, io) {
             if (brewing) {
                 brewing.HermsEmpty = false;
                 brewing.HermsFilling = true;
-                brewing.HermsLog += '\n' + utilRoute.getTime() + ' - enchimento iniciado';
+                brewing.HermsLog += '\n' + utilRoute.getTime() + ' - start fill';
                 brewing.save(function (err) {
                     if (!err) {
                         updateBrewing(io);
@@ -401,7 +401,7 @@ var stopFillHerms = function (req, res, io) {
             if (brewing) {
                 brewing.HermsFilling = false;
                 brewing.HermsFull = true;
-                brewing.HermsLog += '\n' + utilRoute.getTime() + ' - enchimento parado';
+                brewing.HermsLog += '\n' + utilRoute.getTime() + ' - stop fill';
                 brewing.save(function (err) {
                     if (!err) {
                         updateBrewing(io);
@@ -430,7 +430,7 @@ var HermsFull = function (req, res, io) {
                 brewing.HermsEmpty = false;
                 brewing.HermsFilling = false;
                 brewing.HermsFull = true;
-                brewing.HermsLog += '\n' + utilRoute.getTime() + ' - enchimento finalizado';
+                brewing.HermsLog += '\n' + utilRoute.getTime() + ' - finished fill';
                 brewing.save(function (err) {
                     if (!err) {
                         updateBrewing(io);
@@ -461,15 +461,15 @@ var heatHerms = function (req, res, io) {
         if (!err) {
             if (brewing) {
                 if (brewing.HermsEmpty) {
-                    res.status('500').send({ status: 500, error: 'O herms está empty' });
+                    res.status('500').send({ status: 500, error: 'herms is empty' });
                 }
                 else if (brewing.HermsFilling) {
-                    res.status('500').send({ status: 500, error: 'O herms está filling' });
+                    res.status('500').send({ status: 500, error: 'herms is filling' });
                 }
                 else {
                     brewing.HermsHeating = true;
                     brewing.HermsHeatingTemperature = temperature;
-                    brewing.HermsLog += '\n' + utilRoute.getTime() + ' - heat iniciado ' + temperature + 'ºC';
+                    brewing.HermsLog += '\n' + utilRoute.getTime() + ' - start heat ' + temperature + 'ºC';
                     brewing.save(function () {
                         updateBrewing(io);
                         res.send();
@@ -492,7 +492,7 @@ var stopHeatHerms = function (req, res, io) {
         if (!err) {
             if (brewing) {
                 brewing.HermsHeating = false;
-                brewing.HermsLog += '\n' + utilRoute.getTime() + ' - heat parado';
+                brewing.HermsLog += '\n' + utilRoute.getTime() + ' - stop heat';
                 brewing.save(function (err) {
                     if (!err) {
                         updateBrewing(io);
@@ -520,15 +520,15 @@ var fillMLT = function (req, res, io) {
         if (!err) {
             if (brewing) {
                 if (brewing.HLTEmpty) {
-                    res.status('500').send({ status: 500, error: 'O hlt está empty' });
+                    res.status('500').send({ status: 500, error: 'hlt is empty' });
                 }
                 else if (brewing.HLTFilling) {
-                    res.status('500').send({ status: 500, error: 'O hlt está filling' });
+                    res.status('500').send({ status: 500, error: 'hlt is filling' });
                 }
                 else {
                     brewing.MLTEmpty = false;
                     brewing.MLTFilling = true;
-                    brewing.MLTLog += '\n' + utilRoute.getTime() + ' - enchimento iniciado';
+                    brewing.MLTLog += '\n' + utilRoute.getTime() + ' - start fill';
                     brewing.save(function () {
                         updateBrewing(io);
                         res.send();
@@ -552,7 +552,7 @@ var stopFillMLT = function (req, res, io) {
             if (brewing) {
                 brewing.MLTFilling = false;
                 brewing.MLTFull = true;
-                brewing.MLTLog += '\n' + utilRoute.getTime() + ' - enchimento parado';
+                brewing.MLTLog += '\n' + utilRoute.getTime() + ' - stop fill';
                 brewing.save(function (err) {
                     if (!err) {
                         updateBrewing(io);
@@ -581,7 +581,7 @@ var MLTFull = function (req, res, io) {
                 brewing.MLTEmpty = false;
                 brewing.MLTFilling = false;
                 brewing.MLTFull = true;
-                brewing.MLTLog += '\n' + utilRoute.getTime() + ' - enchimento finalizado';
+                brewing.MLTLog += '\n' + utilRoute.getTime() + ' - finished fill';
                 brewing.save(function (err) {
                     if (!err) {
                         updateBrewing(io);
@@ -609,15 +609,15 @@ var fillFermenter = function (req, res, io) {
         if (!err) {
             if (brewing) {
                 if (brewing.BOLEmpty) {
-                    res.status('500').send({ status: 500, error: 'O bol está empty' });
+                    res.status('500').send({ status: 500, error: 'bol is empty' });
                 }
                 else if (brewing.BOLFilling) {
-                    res.status('500').send({ status: 500, error: 'O bol está filling' });
+                    res.status('500').send({ status: 500, error: 'bol is filling' });
                 }
                 else {
                     brewing.FermenterEmpty = false;
                     brewing.FermenterFilling = true;
-                    brewing.FermenterLog += '\n' + utilRoute.getTime() + ' - enchimento iniciado';
+                    brewing.FermenterLog += '\n' + utilRoute.getTime() + ' - start fill';
                     brewing.save(function () {
                         updateBrewing(io);
                         res.send();
@@ -641,7 +641,7 @@ var stopFillFermenter = function (req, res, io) {
             if (brewing) {
                 brewing.FermenterFilling = false;
                 brewing.FermenterFull = true;
-                brewing.FermenterLog += '\n' + utilRoute.getTime() + ' - enchimento parado';
+                brewing.FermenterLog += '\n' + utilRoute.getTime() + ' - stop fill';
                 brewing.save(function (err) {
                     if (!err) {
                         updateBrewing(io);
@@ -670,7 +670,7 @@ var FermenterFull = function (req, res, io) {
                 brewing.FermenterEmpty = false;
                 brewing.FermenterFilling = false;
                 brewing.FermenterFull = true;
-                brewing.FermenterLog += '\n' + utilRoute.getTime() + ' - enchimento finalizado';
+                brewing.FermenterLog += '\n' + utilRoute.getTime() + ' - finished fill';
                 brewing.save(function (err) {
                     if (!err) {
                         updateBrewing(io);
@@ -698,15 +698,15 @@ var fillSparge = function (req, res, io) {
         if (!err) {
             if (brewing) {
                 if (brewing.HLTEmpty) {
-                    res.status('500').send({ status: 500, error: 'O hlt está empty' });
+                    res.status('500').send({ status: 500, error: 'hlt is empty' });
                 }
                 else if (brewing.HLTFilling) {
-                    res.status('500').send({ status: 500, error: 'O hlt está filling' });
+                    res.status('500').send({ status: 500, error: 'hlt is filling' });
                 }
                 else {
                     brewing.SpargeEmpty = false;
                     brewing.SpargeExecuting = true;
-                    brewing.SpargeLog += '\n' + utilRoute.getTime() + ' - sparge iniciado';
+                    brewing.SpargeLog += '\n' + utilRoute.getTime() + ' - start sparge';
                     brewing.save(function () {
                         updateBrewing(io);
                         res.send();
@@ -730,7 +730,7 @@ var stopFillSparge = function (req, res, io) {
             if (brewing) {
                 brewing.SpargeExecuting = false;
                 brewing.SpargeFinished = true;
-                brewing.SpargeLog += '\n' + utilRoute.getTime() + ' - sparge finalizado';
+                brewing.SpargeLog += '\n' + utilRoute.getTime() + ' - finished sparge';
                 brewing.save(function (err) {
                     if (!err) {
                         updateBrewing(io);
@@ -759,7 +759,7 @@ var SpargeFull = function (req, res, io) {
                 brewing.SpargeEmpty = false;
                 brewing.SpargeExecuting = false;
                 brewing.SpargeFinished = true;
-                brewing.SpargeLog += '\n' + utilRoute.getTime() + ' - sparge finalizado';
+                brewing.SpargeLog += '\n' + utilRoute.getTime() + ' - finished sparge finalizado';
                 brewing.save(function (err) {
                     if (!err) {
                         updateBrewing(io);
