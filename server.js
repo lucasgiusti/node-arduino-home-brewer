@@ -21,7 +21,7 @@ var application_root = __dirname,
     accountRoute = require("./routes/account"),
     userRoute = require("./routes/user"),
     utilRoute = require("./routes/util");
-    brewingRoute = require("./routes/Brassagem");
+    brewingRoute = require("./routes/brewing");
 
 // Config
         app.set('port', process.env.PORT || 3000);
