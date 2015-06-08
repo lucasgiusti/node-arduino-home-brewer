@@ -1,216 +1,216 @@
 ﻿var socket = io();
-var objBrassagem = null;
+var objBrewing = null;
 var telaExibida = 'div-principal';
 
 function ExibeTelaHLT() {
-    if (telaExibida == "div-hlt-aquecer" || telaExibida == "div-hlt-alterar-temperatura") {
+    if (telaExibida == "div-hlt-heat" || telaExibida == "div-hlt-alterar-temperature") {
         return;
     }
 
     $(".div-hlt").hide();
 
-    if (objBrassagem.HLTAquecendo) {
-        $(".hlt-temperatura").text("Temp. " + objBrassagem.HLTAquecendoTemperatura + "ºC");
-        $(".hlt-temperatura-atual").text("Atual. " + objBrassagem.HLTTemperaturaAtual + "ºC");
+    if (objBrewing.HLTHeating) {
+        $(".hlt-temperature").text("Temp. " + objBrewing.HLTHeatingTemperature + "ºC");
+        $(".hlt-temperature-actual").text("Actual. " + objBrewing.HLTTemperatureActual + "ºC");
 
-        $(".div-hlt-aquecendo").show();
-        telaExibida = 'div-hlt-aquecendo';
+        $(".div-hlt-heating").show();
+        telaExibida = 'div-hlt-heating';
     }
-    else if (objBrassagem.HLTEnchendo) {
-        $(".div-hlt-enchendo").show();
-        telaExibida = 'div-hlt-enchendo';
+    else if (objBrewing.HLTFilling) {
+        $(".div-hlt-filling").show();
+        telaExibida = 'div-hlt-filling';
     }
-    else if (objBrassagem.HLTCheio) {
-        $(".div-hlt-cheio").show();
-        telaExibida = 'div-hlt-cheio';
+    else if (objBrewing.HLTFull) {
+        $(".div-hlt-full").show();
+        telaExibida = 'div-hlt-full';
     }
     else {
-        $(".div-hlt-vazio").show();
-        telaExibida = 'div-hlt-vazio';
+        $(".div-hlt-empty").show();
+        telaExibida = 'div-hlt-empty';
     }
 }
 
 function ExibeTelaHerms() {
-    if (telaExibida == "div-herms-aquecer" || telaExibida == "div-herms-alterar-temperatura") {
+    if (telaExibida == "div-herms-heat" || telaExibida == "div-herms-alterar-temperature") {
         return;
     }
 
     $(".div-herms").hide();
 
-    if (objBrassagem.HermsAquecendo) {
-        $(".herms-temperatura").text("Temp. " + objBrassagem.HermsAquecendoTemperatura + "ºC");
-        $(".herms-temperatura-atual").text("Atual. " + objBrassagem.HermsTemperaturaAtual + "ºC");
+    if (objBrewing.HermsHeating) {
+        $(".herms-temperature").text("Temp. " + objBrewing.HermsHeatingTemperature + "ºC");
+        $(".herms-temperature-actual").text("Actual. " + objBrewing.HermsTemperatureActual + "ºC");
 
-        $(".div-herms-aquecendo").show();
-        telaExibida = 'div-herms-aquecendo';
+        $(".div-herms-heating").show();
+        telaExibida = 'div-herms-heating';
     }
-    else if (objBrassagem.HermsEnchendo) {
-        $(".div-herms-enchendo").show();
-        telaExibida = 'div-herms-enchendo';
+    else if (objBrewing.HermsFilling) {
+        $(".div-herms-filling").show();
+        telaExibida = 'div-herms-filling';
     }
-    else if (objBrassagem.HermsCheio) {
-        $(".div-herms-cheio").show();
-        telaExibida = 'div-herms-cheio';
+    else if (objBrewing.HermsFull) {
+        $(".div-herms-full").show();
+        telaExibida = 'div-herms-full';
     }
     else {
-        $(".div-herms-vazio").show();
-        telaExibida = 'div-herms-vazio';
+        $(".div-herms-empty").show();
+        telaExibida = 'div-herms-empty';
     }
 
 }
 
-function ExibeTelaMash() {
-    $(".div-mash").hide();
+function ExibeTelaMLT() {
+    $(".div-mlt").hide();
 
-    if (objBrassagem.MashEnchendo) {
-        $(".div-mash-enchendo").show();
-        telaExibida = 'div-mash-enchendo';
+    if (objBrewing.MLTFilling) {
+        $(".div-mlt-filling").show();
+        telaExibida = 'div-mlt-filling';
     }
-    else if (objBrassagem.MashCheio) {
-        $(".div-mash-cheio").show();
-        telaExibida = 'div-mash-cheio';
+    else if (objBrewing.MLTFull) {
+        $(".div-mlt-full").show();
+        telaExibida = 'div-mlt-full';
     }
     else {
-        $(".div-mash-vazio").show();
-        telaExibida = 'div-mash-vazio';
+        $(".div-mlt-empty").show();
+        telaExibida = 'div-mlt-empty';
     }
 }
 
-function ExibeTelaFermentador() {
-    $(".div-fermentador").hide();
+function ExibeTelaFermenter() {
+    $(".div-fermenter").hide();
 
-    if (objBrassagem.FermentadorEnchendo) {
-        $(".div-fermentador-enchendo").show();
-        telaExibida = 'div-fermentador-enchendo';
+    if (objBrewing.FermenterFilling) {
+        $(".div-fermenter-filling").show();
+        telaExibida = 'div-fermenter-filling';
     }
-    else if (objBrassagem.FermentadorCheio) {
-        $(".div-fermentador-cheio").show();
-        telaExibida = 'div-fermentador-cheio';
+    else if (objBrewing.FermenterFull) {
+        $(".div-fermenter-full").show();
+        telaExibida = 'div-fermenter-full';
     }
     else {
-        $(".div-fermentador-vazio").show();
-        telaExibida = 'div-fermentador-vazio';
+        $(".div-fermenter-empty").show();
+        telaExibida = 'div-fermenter-empty';
     }
 }
 
 function ExibeTelaSparge() {
     $(".div-sparge").hide();
 
-    if (objBrassagem.SpargeRodando) {
-        $(".div-sparge-enchendo").show();
-        telaExibida = 'div-sparge-enchendo';
+    if (objBrewing.SpargeExecuting) {
+        $(".div-sparge-filling").show();
+        telaExibida = 'div-sparge-filling';
     }
-    else if (objBrassagem.SpargeFinalizado) {
-        $(".div-sparge-cheio").show();
-        telaExibida = 'div-sparge-cheio';
+    else if (objBrewing.SpargeFinalizado) {
+        $(".div-sparge-full").show();
+        telaExibida = 'div-sparge-full';
     }
     else {
-        $(".div-sparge-vazio").show();
-        telaExibida = 'div-sparge-vazio';
+        $(".div-sparge-empty").show();
+        telaExibida = 'div-sparge-empty';
     }
 }
 
 function ExibeTelaBOL() {
     $(".div-bol").hide();
 
-    if (objBrassagem.BOLFervendo) {
-        $(".bol-temperatura").text("Temp. " + objBrassagem.BOLFervendoTemperatura + "ºC");
-        $(".bol-temperatura-atual").text("Atual. " + objBrassagem.BOLTemperaturaAtual + "ºC");
+    if (objBrewing.BOLHeating) {
+        $(".bol-temperature").text("Temp. " + objBrewing.BOLHeatingTemperature + "ºC");
+        $(".bol-temperature-actual").text("Actual. " + objBrewing.BOLTemperatureActual + "ºC");
 
-        $(".bol-minuto").text("Temp. " + objBrassagem.BOLFervendoMinuto + "M");
-        $(".bol-minuto-atual").text("Rest. " + objBrassagem.BOLFervendoMinutoRestante + "M");
+        $(".bol-time").text("Temp. " + objBrewing.BOLHeatingTime + "M");
+        $(".bol-time-actual").text("End. " + objBrewing.BOLHeatingTimeEnd + "M");
 
 
-        $(".div-bol-aquecendo").show();
-        telaExibida = 'div-bol-aquecendo';
+        $(".div-bol-heating").show();
+        telaExibida = 'div-bol-heating';
     }
-    else if (objBrassagem.BOLEnchendo) {
-        $(".div-bol-enchendo").show();
-        telaExibida = 'div-bol-enchendo';
+    else if (objBrewing.BOLFilling) {
+        $(".div-bol-filling").show();
+        telaExibida = 'div-bol-filling';
     }
-    else if (objBrassagem.FervuraFinalizada) {
-        $(".div-bol-cheio").show();
-        telaExibida = 'div-bol-cheio';
+    else if (objBrewing.HeatFinished) {
+        $(".div-bol-full").show();
+        telaExibida = 'div-bol-full';
     }
-    else if (objBrassagem.BOLCheio) {
-        $(".div-bol-cheio").show();
-        telaExibida = 'div-bol-cheio';
+    else if (objBrewing.BOLFull) {
+        $(".div-bol-full").show();
+        telaExibida = 'div-bol-full';
     }
     else {
-        $(".div-bol-vazio").show();
-        telaExibida = 'div-bol-vazio';
+        $(".div-bol-empty").show();
+        telaExibida = 'div-bol-empty';
     }
 }
 
-function ExibeTelaRampa() {
-    if (telaExibida == "div-rampa-aquecer" || telaExibida == "div-rampa-alterar-temperatura") {
+function ExibeTelaStep() {
+    if (telaExibida == "div-step-heat" || telaExibida == "div-step-alterar-temperature") {
         return;
     }
 
-    $(".div-rampa").hide();
+    $(".div-step").hide();
 
-    if (objBrassagem.RampaRodando) {
-        $(".rampa-temperatura").text("Temp. " + objBrassagem.RampaRodandoTemperatura + "ºC");
-        $(".rampa-temperatura-atual").text("Atual. " + objBrassagem.RampaTemperaturaAtual + "ºC");
+    if (objBrewing.StepExecuting) {
+        $(".step-temperature").text("Temp. " + objBrewing.StepExecutingTemperature + "ºC");
+        $(".step-temperature-actual").text("Actual. " + objBrewing.StepTemperatureActual + "ºC");
 
-        $(".rampa-minuto").text("Temp. " + objBrassagem.RampaRodandoMinuto + "M");
-        $(".rampa-minuto-atual").text("Rest. " + objBrassagem.RampaRodandoMinutoRestante + "M");
+        $(".step-time").text("Temp. " + objBrewing.StepExecutingTime + "M");
+        $(".step-time-actual").text("End. " + objBrewing.StepExecutingTimeEnd + "M");
 
-        $(".rampa-numero").text("Rampa " + objBrassagem.RampaRodandoNumero);
+        $(".step-numero").text("Step " + objBrewing.StepExecutingNumber);
 
 
-        $(".div-rampa-aquecendo").show();
-        telaExibida = 'div-rampa-aquecendo';
+        $(".div-step-heating").show();
+        telaExibida = 'div-step-heating';
     }
-    else if (objBrassagem.RampaFinalizada) {
-        $(".div-rampa-cheio").show();
-        telaExibida = 'div-rampa-cheio';
+    else if (objBrewing.StepFinished) {
+        $(".div-step-full").show();
+        telaExibida = 'div-step-full';
     }
     else {
-        $(".div-rampa-vazio").show();
-        telaExibida = 'div-rampa-vazio';
+        $(".div-step-empty").show();
+        telaExibida = 'div-step-empty';
     }
 }
 
-function ExibeTelaResfriar() {
-    $(".div-resfriar").hide();
+function ExibeTelaCooling() {
+    $(".div-cooling").hide();
 
-    if (objBrassagem.ResfriarRodando) {
-        $(".resfriar-temperatura").text("Temp. " + objBrassagem.ResfriarRodandoTemperatura + "ºC");
-        $(".resfriar-temperatura-atual").text("Atual. " + objBrassagem.ResfriarTemperaturaAtual + "ºC");
+    if (objBrewing.CoolingExecuting) {
+        $(".cooling-temperature").text("Temp. " + objBrewing.CoolingExecutingTemperature + "ºC");
+        $(".cooling-temperature-actual").text("Actual. " + objBrewing.CoolingTemperatureActual + "ºC");
 
-        $(".div-resfriar-aquecendo").show();
-        telaExibida = 'div-resfriar-aquecendo';
+        $(".div-cooling-heating").show();
+        telaExibida = 'div-cooling-heating';
     }
     else {
-        $(".div-resfriar-vazio").show();
-        telaExibida = 'div-resfriar-vazio';
+        $(".div-cooling-empty").show();
+        telaExibida = 'div-cooling-empty';
     }
 }
 
 function ExibeTelaWhirlpool() {
     $(".div-whirlpool").hide();
 
-    if (objBrassagem.WhirlpoolRodando) {
-        $(".whirlpool-minuto").text("Temp. " + objBrassagem.WhirlpoolRodandoMinuto + "M");
-        $(".whirlpool-minuto-atual").text("Rest. " + objBrassagem.WhirlpoolRodandoMinutoRestante + "M");
+    if (objBrewing.WhirlpoolExecuting) {
+        $(".whirlpool-time").text("Temp. " + objBrewing.WhirlpoolExecutingTime + "M");
+        $(".whirlpool-time-actual").text("End. " + objBrewing.WhirlpoolExecutingTimeEnd + "M");
 
-        $(".div-whirlpool-aquecendo").show();
-        telaExibida = 'div-whirlpool-aquecendo';
+        $(".div-whirlpool-heating").show();
+        telaExibida = 'div-whirlpool-heating';
     }
     else {
-        $(".div-whirlpool-vazio").show();
-        telaExibida = 'div-whirlpool-vazio';
+        $(".div-whirlpool-empty").show();
+        telaExibida = 'div-whirlpool-empty';
     }
 }
 
 function VerificaTelaExibir(telas) {
-    if (!objBrassagem) {
+    if (!objBrewing) {
         telaExibida = 'div-principal';
         telas = telaExibida.split('-')[1];
     }
-    else if (objBrassagem && telaExibida == 'div-principal') {
-        telaExibida = 'div-brassagem';
+    else if (objBrewing && telaExibida == 'div-principal') {
+        telaExibida = 'div-brewing';
         telas = telaExibida.split('-')[1];
     }
 
@@ -218,9 +218,9 @@ function VerificaTelaExibir(telas) {
         $(".div-tela").hide();
         $('.div-principal').show();
     }
-    else if (telas == 'brassagem') {
+    else if (telas == 'brewing') {
         $('.div-principal').hide();
-        $('.div-brassagem').show();
+        $('.div-brewing').show();
     }
     else if (telas == 'hlt') {
         ExibeTelaHLT();
@@ -228,11 +228,11 @@ function VerificaTelaExibir(telas) {
     else if (telas == 'herms') {
         ExibeTelaHerms();
     }
-    else if (telas == 'mash') {
-        ExibeTelaMash();
+    else if (telas == 'mlt') {
+        ExibeTelaMLT();
     }
-    else if (telas == 'fermentador') {
-        ExibeTelaFermentador();
+    else if (telas == 'fermenter') {
+        ExibeTelaFermenter();
     }
     else if (telas == 'sparge') {
         ExibeTelaSparge();
@@ -240,11 +240,11 @@ function VerificaTelaExibir(telas) {
     else if (telas == 'bol') {
         ExibeTelaBOL();
     }
-    else if (telas == 'rampa') {
-        ExibeTelaRampa();
+    else if (telas == 'step') {
+        ExibeTelaStep();
     }
-    else if (telas == 'resfriar') {
-        ExibeTelaResfriar();
+    else if (telas == 'cooling') {
+        ExibeTelaCooling();
     }
     else if (telas == 'whirlpool') {
         ExibeTelaWhirlpool();
@@ -255,175 +255,174 @@ function defineLayout() {
     $(".btn-medio").css("width", "48%");
     $(".diminuir").css("width", "24%");
     $(".aumentar").css("width", "24%");
-    $(".txt-valor").css("width", "45%");
-    $(".nova-brassagem").css("height", "250px");
+    $(".txt-value").css("width", "45%");
+    $(".new-brewing").css("height", "250px");
 
     $(".btn-medio").css("margin-bottom", "5px");
     $(".btn-grande").css("margin-bottom", "5px");
-    $(".btn-com-legenda").css("margin-right", "1px");
-    $(".voltar-1-botao").css("margin-top", "156px");
-    $(".voltar-1-botao-2-legendas").css("margin-top", "106px");
-    $(".voltar-2-botoes").css("margin-top", "180px");
-    $(".voltar-2-botoes-2-legendas").css("margin-top", "67px");
-    $(".voltar-2-botoes-1-legenda").css("margin-top", "92px");
-    $(".voltar-3-botoes").css("margin-top", "130px");
-    $(".voltar-3-botoes-1-legenda").css("margin-top", "53px");
-    $(".voltar-5-botoes").css("margin-top", "7px");
-    $(".log-1-botao").css("margin-top", "180px");
-    $(".log-1-botao-2-legendas").css("margin-top", "105px");
-    $(".log-2-botoes").css("margin-top", "130px");
-    $(".log-2-botoes-2-legendas").css("margin-top", "55px");
-    $(".log-2-botoes-1-legenda").css("margin-top", "90px");
-    $(".log-3-botoes").css("margin-top", "78px");
-    $(".log-3-botoes-1-legenda").css("margin-top", "40px");
-    $(".log-5-botoes").css("margin-top", "0px");
+    $(".btn-com-info").css("margin-right", "1px");
+    $(".back-1-button").css("margin-top", "156px");
+    $(".back-1-button-2-info").css("margin-top", "106px");
+    $(".back-2-buttons").css("margin-top", "180px");
+    $(".back-2-buttons-2-info").css("margin-top", "67px");
+    $(".back-2-buttons-1-info").css("margin-top", "92px");
+    $(".back-3-buttons").css("margin-top", "130px");
+    $(".back-3-buttons-1-info").css("margin-top", "53px");
+    $(".back-5-buttons").css("margin-top", "7px");
+    $(".log-1-button").css("margin-top", "180px");
+    $(".log-1-button-2-info").css("margin-top", "105px");
+    $(".log-2-buttons").css("margin-top", "130px");
+    $(".log-2-buttons-2-info").css("margin-top", "55px");
+    $(".log-2-buttons-1-info").css("margin-top", "90px");
+    $(".log-3-buttons").css("margin-top", "78px");
+    $(".log-3-buttons-1-info").css("margin-top", "40px");
+    $(".log-5-buttons").css("margin-top", "0px");
     $(".diminuir").css("float", "left");
     $(".aumentar").css("margin-right", "5px");
     $(".aumentar").css("margin-bottom", "5px");
-    $(".txt-valor").css("float", "left");
-    $(".txt-valor").css("margin-left", "8px");
-    $(".txt-valor").css("margin-right", "8px");
+    $(".txt-value").css("float", "left");
+    $(".txt-value").css("margin-left", "8px");
+    $(".txt-value").css("margin-right", "8px");
     $(".lbl-titulo").css("text-align", "center");
-    $(".temperatura").css("margin-right", "20px");
-    $(".minuto").css("margin-right", "20px");
-    $(".sobre").css("margin-top", "30px");
+    $(".temperature").css("margin-right", "20px");
+    $(".time").css("margin-right", "20px");
+    $(".about").css("margin-top", "30px");
 }
 
-socket.on('atualizaBrassagem', function (brassagem) {
-    objBrassagem = brassagem;
+socket.on('updateBrewing', function (brewing) {
+    objBrewing = brewing;
 
     var telas = telaExibida.split('-')[1];
     VerificaTelaExibir(telas);
 });
 
-$(".nova-brassagem").click(function () {
-    $.post("nova-brassagem", function (data) { })
+$(".new-brewing").click(function () {
+    $.post("new-brewing", function (data) { })
         .fail(function (error) {
-            sweetAlert("", "Erro ao criar nova brassagem\n" + $.parseJSON(error.responseText).error, "error");
-            telaExibida = 'div-brassagem';
+            sweetAlert("", "Erro ao criar new brewing\n" + $.parseJSON(error.responseText).error, "error");
+            telaExibida = 'div-brewing';
         });
 });
 
-$(".finalizar-brassagem").click(function () {
+$(".finish-brewing").click(function () {
     swal({
         title: "",
-        text: "Finalizar Brassagem ?",
+        text: "Finish brewing ?",
         type: "warning",
         showCancelButton: true,
-        cancelButtonText: "Não",
+        cancelButtonText: "No",
         confirmButtonColor: '#428bca',
-        confirmButtonText: 'Sim',
+        confirmButtonText: 'Yes',
         closeOnConfirm: true
     },
 function () {
-    $.post("finalizar-brassagem", function (data) { })
+    $.post("finish-brewing", function (data) { })
         .fail(function (error) {
-            sweetAlert("", "Erro ao finalizar brassagem\n" + $.parseJSON(error.responseText).error, "error");
-            telaExibida = 'div-brassagem';
+            sweetAlert("", "Erro ao finished brewing\n" + $.parseJSON(error.responseText).error, "error");
+            telaExibida = 'div-brewing';
         });
 });
 });
 
-$(".voltar").click(function () {
+$(".back").click(function () {
     var classes = $(this).parent().attr("class").split(" ");
     var telas = classes[classes.length - 1].split("-")[1];
     $(".div-" + telas).hide();
 
-    telaExibida = 'div-brassagem';
-    $(".div-brassagem").show();
+    telaExibida = 'div-brewing';
+    $(".div-brewing").show();
 });
 
 $(".item").click(function () {
     var classes = $(this).attr("class").split(" ");
     var telas = classes[classes.length - 1];
-    $(".div-brassagem").hide();
+    $(".div-brewing").hide();
 
     VerificaTelaExibir(telas);
 });
 
-$(".encher").click(function () {
+$(".fill").click(function () {
     var classes = $(this).parent().attr("class").split(" ");
     var tela = classes[classes.length - 1].split("-")[1];
     
-    telaExibida = 'div-' + tela + '-enchendo';
+    telaExibida = 'div-' + tela + '-filling';
 
-    $.post("enche" + tela, function (data) { })
+    $.post("fill" + tela, function (data) { })
         .fail(function (error) {
-            sweetAlert("", "Erro ao encher " + tela + "\n" + $.parseJSON(error.responseText).error, "error");
-            telaExibida = 'div-brassagem';
+            sweetAlert("", "Erro ao fill " + tela + "\n" + $.parseJSON(error.responseText).error, "error");
+            telaExibida = 'div-brewing';
         });
 });
 
-$(".parar-enchimento").click(function () {
+$(".stop-fill").click(function () {
     var classes = $(this).parent().attr("class").split(" ");
     var tela = classes[classes.length - 1].split("-")[1];
-    telaExibida = 'div-' + tela + '-cheio';
-
-    $.post("paraenchimento" + tela, function (data) { })
+    telaExibida = 'div-' + tela + '-full';
+    $.post("stopfill" + tela, function (data) { })
         .fail(function (error) {
-            sweetAlert("", "Erro ao parar enchimento " + tela + "\n" + $.parseJSON(error.responseText).error, "error");
-            telaExibida = 'div-brassagem';
+            sweetAlert("", "Erro ao stop enchimento " + tela + "\n" + $.parseJSON(error.responseText).error, "error");
+            telaExibida = 'div-brewing';
         });
 });
 
-$(".aquecer").click(function () {
+$(".heat").click(function () {
     var classes = $(this).parent().attr("class").split(" ");
     $("." + classes[1]).hide();
-    $("." + classes[1] + "-aquecer").show();
+    $("." + classes[1] + "-heat").show();
 });
 
-$(".parar-aquecimento").click(function () {
+$(".stop-heat").click(function () {
     var classes = $(this).parent().attr("class").split(" ");
     var tela = classes[classes.length - 1].split("-")[1];
-    telaExibida = 'div-' + tela + '-cheio';
+    telaExibida = 'div-' + tela + '-full';
 
-    $.post("paraaquecimento" + tela, function (data) { })
+    $.post("stopheat" + tela, function (data) { })
         .fail(function (error) {
-            sweetAlert("", "Erro ao parar aquecimento " + tela + "\n" + $.parseJSON(error.responseText).error, "error");
-            telaExibida = 'div-brassagem';
+            sweetAlert("", "Erro ao stop heat " + tela + "\n" + $.parseJSON(error.responseText).error, "error");
+            telaExibida = 'div-brewing';
         });
 });
 
-$(".temperatura-aquecer").click(function () {
+$(".temperature-heat").click(function () {
     var classes = $(this).parent().attr("class").split(" ");
     var tela = classes[classes.length - 1].split("-")[1];
-    var valor = parseInt($(".temperatura-" + tela).val());
+    var value = parseInt($(".temperature-" + tela).val());
     
-    telaExibida = 'div-' + tela + '-aquecendo';
+    telaExibida = 'div-' + tela + '-heating';
     
-    $.post("aquece" + tela + "/" + valor, function (data) { })
+    $.post("heat" + tela + "/" + value, function (data) { })
         .fail(function (error) {
-            sweetAlert("", "Erro ao aquecer " + tela + "\n" + $.parseJSON(error.responseText).error, "error");
-            telaExibida = 'div-brassagem';
+            sweetAlert("", "Erro ao heat " + tela + "\n" + $.parseJSON(error.responseText).error, "error");
+            telaExibida = 'div-brewing';
         });
 });
 
-$(".minuto-aquecer").click(function () {
+$(".time-heat").click(function () {
     var classes = $(this).parent().attr("class").split(" ");
     var tela = classes[classes.length - 1].split("-")[1];
-    var valor = parseInt($(".minuto-" + tela).val());
+    var value = parseInt($(".time-" + tela).val());
 
-    telaExibida = 'div-' + tela + '-aquecendo';
+    telaExibida = 'div-' + tela + '-heating';
 
-    $.post("aquece" + tela + "/" + valor, function (data) { })
+    $.post("heat" + tela + "/" + value, function (data) { })
         .fail(function (error) {
-            sweetAlert("", "Erro ao aquecer " + tela + "\n" + $.parseJSON(error.responseText).error, "error");
-            telaExibida = 'div-brassagem';
+            sweetAlert("", "Erro ao heat " + tela + "\n" + $.parseJSON(error.responseText).error, "error");
+            telaExibida = 'div-brewing';
         });
 });
 
-$(".temperatura-minuto-aquecer").click(function () {
+$(".temperature-time-heat").click(function () {
     var classes = $(this).parent().attr("class").split(" ");
     var tela = classes[classes.length - 1].split("-")[1];
-    var valorTemperatura = parseInt($(".temperatura-" + tela).val());
-    var valorMinuto = parseInt($(".minuto-" + tela).val());
+    var valueTemperature = parseInt($(".temperature-" + tela).val());
+    var valueTime = parseInt($(".time-" + tela).val());
 
-    telaExibida = 'div-' + tela + '-aquecendo';
+    telaExibida = 'div-' + tela + '-heating';
 
-    $.post("aquece" + tela + "/" + valorTemperatura + "/" + valorMinuto, function (data) { })
+    $.post("heat" + tela + "/" + valueTemperature + "/" + valueTime, function (data) { })
         .fail(function (error) {
-            sweetAlert("", "Erro ao aquecer " + tela + "\n" + $.parseJSON(error.responseText).error, "error");
-            telaExibida = 'div-brassagem';
+            sweetAlert("", "Erro ao heat " + tela + "\n" + $.parseJSON(error.responseText).error, "error");
+            telaExibida = 'div-brewing';
         });
 });
 
@@ -434,96 +433,96 @@ $(".log").click(function () {
     var texto = "";
     switch (item) {
         case "bol":
-            texto = objBrassagem.BOLLog;
+            texto = objBrewing.BOLLog;
             break;
-        case "rampa":
-            texto = objBrassagem.RampaLog;
+        case "step":
+            texto = objBrewing.StepLog;
             break;
         case "hlt":
-            texto = objBrassagem.HLTLog;
+            texto = objBrewing.HLTLog;
             break;
         case "herms":
-            texto = objBrassagem.HermsLog;
+            texto = objBrewing.HermsLog;
             break;
-        case "resfriar":
-            texto = objBrassagem.ResfriarLog;
+        case "cooling":
+            texto = objBrewing.CoolingLog;
             break;
-        case "mash":
-            texto = objBrassagem.MashLog;
+        case "mlt":
+            texto = objBrewing.MLTLog;
             break;
         case "sparge":
-            texto = objBrassagem.SpargeLog;
+            texto = objBrewing.SpargeLog;
             break;
         case "whirlpool":
-            texto = objBrassagem.WhirlpoolLog;
+            texto = objBrewing.WhirlpoolLog;
             break;
-        case "fermentador":
-            texto = objBrassagem.FermentadorLog;
+        case "fermenter":
+            texto = objBrewing.FermenterLog;
             break;
     }
 
     swal({ title: "", text: texto, confirmButtonColor: '#428bca' });
 });
 
-$(".sobre").click(function(){
-swal({ title: "", text: "Node Arduino Home Brewer\n\nVersão 1.0.0", confirmButtonColor: '#428bca' });    
+$(".about").click(function(){
+swal({ title: "", text: "Node Arduino Home Brewer\nfor Herms System\n\nVersão 1.0.0", confirmButtonColor: '#428bca' });    
 });
 
 
-$(".cheio").click(function () {
+$(".full").click(function () {
     var classes = $(this).parent().attr("class").split(" ");
     var tela = classes[classes.length - 1].split("-")[1];
-    telaExibida = 'div-' + tela + '-cheio';
+    telaExibida = 'div-' + tela + '-full';
 
-    $.post(tela + "cheio", function (data) { })
+    $.post(tela + "full", function (data) { })
         .fail(function (error) {
-            sweetAlert("", "Erro ao marcar " + tela + "como cheio\n" + $.parseJSON(error.responseText).error, "error");
-            telaExibida = 'div-brassagem';
+            sweetAlert("", "Erro ao marcar " + tela + "como full\n" + $.parseJSON(error.responseText).error, "error");
+            telaExibida = 'div-brewing';
         });
 });
 
 $(".aumentar").click(function () {
     var objValor = $(this).prev();
     var classes = $(objValor).attr("class").split(" ");
-    var valor = parseInt($(objValor).val()) + 1;
-    if (valor < 0)
-        valor = 0;
+    var value = parseInt($(objValor).val()) + 1;
+    if (value < 0)
+        value = 0;
 
     $("." + classes[1]).each(function (index) {
-        $(this).val(valor);
+        $(this).val(value);
     })
 });
 
 $(".diminuir").click(function () {
     var objValor = $(this).next();
     var classes = $(objValor).attr("class").split(" ");
-    var valor = parseInt($(objValor).val()) - 1;
-    if (valor < 0)
-        valor = 0;
+    var value = parseInt($(objValor).val()) - 1;
+    if (value < 0)
+        value = 0;
 
     $("." + classes[1]).each(function (index) {
-        $(this).val(valor);
+        $(this).val(value);
     })
 });
 
-$(".alterar-minuto").click(function () {
+$(".alterar-time").click(function () {
     var classes = $(this).parent().attr("class").split(" ");
     var tela = classes[1];
 
-    telaExibida = tela + "-alterar-minuto";
+    telaExibida = tela + "-alterar-time";
 
     $("." + tela).hide();
-    $("." + tela + "-alterar-minuto").show();
+    $("." + tela + "-alterar-time").show();
 });
 
-$(".alterar-temperatura").click(function () {
+$(".alterar-temperature").click(function () {
     var classes = $(this).parent().attr("class").split(" ");
     var tela = classes[1];
 
-    telaExibida = tela + "-alterar-temperatura";
+    telaExibida = tela + "-alterar-temperature";
 
     $("." + tela).hide();
-    $("." + tela + "-alterar-temperatura").show();
+    $("." + tela + "-alterar-temperature").show();
 });
 
 defineLayout();

@@ -19,90 +19,90 @@ var
 //************************************************************
 var Schema = mongoose.Schema;
 
-// Brassagem Model
-var Brassagem = new Schema({
-    BrassagemCriada: { type: Boolean, required: true, Default: true },
-    BrassagemFinalizada: { type: Boolean, required: true, Default: false },
+// Brewing Model
+var Brewing = new Schema({
+    BrewingCreated: { type: Boolean, required: true, Default: true },
+    BrewingFinished: { type: Boolean, required: true, Default: false },
 
-    HLTVazio: { type: Boolean, required: true, Default: true },
-    HLTEnchendo: { type: Boolean, required: true, Default: false },
-    HLTCheio: { type: Boolean, required: true, Default: false },
-    HLTAquecendo: { type: Boolean, required: true, Default: false },
-    HLTAquecendoTemperatura: { type: String, required: false, Default: '' },
-    HLTTemperaturaAtual: { type: String, required: false, Default: '' },
+    HLTEmpty: { type: Boolean, required: true, Default: true },
+    HLTFilling: { type: Boolean, required: true, Default: false },
+    HLTFull: { type: Boolean, required: true, Default: false },
+    HLTHeating: { type: Boolean, required: true, Default: false },
+    HLTHeatingTemperature: { type: String, required: false, Default: '' },
+    HLTTemperatureActual: { type: String, required: false, Default: '' },
     HLTLog: { type: String, required: false, Default: '' },
 
-    HermsVazio: { type: Boolean, required: true, Default: true },
-    HermsEnchendo: { type: Boolean, required: true, Default: false },
-    HermsCheio: { type: Boolean, required: true, Default: false },
-    HermsAquecendo: { type: Boolean, required: true, Default: false },
-    HermsAquecendoTemperatura: { type: String, required: false, Default: '' },
-    HermsTemperaturaAtual: { type: String, required: false, Default: '' },
+    HermsEmpty: { type: Boolean, required: true, Default: true },
+    HermsFilling: { type: Boolean, required: true, Default: false },
+    HermsFull: { type: Boolean, required: true, Default: false },
+    HermsHeating: { type: Boolean, required: true, Default: false },
+    HermsHeatingTemperature: { type: String, required: false, Default: '' },
+    HermsTemperatureActual: { type: String, required: false, Default: '' },
     HermsLog: { type: String, required: false, Default: '' },
 
-    MashVazio: { type: Boolean, required: true, Default: true },
-    MashEnchendo: { type: Boolean, required: true, Default: false },
-    MashCheio: { type: Boolean, required: true, Default: false },
-    MashLog: { type: String, required: false, Default: '' },
+    MLTEmpty: { type: Boolean, required: true, Default: true },
+    MLTFilling: { type: Boolean, required: true, Default: false },
+    MLTFull: { type: Boolean, required: true, Default: false },
+    MLTLog: { type: String, required: false, Default: '' },
 
-    BOLVazio: { type: Boolean, required: true, Default: true },
-    BOLEnchendo: { type: Boolean, required: true, Default: false },
-    BOLCheio: { type: Boolean, required: true, Default: false },
-    BOLFervendo: { type: Boolean, required: true, Default: false },
-    BOLFervendoTemperatura: { type: String, required: false, Default: '' },
-    BOLFervendoMinuto: { type: String, required: false, Default: '' },
-    BOLFervendoMinutoRestante: { type: String, required: false, Default: '' },
-    BOLFervuraFinalizada: { type: Boolean, required: true, Default: false },
-    BOLTemperaturaAtual: { type: String, required: false, Default: '' },
+    BOLEmpty: { type: Boolean, required: true, Default: true },
+    BOLFilling: { type: Boolean, required: true, Default: false },
+    BOLFull: { type: Boolean, required: true, Default: false },
+    BOLHeating: { type: Boolean, required: true, Default: false },
+    BOLHeatingTemperature: { type: String, required: false, Default: '' },
+    BOLHeatingTime: { type: String, required: false, Default: '' },
+    BOLHeatingTimeEnd: { type: String, required: false, Default: '' },
+    BOLHeatFinished: { type: Boolean, required: true, Default: false },
+    BOLTemperatureActual: { type: String, required: false, Default: '' },
     BOLLog: { type: String, required: false, Default: '' },
 
-    ResfriarRodando: { type: Boolean, required: true, Default: false },
-    ResfriarRodandoTemperatura: { type: String, required: false, Default: '' },
-    ResfriarRodandoTemperaturaAtingida: { type: Boolean, required: true, Default: false },
-    ResfriarTemperaturaAtual: { type: String, required: false, Default: '' },
-    ResfriarLog: { type: String, required: false, Default: '' },
+    CoolingExecuting: { type: Boolean, required: true, Default: false },
+    CoolingExecutingTemperature: { type: String, required: false, Default: '' },
+    CoolingExecutingTemperatureFinished: { type: Boolean, required: true, Default: false },
+    CoolingTemperatureActual: { type: String, required: false, Default: '' },
+    CoolingLog: { type: String, required: false, Default: '' },
 
-    WhirlpoolRodando: { type: Boolean, required: true, Default: false },
-    WhirlpoolRodandoMinuto: { type: String, required: false, Default: '' },
-    WhirlpoolRodandoMinutoRestante: { type: String, required: false, Default: '' },
-    WhirlpoolRodandoMinutoAtingido: { type: String, required: false, Default: '' },
+    WhirlpoolExecuting: { type: Boolean, required: true, Default: false },
+    WhirlpoolExecutingTime: { type: String, required: false, Default: '' },
+    WhirlpoolExecutingTimeEnd: { type: String, required: false, Default: '' },
+    WhirlpoolExecutingTimeFinished: { type: String, required: false, Default: '' },
     WhirlpoolLog: { type: String, required: false, Default: '' },
 
-    SpargeVazio: { type: Boolean, required: true, Default: true },
-    SpargeRodando: { type: Boolean, required: true, Default: false },
-    SpargeFinalizado: { type: Boolean, required: true, Default: false },
+    SpargeEmpty: { type: Boolean, required: true, Default: true },
+    SpargeExecuting: { type: Boolean, required: true, Default: false },
+    SpargeFinished: { type: Boolean, required: true, Default: false },
     SpargeLog: { type: String, required: false, Default: '' },
 
-    RampaRodando: { type: Boolean, required: true, Default: false },
-    RampaRodandoNumero: { type: String, required: false, Default: '' },
-    RampaRodandoTemperatura: { type: String, required: false, Default: '' },
-    RampaRodandoMinuto: { type: String, required: false, Default: '' },
-    RampaRodandoMinutoAtingido: { type: Boolean, required: true, Default: false },
-    RampaRodandoMinutoRestante: { type: String, required: false, Default: '' },
-    RampaTemperaturaAtual: { type: String, required: false, Default: '' },
-    RampaFinalizada: { type: Boolean, required: true, Default: false },
-    RampaLog: { type: String, required: false, Default: '' },
+    StepExecuting: { type: Boolean, required: true, Default: false },
+    StepExecutingNumber: { type: String, required: false, Default: '' },
+    StepExecutingTemperature: { type: String, required: false, Default: '' },
+    StepExecutingTime: { type: String, required: false, Default: '' },
+    StepExecutingTimeFinished: { type: Boolean, required: true, Default: false },
+    StepExecutingTimeEnd: { type: String, required: false, Default: '' },
+    StepTemperatureActual: { type: String, required: false, Default: '' },
+    StepFinished: { type: Boolean, required: true, Default: false },
+    StepLog: { type: String, required: false, Default: '' },
 
-    FermentadorVazio: { type: Boolean, required: true, Default: true },
-    FermentadorEnchendo: { type: Boolean, required: true, Default: false },
-    FermentadorCheio: { type: Boolean, required: true, Default: false },
-    FermentadorLog: { type: String, required: false, Default: '' },
+    FermenterEmpty: { type: Boolean, required: true, Default: true },
+    FermenterFilling: { type: Boolean, required: true, Default: false },
+    FermenterFull: { type: Boolean, required: true, Default: false },
+    FermenterLog: { type: String, required: false, Default: '' },
 
-    ComunicacaoComArduinoOk: { type: Boolean, required: true, Default: true },
-    ComunicacaoComArduinoErroMensagem: { type: String, required: false, Default: '' },
+    ArduinoComunicationOk: { type: Boolean, required: true, befault: true },
+    ArduinoComunicationErrorMessage: { type: String, required: false, Default: '' },
 
-    dataInclusao: { type: Date, required: true },
-    dataFinalizacao: { type: Date, required: false }
+    DateCreated: { type: Date, required: true },
+    DateFinished: { type: Date, required: false }
 });
 
-var BrassagemModel = mongoose.model('brassagens', Brassagem);
+var BrewingModel = mongoose.model('brewing', Brewing);
 
 
-var atualizaBrassagem = function (socket) {
-    BrassagemModel = mongoose.model('brassagens', Brassagem);
-    return BrassagemModel.findOne({ 'BrassagemFinalizada': false }, function (err, brassagem) {
+var updateBrewing = function (socket) {
+    BrewingModel = mongoose.model('brewing', Brewing);
+    return BrewingModel.findOne({ 'BrewingFinished': false }, function (err, brewing) {
         if (!err) {
-                socket.emit('atualizaBrassagem', brassagem);
+                socket.emit('updateBrewing', brewing);
         }
         else {
             console.log(err);
@@ -110,77 +110,77 @@ var atualizaBrassagem = function (socket) {
     });
 };
 
-var novaBrassagem = function (req, res, io) {
-    BrassagemModel = mongoose.model('brassagens', Brassagem);
-    BrassagemModel = new BrassagemModel(
+var newBrewing = function (req, res, io) {
+    BrewingModel = mongoose.model('brewing', Brewing);
+    BrewingModel = new BrewingModel(
         {
-            BrassagemCriada: true,
-            BrassagemFinalizada: false,
-            HLTVazio: true,
-            HLTEnchendo: false,
-            HLTCheio: false,
-            HLTAquecendo: false,
-            HLTAquecendoTemperatura: null,
-            HLTTemperaturaAtual: null,
+            BrewingCreated: true,
+            BrewingFinished: false,
+            HLTEmpty: true,
+            HLTFilling: false,
+            HLTFull: false,
+            HLTHeating: false,
+            HLTHeatingTemperature: null,
+            HLTTemperatureActual: null,
             HLTLog: '',
-            HermsVazio: true,
-            HermsEnchendo: false,
-            HermsCheio: false,
-            HermsAquecendo: false,
-            HermsAquecendoTemperatura: null,
-            HermsTemperaturaAtual: null,
+            HermsEmpty: true,
+            HermsFilling: false,
+            HermsFull: false,
+            HermsHeating: false,
+            HermsHeatingTemperature: null,
+            HermsTemperatureActual: null,
             HermsLog: '',
-            MashVazio: true,
-            MashEnchendo: false,
-            MashCheio: false,
-            MashLog: '',
-            BOLVazio: true,
-            BOLEnchendo: false,
-            BOLCheio: false,
-            BOLFervendo: false,
-            BOLFervendoTemperatura: null,
-            BOLFervendoMinuto: null,
-            BOLFervendoMinutoRestante: null,
-            BOLFervuraFinalizada: false,
-            BOLTemperaturaAtual: null,
+            MLTEmpty: true,
+            MLTFilling: false,
+            MLTFull: false,
+            MLTLog: '',
+            BOLEmpty: true,
+            BOLFilling: false,
+            BOLFull: false,
+            BOLHeating: false,
+            BOLHeatingTemperature: null,
+            BOLHeatingTime: null,
+            BOLHeatingTimeEnd: null,
+            BOLHeatFinished: false,
+            BOLTemperatureActual: null,
             BOLLog: '',
-            ResfriarRodando: false,
-            ResfriarRodandoTemperatura: null,
-            ResfriarRodandoTemperaturaAtingida: false,
-            ResfriarTemperaturaAtual: null,
-            ResfriarLog: '',
-            WhirlpoolRodando: false,
-            WhirlpoolRodandoMinuto: null,
-            WhirlpoolRodandoMinutoRestante: null,
-            WhirlpoolRodandoMinutoAtingido: null,
+            CoolingExecuting: false,
+            CoolingExecutingTemperature: null,
+            CoolingExecutingTemperatureFinished: false,
+            CoolingTemperatureActual: null,
+            CoolingLog: '',
+            WhirlpoolExecuting: false,
+            WhirlpoolExecutingTime: null,
+            WhirlpoolExecutingTimeEnd: null,
+            WhirlpoolExecutingTimeFinished: null,
             WhirlpoolLog: '',
-            SpargeVazio: true,
-            SpargeRodando: false,
-            SpargeFinalizado: false,
+            SpargeEmpty: true,
+            SpargeExecuting: false,
+            SpargeFinished: false,
             SpargeLog: '',
-            RampaRodando: false,
-            RampaRodandoNumero: null,
-            RampaRodandoTemperatura: null,
-            RampaRodandoMinuto: null,
-            RampaRodandoMinutoAtingido: false,
-            RampaRodandoMinutoRestante: null,
-            RampaTemperaturaAtual: null,
-            RampaFinalizada: false,
-            RampaLog: '',
-            FermentadorVazio: true,
-            FermentadorEnchendo: false,
-            FermentadorCheio: false,
-            FermentadorLog: '',
-            ComunicacaoComArduinoOk: true,
-            ComunicacaoComArduinoErroMensagem: null,
-            dataInclusao: new Date()
+            StepExecuting: false,
+            StepExecutingNumber: null,
+            StepExecutingTemperature: null,
+            StepExecutingTime: null,
+            StepExecutingTimeFinished: false,
+            StepExecutingTimeEnd: null,
+            StepTemperatureActual: null,
+            StepFinished: false,
+            StepLog: '',
+            FermenterEmpty: true,
+            FermenterFilling: false,
+            FermenterFull: false,
+            FermenterLog: '',
+            ArduinoComunicationOk: true,
+            ArduinoComunicationErrorMessage: null,
+            DateCreated: new Date()
         }
 
 
         );
-    BrassagemModel.save(function (err, brassagem, result) {
+    BrewingModel.save(function (err, brewing, result) {
         if (!err) {
-            atualizaBrassagem(io); 
+            updateBrewing(io); 
             res.send();
         } else {
             res.status('500').send({ status: 500, error: err.message });
@@ -188,17 +188,17 @@ var novaBrassagem = function (req, res, io) {
     });
 };
 
-var finalizaBrassagem = function (req, res, io) {
-    BrassagemModel = mongoose.model('brassagens', Brassagem);
+var finishBrewing = function (req, res, io) {
+    BrewingModel = mongoose.model('brewing', Brewing);
 
-    return BrassagemModel.findOne({ 'BrassagemFinalizada': false }, function (err, brassagem) {
+    return BrewingModel.findOne({ 'BrewingFinished': false }, function (err, brewing) {
         if (!err) {
-            if (brassagem) {
-                    brassagem.BrassagemFinalizada = true;
-                    brassagem.dataFinalizacao = new Date();
-                    brassagem.save(function (err) {
+            if (brewing) {
+                    brewing.BrewingFinished = true;
+                    brewing.DateFinished = new Date();
+                    brewing.save(function (err) {
                         if (!err) {
-                            atualizaBrassagem(io);
+                            updateBrewing(io);
                             res.send();
                         }
                         else {
@@ -207,7 +207,7 @@ var finalizaBrassagem = function (req, res, io) {
                     });
             }
             else {
-                atualizaBrassagem(io);
+                updateBrewing(io);
                 res.send();
             }
         }
@@ -217,18 +217,18 @@ var finalizaBrassagem = function (req, res, io) {
     });
 };
 
-var encheHLT = function (req, res, io) {
-    BrassagemModel = mongoose.model('brassagens', Brassagem);
+var fillHLT = function (req, res, io) {
+    BrewingModel = mongoose.model('brewing', Brewing);
 
-    return BrassagemModel.findOne({ 'BrassagemFinalizada': false }, function (err, brassagem) {
+    return BrewingModel.findOne({ 'BrewingFinished': false }, function (err, brewing) {
         if (!err) {
-            if (brassagem) {
-                brassagem.HLTVazio = false;
-                brassagem.HLTEnchendo = true;
-                brassagem.HLTLog += '\n' + utilRoute.getTime() + ' - enchimento iniciado';
-                brassagem.save(function (err) {
+            if (brewing) {
+                brewing.HLTEmpty = false;
+                brewing.HLTFilling = true;
+                brewing.HLTLog += '\n' + utilRoute.getTime() + ' - filling';
+                brewing.save(function (err) {
                     if (!err) {
-                        atualizaBrassagem(io);
+                        updateBrewing(io);
                         res.send();
                     }
                     else {
@@ -237,7 +237,7 @@ var encheHLT = function (req, res, io) {
                 });
             }
             else {
-                atualizaBrassagem(io);
+                updateBrewing(io);
                 res.send();
             }
         }
@@ -246,17 +246,17 @@ var encheHLT = function (req, res, io) {
         }
     });
 };
-var paraEnchimentoHLT = function (req, res, io) {
-    BrassagemModel = mongoose.model('brassagens', Brassagem);
-    return BrassagemModel.findOne({ 'BrassagemFinalizada': false }, function (err, brassagem) {
+var stopFillHLT = function (req, res, io) {
+    BrewingModel = mongoose.model('brewing', Brewing);
+    return BrewingModel.findOne({ 'BrewingFinished': false }, function (err, brewing) {
         if (!err) {
-            if (brassagem) {
-                brassagem.HLTEnchendo = false;
-                brassagem.HLTCheio = true;
-                brassagem.HLTLog += '\n' + utilRoute.getTime() + ' - enchimento parado';
-                brassagem.save(function (err) {
+            if (brewing) {
+                brewing.HLTFilling = false;
+                brewing.HLTFull = true;
+                brewing.HLTLog += '\n' + utilRoute.getTime() + ' - stop fill';
+                brewing.save(function (err) {
                     if (!err) {
-                        atualizaBrassagem(io);
+                        updateBrewing(io);
                         res.send();
                     }
                     else {
@@ -265,7 +265,7 @@ var paraEnchimentoHLT = function (req, res, io) {
                 });
             }
             else {
-                atualizaBrassagem(io);
+                updateBrewing(io);
                 res.send();
             }
         }
@@ -274,18 +274,18 @@ var paraEnchimentoHLT = function (req, res, io) {
         }
     });
 };
-var HLTCheio = function (req, res, io) {
-    BrassagemModel = mongoose.model('brassagens', Brassagem);
-    return BrassagemModel.findOne({ 'BrassagemFinalizada': false }, function (err, brassagem) {
+var HLTFull = function (req, res, io) {
+    BrewingModel = mongoose.model('brewing', Brewing);
+    return BrewingModel.findOne({ 'BrewingFinished': false }, function (err, brewing) {
         if (!err) {
-            if (brassagem) {
-                brassagem.HLTVazio = false;
-                brassagem.HLTEnchendo = false;
-                brassagem.HLTCheio = true;
-                brassagem.HLTLog += '\n' + utilRoute.getTime() + ' - enchimento finalizado';
-                brassagem.save(function (err) {
+            if (brewing) {
+                brewing.HLTEmpty = false;
+                brewing.HLTFilling = false;
+                brewing.HLTFull = true;
+                brewing.HLTLog += '\n' + utilRoute.getTime() + ' - fill finished';
+                brewing.save(function (err) {
                     if (!err) {
-                        atualizaBrassagem(io);
+                        updateBrewing(io);
                         res.send();
                     }
                     else {
@@ -294,7 +294,7 @@ var HLTCheio = function (req, res, io) {
                 });
             }
             else {
-                atualizaBrassagem(io);
+                updateBrewing(io);
                 res.send();
             }
         }
@@ -303,33 +303,33 @@ var HLTCheio = function (req, res, io) {
         }
     });
 };
-var aqueceHLT = function (req, res, io) {
-    var temperatura = req.params.temperatura;
-    if (!temperatura && temperatura == '') {
-        temperatura = "0";
+var heatHLT = function (req, res, io) {
+    var temperature = req.params.temperature;
+    if (!temperature && temperature == '') {
+        temperature = "0";
     }
-    BrassagemModel = mongoose.model('brassagens', Brassagem);
-    return BrassagemModel.findOne({ 'BrassagemFinalizada': false }, function (err, brassagem) {
+    BrewingModel = mongoose.model('brewing', Brewing);
+    return BrewingModel.findOne({ 'BrewingFinished': false }, function (err, brewing) {
         if (!err) {
-            if (brassagem) {
-                if (brassagem.HLTVazio) {
-                    res.status('500').send({ status: 500, error: 'O hlt está vazio' });
+            if (brewing) {
+                if (brewing.HLTEmpty) {
+                    res.status('500').send({ status: 500, error: 'O hlt está empty' });
                 }
-                else if (brassagem.HLTEnchendo) {
-                    res.status('500').send({ status: 500, error: 'O hlt está enchendo' });
+                else if (brewing.HLTFilling) {
+                    res.status('500').send({ status: 500, error: 'O hlt está filling' });
                 }
                 else {
-                    brassagem.HLTAquecendo = true;
-                    brassagem.HLTAquecendoTemperatura = temperatura;
-                    brassagem.HLTLog += '\n' + utilRoute.getTime() + ' - aquecimento iniciado ' + temperatura + 'ºC';
-                    brassagem.save(function () {
-                        atualizaBrassagem(io);
+                    brewing.HLTHeating = true;
+                    brewing.HLTHeatingTemperature = temperature;
+                    brewing.HLTLog += '\n' +    utilRoute.getTime() + ' - heat iniciado ' + temperature + 'ºC';
+                    brewing.save(function () {
+                        updateBrewing(io);
                         res.send();
                     });
                 }
             }
             else {
-                atualizaBrassagem(io);
+                updateBrewing(io);
                 res.send();
             }
         }
@@ -338,16 +338,16 @@ var aqueceHLT = function (req, res, io) {
         }
     });
 };
-var paraAquecimentoHLT = function (req, res, io) {
-    BrassagemModel = mongoose.model('brassagens', Brassagem);
-    return BrassagemModel.findOne({ 'BrassagemFinalizada': false }, function (err, brassagem) {
+var stopHeatHLT = function (req, res, io) {
+    BrewingModel = mongoose.model('brewing', Brewing);
+    return BrewingModel.findOne({ 'BrewingFinished': false }, function (err, brewing) {
         if (!err) {
-            if (brassagem) {
-                brassagem.HLTAquecendo = false;
-                brassagem.HLTLog += '\n' + utilRoute.getTime() + ' - aquecimento parado';
-                brassagem.save(function (err) {
+            if (brewing) {
+                brewing.HLTHeating = false;
+                brewing.HLTLog += '\n' + utilRoute.getTime() + ' - heat parado';
+                brewing.save(function (err) {
                     if (!err) {
-                        atualizaBrassagem(io);
+                        updateBrewing(io);
                         res.send();
                     }
                     else {
@@ -356,7 +356,7 @@ var paraAquecimentoHLT = function (req, res, io) {
                 });
             }
             else {
-                atualizaBrassagem(io);
+                updateBrewing(io);
                 res.send();
             }
         }
@@ -366,17 +366,17 @@ var paraAquecimentoHLT = function (req, res, io) {
     });
 };
 
-var encheHerms = function (req, res, io) {
-    BrassagemModel = mongoose.model('brassagens', Brassagem);
-    return BrassagemModel.findOne({ 'BrassagemFinalizada': false }, function (err, brassagem) {
+var fillHerms = function (req, res, io) {
+    BrewingModel = mongoose.model('brewing', Brewing);
+    return BrewingModel.findOne({ 'BrewingFinished': false }, function (err, brewing) {
         if (!err) {
-            if (brassagem) {
-                brassagem.HermsVazio = false;
-                brassagem.HermsEnchendo = true;
-                brassagem.HermsLog += '\n' + utilRoute.getTime() + ' - enchimento iniciado';
-                brassagem.save(function (err) {
+            if (brewing) {
+                brewing.HermsEmpty = false;
+                brewing.HermsFilling = true;
+                brewing.HermsLog += '\n' + utilRoute.getTime() + ' - enchimento iniciado';
+                brewing.save(function (err) {
                     if (!err) {
-                        atualizaBrassagem(io);
+                        updateBrewing(io);
                         res.send();
                     }
                     else {
@@ -385,7 +385,7 @@ var encheHerms = function (req, res, io) {
                 });
             }
             else {
-                atualizaBrassagem(io);
+                updateBrewing(io);
                 res.send();
             }
         }
@@ -394,17 +394,17 @@ var encheHerms = function (req, res, io) {
         }
     });
 };
-var paraEnchimentoHerms = function (req, res, io) {
-    BrassagemModel = mongoose.model('brassagens', Brassagem);
-    return BrassagemModel.findOne({ 'BrassagemFinalizada': false }, function (err, brassagem) {
+var stopFillHerms = function (req, res, io) {
+    BrewingModel = mongoose.model('brewing', Brewing);
+    return BrewingModel.findOne({ 'BrewingFinished': false }, function (err, brewing) {
         if (!err) {
-            if (brassagem) {
-                brassagem.HermsEnchendo = false;
-                brassagem.HermsCheio = true;
-                brassagem.HermsLog += '\n' + utilRoute.getTime() + ' - enchimento parado';
-                brassagem.save(function (err) {
+            if (brewing) {
+                brewing.HermsFilling = false;
+                brewing.HermsFull = true;
+                brewing.HermsLog += '\n' + utilRoute.getTime() + ' - enchimento parado';
+                brewing.save(function (err) {
                     if (!err) {
-                        atualizaBrassagem(io);
+                        updateBrewing(io);
                         res.send();
                     }
                     else {
@@ -413,7 +413,7 @@ var paraEnchimentoHerms = function (req, res, io) {
                 });
             }
             else {
-                atualizaBrassagem(io);
+                updateBrewing(io);
                 res.send();
             }
         }
@@ -422,18 +422,18 @@ var paraEnchimentoHerms = function (req, res, io) {
         }
     });
 };
-var HermsCheio = function (req, res, io) {
-    BrassagemModel = mongoose.model('brassagens', Brassagem);
-    return BrassagemModel.findOne({ 'BrassagemFinalizada': false }, function (err, brassagem) {
+var HermsFull = function (req, res, io) {
+    BrewingModel = mongoose.model('brewing', Brewing);
+    return BrewingModel.findOne({ 'BrewingFinished': false }, function (err, brewing) {
         if (!err) {
-            if (brassagem) {
-                brassagem.HermsVazio = false;
-                brassagem.HermsEnchendo = false;
-                brassagem.HermsCheio = true;
-                brassagem.HermsLog += '\n' + utilRoute.getTime() + ' - enchimento finalizado';
-                brassagem.save(function (err) {
+            if (brewing) {
+                brewing.HermsEmpty = false;
+                brewing.HermsFilling = false;
+                brewing.HermsFull = true;
+                brewing.HermsLog += '\n' + utilRoute.getTime() + ' - enchimento finalizado';
+                brewing.save(function (err) {
                     if (!err) {
-                        atualizaBrassagem(io);
+                        updateBrewing(io);
                         res.send();
                     }
                     else {
@@ -442,7 +442,7 @@ var HermsCheio = function (req, res, io) {
                 });
             }
             else {
-                atualizaBrassagem(io);
+                updateBrewing(io);
                 res.send();
             }
         }
@@ -451,33 +451,33 @@ var HermsCheio = function (req, res, io) {
         }
     });
 };
-var aqueceHerms = function (req, res, io) {
-    var temperatura = req.params.temperatura;
-    if (!temperatura && temperatura == '') {
-        temperatura = "0";
+var heatHerms = function (req, res, io) {
+    var temperature = req.params.temperature;
+    if (!temperature && temperature == '') {
+        temperature = "0";
     }
-    BrassagemModel = mongoose.model('brassagens', Brassagem);
-    return BrassagemModel.findOne({ 'BrassagemFinalizada': false }, function (err, brassagem) {
+    BrewingModel = mongoose.model('brewing', Brewing);
+    return BrewingModel.findOne({ 'BrewingFinished': false }, function (err, brewing) {
         if (!err) {
-            if (brassagem) {
-                if (brassagem.HermsVazio) {
-                    res.status('500').send({ status: 500, error: 'O herms está vazio' });
+            if (brewing) {
+                if (brewing.HermsEmpty) {
+                    res.status('500').send({ status: 500, error: 'O herms está empty' });
                 }
-                else if (brassagem.HermsEnchendo) {
-                    res.status('500').send({ status: 500, error: 'O herms está enchendo' });
+                else if (brewing.HermsFilling) {
+                    res.status('500').send({ status: 500, error: 'O herms está filling' });
                 }
                 else {
-                    brassagem.HermsAquecendo = true;
-                    brassagem.HermsAquecendoTemperatura = temperatura;
-                    brassagem.HermsLog += '\n' + utilRoute.getTime() + ' - aquecimento iniciado ' + temperatura + 'ºC';
-                    brassagem.save(function () {
-                        atualizaBrassagem(io);
+                    brewing.HermsHeating = true;
+                    brewing.HermsHeatingTemperature = temperature;
+                    brewing.HermsLog += '\n' + utilRoute.getTime() + ' - heat iniciado ' + temperature + 'ºC';
+                    brewing.save(function () {
+                        updateBrewing(io);
                         res.send();
                     });
                 }
             }
             else {
-                atualizaBrassagem(io);
+                updateBrewing(io);
                 res.send();
             }
         }
@@ -486,16 +486,16 @@ var aqueceHerms = function (req, res, io) {
         }
     });
 };
-var paraAquecimentoHerms = function (req, res, io) {
-    BrassagemModel = mongoose.model('brassagens', Brassagem);
-    return BrassagemModel.findOne({ 'BrassagemFinalizada': false }, function (err, brassagem) {
+var stopHeatHerms = function (req, res, io) {
+    BrewingModel = mongoose.model('brewing', Brewing);
+    return BrewingModel.findOne({ 'BrewingFinished': false }, function (err, brewing) {
         if (!err) {
-            if (brassagem) {
-                brassagem.HermsAquecendo = false;
-                brassagem.HermsLog += '\n' + utilRoute.getTime() + ' - aquecimento parado';
-                brassagem.save(function (err) {
+            if (brewing) {
+                brewing.HermsHeating = false;
+                brewing.HermsLog += '\n' + utilRoute.getTime() + ' - heat parado';
+                brewing.save(function (err) {
                     if (!err) {
-                        atualizaBrassagem(io);
+                        updateBrewing(io);
                         res.send();
                     }
                     else {
@@ -504,7 +504,7 @@ var paraAquecimentoHerms = function (req, res, io) {
                 });
             }
             else {
-                atualizaBrassagem(io);
+                updateBrewing(io);
                 res.send();
             }
         }
@@ -514,29 +514,29 @@ var paraAquecimentoHerms = function (req, res, io) {
     });
 };
 
-var encheMash = function (req, res, io) {
-    BrassagemModel = mongoose.model('brassagens', Brassagem);
-    return BrassagemModel.findOne({ 'BrassagemFinalizada': false }, function (err, brassagem) {
+var fillMLT = function (req, res, io) {
+    BrewingModel = mongoose.model('brewing', Brewing);
+    return BrewingModel.findOne({ 'BrewingFinished': false }, function (err, brewing) {
         if (!err) {
-            if (brassagem) {
-                if (brassagem.HLTVazio) {
-                    res.status('500').send({ status: 500, error: 'O hlt está vazio' });
+            if (brewing) {
+                if (brewing.HLTEmpty) {
+                    res.status('500').send({ status: 500, error: 'O hlt está empty' });
                 }
-                else if (brassagem.HLTEnchendo) {
-                    res.status('500').send({ status: 500, error: 'O hlt está enchendo' });
+                else if (brewing.HLTFilling) {
+                    res.status('500').send({ status: 500, error: 'O hlt está filling' });
                 }
                 else {
-                    brassagem.MashVazio = false;
-                    brassagem.MashEnchendo = true;
-                    brassagem.MashLog += '\n' + utilRoute.getTime() + ' - enchimento iniciado';
-                    brassagem.save(function () {
-                        atualizaBrassagem(io);
+                    brewing.MLTEmpty = false;
+                    brewing.MLTFilling = true;
+                    brewing.MLTLog += '\n' + utilRoute.getTime() + ' - enchimento iniciado';
+                    brewing.save(function () {
+                        updateBrewing(io);
                         res.send();
                     });
                 }
             }
             else {
-                atualizaBrassagem(io);
+                updateBrewing(io);
                 res.send();
             }
         }
@@ -545,17 +545,17 @@ var encheMash = function (req, res, io) {
         }
     });
 };
-var paraEnchimentoMash = function (req, res, io) {
-    BrassagemModel = mongoose.model('brassagens', Brassagem);
-    return BrassagemModel.findOne({ 'BrassagemFinalizada': false }, function (err, brassagem) {
+var stopFillMLT = function (req, res, io) {
+    BrewingModel = mongoose.model('brewing', Brewing);
+    return BrewingModel.findOne({ 'BrewingFinished': false }, function (err, brewing) {
         if (!err) {
-            if (brassagem) {
-                brassagem.MashEnchendo = false;
-                brassagem.MashCheio = true;
-                brassagem.MashLog += '\n' + utilRoute.getTime() + ' - enchimento parado';
-                brassagem.save(function (err) {
+            if (brewing) {
+                brewing.MLTFilling = false;
+                brewing.MLTFull = true;
+                brewing.MLTLog += '\n' + utilRoute.getTime() + ' - enchimento parado';
+                brewing.save(function (err) {
                     if (!err) {
-                        atualizaBrassagem(io);
+                        updateBrewing(io);
                         res.send();
                     }
                     else {
@@ -564,7 +564,7 @@ var paraEnchimentoMash = function (req, res, io) {
                 });
             }
             else {
-                atualizaBrassagem(io);
+                updateBrewing(io);
                 res.send();
             }
         }
@@ -573,18 +573,18 @@ var paraEnchimentoMash = function (req, res, io) {
         }
     });
 };
-var MashCheio = function (req, res, io) {
-    BrassagemModel = mongoose.model('brassagens', Brassagem);
-    return BrassagemModel.findOne({ 'BrassagemFinalizada': false }, function (err, brassagem) {
+var MLTFull = function (req, res, io) {
+    BrewingModel = mongoose.model('brewing', Brewing);
+    return BrewingModel.findOne({ 'BrewingFinished': false }, function (err, brewing) {
         if (!err) {
-            if (brassagem) {
-                brassagem.MashVazio = false;
-                brassagem.MashEnchendo = false;
-                brassagem.MashCheio = true;
-                brassagem.MashLog += '\n' + utilRoute.getTime() + ' - enchimento finalizado';
-                brassagem.save(function (err) {
+            if (brewing) {
+                brewing.MLTEmpty = false;
+                brewing.MLTFilling = false;
+                brewing.MLTFull = true;
+                brewing.MLTLog += '\n' + utilRoute.getTime() + ' - enchimento finalizado';
+                brewing.save(function (err) {
                     if (!err) {
-                        atualizaBrassagem(io);
+                        updateBrewing(io);
                         res.send();
                     }
                     else {
@@ -593,7 +593,7 @@ var MashCheio = function (req, res, io) {
                 });
             }
             else {
-                atualizaBrassagem(io);
+                updateBrewing(io);
                 res.send();
             }
         }
@@ -603,29 +603,29 @@ var MashCheio = function (req, res, io) {
     });
 };
 
-var encheFermentador = function (req, res, io) {
-    BrassagemModel = mongoose.model('brassagens', Brassagem);
-    return BrassagemModel.findOne({ 'BrassagemFinalizada': false }, function (err, brassagem) {
+var fillFermenter = function (req, res, io) {
+    BrewingModel = mongoose.model('brewing', Brewing);
+    return BrewingModel.findOne({ 'BrewingFinished': false }, function (err, brewing) {
         if (!err) {
-            if (brassagem) {
-                if (brassagem.BOLVazio) {
-                    res.status('500').send({ status: 500, error: 'O bol está vazio' });
+            if (brewing) {
+                if (brewing.BOLEmpty) {
+                    res.status('500').send({ status: 500, error: 'O bol está empty' });
                 }
-                else if (brassagem.BOLEnchendo) {
-                    res.status('500').send({ status: 500, error: 'O bol está enchendo' });
+                else if (brewing.BOLFilling) {
+                    res.status('500').send({ status: 500, error: 'O bol está filling' });
                 }
                 else {
-                    brassagem.FermentadorVazio = false;
-                    brassagem.FermentadorEnchendo = true;
-                    brassagem.FermentadorLog += '\n' + utilRoute.getTime() + ' - enchimento iniciado';
-                    brassagem.save(function () {
-                        atualizaBrassagem(io);
+                    brewing.FermenterEmpty = false;
+                    brewing.FermenterFilling = true;
+                    brewing.FermenterLog += '\n' + utilRoute.getTime() + ' - enchimento iniciado';
+                    brewing.save(function () {
+                        updateBrewing(io);
                         res.send();
                     });
                 }
             }
             else {
-                atualizaBrassagem(io);
+                updateBrewing(io);
                 res.send();
             }
         }
@@ -634,17 +634,17 @@ var encheFermentador = function (req, res, io) {
         }
     });
 };
-var paraEnchimentoFermentador = function (req, res, io) {
-    BrassagemModel = mongoose.model('brassagens', Brassagem);
-    return BrassagemModel.findOne({ 'BrassagemFinalizada': false }, function (err, brassagem) {
+var stopFillFermenter = function (req, res, io) {
+    BrewingModel = mongoose.model('brewing', Brewing);
+    return BrewingModel.findOne({ 'BrewingFinished': false }, function (err, brewing) {
         if (!err) {
-            if (brassagem) {
-                brassagem.FermentadorEnchendo = false;
-                brassagem.FermentadorCheio = true;
-                brassagem.FermentadorLog += '\n' + utilRoute.getTime() + ' - enchimento parado';
-                brassagem.save(function (err) {
+            if (brewing) {
+                brewing.FermenterFilling = false;
+                brewing.FermenterFull = true;
+                brewing.FermenterLog += '\n' + utilRoute.getTime() + ' - enchimento parado';
+                brewing.save(function (err) {
                     if (!err) {
-                        atualizaBrassagem(io);
+                        updateBrewing(io);
                         res.send();
                     }
                     else {
@@ -653,7 +653,7 @@ var paraEnchimentoFermentador = function (req, res, io) {
                 });
             }
             else {
-                atualizaBrassagem(io);
+                updateBrewing(io);
                 res.send();
             }
         }
@@ -662,18 +662,18 @@ var paraEnchimentoFermentador = function (req, res, io) {
         }
     });
 };
-var FermentadorCheio = function (req, res, io) {
-    BrassagemModel = mongoose.model('brassagens', Brassagem);
-    return BrassagemModel.findOne({ 'BrassagemFinalizada': false }, function (err, brassagem) {
+var FermenterFull = function (req, res, io) {
+    BrewingModel = mongoose.model('brewing', Brewing);
+    return BrewingModel.findOne({ 'BrewingFinished': false }, function (err, brewing) {
         if (!err) {
-            if (brassagem) {
-                brassagem.FermentadorVazio = false;
-                brassagem.FermentadorEnchendo = false;
-                brassagem.FermentadorCheio = true;
-                brassagem.FermentadorLog += '\n' + utilRoute.getTime() + ' - enchimento finalizado';
-                brassagem.save(function (err) {
+            if (brewing) {
+                brewing.FermenterEmpty = false;
+                brewing.FermenterFilling = false;
+                brewing.FermenterFull = true;
+                brewing.FermenterLog += '\n' + utilRoute.getTime() + ' - enchimento finalizado';
+                brewing.save(function (err) {
                     if (!err) {
-                        atualizaBrassagem(io);
+                        updateBrewing(io);
                         res.send();
                     }
                     else {
@@ -682,7 +682,7 @@ var FermentadorCheio = function (req, res, io) {
                 });
             }
             else {
-                atualizaBrassagem(io);
+                updateBrewing(io);
                 res.send();
             }
         }
@@ -692,29 +692,29 @@ var FermentadorCheio = function (req, res, io) {
     });
 };
 
-var encheSparge = function (req, res, io) {
-    BrassagemModel = mongoose.model('brassagens', Brassagem);
-    return BrassagemModel.findOne({ 'BrassagemFinalizada': false }, function (err, brassagem) {
+var fillSparge = function (req, res, io) {
+    BrewingModel = mongoose.model('brewing', Brewing);
+    return BrewingModel.findOne({ 'BrewingFinished': false }, function (err, brewing) {
         if (!err) {
-            if (brassagem) {
-                if (brassagem.HLTVazio) {
-                    res.status('500').send({ status: 500, error: 'O hlt está vazio' });
+            if (brewing) {
+                if (brewing.HLTEmpty) {
+                    res.status('500').send({ status: 500, error: 'O hlt está empty' });
                 }
-                else if (brassagem.HLTEnchendo) {
-                    res.status('500').send({ status: 500, error: 'O hlt está enchendo' });
+                else if (brewing.HLTFilling) {
+                    res.status('500').send({ status: 500, error: 'O hlt está filling' });
                 }
                 else {
-                    brassagem.SpargeVazio = false;
-                    brassagem.SpargeRodando = true;
-                    brassagem.SpargeLog += '\n' + utilRoute.getTime() + ' - sparge iniciado';
-                    brassagem.save(function () {
-                        atualizaBrassagem(io);
+                    brewing.SpargeEmpty = false;
+                    brewing.SpargeExecuting = true;
+                    brewing.SpargeLog += '\n' + utilRoute.getTime() + ' - sparge iniciado';
+                    brewing.save(function () {
+                        updateBrewing(io);
                         res.send();
                     });
                 }
             }
             else {
-                atualizaBrassagem(io);
+                updateBrewing(io);
                 res.send();
             }
         }
@@ -723,17 +723,17 @@ var encheSparge = function (req, res, io) {
         }
     });
 };
-var paraEnchimentoSparge = function (req, res, io) {
-    BrassagemModel = mongoose.model('brassagens', Brassagem);
-    return BrassagemModel.findOne({ 'BrassagemFinalizada': false }, function (err, brassagem) {
+var stopFillSparge = function (req, res, io) {
+    BrewingModel = mongoose.model('brewing', Brewing);
+    return BrewingModel.findOne({ 'BrewingFinished': false }, function (err, brewing) {
         if (!err) {
-            if (brassagem) {
-                brassagem.SpargeRodando = false;
-                brassagem.SpargeFinalizado = true;
-                brassagem.SpargeLog += '\n' + utilRoute.getTime() + ' - sparge finalizado';
-                brassagem.save(function (err) {
+            if (brewing) {
+                brewing.SpargeExecuting = false;
+                brewing.SpargeFinished = true;
+                brewing.SpargeLog += '\n' + utilRoute.getTime() + ' - sparge finalizado';
+                brewing.save(function (err) {
                     if (!err) {
-                        atualizaBrassagem(io);
+                        updateBrewing(io);
                         res.send();
                     }
                     else {
@@ -742,7 +742,7 @@ var paraEnchimentoSparge = function (req, res, io) {
                 });
             }
             else {
-                atualizaBrassagem(io);
+                updateBrewing(io);
                 res.send();
             }
         }
@@ -751,18 +751,18 @@ var paraEnchimentoSparge = function (req, res, io) {
         }
     });
 };
-var SpargeCheio = function (req, res, io) {
-    BrassagemModel = mongoose.model('brassagens', Brassagem);
-    return BrassagemModel.findOne({ 'BrassagemFinalizada': false }, function (err, brassagem) {
+var SpargeFull = function (req, res, io) {
+    BrewingModel = mongoose.model('brewing', Brewing);
+    return BrewingModel.findOne({ 'BrewingFinished': false }, function (err, brewing) {
         if (!err) {
-            if (brassagem) {
-                brassagem.SpargeVazio = false;
-                brassagem.SpargeRodando = false;
-                brassagem.SpargeFinalizado = true;
-                brassagem.SpargeLog += '\n' + utilRoute.getTime() + ' - sparge finalizado';
-                brassagem.save(function (err) {
+            if (brewing) {
+                brewing.SpargeEmpty = false;
+                brewing.SpargeExecuting = false;
+                brewing.SpargeFinished = true;
+                brewing.SpargeLog += '\n' + utilRoute.getTime() + ' - sparge finalizado';
+                brewing.save(function (err) {
                     if (!err) {
-                        atualizaBrassagem(io);
+                        updateBrewing(io);
                         res.send();
                     }
                     else {
@@ -771,7 +771,7 @@ var SpargeCheio = function (req, res, io) {
                 });
             }
             else {
-                atualizaBrassagem(io);
+                updateBrewing(io);
                 res.send();
             }
         }
@@ -781,29 +781,29 @@ var SpargeCheio = function (req, res, io) {
     });
 };
 
-var encheBOL = function (req, res, io) {
-    BrassagemModel = mongoose.model('brassagens', Brassagem);
-    return BrassagemModel.findOne({ 'BrassagemFinalizada': false }, function (err, brassagem) {
+var fillBOL = function (req, res, io) {
+    BrewingModel = mongoose.model('brewing', Brewing);
+    return BrewingModel.findOne({ 'BrewingFinished': false }, function (err, brewing) {
         if (!err) {
-            if (brassagem) {
-                if (brassagem.MashVazio) {
-                    res.status('500').send({ status: 500, error: 'O mash está vazio' });
+            if (brewing) {
+                if (brewing.MLTEmpty) {
+                    res.status('500').send({ status: 500, error: 'O mlt está empty' });
                 }
-                else if (brassagem.MashEnchendo) {
-                    res.status('500').send({ status: 500, error: 'O mash está enchendo' });
+                else if (brewing.MLTFilling) {
+                    res.status('500').send({ status: 500, error: 'O mlt está filling' });
                 }
                 else {
-                    brassagem.BOLVazio = false;
-                    brassagem.BOLEnchendo = true;
-                    brassagem.BOLLog += '\n' + utilRoute.getTime() + ' - enchimento iniciado';
-                    brassagem.save(function () {
-                        atualizaBrassagem(io);
+                    brewing.BOLEmpty = false;
+                    brewing.BOLFilling = true;
+                    brewing.BOLLog += '\n' + utilRoute.getTime() + ' - enchimento iniciado';
+                    brewing.save(function () {
+                        updateBrewing(io);
                         res.send();
                     });
                 }
             }
             else {
-                atualizaBrassagem(io);
+                updateBrewing(io);
                 res.send();
             }
         }
@@ -812,17 +812,17 @@ var encheBOL = function (req, res, io) {
         }
     });
 };
-var paraEnchimentoBOL = function (req, res, io) {
-    BrassagemModel = mongoose.model('brassagens', Brassagem);
-    return BrassagemModel.findOne({ 'BrassagemFinalizada': false }, function (err, brassagem) {
+var stopFillBOL = function (req, res, io) {
+    BrewingModel = mongoose.model('brewing', Brewing);
+    return BrewingModel.findOne({ 'BrewingFinished': false }, function (err, brewing) {
         if (!err) {
-            if (brassagem) {
-                brassagem.BOLEnchendo = false;
-                brassagem.BOLCheio = true;
-                brassagem.BOLLog += '\n' + utilRoute.getTime() + ' - enchimento parado';
-                brassagem.save(function (err) {
+            if (brewing) {
+                brewing.BOLFilling = false;
+                brewing.BOLFull = true;
+                brewing.BOLLog += '\n' + utilRoute.getTime() + ' - enchimento parado';
+                brewing.save(function (err) {
                     if (!err) {
-                        atualizaBrassagem(io);
+                        updateBrewing(io);
                         res.send();
                     }
                     else {
@@ -831,7 +831,7 @@ var paraEnchimentoBOL = function (req, res, io) {
                 });
             }
             else {
-                atualizaBrassagem(io);
+                updateBrewing(io);
                 res.send();
             }
         }
@@ -840,18 +840,18 @@ var paraEnchimentoBOL = function (req, res, io) {
         }
     });
 };
-var BOLCheio = function (req, res, io) {
-    BrassagemModel = mongoose.model('brassagens', Brassagem);
-    return BrassagemModel.findOne({ 'BrassagemFinalizada': false }, function (err, brassagem) {
+var BOLFull = function (req, res, io) {
+    BrewingModel = mongoose.model('brewing', Brewing);
+    return BrewingModel.findOne({ 'BrewingFinished': false }, function (err, brewing) {
         if (!err) {
-            if (brassagem) {
-                brassagem.BOLVazio = false;
-                brassagem.BOLEnchendo = false;
-                brassagem.BOLCheio = true;
-                brassagem.BOLLog += '\n' + utilRoute.getTime() + ' - enchimento finalizado';
-                brassagem.save(function (err) {
+            if (brewing) {
+                brewing.BOLEmpty = false;
+                brewing.BOLFilling = false;
+                brewing.BOLFull = true;
+                brewing.BOLLog += '\n' + utilRoute.getTime() + ' - enchimento finalizado';
+                brewing.save(function (err) {
                     if (!err) {
-                        atualizaBrassagem(io);
+                        updateBrewing(io);
                         res.send();
                     }
                     else {
@@ -860,7 +860,7 @@ var BOLCheio = function (req, res, io) {
                 });
             }
             else {
-                atualizaBrassagem(io);
+                updateBrewing(io);
                 res.send();
             }
         }
@@ -870,79 +870,79 @@ var BOLCheio = function (req, res, io) {
     });
 };
 
-var timerMinutoBOL = null;
+var timerTimeBOL = null;
 
-var atualizaMinutoBOL = function(io){
- BrassagemModel = mongoose.model('brassagens', Brassagem);
-    return BrassagemModel.findOne({ 'BrassagemFinalizada': false }, function (err, brassagem) {
+var updateTimeBOL = function(io){
+ BrewingModel = mongoose.model('brewing', Brewing);
+    return BrewingModel.findOne({ 'BrewingFinished': false }, function (err, brewing) {
         if (!err) {
-            if (brassagem) {
-                if(brassagem.BOLFervendo == false){
-                    clearInterval(timerMinutoBOL);
+            if (brewing) {
+                if(brewing.BOLHeating == false){
+                    clearInterval(timerTimeBOL);
                 }
-                if (brassagem.BOLFervendoMinutoRestante == "1") {
-                    brassagem.BOLFervendo = false;
-                    brassagem.BOLFervendoMinutoRestante = "0";
-                    brassagem.BOLFervendoMinutoAtingido = false;
-                    brassagem.BOLLog += '\n' + utilRoute.getTime() + ' - fervura parada';
-                    clearInterval(timerMinutoBOL);
+                if (brewing.BOLHeatingTimeEnd == "1") {
+                    brewing.BOLHeating = false;
+                    brewing.BOLHeatingTimeEnd = "0";
+                    brewing.BOLHeatingTimeFinished = false;
+                    brewing.BOLLog += '\n' + utilRoute.getTime() + ' - heat parada';
+                    clearInterval(timerTimeBOL);
                 }
                 else{
-                    brassagem.BOLFervendoMinutoRestante = parseInt(brassagem.BOLFervendoMinutoRestante)-1;
+                    brewing.BOLHeatingTimeEnd = parseInt(brewing.BOLHeatingTimeEnd)-1;
                 }
 
-                    brassagem.save(function () {
-                        atualizaBrassagem(io);
+                    brewing.save(function () {
+                        updateBrewing(io);
                     });
             }
             else {
-                clearInterval(timerMinutoBOL);
+                clearInterval(timerTimeBOL);
             }
         }
         else {
-            clearInterval(timerMinutoBOL);
+            clearInterval(timerTimeBOL);
         }
     });
 }
 
-var ferveBOL = function (req, res, io) {
-    if(timerMinutoBOL){
-        clearInterval(timerMinutoBOL);
+var startBOL = function (req, res, io) {
+    if(timerTimeBOL){
+        clearInterval(timerTimeBOL);
     }
 
-    var temperatura = req.params.temperatura;
-    if (!temperatura && temperatura == '') {
-        temperatura = "0";
+    var temperature = req.params.temperature;
+    if (!temperature && temperature == '') {
+        temperature = "0";
     }
-    var minuto = req.params.minuto;
-    if (!minuto && minuto == '') {
-        minuto = "0";
+    var time = req.params.time;
+    if (!time && time == '') {
+        time = "0";
     }
-    BrassagemModel = mongoose.model('brassagens', Brassagem);
-    return BrassagemModel.findOne({ 'BrassagemFinalizada': false }, function (err, brassagem) {
+    BrewingModel = mongoose.model('brewing', Brewing);
+    return BrewingModel.findOne({ 'BrewingFinished': false }, function (err, brewing) {
         if (!err) {
-            if (brassagem) {
-                if (brassagem.BOLVazio) {
-                    res.status('500').send({ status: 500, error: 'O bol está vazio' });
+            if (brewing) {
+                if (brewing.BOLEmpty) {
+                    res.status('500').send({ status: 500, error: 'O bol está empty' });
                 }
-                else if (brassagem.BOLEnchendo) {
-                    res.status('500').send({ status: 500, error: 'O bol está enchendo' });
+                else if (brewing.BOLFilling) {
+                    res.status('500').send({ status: 500, error: 'O bol está filling' });
                 }
                 else {
-                    brassagem.BOLFervendo = true;
-                    brassagem.BOLFervendoTemperatura = temperatura;
-                    brassagem.BOLFervendoMinuto = minuto;
-                    brassagem.BOLFervendoMinutoRestante = minuto;
-                    brassagem.BOLLog += '\n' + utilRoute.getTime() + ' - fervura iniciada ' + temperatura + 'ºC ' + minuto + 'M';
-                    brassagem.save(function () {
-                        atualizaBrassagem(io);
-                        timerMinutoBOL = setInterval(function(){atualizaMinutoBOL(io);},60*1000);
+                    brewing.BOLHeating = true;
+                    brewing.BOLHeatingTemperature = temperature;
+                    brewing.BOLHeatingTime = time;
+                    brewing.BOLHeatingTimeEnd = time;
+                    brewing.BOLLog += '\n' + utilRoute.getTime() + ' - heat iniciada ' + temperature + 'ºC ' + time + 'M';
+                    brewing.save(function () {
+                        updateBrewing(io);
+                        timerTimeBOL = setInterval(function(){updateTimeBOL(io);},60*1000);
                         res.send();
                     });
                 }
             }
             else {
-                atualizaBrassagem(io);
+                updateBrewing(io);
                 res.send();
             }
         }
@@ -951,16 +951,16 @@ var ferveBOL = function (req, res, io) {
         }
     });
 };
-var paraFervuraBOL = function (req, res, io) {
-    BrassagemModel = mongoose.model('brassagens', Brassagem);
-    return BrassagemModel.findOne({ 'BrassagemFinalizada': false }, function (err, brassagem) {
+var stopBOL = function (req, res, io) {
+    BrewingModel = mongoose.model('brewing', Brewing);
+    return BrewingModel.findOne({ 'BrewingFinished': false }, function (err, brewing) {
         if (!err) {
-            if (brassagem) {
-                brassagem.BOLFervendo = false;
-                brassagem.BOLLog += '\n' + utilRoute.getTime() + ' - fervura parada';
-                brassagem.save(function (err) {
+            if (brewing) {
+                brewing.BOLHeating = false;
+                brewing.BOLLog += '\n' + utilRoute.getTime() + ' - heat parada';
+                brewing.save(function (err) {
                     if (!err) {
-                        atualizaBrassagem(io);
+                        updateBrewing(io);
                         res.send();
                     }
                     else {
@@ -969,7 +969,7 @@ var paraFervuraBOL = function (req, res, io) {
                 });
             }
             else {
-                atualizaBrassagem(io);
+                updateBrewing(io);
                 res.send();
             }
         }
@@ -979,93 +979,93 @@ var paraFervuraBOL = function (req, res, io) {
     });
 };
 
-var timerMinutoRampa = null;
+var timerTimeStep = null;
 
-var atualizaMinutoRampa = function(io){
- BrassagemModel = mongoose.model('brassagens', Brassagem);
-    return BrassagemModel.findOne({ 'BrassagemFinalizada': false }, function (err, brassagem) {
+var updateTimeStep = function(io){
+ BrewingModel = mongoose.model('brewing', Brewing);
+    return BrewingModel.findOne({ 'BrewingFinished': false }, function (err, brewing) {
         if (!err) {
-            if (brassagem) {
-                if(brassagem.RampaRodando == false){
-                    clearInterval(timerMinutoRampa);
+            if (brewing) {
+                if(brewing.StepExecuting == false){
+                    clearInterval(timerTimeStep);
                 }
-                if (brassagem.RampaRodandoMinutoRestante == "1") {
-                    brassagem.RampaRodando = false;
-                    brassagem.RampaRodandoMinutoRestante = "0";
-                    brassagem.RampaFinalizada
-                    brassagem.RampaLog += '\n' + utilRoute.getTime() + ' - rampa ' + brassagem.RampaRodandoNumero + ' finalizada';
-                    clearInterval(timerMinutoRampa);
+                if (brewing.StepExecutingTimeEnd == "1") {
+                    brewing.StepExecuting = false;
+                    brewing.StepExecutingTimeEnd = "0";
+                    brewing.StepFinished
+                    brewing.StepLog += '\n' + utilRoute.getTime() + ' - step ' + brewing.StepExecutingNumber + ' finished';
+                    clearInterval(timerTimeStep);
                 }
                 else{
-                   brassagem.RampaRodandoMinutoRestante = parseInt(brassagem.RampaRodandoMinutoRestante)-1;
+                   brewing.StepExecutingTimeEnd = parseInt(brewing.StepExecutingTimeEnd)-1;
                 }
 
-                    brassagem.save(function () {
-                        atualizaBrassagem(io);
+                    brewing.save(function () {
+                        updateBrewing(io);
                     });
             }
             else {
-                clearInterval(timerMinutoRampa);
+                clearInterval(timerTimeStep);
             }
         }
         else {
-            clearInterval(timerMinutoRampa);
+            clearInterval(timerTimeStep);
         }
     });
 }
 
-var iniciaRampa = function (req, res, io) {
-    if(timerMinutoRampa){
-        clearInterval(timerMinutoRampa);
+var startStep = function (req, res, io) {
+    if(timerTimeStep){
+        clearInterval(timerTimeStep);
     }
 
-    var temperatura = req.params.temperatura;
-    if (!temperatura && temperatura == '') {
-        temperatura = "0";
+    var temperature = req.params.temperature;
+    if (!temperature && temperature == '') {
+        temperature = "0";
     }
-    var minuto = req.params.minuto;
-    if (!minuto && minuto == '') {
-        minuto = "0";
+    var time = req.params.time;
+    if (!time && time == '') {
+        time = "0";
     }
-    BrassagemModel = mongoose.model('brassagens', Brassagem);
-    return BrassagemModel.findOne({ 'BrassagemFinalizada': false }, function (err, brassagem) {
+    BrewingModel = mongoose.model('brewing', Brewing);
+    return BrewingModel.findOne({ 'BrewingFinished': false }, function (err, brewing) {
         if (!err) {
-            if (brassagem) {
-                if (brassagem.MashVazio) {
-                    res.status('500').send({ status: 500, error: 'O mash está vazio' });
+            if (brewing) {
+                if (brewing.MLTEmpty) {
+                    res.status('500').send({ status: 500, error: 'O mlt está empty' });
                 }
-                else if (brassagem.MashEnchendo) {
-                    res.status('500').send({ status: 500, error: 'O mash está enchendo' });
+                else if (brewing.MLTFilling) {
+                    res.status('500').send({ status: 500, error: 'O mlt está filling' });
                 }
-                else if (brassagem.HermsVazio) {
-                    res.status('500').send({ status: 500, error: 'O herms está vazio' });
+                else if (brewing.HermsEmpty) {
+                    res.status('500').send({ status: 500, error: 'O herms está empty' });
                 }
-                else if (brassagem.HermsEnchendo) {
-                    res.status('500').send({ status: 500, error: 'O herms está enchendo' });
+                else if (brewing.HermsFilling) {
+                    res.status('500').send({ status: 500, error: 'O herms está filling' });
                 }
                 else {
-                    brassagem.RampaRodando = true;
-                    brassagem.RampaRodandoTemperatura = temperatura;
-                    brassagem.RampaRodandoMinuto = minuto;
-                    brassagem.RampaRodandoMinutoRestante = minuto;
+                    brewing.StepExecuting = true;
+                    brewing.StepExecutingTemperature = temperature;
+                    brewing.StepExecutingTime = time;
+                    brewing.StepExecutingTimeEnd = time;
 
-                    if (!brassagem.RampaRodandoNumero) {
-                        brassagem.RampaRodandoNumero = "1";
+                    if (!brewing.StepExecutingNumber) {
+                        brewing.StepExecutingNumber = "1";
                     }
                     else {
-                        brassagem.RampaRodandoNumero = parseInt(brassagem.RampaRodandoNumero) + 1;
+                        brewing.StepExecutingNumber = parseInt(brewing.StepExecutingNumber) + 1;
                     }
 
-                    brassagem.RampaLog += '\n' + utilRoute.getTime() + ' - rampa ' + brassagem.RampaRodandoNumero + ' iniciada ' + temperatura + 'ºC ' + minuto + 'M';
-                    brassagem.save(function () {
-                        atualizaBrassagem(io);
-                        timerMinutoRampa = setInterval(function(){atualizaMinutoRampa(io);},60*1000);
+                    brewing.StepLog += '\n' + utilRoute.getTime() + ' - step ' + brewing.StepExecutingNumber + ' iniciada ' + temperature + 'ºC ' + time + 'M';
+                    brewing.save(function () {
+                        updateBrewing(io);
+                        timerTimeStep = setInterval(function(){updateTimeStep(io);},60*1000);
                         res.send();
                     });
                 }
             }
             else {
-                atualizaBrassagem(io);
+                updateBrewing(io);
                 res.send();
             }
         }
@@ -1074,17 +1074,17 @@ var iniciaRampa = function (req, res, io) {
         }
     });
 };
-var finalizaRampa = function (req, res, io) {
-    BrassagemModel = mongoose.model('brassagens', Brassagem);
-    return BrassagemModel.findOne({ 'BrassagemFinalizada': false }, function (err, brassagem) {
+var finishStep = function (req, res, io) {
+    BrewingModel = mongoose.model('brewing', Brewing);
+    return BrewingModel.findOne({ 'BrewingFinished': false }, function (err, brewing) {
         if (!err) {
-            if (brassagem) {
-                brassagem.RampaRodando = false;
-                brassagem.RampaFinalizada = true;
-                brassagem.RampaLog += '\n' + utilRoute.getTime() + ' - rampa ' + brassagem.RampaRodandoNumero + ' finalizada';
-                brassagem.save(function (err) {
+            if (brewing) {
+                brewing.StepExecuting = false;
+                brewing.StepFinished = true;
+                brewing.StepLog += '\n' + utilRoute.getTime() + ' - step ' + brewing.StepExecutingNumber + ' finished';
+                brewing.save(function (err) {
                     if (!err) {
-                        atualizaBrassagem(io);
+                        updateBrewing(io);
                         res.send();
                     }
                     else {
@@ -1093,7 +1093,7 @@ var finalizaRampa = function (req, res, io) {
                 });
             }
             else {
-                atualizaBrassagem(io);
+                updateBrewing(io);
                 res.send();
             }
         }
@@ -1103,33 +1103,33 @@ var finalizaRampa = function (req, res, io) {
     });
 };
 
-var rodaResfriamento = function (req, res, io) {
-    var temperatura = req.params.temperatura;
-    if (!temperatura && temperatura == '') {
-        temperatura = "0";
+var startCooling = function (req, res, io) {
+    var temperature = req.params.temperature;
+    if (!temperature && temperature == '') {
+        temperature = "0";
     }
-    BrassagemModel = mongoose.model('brassagens', Brassagem);
-    return BrassagemModel.findOne({ 'BrassagemFinalizada': false }, function (err, brassagem) {
+    BrewingModel = mongoose.model('brewing', Brewing);
+    return BrewingModel.findOne({ 'BrewingFinished': false }, function (err, brewing) {
         if (!err) {
-            if (brassagem) {
-                if (brassagem.BOLVazio) {
-                    res.status('500').send({ status: 500, error: 'O bol está vazio' });
+            if (brewing) {
+                if (brewing.BOLEmpty) {
+                    res.status('500').send({ status: 500, error: 'O bol está empty' });
                 }
-                else if (brassagem.BOLEnchendo) {
-                    res.status('500').send({ status: 500, error: 'O bol está enchendo' });
+                else if (brewing.BOLFilling) {
+                    res.status('500').send({ status: 500, error: 'O bol está filling' });
                 }
                 else {
-                    brassagem.ResfriarRodando = true;
-                    brassagem.ResfriarRodandoTemperatura = temperatura;
-                    brassagem.ResfriarLog += '\n' + utilRoute.getTime() + ' - resfriamento iniciado ' + temperatura + 'ºC';
-                    brassagem.save(function () {
-                        atualizaBrassagem(io);
+                    brewing.CoolingExecuting = true;
+                    brewing.CoolingExecutingTemperature = temperature;
+                    brewing.CoolingLog += '\n' + utilRoute.getTime() + ' - resfriamento iniciado ' + temperature + 'ºC';
+                    brewing.save(function () {
+                        updateBrewing(io);
                         res.send();
                     });
                 }
             }
             else {
-                atualizaBrassagem(io);
+                updateBrewing(io);
                 res.send();
             }
         }
@@ -1138,16 +1138,16 @@ var rodaResfriamento = function (req, res, io) {
         }
     });
 };
-var paraResfriamento = function (req, res, io) {
-    BrassagemModel = mongoose.model('brassagens', Brassagem);
-    return BrassagemModel.findOne({ 'BrassagemFinalizada': false }, function (err, brassagem) {
+var stopCooling = function (req, res, io) {
+    BrewingModel = mongoose.model('brewing', Brewing);
+    return BrewingModel.findOne({ 'BrewingFinished': false }, function (err, brewing) {
         if (!err) {
-            if (brassagem) {
-                brassagem.ResfriarRodando = false;
-                brassagem.ResfriarLog += '\n' + utilRoute.getTime() + ' - resfriamento parado';
-                brassagem.save(function (err) {
+            if (brewing) {
+                brewing.CoolingExecuting = false;
+                brewing.CoolingLog += '\n' + utilRoute.getTime() + ' - resfriamento parado';
+                brewing.save(function (err) {
                     if (!err) {
-                        atualizaBrassagem(io);
+                        updateBrewing(io);
                         res.send();
                     }
                     else {
@@ -1156,7 +1156,7 @@ var paraResfriamento = function (req, res, io) {
                 });
             }
             else {
-                atualizaBrassagem(io);
+                updateBrewing(io);
                 res.send();
             }
         }
@@ -1166,74 +1166,74 @@ var paraResfriamento = function (req, res, io) {
     });
 };
 
-var timerMinutoWhirlpool = null;
+var timerTimeWhirlpool = null;
 
-var atualizaMinutoWhirlpool = function(io){
- BrassagemModel = mongoose.model('brassagens', Brassagem);
-    return BrassagemModel.findOne({ 'BrassagemFinalizada': false }, function (err, brassagem) {
+var updateTimeWhirlpool = function(io){
+ BrewingModel = mongoose.model('brewing', Brewing);
+    return BrewingModel.findOne({ 'BrewingFinished': false }, function (err, brewing) {
         if (!err) {
-            if (brassagem) {
-                if(brassagem.WhirlpoolRodando == false){
-                    clearInterval(timerMinutoWhirlpool);
+            if (brewing) {
+                if(brewing.WhirlpoolExecuting == false){
+                    clearInterval(timerTimeWhirlpool);
                 }
-                if (brassagem.WhirlpoolRodandoMinutoRestante == "1") {
-                    brassagem.WhirlpoolRodando = false;
-                    brassagem.WhirlpoolRodandoMinutoRestante = "0";
-                    brassagem.WhirlpoolRodandoMinutoAtingido = false;
-                    brassagem.WhirlpoolLog += '\n' + utilRoute.getTime() + ' - whirlpool parado';
-                    clearInterval(timerMinutoWhirlpool);
+                if (brewing.WhirlpoolExecutingTimeEnd == "1") {
+                    brewing.WhirlpoolExecuting = false;
+                    brewing.WhirlpoolExecutingTimeEnd = "0";
+                    brewing.WhirlpoolExecutingTimeFinished = false;
+                    brewing.WhirlpoolLog += '\n' + utilRoute.getTime() + ' - whirlpool parado';
+                    clearInterval(timerTimeWhirlpool);
                 }
                 else{
-                    brassagem.WhirlpoolRodandoMinutoRestante = parseInt(brassagem.WhirlpoolRodandoMinutoRestante)-1;
+                    brewing.WhirlpoolExecutingTimeEnd = parseInt(brewing.WhirlpoolExecutingTimeEnd)-1;
                 }
 
-                    brassagem.save(function () {
-                        atualizaBrassagem(io);
+                    brewing.save(function () {
+                        updateBrewing(io);
                     });
             }
             else {
-                clearInterval(timerMinutoWhirlpool);
+                clearInterval(timerTimeWhirlpool);
             }
         }
         else {
-            clearInterval(timerMinutoWhirlpool);
+            clearInterval(timerTimeWhirlpool);
         }
     });
 }
 
-var rodaWhirlpool = function (req, res, io) {
-    if(timerMinutoWhirlpool){
-        clearInterval(timerMinutoWhirlpool);
+var startWhirlpool = function (req, res, io) {
+    if(timerTimeWhirlpool){
+        clearInterval(timerTimeWhirlpool);
     }
 
-    var minuto = req.params.minuto;
-    if (!minuto && minuto == '') {
-        minuto = "0";
+    var time = req.params.time;
+    if (!time && time == '') {
+        time = "0";
     }
-    BrassagemModel = mongoose.model('brassagens', Brassagem);
-    return BrassagemModel.findOne({ 'BrassagemFinalizada': false }, function (err, brassagem) {
+    BrewingModel = mongoose.model('brewing', Brewing);
+    return BrewingModel.findOne({ 'BrewingFinished': false }, function (err, brewing) {
         if (!err) {
-            if (brassagem) {
-                if (brassagem.BOLVazio) {
-                    res.status('500').send({ status: 500, error: 'O bol está vazio' });
+            if (brewing) {
+                if (brewing.BOLEmpty) {
+                    res.status('500').send({ status: 500, error: 'O bol está empty' });
                 }
-                else if (brassagem.BOLEnchendo) {
-                    res.status('500').send({ status: 500, error: 'O bol está enchendo' });
+                else if (brewing.BOLFilling) {
+                    res.status('500').send({ status: 500, error: 'O bol está filling' });
                 }
                 else {
-                    brassagem.WhirlpoolRodando = true;
-                    brassagem.WhirlpoolRodandoMinuto = minuto;
-                    brassagem.WhirlpoolRodandoMinutoRestante = minuto;
-                    brassagem.WhirlpoolLog += '\n' + utilRoute.getTime() + ' - whirlpool iniciado ' + minuto + 'M';
-                    brassagem.save(function () {
-                        atualizaBrassagem(io);
-                        timerMinutoWhirlpool = setInterval(function(){atualizaMinutoWhirlpool(io);},60*1000);
+                    brewing.WhirlpoolExecuting = true;
+                    brewing.WhirlpoolExecutingTime = time;
+                    brewing.WhirlpoolExecutingTimeEnd = time;
+                    brewing.WhirlpoolLog += '\n' + utilRoute.getTime() + ' - whirlpool iniciado ' + time + 'M';
+                    brewing.save(function () {
+                        updateBrewing(io);
+                        timerTimeWhirlpool = setInterval(function(){updateTimeWhirlpool(io);},60*1000);
                         res.send();
                     });
                 }
             }
             else {
-                atualizaBrassagem(io);
+                updateBrewing(io);
                 res.send();
             }
         }
@@ -1242,16 +1242,16 @@ var rodaWhirlpool = function (req, res, io) {
         }
     });
 };
-var paraWhirlpool = function (req, res, io) {
-    BrassagemModel = mongoose.model('brassagens', Brassagem);
-    return BrassagemModel.findOne({ 'BrassagemFinalizada': false }, function (err, brassagem) {
+var stopWhirlpool = function (req, res, io) {
+    BrewingModel = mongoose.model('brewing', Brewing);
+    return BrewingModel.findOne({ 'BrewingFinished': false }, function (err, brewing) {
         if (!err) {
-            if (brassagem) {
-                brassagem.WhirlpoolRodando = false;
-                brassagem.WhirlpoolLog += '\n' + utilRoute.getTime() + ' - whirlpool parado';
-                brassagem.save(function (err) {
+            if (brewing) {
+                brewing.WhirlpoolExecuting = false;
+                brewing.WhirlpoolLog += '\n' + utilRoute.getTime() + ' - whirlpool parado';
+                brewing.save(function (err) {
                     if (!err) {
-                        atualizaBrassagem(io);
+                        updateBrewing(io);
                         res.send();
                     }
                     else {
@@ -1260,7 +1260,7 @@ var paraWhirlpool = function (req, res, io) {
                 });
             }
             else {
-                atualizaBrassagem(io);
+                updateBrewing(io);
                 res.send();
             }
         }
@@ -1270,46 +1270,46 @@ var paraWhirlpool = function (req, res, io) {
     });
 };
 
-module.exports.BrassagemModel = BrassagemModel;
-module.exports.atualizaBrassagem = atualizaBrassagem;
-module.exports.novaBrassagem = novaBrassagem;
-module.exports.finalizaBrassagem = finalizaBrassagem;
+module.exports.BrewingModel = BrewingModel;
+module.exports.updateBrewing = updateBrewing;
+module.exports.newBrewing = newBrewing;
+module.exports.finishBrewing = finishBrewing;
 
-module.exports.encheHLT = encheHLT;
-module.exports.paraEnchimentoHLT = paraEnchimentoHLT;
-module.exports.HLTCheio = HLTCheio;
-module.exports.aqueceHLT = aqueceHLT;
-module.exports.paraAquecimentoHLT = paraAquecimentoHLT;
+module.exports.fillHLT = fillHLT;
+module.exports.stopFillHLT = stopFillHLT;
+module.exports.HLTFull = HLTFull;
+module.exports.heatHLT = heatHLT;
+module.exports.stopHeatHLT = stopHeatHLT;
 
-module.exports.encheHerms = encheHerms;
-module.exports.paraEnchimentoHerms = paraEnchimentoHerms;
-module.exports.HermsCheio = HermsCheio;
-module.exports.aqueceHerms = aqueceHerms;
-module.exports.paraAquecimentoHerms = paraAquecimentoHerms;
+module.exports.fillHerms = fillHerms;
+module.exports.stopFillHerms = stopFillHerms;
+module.exports.HermsFull = HermsFull;
+module.exports.heatHerms = heatHerms;
+module.exports.stopHeatHerms = stopHeatHerms;
 
-module.exports.encheMash = encheMash;
-module.exports.paraEnchimentoMash = paraEnchimentoMash;
-module.exports.MashCheio = MashCheio;
+module.exports.fillMLT = fillMLT;
+module.exports.stopFillMLT = stopFillMLT;
+module.exports.MLTFull = MLTFull;
 
-module.exports.encheFermentador = encheFermentador;
-module.exports.paraEnchimentoFermentador = paraEnchimentoFermentador;
-module.exports.FermentadorCheio = FermentadorCheio;
+module.exports.fillFermenter = fillFermenter;
+module.exports.stopFillFermenter = stopFillFermenter;
+module.exports.FermenterFull = FermenterFull;
 
-module.exports.encheSparge = encheSparge;
-module.exports.paraEnchimentoSparge = paraEnchimentoSparge;
-module.exports.SpargeCheio = SpargeCheio;
+module.exports.fillSparge = fillSparge;
+module.exports.stopFillSparge = stopFillSparge;
+module.exports.SpargeFull = SpargeFull;
 
-module.exports.encheBOL = encheBOL;
-module.exports.paraEnchimentoBOL = paraEnchimentoBOL;
-module.exports.BOLCheio = BOLCheio;
-module.exports.ferveBOL = ferveBOL;
-module.exports.paraFervuraBOL = paraFervuraBOL;
+module.exports.fillBOL = fillBOL;
+module.exports.stopFillBOL = stopFillBOL;
+module.exports.BOLFull = BOLFull;
+module.exports.startBOL = startBOL;
+module.exports.stopBOL = stopBOL;
 
-module.exports.iniciaRampa = iniciaRampa;
-module.exports.finalizaRampa = finalizaRampa;
+module.exports.startStep = startStep;
+module.exports.finishStep = finishStep;
 
-module.exports.rodaResfriamento = rodaResfriamento;
-module.exports.paraResfriamento = paraResfriamento;
+module.exports.startCooling = startCooling;
+module.exports.stopCooling = stopCooling;
 
-module.exports.rodaWhirlpool = rodaWhirlpool;
-module.exports.paraWhirlpool = paraWhirlpool;
+module.exports.startWhirlpool = startWhirlpool;
+module.exports.stopWhirlpool = stopWhirlpool;

@@ -1,4 +1,4 @@
-﻿//************************************************************
+﻿    //************************************************************
 
 var application_root = __dirname,
     express = require("express"),
@@ -21,7 +21,7 @@ var application_root = __dirname,
     accountRoute = require("./routes/account"),
     userRoute = require("./routes/user"),
     utilRoute = require("./routes/util");
-    brassagemRoute = require("./routes/Brassagem");
+    brewingRoute = require("./routes/Brassagem");
 
 // Config
         app.set('port', process.env.PORT || 3000);
@@ -78,51 +78,50 @@ var application_root = __dirname,
         });
 
         io.on('connection', function (socket) {
-            brassagemRoute.atualizaBrassagem(socket);
+            brewingRoute.updateBrewing(socket);
         });
 
-        app.post('/nova-brassagem', function (req, res) { brassagemRoute.novaBrassagem(req, res, io); });
-        app.post('/finalizar-brassagem', function (req, res) { brassagemRoute.finalizaBrassagem(req, res, io); });
+        app.post('/new-brewing', function (req, res) { brewingRoute.newBrewing(req, res, io); });
+        app.post('/finish-brewing', function (req, res) { brewingRoute.finishBrewing(req, res, io); });
 
-        app.post('/enchehlt', function (req, res) { brassagemRoute.encheHLT(req, res, io); });
-        app.post('/paraenchimentohlt', function (req, res) { brassagemRoute.paraEnchimentoHLT(req, res, io); });
-        app.post('/hltcheio', function (req, res) { brassagemRoute.HLTCheio(req, res, io); });
-        app.post('/aquecehlt/:temperatura', function (req, res) { brassagemRoute.aqueceHLT(req, res, io); });
-        app.post('/paraaquecimentohlt', function (req, res) { brassagemRoute.paraAquecimentoHLT(req, res, io); });
+        app.post('/fillhlt', function (req, res) { brewingRoute.fillHLT(req, res, io); });
+        app.post('/stopfillhlt', function (req, res) { brewingRoute.stopFillHLT(req, res, io); });
+        app.post('/hltfull', function (req, res) { brewingRoute.HLTFull(req, res, io); });
+        app.post('/heathlt/:temperature', function (req, res) { brewingRoute.heatHLT(req, res, io); });
+        app.post('/stopheathlt', function (req, res) { brewingRoute.stopHeatHLT(req, res, io); });
 
-        app.post('/encheherms', function (req, res) { brassagemRoute.encheHerms(req, res, io); });
-        app.post('/paraenchimentoherms', function (req, res) { brassagemRoute.paraEnchimentoHerms(req, res, io); });
-        app.post('/hermscheio', function (req, res) { brassagemRoute.HermsCheio(req, res, io); });
-        app.post('/aqueceherms/:temperatura', function (req, res) { brassagemRoute.aqueceHerms(req, res, io); });
-        app.post('/paraaquecimentoherms', function (req, res) { brassagemRoute.paraAquecimentoHerms(req, res, io); });
+        app.post('/fillherms', function (req, res) { brewingRoute.fillHerms(req, res, io); });
+        app.post('/stopfillherms', function (req, res) { brewingRoute.stopFillHerms(req, res, io); });
+        app.post('/hermsfull', function (req, res) { brewingRoute.HermsFull(req, res, io); });
+        app.post('/heatherms/:temperature', function (req, res) { brewingRoute.heatHerms(req, res, io); });
+        app.post('/stopheatherms', function (req, res) { brewingRoute.stopHeatHerms(req, res, io); });
 
-        app.post('/enchemash', function (req, res) { brassagemRoute.encheMash(req, res, io); });
-        app.post('/paraenchimentomash', function (req, res) { brassagemRoute.paraEnchimentoMash(req, res, io); });
-        app.post('/mashcheio', function (req, res) { brassagemRoute.MashCheio(req, res, io); });
+        app.post('/fillmlt', function (req, res) { brewingRoute.fillMLT(req, res, io); });
+        app.post('/stopfillmlt', function (req, res) { brewingRoute.stopFillMLT(req, res, io); });
+        app.post('/mltfull', function (req, res) { brewingRoute.MLTFull(req, res, io); });
 
-        app.post('/enchefermentador', function (req, res) { brassagemRoute.encheFermentador(req, res, io); });
-        app.post('/paraenchimentofermentador', function (req, res) { brassagemRoute.paraEnchimentoFermentador(req, res, io); });
-        app.post('/fermentadorcheio', function (req, res) { brassagemRoute.FermentadorCheio(req, res, io); });
+        app.post('/fillfermenter', function (req, res) { brewingRoute.fillFermenter(req, res, io); });
+        app.post('/stopfillfermenter', function (req, res) { brewingRoute.stopFillFermenter(req, res, io); });
+        app.post('/fermenterfull', function (req, res) { brewingRoute.FermenterFull(req, res, io); });
 
-        app.post('/enchesparge', function (req, res) { brassagemRoute.encheSparge(req, res, io); });
-        app.post('/paraenchimentosparge', function (req, res) { brassagemRoute.paraEnchimentoSparge(req, res, io); });
-        app.post('/spargecheio', function (req, res) { brassagemRoute.SpargeCheio(req, res, io); });
+        app.post('/fillsparge', function (req, res) { brewingRoute.fillSparge(req, res, io); });
+        app.post('/stopfillsparge', function (req, res) { brewingRoute.stopFillSparge(req, res, io); });
+        app.post('/spargefull', function (req, res) { brewingRoute.SpargeFull(req, res, io); });
 
-        app.post('/enchebol', function (req, res) { brassagemRoute.encheBOL(req, res, io); });
-        app.post('/paraenchimentobol', function (req, res) { brassagemRoute.paraEnchimentoBOL(req, res, io); });
-        app.post('/bolcheio', function (req, res) { brassagemRoute.BOLCheio(req, res, io); });
+        app.post('/fillbol', function (req, res) { brewingRoute.fillBOL(req, res, io); });
+        app.post('/stopfillbol', function (req, res) { brewingRoute.stopFillBOL(req, res, io); });
+        app.post('/bolfull', function (req, res) { brewingRoute.BOLFull(req, res, io); });
+        app.post('/heatbol/:temperature/:time', function (req, res) { brewingRoute.startBOL(req, res, io); });
+        app.post('/stopheatbol', function (req, res) { brewingRoute.stopBOL(req, res, io); });
 
-        app.post('/aquecewhirlpool/:minuto', function (req, res) { brassagemRoute.rodaWhirlpool(req, res, io); });
-        app.post('/paraaquecimentowhirlpool', function (req, res) { brassagemRoute.paraWhirlpool(req, res, io); });
+        app.post('/heatwhirlpool/:time', function (req, res) { brewingRoute.startWhirlpool(req, res, io); });
+        app.post('/stopheatwhirlpool', function (req, res) { brewingRoute.stopWhirlpool(req, res, io); });
 
-        app.post('/aqueceresfriar/:temperatura', function (req, res) { brassagemRoute.rodaResfriamento(req, res, io); });
-        app.post('/paraaquecimentoresfriar', function (req, res) { brassagemRoute.paraResfriamento(req, res, io); });
+        app.post('/heatcooling/:temperature', function (req, res) { brewingRoute.startCooling(req, res, io); });
+        app.post('/stopheatcooling', function (req, res) { brewingRoute.stopCooling(req, res, io); });
 
-        app.post('/aquecebol/:temperatura/:minuto', function (req, res) { brassagemRoute.ferveBOL(req, res, io); });
-        app.post('/paraaquecimentobol', function (req, res) { brassagemRoute.paraFervuraBOL(req, res, io); });
-
-        app.post('/aquecerampa/:temperatura/:minuto', function (req, res) { brassagemRoute.iniciaRampa(req, res, io); });
-        app.post('/paraaquecimentorampa', function (req, res) { brassagemRoute.finalizaRampa(req, res, io); });
+        app.post('/heatstep/:temperature/:time', function (req, res) { brewingRoute.startStep(req, res, io); });
+        app.post('/stopheatstep', function (req, res) { brewingRoute.finishStep(req, res, io); });
 
 
 // Launch server
