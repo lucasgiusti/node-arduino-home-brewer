@@ -117,7 +117,7 @@ function ExibeTelaBOL() {
         $(".bol-temperature").text("Temp. " + objBrewing.BOLHeatingTemperature + "ºC");
         $(".bol-temperature-actual").text("Actual. " + objBrewing.BOLTemperatureActual + "ºC");
 
-        $(".bol-time").text("Temp. " + objBrewing.BOLHeatingTime + "M");
+        $(".bol-time").text("Time " + objBrewing.BOLHeatingTime + "M");
         $(".bol-time-actual").text("End. " + objBrewing.BOLHeatingTimeEnd + "M");
 
 
@@ -153,7 +153,7 @@ function ExibeTelaStep() {
         $(".step-temperature").text("Temp. " + objBrewing.StepExecutingTemperature + "ºC");
         $(".step-temperature-actual").text("Actual. " + objBrewing.StepTemperatureActual + "ºC");
 
-        $(".step-time").text("Temp. " + objBrewing.StepExecutingTime + "M");
+        $(".step-time").text("Time " + objBrewing.StepExecutingTime + "M");
         $(".step-time-actual").text("End. " + objBrewing.StepExecutingTimeEnd + "M");
 
         $(".step-numero").text("Step " + objBrewing.StepExecutingNumber);
@@ -192,7 +192,7 @@ function ExibeTelaWhirlpool() {
     $(".div-whirlpool").hide();
 
     if (objBrewing.WhirlpoolExecuting) {
-        $(".whirlpool-time").text("Temp. " + objBrewing.WhirlpoolExecutingTime + "M");
+        $(".whirlpool-time").text("Time " + objBrewing.WhirlpoolExecutingTime + "M");
         $(".whirlpool-time-actual").text("End. " + objBrewing.WhirlpoolExecutingTimeEnd + "M");
 
         $(".div-whirlpool-heating").show();
