@@ -1,12 +1,21 @@
 ﻿var socket = io();
 var objBrewing = null;
-var telaExibida = 'div-principal';
+var divVisible = 'div-default';
 
-function ExibeTelaHLT() {
-    if (telaExibida == "div-hlt-heat" || telaExibida == "div-hlt-alterar-temperature") {
-        return;
-    }
+function signin() {
+    window.location.assign("signin.html");
+}
 
+$.get("loggedtest", function (data) { })
+        .fail(function (error, message) {
+            var erro = $.parseJSON(error.responseText).status;
+                if (erro == 401) {
+                    signin();
+                }
+        });
+
+
+function DisplayPageHLT() {
     $(".div-hlt").hide();
 
     if (objBrewing.HLTHeating) {
@@ -14,27 +23,23 @@ function ExibeTelaHLT() {
         $(".hlt-temperature-actual").text("Actual. " + objBrewing.HLTTemperatureActual + "ºC");
 
         $(".div-hlt-heating").show();
-        telaExibida = 'div-hlt-heating';
+        divVisible = 'div-hlt-heating';
     }
     else if (objBrewing.HLTFilling) {
         $(".div-hlt-filling").show();
-        telaExibida = 'div-hlt-filling';
+        divVisible = 'div-hlt-filling';
     }
     else if (objBrewing.HLTFull) {
         $(".div-hlt-full").show();
-        telaExibida = 'div-hlt-full';
+        divVisible = 'div-hlt-full';
     }
     else {
         $(".div-hlt-empty").show();
-        telaExibida = 'div-hlt-empty';
+        divVisible = 'div-hlt-empty';
     }
 }
 
-function ExibeTelaHerms() {
-    if (telaExibida == "div-herms-heat" || telaExibida == "div-herms-alterar-temperature") {
-        return;
-    }
-
+function DisplayPageHerms() {
     $(".div-herms").hide();
 
     if (objBrewing.HermsHeating) {
@@ -42,75 +47,75 @@ function ExibeTelaHerms() {
         $(".herms-temperature-actual").text("Actual. " + objBrewing.HermsTemperatureActual + "ºC");
 
         $(".div-herms-heating").show();
-        telaExibida = 'div-herms-heating';
+        divVisible = 'div-herms-heating';
     }
     else if (objBrewing.HermsFilling) {
         $(".div-herms-filling").show();
-        telaExibida = 'div-herms-filling';
+        divVisible = 'div-herms-filling';
     }
     else if (objBrewing.HermsFull) {
         $(".div-herms-full").show();
-        telaExibida = 'div-herms-full';
+        divVisible = 'div-herms-full';
     }
     else {
         $(".div-herms-empty").show();
-        telaExibida = 'div-herms-empty';
+        divVisible = 'div-herms-empty';
     }
 
 }
 
-function ExibeTelaMLT() {
+function DisplayPageMLT() {
     $(".div-mlt").hide();
 
     if (objBrewing.MLTFilling) {
         $(".div-mlt-filling").show();
-        telaExibida = 'div-mlt-filling';
+        divVisible = 'div-mlt-filling';
     }
     else if (objBrewing.MLTFull) {
         $(".div-mlt-full").show();
-        telaExibida = 'div-mlt-full';
+        divVisible = 'div-mlt-full';
     }
     else {
         $(".div-mlt-empty").show();
-        telaExibida = 'div-mlt-empty';
+        divVisible = 'div-mlt-empty';
     }
 }
 
-function ExibeTelaFermenter() {
+function DisplayPageFermenter() {
     $(".div-fermenter").hide();
 
     if (objBrewing.FermenterFilling) {
         $(".div-fermenter-filling").show();
-        telaExibida = 'div-fermenter-filling';
+        divVisible = 'div-fermenter-filling';
     }
     else if (objBrewing.FermenterFull) {
         $(".div-fermenter-full").show();
-        telaExibida = 'div-fermenter-full';
+        divVisible = 'div-fermenter-full';
     }
     else {
         $(".div-fermenter-empty").show();
-        telaExibida = 'div-fermenter-empty';
+        divVisible = 'div-fermenter-empty';
     }
 }
 
-function ExibeTelaSparge() {
+function DisplayPageSparge() {
     $(".div-sparge").hide();
 
     if (objBrewing.SpargeExecuting) {
         $(".div-sparge-filling").show();
-        telaExibida = 'div-sparge-filling';
+        divVisible = 'div-sparge-filling';
     }
     else if (objBrewing.SpargeFinalizado) {
         $(".div-sparge-full").show();
-        telaExibida = 'div-sparge-full';
+        divVisible = 'div-sparge-full';
     }
     else {
         $(".div-sparge-empty").show();
-        telaExibida = 'div-sparge-empty';
+        divVisible = 'div-sparge-empty';
     }
 }
 
-function ExibeTelaBOL() {
+function DisplayPageBOL() {
     $(".div-bol").hide();
 
     if (objBrewing.BOLHeating) {
@@ -122,31 +127,27 @@ function ExibeTelaBOL() {
 
 
         $(".div-bol-heating").show();
-        telaExibida = 'div-bol-heating';
+        divVisible = 'div-bol-heating';
     }
     else if (objBrewing.BOLFilling) {
         $(".div-bol-filling").show();
-        telaExibida = 'div-bol-filling';
+        divVisible = 'div-bol-filling';
     }
     else if (objBrewing.HeatFinished) {
         $(".div-bol-full").show();
-        telaExibida = 'div-bol-full';
+        divVisible = 'div-bol-full';
     }
     else if (objBrewing.BOLFull) {
         $(".div-bol-full").show();
-        telaExibida = 'div-bol-full';
+        divVisible = 'div-bol-full';
     }
     else {
         $(".div-bol-empty").show();
-        telaExibida = 'div-bol-empty';
+        divVisible = 'div-bol-empty';
     }
 }
 
-function ExibeTelaStep() {
-    if (telaExibida == "div-step-heat" || telaExibida == "div-step-alterar-temperature") {
-        return;
-    }
-
+function DisplayPageStep() {
     $(".div-step").hide();
 
     if (objBrewing.StepExecuting) {
@@ -156,23 +157,23 @@ function ExibeTelaStep() {
         $(".step-time").text("Time " + objBrewing.StepExecutingTime + "M");
         $(".step-time-actual").text("End. " + objBrewing.StepExecutingTimeEnd + "M");
 
-        $(".step-numero").text("Step " + objBrewing.StepExecutingNumber);
+        $(".step-number").text("Step " + objBrewing.StepExecutingNumber);
 
 
         $(".div-step-heating").show();
-        telaExibida = 'div-step-heating';
+        divVisible = 'div-step-heating';
     }
     else if (objBrewing.StepFinished) {
         $(".div-step-full").show();
-        telaExibida = 'div-step-full';
+        divVisible = 'div-step-full';
     }
     else {
         $(".div-step-empty").show();
-        telaExibida = 'div-step-empty';
+        divVisible = 'div-step-empty';
     }
 }
 
-function ExibeTelaCooling() {
+function DisplayPageCooling() {
     $(".div-cooling").hide();
 
     if (objBrewing.CoolingExecuting) {
@@ -180,15 +181,15 @@ function ExibeTelaCooling() {
         $(".cooling-temperature-actual").text("Actual. " + objBrewing.CoolingTemperatureActual + "ºC");
 
         $(".div-cooling-heating").show();
-        telaExibida = 'div-cooling-heating';
+        divVisible = 'div-cooling-heating';
     }
     else {
         $(".div-cooling-empty").show();
-        telaExibida = 'div-cooling-empty';
+        divVisible = 'div-cooling-empty';
     }
 }
 
-function ExibeTelaWhirlpool() {
+function DisplayPageWhirlpool() {
     $(".div-whirlpool").hide();
 
     if (objBrewing.WhirlpoolExecuting) {
@@ -196,70 +197,73 @@ function ExibeTelaWhirlpool() {
         $(".whirlpool-time-actual").text("End. " + objBrewing.WhirlpoolExecutingTimeEnd + "M");
 
         $(".div-whirlpool-heating").show();
-        telaExibida = 'div-whirlpool-heating';
+        divVisible = 'div-whirlpool-heating';
     }
     else {
         $(".div-whirlpool-empty").show();
-        telaExibida = 'div-whirlpool-empty';
+        divVisible = 'div-whirlpool-empty';
     }
 }
 
-function VerificaTelaExibir(telas) {
+function CheckPageDisplay(pages) {
     if (!objBrewing) {
-        telaExibida = 'div-principal';
-        telas = telaExibida.split('-')[1];
+        divVisible = 'div-default';
+        pages = divVisible.split('-')[1];
     }
-    else if (objBrewing && telaExibida == 'div-principal') {
-        telaExibida = 'div-brewing';
-        telas = telaExibida.split('-')[1];
+    else if (objBrewing && divVisible == 'div-default') {
+        divVisible = 'div-brewing';
+        pages = divVisible.split('-')[1];
     }
 
-    if (telas == 'principal') {
-        $(".div-tela").hide();
-        $('.div-principal').show();
+    if (pages == 'default') {
+        $(".div-page").hide();
+        $('.div-default').show();
     }
-    else if (telas == 'brewing') {
-        $('.div-principal').hide();
+    else if (pages == 'brewing') {
+        $('.div-default').hide();
         $('.div-brewing').show();
     }
-    else if (telas == 'hlt') {
-        ExibeTelaHLT();
+    else if (pages == 'hlt') {
+        DisplayPageHLT();
     }
-    else if (telas == 'herms') {
-        ExibeTelaHerms();
+    else if (pages == 'herms') {
+        DisplayPageHerms();
     }
-    else if (telas == 'mlt') {
-        ExibeTelaMLT();
+    else if (pages == 'mlt') {
+        DisplayPageMLT();
     }
-    else if (telas == 'fermenter') {
-        ExibeTelaFermenter();
+    else if (pages == 'fermenter') {
+        DisplayPageFermenter();
     }
-    else if (telas == 'sparge') {
-        ExibeTelaSparge();
+    else if (pages == 'sparge') {
+        DisplayPageSparge();
     }
-    else if (telas == 'bol') {
-        ExibeTelaBOL();
+    else if (pages == 'bol') {
+        DisplayPageBOL();
     }
-    else if (telas == 'step') {
-        ExibeTelaStep();
+    else if (pages == 'step') {
+        DisplayPageStep();
     }
-    else if (telas == 'cooling') {
-        ExibeTelaCooling();
+    else if (pages == 'cooling') {
+        DisplayPageCooling();
     }
-    else if (telas == 'whirlpool') {
-        ExibeTelaWhirlpool();
+    else if (pages == 'whirlpool') {
+        DisplayPageWhirlpool();
     }
 }
 
-function defineLayout() {
-    $(".btn-medio").css("width", "48%");
-    $(".diminuir").css("width", "24%");
-    $(".aumentar").css("width", "24%");
+function startLayout() {
+    $(".div-page").hide();
+    $('.container').removeAttr('style');
+    $(".btn-middle").css("width", "48%");
+    $(".down").css("width", "24%");
+    $(".up").css("width", "24%");
     $(".txt-value").css("width", "45%");
-    $(".new-brewing").css("height", "250px");
+    $(".new-brewing").css("height", "196px");
 
-    $(".btn-medio").css("margin-bottom", "5px");
-    $(".btn-grande").css("margin-bottom", "5px");
+    $(".btn-middle").css("margin-bottom", "5px");
+    $(".btn-middle").css("margin-left", "3px");
+    $(".btn-large").css("margin-bottom", "5px");
     $(".btn-com-info").css("margin-right", "1px");
     $(".back-1-button").css("margin-top", "156px");
     $(".back-1-button-2-info").css("margin-top", "106px");
@@ -277,13 +281,13 @@ function defineLayout() {
     $(".log-3-buttons").css("margin-top", "78px");
     $(".log-3-buttons-1-info").css("margin-top", "40px");
     $(".log-5-buttons").css("margin-top", "0px");
-    $(".diminuir").css("float", "left");
-    $(".aumentar").css("margin-right", "5px");
-    $(".aumentar").css("margin-bottom", "5px");
+    $(".down").css("float", "left");
+    $(".up").css("margin-right", "5px");
+    $(".up").css("margin-bottom", "5px");
     $(".txt-value").css("float", "left");
-    $(".txt-value").css("margin-left", "8px");
-    $(".txt-value").css("margin-right", "8px");
-    $(".lbl-titulo").css("text-align", "center");
+    $(".txt-value").css("margin-left", "6px");
+    $(".txt-value").css("margin-right", "6px");
+    $(".form-signin-heading").css("text-align", "center");
     $(".temperature").css("margin-right", "20px");
     $(".time").css("margin-right", "20px");
     $(".about").css("margin-top", "30px");
@@ -292,15 +296,22 @@ function defineLayout() {
 socket.on('updateBrewing', function (brewing) {
     objBrewing = brewing;
 
-    var telas = telaExibida.split('-')[1];
-    VerificaTelaExibir(telas);
+    var pages = divVisible.split('-')[1];
+    CheckPageDisplay(pages);
 });
 
 $(".new-brewing").click(function () {
     $.post("new-brewing", function (data) { })
         .fail(function (error) {
-            sweetAlert("", "Erro ao criar new brewing\n" + $.parseJSON(error.responseText).error, "error");
-            telaExibida = 'div-brewing';
+            sweetAlert("", "Error\n" + $.parseJSON(error.responseText).error, "error");
+            divVisible = 'div-brewing';
+        });
+});
+
+$(".logout").click(function () {
+$.post("logout", function (data) { signin(); })
+        .fail(function (error, message) {
+            signin();
         });
 });
 
@@ -318,111 +329,111 @@ $(".finish-brewing").click(function () {
 function () {
     $.post("finish-brewing", function (data) { })
         .fail(function (error) {
-            sweetAlert("", "Erro ao finished brewing\n" + $.parseJSON(error.responseText).error, "error");
-            telaExibida = 'div-brewing';
+            sweetAlert("", "Error\n" + $.parseJSON(error.responseText).error, "error");
+            divVisible = 'div-brewing';
         });
 });
 });
 
 $(".back").click(function () {
     var classes = $(this).parent().attr("class").split(" ");
-    var telas = classes[classes.length - 1].split("-")[1];
-    $(".div-" + telas).hide();
+    var pages = classes[classes.length - 1].split("-")[1];
+    $(".div-" + pages).hide();
 
-    telaExibida = 'div-brewing';
+    divVisible = 'div-brewing';
     $(".div-brewing").show();
 });
 
 $(".item").click(function () {
     var classes = $(this).attr("class").split(" ");
-    var telas = classes[classes.length - 1];
+    var pages = classes[classes.length - 1];
     $(".div-brewing").hide();
 
-    VerificaTelaExibir(telas);
+    CheckPageDisplay(pages);
 });
 
 $(".fill").click(function () {
     var classes = $(this).parent().attr("class").split(" ");
-    var tela = classes[classes.length - 1].split("-")[1];
+    var page = classes[classes.length - 1].split("-")[1];
     
-    telaExibida = 'div-' + tela + '-filling';
+    divVisible = 'div-' + page + '-filling';
 
-    $.post("fill" + tela, function (data) { })
+    $.post("fill" + page, function (data) { })
         .fail(function (error) {
-            sweetAlert("", "Erro ao fill " + tela + "\n" + $.parseJSON(error.responseText).error, "error");
-            telaExibida = 'div-brewing';
+            sweetAlert("", "Error\n" + $.parseJSON(error.responseText).error, "error");
+            divVisible = 'div-brewing';
         });
 });
 
 $(".stop-fill").click(function () {
     var classes = $(this).parent().attr("class").split(" ");
-    var tela = classes[classes.length - 1].split("-")[1];
-    telaExibida = 'div-' + tela + '-full';
-    $.post("stopfill" + tela, function (data) { })
+    var page = classes[classes.length - 1].split("-")[1];
+    divVisible = 'div-' + page + '-full';
+    $.post("stopfill" + page, function (data) { })
         .fail(function (error) {
-            sweetAlert("", "Erro ao stop enchimento " + tela + "\n" + $.parseJSON(error.responseText).error, "error");
-            telaExibida = 'div-brewing';
+            sweetAlert("", "Error\n" + $.parseJSON(error.responseText).error, "error");
+            divVisible = 'div-brewing';
         });
 });
 
-$(".heat").click(function () {
+$(".start").click(function () {
     var classes = $(this).parent().attr("class").split(" ");
     $("." + classes[1]).hide();
     $("." + classes[1] + "-heat").show();
 });
 
-$(".stop-heat").click(function () {
+$(".stop").click(function () {
     var classes = $(this).parent().attr("class").split(" ");
-    var tela = classes[classes.length - 1].split("-")[1];
-    telaExibida = 'div-' + tela + '-full';
+    var page = classes[classes.length - 1].split("-")[1];
+    divVisible = 'div-' + page + '-full';
 
-    $.post("stopheat" + tela, function (data) { })
+    $.post("stop" + page, function (data) { })
         .fail(function (error) {
-            sweetAlert("", "Erro ao stop heat " + tela + "\n" + $.parseJSON(error.responseText).error, "error");
-            telaExibida = 'div-brewing';
+            sweetAlert("", "Error\n" + $.parseJSON(error.responseText).error, "error");
+            divVisible = 'div-brewing';
         });
 });
 
-$(".temperature-heat").click(function () {
+$(".temperature-start").click(function () {
     var classes = $(this).parent().attr("class").split(" ");
-    var tela = classes[classes.length - 1].split("-")[1];
-    var value = parseInt($(".temperature-" + tela).val());
+    var page = classes[classes.length - 1].split("-")[1];
+    var value = parseInt($(".temperature-" + page).val());
     
-    telaExibida = 'div-' + tela + '-heating';
+    divVisible = 'div-' + page + '-heating';
     
-    $.post("heat" + tela + "/" + value, function (data) { })
+    $.post("start" + page + "/" + value, function (data) { })
         .fail(function (error) {
-            sweetAlert("", "Erro ao heat " + tela + "\n" + $.parseJSON(error.responseText).error, "error");
-            telaExibida = 'div-brewing';
+            sweetAlert("", "Error\n" + $.parseJSON(error.responseText).error, "error");
+            divVisible = 'div-brewing';
         });
 });
 
-$(".time-heat").click(function () {
+$(".time-start").click(function () {
     var classes = $(this).parent().attr("class").split(" ");
-    var tela = classes[classes.length - 1].split("-")[1];
-    var value = parseInt($(".time-" + tela).val());
+    var page = classes[classes.length - 1].split("-")[1];
+    var value = parseInt($(".time-" + page).val());
 
-    telaExibida = 'div-' + tela + '-heating';
+    divVisible = 'div-' + page + '-heating';
 
-    $.post("heat" + tela + "/" + value, function (data) { })
+    $.post("start" + page + "/" + value, function (data) { })
         .fail(function (error) {
-            sweetAlert("", "Erro ao heat " + tela + "\n" + $.parseJSON(error.responseText).error, "error");
-            telaExibida = 'div-brewing';
+            sweetAlert("", "Error\n" + $.parseJSON(error.responseText).error, "error");
+            divVisible = 'div-brewing';
         });
 });
 
-$(".temperature-time-heat").click(function () {
+$(".temperature-time-start").click(function () {
     var classes = $(this).parent().attr("class").split(" ");
-    var tela = classes[classes.length - 1].split("-")[1];
-    var valueTemperature = parseInt($(".temperature-" + tela).val());
-    var valueTime = parseInt($(".time-" + tela).val());
+    var page = classes[classes.length - 1].split("-")[1];
+    var valueTemperature = parseInt($(".temperature-" + page).val());
+    var valueTime = parseInt($(".time-" + page).val());
 
-    telaExibida = 'div-' + tela + '-heating';
+    divVisible = 'div-' + page + '-heating';
 
-    $.post("heat" + tela + "/" + valueTemperature + "/" + valueTime, function (data) { })
+    $.post("start" + page + "/" + valueTemperature + "/" + valueTime, function (data) { })
         .fail(function (error) {
-            sweetAlert("", "Erro ao heat " + tela + "\n" + $.parseJSON(error.responseText).error, "error");
-            telaExibida = 'div-brewing';
+            sweetAlert("", "Error\n" + $.parseJSON(error.responseText).error, "error");
+            divVisible = 'div-brewing';
         });
 });
 
@@ -430,61 +441,61 @@ $(".log").click(function () {
     var classes = $(this).parent().attr("class").split(" ");
     var item = classes[1].replace("div-", "");
 
-    var texto = "";
+    var text = "";
     switch (item) {
         case "bol":
-            texto = objBrewing.BOLLog;
+            text = objBrewing.BOLLog;
             break;
         case "step":
-            texto = objBrewing.StepLog;
+            text = objBrewing.StepLog;
             break;
         case "hlt":
-            texto = objBrewing.HLTLog;
+            text = objBrewing.HLTLog;
             break;
         case "herms":
-            texto = objBrewing.HermsLog;
+            text = objBrewing.HermsLog;
             break;
         case "cooling":
-            texto = objBrewing.CoolingLog;
+            text = objBrewing.CoolingLog;
             break;
         case "mlt":
-            texto = objBrewing.MLTLog;
+            text = objBrewing.MLTLog;
             break;
         case "sparge":
-            texto = objBrewing.SpargeLog;
+            text = objBrewing.SpargeLog;
             break;
         case "whirlpool":
-            texto = objBrewing.WhirlpoolLog;
+            text = objBrewing.WhirlpoolLog;
             break;
         case "fermenter":
-            texto = objBrewing.FermenterLog;
+            text = objBrewing.FermenterLog;
             break;
     }
 
-    swal({ title: "", text: texto, confirmButtonColor: '#428bca' });
+    swal({ title: "", text: text, confirmButtonColor: '#428bca' });
 });
 
 $(".about").click(function(){
-swal({ title: "", text: "Node Arduino Home Brewer\nfor Herms System\n\nVersão 1.0.0", confirmButtonColor: '#428bca' });    
+swal({ title: "", text: "Node Arduino Home Brewer\nfor Herms System\n\nVersion 1.0.0", confirmButtonColor: '#428bca' });    
 });
 
 
 $(".full").click(function () {
     var classes = $(this).parent().attr("class").split(" ");
-    var tela = classes[classes.length - 1].split("-")[1];
-    telaExibida = 'div-' + tela + '-full';
+    var page = classes[classes.length - 1].split("-")[1];
+    divVisible = 'div-' + page + '-full';
 
-    $.post(tela + "full", function (data) { })
+    $.post(page + "full", function (data) { })
         .fail(function (error) {
-            sweetAlert("", "Erro ao marcar " + tela + "como full\n" + $.parseJSON(error.responseText).error, "error");
-            telaExibida = 'div-brewing';
+            sweetAlert("", "Error\n" + $.parseJSON(error.responseText).error, "error");
+            divVisible = 'div-brewing';
         });
 });
 
-$(".aumentar").click(function () {
-    var objValor = $(this).prev();
-    var classes = $(objValor).attr("class").split(" ");
-    var value = parseInt($(objValor).val()) + 1;
+$(".up").click(function () {
+    var objValue = $(this).prev();
+    var classes = $(objValue).attr("class").split(" ");
+    var value = parseInt($(objValue).val()) + 1;
     if (value < 0)
         value = 0;
 
@@ -493,10 +504,10 @@ $(".aumentar").click(function () {
     })
 });
 
-$(".diminuir").click(function () {
-    var objValor = $(this).next();
-    var classes = $(objValor).attr("class").split(" ");
-    var value = parseInt($(objValor).val()) - 1;
+$(".down").click(function () {
+    var objValue = $(this).next();
+    var classes = $(objValue).attr("class").split(" ");
+    var value = parseInt($(objValue).val()) - 1;
     if (value < 0)
         value = 0;
 
@@ -505,24 +516,22 @@ $(".diminuir").click(function () {
     })
 });
 
-$(".alterar-time").click(function () {
+$(".change-time").click(function () {
     var classes = $(this).parent().attr("class").split(" ");
-    var tela = classes[1];
+    var page = classes[1];
 
-    telaExibida = tela + "-alterar-time";
+    divVisible = page + "-change-time";
 
-    $("." + tela).hide();
-    $("." + tela + "-alterar-time").show();
+    $("." + page).hide();
+    $("." + page + "-change-time").show();
 });
 
-$(".alterar-temperature").click(function () {
+$(".change-temperature").click(function () {
     var classes = $(this).parent().attr("class").split(" ");
-    var tela = classes[1];
+    var page = classes[1];
 
-    telaExibida = tela + "-alterar-temperature";
+    divVisible = page + "-change-temperature";
 
-    $("." + tela).hide();
-    $("." + tela + "-alterar-temperature").show();
+    $("." + page).hide();
+    $("." + page + "-change-temperature").show();
 });
-
-defineLayout();

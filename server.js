@@ -27,7 +27,7 @@ var application_root = __dirname,
         app.set('port', process.env.PORT || 3000);
         app.use(bodyParser.urlencoded({ extended: false }));
         app.use(bodyParser.json());
-        app.use(session({ secret: 'nodeclinicakey', resave: true, saveUninitialized: true }));
+        app.use(session({ secret: 'nodehomebrewerkey', resave: true, saveUninitialized: true }));
         app.use(express.static(path.join(__dirname, 'public')));
         app.use(cookieParser());
         app.use(function (req, res, next) {
@@ -64,64 +64,57 @@ var application_root = __dirname,
 
         //************************************************************
         // ACCOUNT
-        app.get('/account/:username', auth, accountRoute.findByUserName);
-        app.put('/account/:id', auth, accountRoute.putAccount);
         app.get('/loggedtest', accountRoute.loggedtest);
         app.post('/login', accountRoute.login);
-        app.get('/logout', accountRoute.logout);
+        app.post('/logout', accountRoute.logout);
 
 
-
-
-        app.get('/', function (req, res) {
-            res.sendfile('index.html');
-        });
 
         io.on('connection', function (socket) {
             brewingRoute.updateBrewing(socket);
         });
 
-        app.post('/new-brewing', function (req, res) { brewingRoute.newBrewing(req, res, io); });
-        app.post('/finish-brewing', function (req, res) { brewingRoute.finishBrewing(req, res, io); });
+        app.post('/new-brewing', auth, function (req, res) { brewingRoute.newBrewing(req, res, io); });
+        app.post('/finish-brewing', auth, function (req, res) { brewingRoute.finishBrewing(req, res, io); });
 
-        app.post('/fillhlt', function (req, res) { brewingRoute.fillHLT(req, res, io); });
-        app.post('/stopfillhlt', function (req, res) { brewingRoute.stopFillHLT(req, res, io); });
-        app.post('/hltfull', function (req, res) { brewingRoute.HLTFull(req, res, io); });
-        app.post('/heathlt/:temperature', function (req, res) { brewingRoute.heatHLT(req, res, io); });
-        app.post('/stopheathlt', function (req, res) { brewingRoute.stopHeatHLT(req, res, io); });
+        app.post('/fillhlt', auth, function (req, res) { brewingRoute.fillHLT(req, res, io); });
+        app.post('/stopfillhlt', auth, function (req, res) { brewingRoute.stopFillHLT(req, res, io); });
+        app.post('/hltfull', auth, function (req, res) { brewingRoute.HLTFull(req, res, io); });
+        app.post('/starthlt/:temperature', auth, function (req, res) { brewingRoute.startHLT(req, res, io); });
+        app.post('/stophlt', auth, function (req, res) { brewingRoute.stopHLT(req, res, io); });
 
-        app.post('/fillherms', function (req, res) { brewingRoute.fillHerms(req, res, io); });
-        app.post('/stopfillherms', function (req, res) { brewingRoute.stopFillHerms(req, res, io); });
-        app.post('/hermsfull', function (req, res) { brewingRoute.HermsFull(req, res, io); });
-        app.post('/heatherms/:temperature', function (req, res) { brewingRoute.heatHerms(req, res, io); });
-        app.post('/stopheatherms', function (req, res) { brewingRoute.stopHeatHerms(req, res, io); });
+        app.post('/fillherms', auth, function (req, res) { brewingRoute.fillHerms(req, res, io); });
+        app.post('/stopfillherms', auth, function (req, res) { brewingRoute.stopFillHerms(req, res, io); });
+        app.post('/hermsfull', auth, function (req, res) { brewingRoute.HermsFull(req, res, io); });
+        app.post('/startherms/:temperature', auth, function (req, res) { brewingRoute.startHerms(req, res, io); });
+        app.post('/stopherms', auth, function (req, res) { brewingRoute.stopHerms(req, res, io); });
 
-        app.post('/fillmlt', function (req, res) { brewingRoute.fillMLT(req, res, io); });
-        app.post('/stopfillmlt', function (req, res) { brewingRoute.stopFillMLT(req, res, io); });
-        app.post('/mltfull', function (req, res) { brewingRoute.MLTFull(req, res, io); });
+        app.post('/fillmlt', auth, function (req, res) { brewingRoute.fillMLT(req, res, io); });
+        app.post('/stopfillmlt', auth, function (req, res) { brewingRoute.stopFillMLT(req, res, io); });
+        app.post('/mltfull', auth, function (req, res) { brewingRoute.MLTFull(req, res, io); });
 
-        app.post('/fillfermenter', function (req, res) { brewingRoute.fillFermenter(req, res, io); });
-        app.post('/stopfillfermenter', function (req, res) { brewingRoute.stopFillFermenter(req, res, io); });
-        app.post('/fermenterfull', function (req, res) { brewingRoute.FermenterFull(req, res, io); });
+        app.post('/fillfermenter', auth, function (req, res) { brewingRoute.fillFermenter(req, res, io); });
+        app.post('/stopfillfermenter', auth, function (req, res) { brewingRoute.stopFillFermenter(req, res, io); });
+        app.post('/fermenterfull', auth, function (req, res) { brewingRoute.FermenterFull(req, res, io); });
 
-        app.post('/fillsparge', function (req, res) { brewingRoute.fillSparge(req, res, io); });
-        app.post('/stopfillsparge', function (req, res) { brewingRoute.stopFillSparge(req, res, io); });
-        app.post('/spargefull', function (req, res) { brewingRoute.SpargeFull(req, res, io); });
+        app.post('/fillsparge', auth, function (req, res) { brewingRoute.fillSparge(req, res, io); });
+        app.post('/stopfillsparge', auth, function (req, res) { brewingRoute.stopFillSparge(req, res, io); });
+        app.post('/spargefull', auth, function (req, res) { brewingRoute.SpargeFull(req, res, io); });
 
-        app.post('/fillbol', function (req, res) { brewingRoute.fillBOL(req, res, io); });
-        app.post('/stopfillbol', function (req, res) { brewingRoute.stopFillBOL(req, res, io); });
-        app.post('/bolfull', function (req, res) { brewingRoute.BOLFull(req, res, io); });
-        app.post('/heatbol/:temperature/:time', function (req, res) { brewingRoute.startBOL(req, res, io); });
-        app.post('/stopheatbol', function (req, res) { brewingRoute.stopBOL(req, res, io); });
+        app.post('/fillbol', auth, function (req, res) { brewingRoute.fillBOL(req, res, io); });
+        app.post('/stopfillbol', auth, function (req, res) { brewingRoute.stopFillBOL(req, res, io); });
+        app.post('/bolfull', auth, function (req, res) { brewingRoute.BOLFull(req, res, io); });
+        app.post('/startbol/:temperature/:time', auth, function (req, res) { brewingRoute.startBOL(req, res, io); });
+        app.post('/stopbol', auth, function (req, res) { brewingRoute.stopBOL(req, res, io); });
 
-        app.post('/heatwhirlpool/:time', function (req, res) { brewingRoute.startWhirlpool(req, res, io); });
-        app.post('/stopheatwhirlpool', function (req, res) { brewingRoute.stopWhirlpool(req, res, io); });
+        app.post('/startwhirlpool/:time', auth, function (req, res) { brewingRoute.startWhirlpool(req, res, io); });
+        app.post('/stopwhirlpool', auth, function (req, res) { brewingRoute.stopWhirlpool(req, res, io); });
 
-        app.post('/heatcooling/:temperature', function (req, res) { brewingRoute.startCooling(req, res, io); });
-        app.post('/stopheatcooling', function (req, res) { brewingRoute.stopCooling(req, res, io); });
+        app.post('/startcooling/:temperature', auth, function (req, res) { brewingRoute.startCooling(req, res, io); });
+        app.post('/stopcooling', auth, function (req, res) { brewingRoute.stopCooling(req, res, io); });
 
-        app.post('/heatstep/:temperature/:time', function (req, res) { brewingRoute.startStep(req, res, io); });
-        app.post('/stopheatstep', function (req, res) { brewingRoute.finishStep(req, res, io); });
+        app.post('/startstep/:temperature/:time', auth, function (req, res) { brewingRoute.startStep(req, res, io); });
+        app.post('/stopstep', auth, function (req, res) { brewingRoute.finishStep(req, res, io); });
 
 
 // Launch server

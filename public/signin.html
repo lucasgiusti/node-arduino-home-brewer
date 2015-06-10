@@ -7,24 +7,36 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Node RestFull CRUD</title>
+    <title>Home Brewer</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="css/signin.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
 
   </head>
 
   <body>
     <div class="container">
-
-      <form class="form-signin">
-        <h2 class="form-signin-heading">Arduino Home Brewer</h2>
-        <button type="button" class="btn btn-lg btn-primary btn-block btn-grande nova-brassagem">Nova Brassagem</button>
+    <div class="jumbotron">
+      <form class="form-signin" action="/login" method="post">
+        <h2 class="form-signin-heading" style="text-align: center">Home Brewer</h2>
+        <input type="text" name="username" class="form-control" placeholder="Login" maxlength="100" required autofocus>
+        <input type="password" name="password" class="form-control" placeholder="Password" maxlength="20" required>
+        <label class="checkbox" style="margin-left: 20px">
+          <input type="checkbox" name="rememberme" value="1"> Remember me
+        </label>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        </br>
+        <div id="alert" class="alert alert-warning" style="display: none; text-align: center">
+            <b>Invalid Login!</b>
+        </div>
       </form>
-
+      <footer class="footer">
+        <label class="pull-right" style="font-size: 10px">Node Arduino Home Brewer - 1.0.0</label>
+      </footer>
+    </div>
     </div> <!-- /container -->
 
 
@@ -33,3 +45,13 @@
     <!-- Placed at the end of the document so the pages load faster -->
   </body>
 </html>
+
+<script type="text/javascript">
+    var query = window.location.search.substring(1);
+    var retorno = query.split("&");
+    if (retorno == 'return=false') {
+        document.getElementById('alert').style.display = '';
+    }
+    else
+        document.getElementById('alert').style.display = 'none';
+</script>

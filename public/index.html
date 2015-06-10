@@ -17,349 +17,350 @@
   </head>
 
   <body>
-    <div class="container">
+    <div class="container" style="visibility: hidden">
     <div class="jumbotron">
 
-        <!-- PRINCIPAL -->
+        <!-- DEFAULT -->
       <form class="form-signin">
 
-        <div class="div-tela div-principal">
+        <div class="div-page div-default">
             <h2 class="form-signin-heading">Home Brewer</h2>
-            <button type="button" class="btn btn-lg btn-danger btn-block btn-grande new-brewing">New Brewing</button>
+            <button type="button" class="btn btn-lg btn-danger btn-block btn-large new-brewing">New Brewing</button>
             <button type="button" class="btn btn-lg btn-block btn-info about">About</button>
+            <button type="button" class="btn btn-lg btn-danger btn-block btn-info logout">Logout</button>
         </div>
 
         <!-- BREWING -->
-        <div class="div-tela div-brewing">
+        <div class="div-page div-brewing">
             <h2 class="form-signin-heading">Brewing</h2>
-                    <button type="button" class="btn btn-lg btn-primary btn-medio item hlt">HLT</button>
-                    <button type="button" class="btn btn-lg btn-primary btn-medio item herms">Herms</button><br />
-                    <button type="button" class="btn btn-lg btn-primary btn-medio item mlt">MLT</button>
-                    <button type="button" class="btn btn-lg btn-primary btn-medio item step">Step</button><br />
-                    <button type="button" class="btn btn-lg btn-primary btn-medio item bol">BOL</button>
-                    <button type="button" class="btn btn-lg btn-primary btn-medio item sparge">Sparge</button><br />
-                    <button type="button" class="btn btn-lg btn-primary btn-medio item cooling">Cooling</button>
-                    <button type="button" class="btn btn-lg btn-primary btn-medio item whirlpool">Whirlpool</button><br />
+                    <button type="button" class="btn btn-lg btn-primary btn-middle item hlt">HLT</button>
+                    <button type="button" class="btn btn-lg btn-primary btn-middle item herms">Herms</button><br />
+                    <button type="button" class="btn btn-lg btn-primary btn-middle item mlt">MLT</button>
+                    <button type="button" class="btn btn-lg btn-primary btn-middle item step">Step</button><br />
+                    <button type="button" class="btn btn-lg btn-primary btn-middle item bol">BOL</button>
+                    <button type="button" class="btn btn-lg btn-primary btn-middle item sparge">Sparge</button><br />
+                    <button type="button" class="btn btn-lg btn-primary btn-middle item cooling">Cooling</button>
+                    <button type="button" class="btn btn-lg btn-primary btn-middle item whirlpool">Whirlpool</button><br />
                     <button type="button" class="btn btn-lg btn-primary btn-block item fermenter">Fermenter</button><br />
                     <button type="button" class="btn btn-lg btn-danger btn-block finish-brewing back-5-buttons">Finish Brewing</button>
         </div>
 
         <!-- HLT -->
-        <div class="div-tela div-hlt div-hlt-empty">
+        <div class="div-page div-hlt div-hlt-empty">
             <h2 class="form-signin-heading">HLT</h2>
-            <button type="button" class="btn btn-lg btn-primary btn-block btn-grande fill">Fill</button>
-            <button type="button" class="btn btn-lg btn-primary btn-block btn-grande heat">Heat</button>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande log log-2-buttons">Log</button>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande back">Back</button>
+            <button type="button" class="btn btn-lg btn-primary btn-block btn-large fill">Fill</button>
+            <button type="button" class="btn btn-lg btn-primary btn-block btn-large start">Heat</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large log log-2-buttons">Log</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large back">Back</button>
         </div>
-        <div class="div-tela div-hlt div-hlt-filling">
+        <div class="div-page div-hlt div-hlt-filling">
             <h2 class="form-signin-heading">HLT</h2>
-            <button type="button" class="btn btn-lg btn-danger btn-block btn-grande stop-fill btn-com-info">Stop Fill</button>
+            <button type="button" class="btn btn-lg btn-danger btn-block btn-large stop-fill btn-com-info">Stop Fill</button>
             <label class="full">Full</label>
-            <button type="button" class="btn btn-lg btn-primary btn-block btn-grande heat btn-com-info">Heat</button>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande log log-2-buttons">Log</button>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande back">Back</button>
+            <button type="button" class="btn btn-lg btn-primary btn-block btn-large start btn-com-info">Heat</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large log log-2-buttons">Log</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large back">Back</button>
         </div>
-        <div class="div-tela div-hlt div-hlt-full">
+        <div class="div-page div-hlt div-hlt-full">
             <h2 class="form-signin-heading">HLT</h2>
-            <button type="button" class="btn btn-lg btn-primary btn-block btn-grande fill">Fill</button>
-            <button type="button" class="btn btn-lg btn-primary btn-block btn-grande heat btn-com-info">Heat</button>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande log log-2-buttons">Log</button>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande back">Back</button>
+            <button type="button" class="btn btn-lg btn-primary btn-block btn-large fill">Fill</button>
+            <button type="button" class="btn btn-lg btn-primary btn-block btn-large start btn-com-info">Heat</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large log log-2-buttons">Log</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large back">Back</button>
         </div>
-        <div class="div-tela div-hlt div-hlt-heat">
+        <div class="div-page div-hlt div-hlt-heat">
             <h2 class="form-signin-heading">HLT</h2>
-            <button type="button" class="btn btn-lg btn-primary diminuir"><</button>
+            <button type="button" class="btn btn-lg btn-primary down"><</button>
             <input type="text" class="form-control temperature-hlt txt-value" value="30" maxlength="3" readonly/>
-            <button type="button" class="btn btn-lg btn-primary aumentar">></button>
-            <button type="button" class="btn btn-lg btn-primary btn-block btn-grande temperature-heat">Heat</button>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande back back-2-buttons">Back</button>
+            <button type="button" class="btn btn-lg btn-primary up">></button>
+            <button type="button" class="btn btn-lg btn-primary btn-block btn-large temperature-start">Heat</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large back back-2-buttons">Back</button>
         </div>
-        <div class="div-tela div-hlt div-hlt-heating">
+        <div class="div-page div-hlt div-hlt-heating">
             <h2 class="form-signin-heading">HLT</h2>
-            <button type="button" class="btn btn-lg btn-primary btn-block btn-grande disabled fill">Fill</button>
-            <button type="button" class="btn btn-lg btn-danger btn-block btn-grande stop-heat">Stop Heat</button>
-            <button type="button" class="btn btn-lg btn-primary btn-block btn-grande alterar-temperature btn-com-info">Change</button>
+            <button type="button" class="btn btn-lg btn-primary btn-block btn-large disabled fill">Fill</button>
+            <button type="button" class="btn btn-lg btn-danger btn-block btn-large stop">Stop Heat</button>
+            <button type="button" class="btn btn-lg btn-primary btn-block btn-large change-temperature btn-com-info">Change</button>
             <label class="temperature hlt-temperature"></label><label class="hlt-temperature-actual"></label>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande log log-3-buttons-1-info">Log</button>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande back">Back</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large log log-3-buttons-1-info">Log</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large back">Back</button>
         </div>
-        <div class="div-tela div-hlt div-hlt-alterar-temperature">
+        <div class="div-page div-hlt div-hlt-change-temperature">
             <h2 class="form-signin-heading">HLT</h2>
-            <button type="button" class="btn btn-lg btn-primary hlt diminuir"><</button>
+            <button type="button" class="btn btn-lg btn-primary hlt down"><</button>
             <input type="text" class="form-control temperature-hlt txt-value" value="30" maxlength="3" readonly/>
-            <button type="button" class="btn btn-lg btn-primary aumentar">></button>
-            <button type="button" class="btn btn-lg btn-primary btn-block btn-grande temperature-heat">Change</button>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande back back-2-buttons">Back</button>
+            <button type="button" class="btn btn-lg btn-primary up">></button>
+            <button type="button" class="btn btn-lg btn-primary btn-block btn-large temperature-start">Change</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large back back-2-buttons">Back</button>
         </div>
 
         <!-- HERMS -->
-        <div class="div-tela div-herms div-herms-empty">
+        <div class="div-page div-herms div-herms-empty">
             <h2 class="form-signin-heading">Herms</h2>
-            <button type="button" class="btn btn-lg btn-primary btn-block btn-grande fill">Fill</button>
-            <button type="button" class="btn btn-lg btn-primary btn-block btn-grande heat">Heat</button>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande log log-2-buttons">Log</button>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande back">Back</button>
+            <button type="button" class="btn btn-lg btn-primary btn-block btn-large fill">Fill</button>
+            <button type="button" class="btn btn-lg btn-primary btn-block btn-large start">Heat</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large log log-2-buttons">Log</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large back">Back</button>
         </div>
-        <div class="div-tela div-herms div-herms-filling">
+        <div class="div-page div-herms div-herms-filling">
             <h2 class="form-signin-heading">Herms</h2>
-            <button type="button" class="btn btn-lg btn-danger btn-block btn-grande stop-fill btn-com-info">Stop Fill</button>
+            <button type="button" class="btn btn-lg btn-danger btn-block btn-large stop-fill btn-com-info">Stop Fill</button>
             <label class="full">Full</label>
-            <button type="button" class="btn btn-lg btn-primary btn-block btn-grande heat btn-com-info">Heat</button>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande log log-2-buttons">Log</button>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande back">Back</button>
+            <button type="button" class="btn btn-lg btn-primary btn-block btn-large start btn-com-info">Heat</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large log log-2-buttons">Log</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large back">Back</button>
         </div>
-        <div class="div-tela div-herms div-herms-full">
+        <div class="div-page div-herms div-herms-full">
             <h2 class="form-signin-heading">Herms</h2>
-            <button type="button" class="btn btn-lg btn-primary btn-block btn-grande fill">Fill</button>
-            <button type="button" class="btn btn-lg btn-primary btn-block btn-grande heat btn-com-info">Heat</button>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande log log-2-buttons">Log</button>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande back">Back</button>
+            <button type="button" class="btn btn-lg btn-primary btn-block btn-large fill">Fill</button>
+            <button type="button" class="btn btn-lg btn-primary btn-block btn-large start btn-com-info">Heat</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large log log-2-buttons">Log</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large back">Back</button>
         </div>
-        <div class="div-tela div-herms div-herms-heat">
+        <div class="div-page div-herms div-herms-heat">
             <h2 class="form-signin-heading">Herms</h2>
-            <button type="button" class="btn btn-lg btn-primary diminuir"><</button>
+            <button type="button" class="btn btn-lg btn-primary down"><</button>
             <input type="text" class="form-control temperature-herms txt-value" value="30" maxlength="3" readonly/>
-            <button type="button" class="btn btn-lg btn-primary aumentar">></button>
-            <button type="button" class="btn btn-lg btn-primary btn-block btn-grande temperature-heat">Heat</button>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande back back-2-buttons">Back</button>
+            <button type="button" class="btn btn-lg btn-primary up">></button>
+            <button type="button" class="btn btn-lg btn-primary btn-block btn-large temperature-start">Heat</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large back back-2-buttons">Back</button>
         </div>
-        <div class="div-tela div-herms div-herms-heating">
+        <div class="div-page div-herms div-herms-heating">
             <h2 class="form-signin-heading">Herms</h2>
-            <button type="button" class="btn btn-lg btn-primary btn-block btn-grande disabled fill">Fill</button>
-            <button type="button" class="btn btn-lg btn-danger btn-block btn-grande stop-heat">Stop Heat</button>
-            <button type="button" class="btn btn-lg btn-primary btn-block btn-grande alterar-temperature btn-com-info">Change</button>
+            <button type="button" class="btn btn-lg btn-primary btn-block btn-large disabled fill">Fill</button>
+            <button type="button" class="btn btn-lg btn-danger btn-block btn-large stop">Stop Heat</button>
+            <button type="button" class="btn btn-lg btn-primary btn-block btn-large change-temperature btn-com-info">Change</button>
             <label class="temperature herms-temperature"></label>
             <label class="herms-temperature-actual"></label>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande log log-3-buttons-1-info">Log</button>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande back">Back</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large log log-3-buttons-1-info">Log</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large back">Back</button>
         </div>
-        <div class="div-tela div-herms div-herms-alterar-temperature">
+        <div class="div-page div-herms div-herms-change-temperature">
             <h2 class="form-signin-heading">Herms</h2>
-            <button type="button" class="btn btn-lg btn-primary diminuir"><</button>
+            <button type="button" class="btn btn-lg btn-primary down"><</button>
             <input type="text" class="form-control temperature-herms txt-value" value="30" maxlength="3" readonly/>
-            <button type="button" class="btn btn-lg btn-primary aumentar">></button>
-            <button type="button" class="btn btn-lg btn-primary btn-block btn-grande temperature-heat">Change</button>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande back back-2-buttons">Back</button>
+            <button type="button" class="btn btn-lg btn-primary up">></button>
+            <button type="button" class="btn btn-lg btn-primary btn-block btn-large temperature-start">Change</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large back back-2-buttons">Back</button>
         </div>
 
-        <!-- MASH -->
-        <div class="div-tela div-mlt div-mlt-empty">
+        <!-- MLT -->
+        <div class="div-page div-mlt div-mlt-empty">
             <h2 class="form-signin-heading">MLT</h2>
-            <button type="button" class="btn btn-lg btn-primary btn-block btn-grande fill">Fill</button>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande log log-1-button">Log</button>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande back">Back</button>
+            <button type="button" class="btn btn-lg btn-primary btn-block btn-large fill">Fill</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large log log-1-button">Log</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large back">Back</button>
         </div>
-        <div class="div-tela div-mlt div-mlt-filling">
+        <div class="div-page div-mlt div-mlt-filling">
             <h2 class="form-signin-heading">MLT</h2>
-            <button type="button" class="btn btn-lg btn-danger btn-block btn-grande stop-fill btn-com-info">Stop Fill</button>
+            <button type="button" class="btn btn-lg btn-danger btn-block btn-large stop-fill btn-com-info">Stop Fill</button>
             <label class="full">Full</label>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande log log-1-button">Log</button>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande back">Back</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large log log-1-button">Log</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large back">Back</button>
         </div>
-        <div class="div-tela div-mlt div-mlt-full">
+        <div class="div-page div-mlt div-mlt-full">
             <h2 class="form-signin-heading">MLT</h2>
-            <button type="button" class="btn btn-lg btn-primary btn-block btn-grande fill">Fill</button>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande log log-1-button">Log</button>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande back">Back</button>
+            <button type="button" class="btn btn-lg btn-primary btn-block btn-large fill">Fill</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large log log-1-button">Log</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large back">Back</button>
         </div>
 
-        <!-- RAMPA -->
-        <div class="div-tela div-step div-step-empty">
+        <!-- STEP -->
+        <div class="div-page div-step div-step-empty">
             <h2 class="form-signin-heading step-number">Step</h2>
-            <button type="button" class="btn btn-lg btn-primary btn-block btn-grande heat btn-com-info">New</button>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande log log-1-button">Log</button>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande back">Back</button>
+            <button type="button" class="btn btn-lg btn-primary btn-block btn-large start btn-com-info">New</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large log log-1-button">Log</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large back">Back</button>
         </div>
-        <div class="div-tela div-step div-step-heat">
+        <div class="div-page div-step div-step-heat">
             <h2 class="form-signin-heading">Step</h2>
-            <button type="button" class="btn btn-lg btn-primary diminuir"><</button>
+            <button type="button" class="btn btn-lg btn-primary down"><</button>
             <input type="text" class="form-control temperature-step txt-value" value="30" maxlength="3" readonly/>
-            <button type="button" class="btn btn-lg btn-primary aumentar">></button>
-            <button type="button" class="btn btn-lg btn-primary diminuir"><</button>
+            <button type="button" class="btn btn-lg btn-primary up">></button>
+            <button type="button" class="btn btn-lg btn-primary down"><</button>
             <input type="text" class="form-control time-step txt-value" value="60" maxlength="3" readonly/>
-            <button type="button" class="btn btn-lg btn-primary aumentar">></button>
-            <button type="button" class="btn btn-lg btn-primary btn-block btn-grande temperature-time-heat">Start</button>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande back back-3-buttons">Back</button>
+            <button type="button" class="btn btn-lg btn-primary up">></button>
+            <button type="button" class="btn btn-lg btn-primary btn-block btn-large temperature-time-start">Start</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large back back-3-buttons">Back</button>
         </div>
-        <div class="div-tela div-step div-step-heating">
+        <div class="div-page div-step div-step-heating">
             <h2 class="form-signin-heading step-number">Step</h2>
-            <button type="button" class="btn btn-lg btn-danger btn-block btn-grande stop-heat btn-com-info">Finish</button>
+            <button type="button" class="btn btn-lg btn-danger btn-block btn-large stop btn-com-info">Finish</button>
             <label class="temperature step-temperature"></label><label class="step-temperature-actual"></label>
             <br/><label class="time step-time"></label><label class="step-time-actual"></label>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande log log-1-button-2-info">Log</button>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande back">Back</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large log log-1-button-2-info">Log</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large back">Back</button>
         </div>
-        <div class="div-tela div-step div-step-full">
+        <div class="div-page div-step div-step-full">
             <h2 class="form-signin-heading step-number">Step</h2>
-            <button type="button" class="btn btn-lg btn-primary btn-block btn-grande heat btn-com-info">New</button>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande log log-1-button">Log</button>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande back">Back</button>
+            <button type="button" class="btn btn-lg btn-primary btn-block btn-large start btn-com-info">New</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large log log-1-button">Log</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large back">Back</button>
         </div>
 
         <!-- BOL -->
-        <div class="div-tela div-bol div-bol-empty">
+        <div class="div-page div-bol div-bol-empty">
             <h2 class="form-signin-heading">BOL</h2>
-            <button type="button" class="btn btn-lg btn-primary btn-block btn-grande fill">Fill</button>
-            <button type="button" class="btn btn-lg btn-primary btn-block btn-grande heat">Start</button>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande log log-2-buttons">Log</button>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande back">Back</button>
+            <button type="button" class="btn btn-lg btn-primary btn-block btn-large fill">Fill</button>
+            <button type="button" class="btn btn-lg btn-primary btn-block btn-large start">Start</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large log log-2-buttons">Log</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large back">Back</button>
         </div>
-        <div class="div-tela div-bol div-bol-filling">
+        <div class="div-page div-bol div-bol-filling">
             <h2 class="form-signin-heading">BOL</h2>
-            <button type="button" class="btn btn-lg btn-danger btn-block btn-grande stop-fill btn-com-info">Stop Fill</button>
+            <button type="button" class="btn btn-lg btn-danger btn-block btn-large stop-fill btn-com-info">Stop Fill</button>
             <label class="full">Full</label></br>
-            <button type="button" class="btn btn-lg btn-primary btn-block btn-grande heat btn-com-info">Start</button>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande log log-2-buttons">Log</button>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande back">Back</button>
+            <button type="button" class="btn btn-lg btn-primary btn-block btn-large start btn-com-info">Start</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large log log-2-buttons">Log</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large back">Back</button>
         </div>
-        <div class="div-tela div-bol div-bol-full">
+        <div class="div-page div-bol div-bol-full">
             <h2 class="form-signin-heading">BOL</h2>
-            <button type="button" class="btn btn-lg btn-primary btn-block btn-grande fill">Fill</button>
-            <button type="button" class="btn btn-lg btn-primary btn-block btn-grande heat btn-com-info">Start</button>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande log log-2-buttons">Log</button>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande back">Back</button>
+            <button type="button" class="btn btn-lg btn-primary btn-block btn-large fill">Fill</button>
+            <button type="button" class="btn btn-lg btn-primary btn-block btn-large start btn-com-info">Start</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large log log-2-buttons">Log</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large back">Back</button>
         </div>
-        <div class="div-tela div-bol div-bol-heat">
+        <div class="div-page div-bol div-bol-heat">
             <h2 class="form-signin-heading">BOL</h2>
-            <button type="button" class="btn btn-lg btn-primary diminuir"><</button>
+            <button type="button" class="btn btn-lg btn-primary down"><</button>
             <input type="text" class="form-control temperature-bol txt-value" value="30" maxlength="3" readonly/>
-            <button type="button" class="btn btn-lg btn-primary bol aumentar">></button>
-            <button type="button" class="btn btn-lg btn-primary diminuir"><</button>
+            <button type="button" class="btn btn-lg btn-primary bol up">></button>
+            <button type="button" class="btn btn-lg btn-primary down"><</button>
             <input type="text" class="form-control time-bol txt-value" value="60" maxlength="3" readonly/>
-            <button type="button" class="btn btn-lg btn-primary aumentar">></button>
-            <button type="button" class="btn btn-lg btn-primary btn-block btn-grande temperature-time-heat">Start</button>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande back back-3-buttons">Back</button>
+            <button type="button" class="btn btn-lg btn-primary up">></button>
+            <button type="button" class="btn btn-lg btn-primary btn-block btn-large temperature-time-start">Start</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large back back-3-buttons">Back</button>
         </div>
-        <div class="div-tela div-bol div-bol-heating">
+        <div class="div-page div-bol div-bol-heating">
             <h2 class="form-signin-heading">BOL</h2>
-            <button type="button" class="btn btn-lg btn-primary btn-block btn-grande disabled fill">Fill</button>
-            <button type="button" class="btn btn-lg btn-danger btn-block btn-grande stop-heat btn-com-info">Stop</button>
+            <button type="button" class="btn btn-lg btn-primary btn-block btn-large disabled fill">Fill</button>
+            <button type="button" class="btn btn-lg btn-danger btn-block btn-large stop btn-com-info">Stop</button>
             <label class="temperature bol-temperature"></label><label class="bol-temperature-actual"></label>
             <br/><label class="time bol-time"></label><label class="bol-time-actual"></label>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande log log-2-buttons-2-info">Log</button>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande back">Back</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large log log-2-buttons-2-info">Log</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large back">Back</button>
         </div>
 
         <!-- SPARGE -->
-        <div class="div-tela div-sparge div-sparge-empty">
+        <div class="div-page div-sparge div-sparge-empty">
             <h2 class="form-signin-heading">Sparge</h2>
-            <button type="button" class="btn btn-lg btn-primary btn-block btn-grande fill">Start</button>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande log log-1-button">Log</button>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande back">Back</button>
+            <button type="button" class="btn btn-lg btn-primary btn-block btn-large fill">Start</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large log log-1-button">Log</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large back">Back</button>
         </div>
-        <div class="div-tela div-sparge div-sparge-filling">
+        <div class="div-page div-sparge div-sparge-filling">
             <h2 class="form-signin-heading">Sparge</h2>
-            <button type="button" class="btn btn-lg btn-danger btn-block btn-grande stop-fill btn-com-info">Stop</button>
+            <button type="button" class="btn btn-lg btn-danger btn-block btn-large stop-fill btn-com-info">Stop</button>
             <label class="full">finish</label>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande log log-1-button">Log</button>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande back">Back</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large log log-1-button">Log</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large back">Back</button>
         </div>
-        <div class="div-tela div-sparge div-sparge-full">
+        <div class="div-page div-sparge div-sparge-full">
             <h2 class="form-signin-heading">Sparge</h2>
-            <button type="button" class="btn btn-lg btn-primary btn-block btn-grande fill">Start</button>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande log log-1-button">Log</button>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande back">Back</button>
+            <button type="button" class="btn btn-lg btn-primary btn-block btn-large fill">Start</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large log log-1-button">Log</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large back">Back</button>
         </div>
 
-        <!-- RESFRIAR -->
-        <div class="div-tela div-cooling div-cooling-empty">
+        <!-- COOLING -->
+        <div class="div-page div-cooling div-cooling-empty">
             <h2 class="form-signin-heading">Cooling</h2>
-            <button type="button" class="btn btn-lg btn-primary btn-block btn-grande heat btn-com-info">Start</button>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande log log-1-button">Log</button>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande back">Back</button>
+            <button type="button" class="btn btn-lg btn-primary btn-block btn-large start btn-com-info">Start</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large log log-1-button">Log</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large back">Back</button>
         </div>
-        <div class="div-tela div-cooling div-cooling-heat">
+        <div class="div-page div-cooling div-cooling-heat">
             <h2 class="form-signin-heading">Cooling</h2>
-            <button type="button" class="btn btn-lg btn-primary diminuir"><</button>
+            <button type="button" class="btn btn-lg btn-primary down"><</button>
             <input type="text" class="form-control temperature-cooling txt-value" value="30" maxlength="3" readonly/>
-            <button type="button" class="btn btn-lg btn-primary aumentar">></button>
-            <button type="button" class="btn btn-lg btn-primary btn-block btn-grande temperature-heat">Start</button>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande back back-2-buttons">Back</button>
+            <button type="button" class="btn btn-lg btn-primary up">></button>
+            <button type="button" class="btn btn-lg btn-primary btn-block btn-large temperature-start">Start</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large back back-2-buttons">Back</button>
         </div>
-        <div class="div-tela div-cooling div-cooling-heating">
+        <div class="div-page div-cooling div-cooling-heating">
             <h2 class="form-signin-heading">Cooling</h2>
-            <button type="button" class="btn btn-lg btn-danger btn-block btn-grande stop-heat">Stop</button>
-            <button type="button" class="btn btn-lg btn-primary btn-block btn-grande alterar-temperature btn-com-info">Change</button>
+            <button type="button" class="btn btn-lg btn-danger btn-block btn-large stop">Stop</button>
+            <button type="button" class="btn btn-lg btn-primary btn-block btn-large change-temperature btn-com-info">Change</button>
             <label class="temperature cooling-temperature"></label><label class="cooling-temperature-actual"></label>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande log log-2-buttons-1-info">Log</button>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande back">Back</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large log log-2-buttons-1-info">Log</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large back">Back</button>
         </div>
-        <div class="div-tela div-cooling div-cooling-full">
+        <div class="div-page div-cooling div-cooling-full">
             <h2 class="form-signin-heading">Cooling</h2>
-            <button type="button" class="btn btn-lg btn-primary btn-block btn-grande heat btn-com-info">Start</button>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande log log-1-button">Log</button>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande back">Back</button>
+            <button type="button" class="btn btn-lg btn-primary btn-block btn-large start btn-com-info">Start</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large log log-1-button">Log</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large back">Back</button>
         </div>
-        <div class="div-tela div-cooling div-cooling-alterar-temperature">
+        <div class="div-page div-cooling div-cooling-change-temperature">
             <h2 class="form-signin-heading">Cooling</h2>
-            <button type="button" class="btn btn-lg btn-primary diminuir"><</button>
+            <button type="button" class="btn btn-lg btn-primary down"><</button>
             <input type="text" class="form-control temperature-cooling txt-value" value="30" maxlength="3" readonly/>
-            <button type="button" class="btn btn-lg btn-primary aumentar">></button>
-            <button type="button" class="btn btn-lg btn-primary btn-block btn-grande temperature-heat">Change</button>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande back back-2-buttons">Back</button>
+            <button type="button" class="btn btn-lg btn-primary up">></button>
+            <button type="button" class="btn btn-lg btn-primary btn-block btn-large temperature-start">Change</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large back back-2-buttons">Back</button>
         </div>
 
         <!-- WHIRLPOOL -->
-        <div class="div-tela div-whirlpool div-whirlpool-empty">
+        <div class="div-page div-whirlpool div-whirlpool-empty">
             <h2 class="form-signin-heading">Whirlpool</h2>
-            <button type="button" class="btn btn-lg btn-primary btn-block btn-grande heat btn-com-info">Start</button>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande log log-1-button">Log</button>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande back">Back</button>
+            <button type="button" class="btn btn-lg btn-primary btn-block btn-large start btn-com-info">Start</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large log log-1-button">Log</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large back">Back</button>
         </div>
-        <div class="div-tela div-whirlpool div-whirlpool-heat">
+        <div class="div-page div-whirlpool div-whirlpool-heat">
             <h2 class="form-signin-heading">Whirlpool</h2>
-            <button type="button" class="btn btn-lg btn-primary diminuir"><</button>
+            <button type="button" class="btn btn-lg btn-primary down"><</button>
             <input type="text" class="form-control time-whirlpool txt-value" value="60" maxlength="3" readonly/>
-            <button type="button" class="btn btn-lg btn-primary aumentar">></button>
-            <button type="button" class="btn btn-lg btn-primary btn-block btn-grande time-heat">Start</button>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande back back-2-buttons">Back</button>
+            <button type="button" class="btn btn-lg btn-primary up">></button>
+            <button type="button" class="btn btn-lg btn-primary btn-block btn-large time-start">Start</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large back back-2-buttons">Back</button>
         </div>
-        <div class="div-tela div-whirlpool div-whirlpool-heating">
+        <div class="div-page div-whirlpool div-whirlpool-heating">
             <h2 class="form-signin-heading">Whirlpool</h2>
-            <button type="button" class="btn btn-lg btn-danger btn-block btn-grande stop-heat">Stop</button>
-            <button type="button" class="btn btn-lg btn-primary btn-block btn-grande alterar-time btn-com-info">Change</button>
+            <button type="button" class="btn btn-lg btn-danger btn-block btn-large stop">Stop</button>
+            <button type="button" class="btn btn-lg btn-primary btn-block btn-large change-time btn-com-info">Change</button>
             <label class="time whirlpool-time"></label><label class="whirlpool-time-actual"></label>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande log log-2-buttons-1-info">Log</button>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande back">Back</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large log log-2-buttons-1-info">Log</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large back">Back</button>
         </div>
-        <div class="div-tela div-whirlpool div-whirlpool-full">
+        <div class="div-page div-whirlpool div-whirlpool-full">
             <h2 class="form-signin-heading">Whirlpool</h2>
-            <button type="button" class="btn btn-lg btn-primary btn-block btn-grande heat btn-com-info">Start</button>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande log log-1-button">Log</button>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande back">Back</button>
+            <button type="button" class="btn btn-lg btn-primary btn-block btn-large start btn-com-info">Start</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large log log-1-button">Log</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large back">Back</button>
         </div>
-        <div class="div-tela div-whirlpool div-whirlpool-alterar-time">
+        <div class="div-page div-whirlpool div-whirlpool-change-time">
             <h2 class="form-signin-heading">Whirlpool</h2>
-            <button type="button" class="btn btn-lg btn-primary diminuir"><</button>
+            <button type="button" class="btn btn-lg btn-primary down"><</button>
             <input type="text" class="form-control time-whirlpool txt-value" value="60" maxlength="3" readonly/>
-            <button type="button" class="btn btn-lg btn-primary aumentar">></button>
-            <button type="button" class="btn btn-lg btn-primary btn-block btn-grande time-heat">Change</button>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande back back-2-buttons">Back</button>
+            <button type="button" class="btn btn-lg btn-primary up">></button>
+            <button type="button" class="btn btn-lg btn-primary btn-block btn-large time-start">Change</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large back back-2-buttons">Back</button>
         </div>
 
-        <!-- FERMENTADOR -->
-        <div class="div-tela div-fermenter div-fermenter-empty">
+        <!-- FERMENTER -->
+        <div class="div-page div-fermenter div-fermenter-empty">
             <h2 class="form-signin-heading">Fermenter</h2>
-            <button type="button" class="btn btn-lg btn-primary btn-block btn-grande fill">Fill</button>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande log log-1-button">Log</button>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande back">Back</button>
+            <button type="button" class="btn btn-lg btn-primary btn-block btn-large fill">Fill</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large log log-1-button">Log</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large back">Back</button>
         </div>
-        <div class="div-tela div-fermenter div-fermenter-filling">
+        <div class="div-page div-fermenter div-fermenter-filling">
             <h2 class="form-signin-heading">Fermenter</h2>
-            <button type="button" class="btn btn-lg btn-danger btn-block btn-grande stop-fill btn-com-info">Stop Fill</button>
+            <button type="button" class="btn btn-lg btn-danger btn-block btn-large stop-fill btn-com-info">Stop Fill</button>
             <label class="full">Full</label>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande log log-1-button">Log</button>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande back">Back</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large log log-1-button">Log</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large back">Back</button>
         </div>
-        <div class="div-tela div-fermenter div-fermenter-full">
+        <div class="div-page div-fermenter div-fermenter-full">
             <h2 class="form-signin-heading">Fermenter</h2>
-            <button type="button" class="btn btn-lg btn-primary btn-block btn-grande fill">Fill</button>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande log log-1-button">Log</button>
-            <button type="button" class="btn btn-lg btn-info btn-block btn-grande back">Back</button>
+            <button type="button" class="btn btn-lg btn-primary btn-block btn-large fill">Fill</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large log log-1-button">Log</button>
+            <button type="button" class="btn btn-lg btn-info btn-block btn-large back">Back</button>
         </div>
       </form>
-<footer class="footer">
+    <footer class="footer">
         <label class="pull-right" style="font-size: 10px">Node Arduino Home Brewer - 1.0.0</label>
     </footer>
     </div>
@@ -372,3 +373,6 @@
 <script src="/socket.io/socket.io.js"></script>
 <script src="lib/sweet-alert.min.js"></script>
 <script src="js/brewing.js"></script>
+<script type="text/javascript">
+startLayout();
+</script>

@@ -303,7 +303,7 @@ var HLTFull = function (req, res, io) {
         }
     });
 };
-var heatHLT = function (req, res, io) {
+var startHLT = function (req, res, io) {
     var temperature = req.params.temperature;
     if (!temperature && temperature == '') {
         temperature = "0";
@@ -313,10 +313,10 @@ var heatHLT = function (req, res, io) {
         if (!err) {
             if (brewing) {
                 if (brewing.HLTEmpty) {
-                    res.status('500').send({ status: 500, error: 'hlt is empty' });
+                    res.status('500').send({ status: 500, error: 'HLT is empty' });
                 }
                 else if (brewing.HLTFilling) {
-                    res.status('500').send({ status: 500, error: 'hlt is filling' });
+                    res.status('500').send({ status: 500, error: 'HLT is filling' });
                 }
                 else {
                     brewing.HLTHeating = true;
@@ -338,7 +338,7 @@ var heatHLT = function (req, res, io) {
         }
     });
 };
-var stopHeatHLT = function (req, res, io) {
+var stopHLT = function (req, res, io) {
     BrewingModel = mongoose.model('brewing', Brewing);
     return BrewingModel.findOne({ 'BrewingFinished': false }, function (err, brewing) {
         if (!err) {
@@ -451,7 +451,7 @@ var HermsFull = function (req, res, io) {
         }
     });
 };
-var heatHerms = function (req, res, io) {
+var startHerms = function (req, res, io) {
     var temperature = req.params.temperature;
     if (!temperature && temperature == '') {
         temperature = "0";
@@ -461,10 +461,10 @@ var heatHerms = function (req, res, io) {
         if (!err) {
             if (brewing) {
                 if (brewing.HermsEmpty) {
-                    res.status('500').send({ status: 500, error: 'herms is empty' });
+                    res.status('500').send({ status: 500, error: 'Herms is empty' });
                 }
                 else if (brewing.HermsFilling) {
-                    res.status('500').send({ status: 500, error: 'herms is filling' });
+                    res.status('500').send({ status: 500, error: 'Herms is filling' });
                 }
                 else {
                     brewing.HermsHeating = true;
@@ -486,7 +486,7 @@ var heatHerms = function (req, res, io) {
         }
     });
 };
-var stopHeatHerms = function (req, res, io) {
+var stopHerms = function (req, res, io) {
     BrewingModel = mongoose.model('brewing', Brewing);
     return BrewingModel.findOne({ 'BrewingFinished': false }, function (err, brewing) {
         if (!err) {
@@ -520,10 +520,10 @@ var fillMLT = function (req, res, io) {
         if (!err) {
             if (brewing) {
                 if (brewing.HLTEmpty) {
-                    res.status('500').send({ status: 500, error: 'hlt is empty' });
+                    res.status('500').send({ status: 500, error: 'HLT is empty' });
                 }
                 else if (brewing.HLTFilling) {
-                    res.status('500').send({ status: 500, error: 'hlt is filling' });
+                    res.status('500').send({ status: 500, error: 'HLT is filling' });
                 }
                 else {
                     brewing.MLTEmpty = false;
@@ -609,10 +609,19 @@ var fillFermenter = function (req, res, io) {
         if (!err) {
             if (brewing) {
                 if (brewing.BOLEmpty) {
-                    res.status('500').send({ status: 500, error: 'bol is empty' });
+                    res.status('500').send({ status: 500, error: 'BOL is empty' });
                 }
                 else if (brewing.BOLFilling) {
-                    res.status('500').send({ status: 500, error: 'bol is filling' });
+                    res.status('500').send({ status: 500, error: 'BOL is filling' });
+                }
+                else if (brewing.BOLHeating) {
+                    res.status('500').send({ status: 500, error: 'BOL is heating' });
+                }
+                else if (brewing.WhirlpoolExecuting) {
+                    res.status('500').send({ status: 500, error: 'Whirlpool is executing' });
+                }
+                else if (brewing.CoolingExecuting) {
+                    res.status('500').send({ status: 500, error: 'Cooling is executing' });
                 }
                 else {
                     brewing.FermenterEmpty = false;
@@ -698,10 +707,10 @@ var fillSparge = function (req, res, io) {
         if (!err) {
             if (brewing) {
                 if (brewing.HLTEmpty) {
-                    res.status('500').send({ status: 500, error: 'hlt is empty' });
+                    res.status('500').send({ status: 500, error: 'HLT is empty' });
                 }
                 else if (brewing.HLTFilling) {
-                    res.status('500').send({ status: 500, error: 'hlt is filling' });
+                    res.status('500').send({ status: 500, error: 'HLT is filling' });
                 }
                 else {
                     brewing.SpargeEmpty = false;
@@ -759,7 +768,7 @@ var SpargeFull = function (req, res, io) {
                 brewing.SpargeEmpty = false;
                 brewing.SpargeExecuting = false;
                 brewing.SpargeFinished = true;
-                brewing.SpargeLog += '\n' + utilRoute.getTime() + ' - finished sparge finalizado';
+                brewing.SpargeLog += '\n' + utilRoute.getTime() + ' - finished sparge';
                 brewing.save(function (err) {
                     if (!err) {
                         updateBrewing(io);
@@ -787,15 +796,15 @@ var fillBOL = function (req, res, io) {
         if (!err) {
             if (brewing) {
                 if (brewing.MLTEmpty) {
-                    res.status('500').send({ status: 500, error: 'O mlt está empty' });
+                    res.status('500').send({ status: 500, error: 'MLT is empty' });
                 }
                 else if (brewing.MLTFilling) {
-                    res.status('500').send({ status: 500, error: 'O mlt está filling' });
+                    res.status('500').send({ status: 500, error: 'MLT is filling' });
                 }
                 else {
                     brewing.BOLEmpty = false;
                     brewing.BOLFilling = true;
-                    brewing.BOLLog += '\n' + utilRoute.getTime() + ' - enchimento iniciado';
+                    brewing.BOLLog += '\n' + utilRoute.getTime() + ' - start fill';
                     brewing.save(function () {
                         updateBrewing(io);
                         res.send();
@@ -819,7 +828,7 @@ var stopFillBOL = function (req, res, io) {
             if (brewing) {
                 brewing.BOLFilling = false;
                 brewing.BOLFull = true;
-                brewing.BOLLog += '\n' + utilRoute.getTime() + ' - enchimento parado';
+                brewing.BOLLog += '\n' + utilRoute.getTime() + ' - stop fill';
                 brewing.save(function (err) {
                     if (!err) {
                         updateBrewing(io);
@@ -848,7 +857,7 @@ var BOLFull = function (req, res, io) {
                 brewing.BOLEmpty = false;
                 brewing.BOLFilling = false;
                 brewing.BOLFull = true;
-                brewing.BOLLog += '\n' + utilRoute.getTime() + ' - enchimento finalizado';
+                brewing.BOLLog += '\n' + utilRoute.getTime() + ' - finished fill';
                 brewing.save(function (err) {
                     if (!err) {
                         updateBrewing(io);
@@ -884,7 +893,7 @@ var updateTimeBOL = function(io){
                     brewing.BOLHeating = false;
                     brewing.BOLHeatingTimeEnd = "0";
                     brewing.BOLHeatingTimeFinished = false;
-                    brewing.BOLLog += '\n' + utilRoute.getTime() + ' - heat parada';
+                    brewing.BOLLog += '\n' + utilRoute.getTime() + ' - stop heat';
                     clearInterval(timerTimeBOL);
                 }
                 else{
@@ -923,17 +932,17 @@ var startBOL = function (req, res, io) {
         if (!err) {
             if (brewing) {
                 if (brewing.BOLEmpty) {
-                    res.status('500').send({ status: 500, error: 'O bol está empty' });
+                    res.status('500').send({ status: 500, error: 'BOL is empty' });
                 }
                 else if (brewing.BOLFilling) {
-                    res.status('500').send({ status: 500, error: 'O bol está filling' });
+                    res.status('500').send({ status: 500, error: 'BOL is filling' });
                 }
                 else {
                     brewing.BOLHeating = true;
                     brewing.BOLHeatingTemperature = temperature;
                     brewing.BOLHeatingTime = time;
                     brewing.BOLHeatingTimeEnd = time;
-                    brewing.BOLLog += '\n' + utilRoute.getTime() + ' - heat iniciada ' + temperature + 'ºC ' + time + 'M';
+                    brewing.BOLLog += '\n' + utilRoute.getTime() + ' - start heat ' + temperature + 'ºC ' + time + 'M';
                     brewing.save(function () {
                         updateBrewing(io);
                         timerTimeBOL = setInterval(function(){updateTimeBOL(io);},60*1000);
@@ -957,7 +966,7 @@ var stopBOL = function (req, res, io) {
         if (!err) {
             if (brewing) {
                 brewing.BOLHeating = false;
-                brewing.BOLLog += '\n' + utilRoute.getTime() + ' - heat parada';
+                brewing.BOLLog += '\n' + utilRoute.getTime() + ' - stop heat';
                 brewing.save(function (err) {
                     if (!err) {
                         updateBrewing(io);
@@ -1032,16 +1041,16 @@ var startStep = function (req, res, io) {
         if (!err) {
             if (brewing) {
                 if (brewing.MLTEmpty) {
-                    res.status('500').send({ status: 500, error: 'O mlt está empty' });
+                    res.status('500').send({ status: 500, error: 'MLT is empty' });
                 }
                 else if (brewing.MLTFilling) {
-                    res.status('500').send({ status: 500, error: 'O mlt está filling' });
+                    res.status('500').send({ status: 500, error: 'MLT is filling' });
                 }
                 else if (brewing.HermsEmpty) {
-                    res.status('500').send({ status: 500, error: 'O herms está empty' });
+                    res.status('500').send({ status: 500, error: 'Herms is empty' });
                 }
                 else if (brewing.HermsFilling) {
-                    res.status('500').send({ status: 500, error: 'O herms está filling' });
+                    res.status('500').send({ status: 500, error: 'Herms is filling' });
                 }
                 else {
                     brewing.StepExecuting = true;
@@ -1056,7 +1065,7 @@ var startStep = function (req, res, io) {
                         brewing.StepExecutingNumber = parseInt(brewing.StepExecutingNumber) + 1;
                     }
 
-                    brewing.StepLog += '\n' + utilRoute.getTime() + ' - step ' + brewing.StepExecutingNumber + ' iniciada ' + temperature + 'ºC ' + time + 'M';
+                    brewing.StepLog += '\n' + utilRoute.getTime() + ' - step ' + brewing.StepExecutingNumber + " " + temperature + 'ºC ' + time + 'M';
                     brewing.save(function () {
                         updateBrewing(io);
                         timerTimeStep = setInterval(function(){updateTimeStep(io);},60*1000);
@@ -1113,15 +1122,18 @@ var startCooling = function (req, res, io) {
         if (!err) {
             if (brewing) {
                 if (brewing.BOLEmpty) {
-                    res.status('500').send({ status: 500, error: 'O bol está empty' });
+                    res.status('500').send({ status: 500, error: 'BOL is empty' });
                 }
                 else if (brewing.BOLFilling) {
-                    res.status('500').send({ status: 500, error: 'O bol está filling' });
+                    res.status('500').send({ status: 500, error: 'BOL is filling' });
+                }
+                else if (brewing.BOLHeating) {
+                    res.status('500').send({ status: 500, error: 'BOL is heating' });
                 }
                 else {
                     brewing.CoolingExecuting = true;
                     brewing.CoolingExecutingTemperature = temperature;
-                    brewing.CoolingLog += '\n' + utilRoute.getTime() + ' - resfriamento iniciado ' + temperature + 'ºC';
+                    brewing.CoolingLog += '\n' + utilRoute.getTime() + ' - start cooling ' + temperature + 'ºC';
                     brewing.save(function () {
                         updateBrewing(io);
                         res.send();
@@ -1144,7 +1156,7 @@ var stopCooling = function (req, res, io) {
         if (!err) {
             if (brewing) {
                 brewing.CoolingExecuting = false;
-                brewing.CoolingLog += '\n' + utilRoute.getTime() + ' - resfriamento parado';
+                brewing.CoolingLog += '\n' + utilRoute.getTime() + ' - stop cooling';
                 brewing.save(function (err) {
                     if (!err) {
                         updateBrewing(io);
@@ -1180,7 +1192,7 @@ var updateTimeWhirlpool = function(io){
                     brewing.WhirlpoolExecuting = false;
                     brewing.WhirlpoolExecutingTimeEnd = "0";
                     brewing.WhirlpoolExecutingTimeFinished = false;
-                    brewing.WhirlpoolLog += '\n' + utilRoute.getTime() + ' - whirlpool parado';
+                    brewing.WhirlpoolLog += '\n' + utilRoute.getTime() + ' - stop whirlpool';
                     clearInterval(timerTimeWhirlpool);
                 }
                 else{
@@ -1215,16 +1227,16 @@ var startWhirlpool = function (req, res, io) {
         if (!err) {
             if (brewing) {
                 if (brewing.BOLEmpty) {
-                    res.status('500').send({ status: 500, error: 'O bol está empty' });
+                    res.status('500').send({ status: 500, error: 'BOL is empty' });
                 }
                 else if (brewing.BOLFilling) {
-                    res.status('500').send({ status: 500, error: 'O bol está filling' });
+                    res.status('500').send({ status: 500, error: 'BOL is filling' });
                 }
                 else {
                     brewing.WhirlpoolExecuting = true;
                     brewing.WhirlpoolExecutingTime = time;
                     brewing.WhirlpoolExecutingTimeEnd = time;
-                    brewing.WhirlpoolLog += '\n' + utilRoute.getTime() + ' - whirlpool iniciado ' + time + 'M';
+                    brewing.WhirlpoolLog += '\n' + utilRoute.getTime() + ' - start whirlpool ' + time + 'M';
                     brewing.save(function () {
                         updateBrewing(io);
                         timerTimeWhirlpool = setInterval(function(){updateTimeWhirlpool(io);},60*1000);
@@ -1248,7 +1260,7 @@ var stopWhirlpool = function (req, res, io) {
         if (!err) {
             if (brewing) {
                 brewing.WhirlpoolExecuting = false;
-                brewing.WhirlpoolLog += '\n' + utilRoute.getTime() + ' - whirlpool parado';
+                brewing.WhirlpoolLog += '\n' + utilRoute.getTime() + ' - stop whirlpool';
                 brewing.save(function (err) {
                     if (!err) {
                         updateBrewing(io);
@@ -1278,14 +1290,14 @@ module.exports.finishBrewing = finishBrewing;
 module.exports.fillHLT = fillHLT;
 module.exports.stopFillHLT = stopFillHLT;
 module.exports.HLTFull = HLTFull;
-module.exports.heatHLT = heatHLT;
-module.exports.stopHeatHLT = stopHeatHLT;
+module.exports.startHLT = startHLT;
+module.exports.stopHLT = stopHLT;
 
 module.exports.fillHerms = fillHerms;
 module.exports.stopFillHerms = stopFillHerms;
 module.exports.HermsFull = HermsFull;
-module.exports.heatHerms = heatHerms;
-module.exports.stopHeatHerms = stopHeatHerms;
+module.exports.startHerms = startHerms;
+module.exports.stopHerms = stopHerms;
 
 module.exports.fillMLT = fillMLT;
 module.exports.stopFillMLT = stopFillMLT;
