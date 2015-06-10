@@ -14,7 +14,6 @@ $.get("loggedtest", function (data) { })
                 }
         });
 
-
 function DisplayPageHLT() {
     $(".div-hlt").hide();
 
