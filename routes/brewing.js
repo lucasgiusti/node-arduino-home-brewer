@@ -525,6 +525,9 @@ var fillMLT = function (req, res, io) {
                 else if (brewing.HLTFilling) {
                     res.status('500').send({ status: 500, error: 'HLT is filling' });
                 }
+                else if (brewing.HLTHeating) {
+                    res.status('500').send({ status: 500, error: 'HLT is heating' });
+                }
                 else {
                     brewing.MLTEmpty = false;
                     brewing.MLTFilling = true;
@@ -803,9 +806,6 @@ var fillBOL = function (req, res, io) {
                 }
                 else if (brewing.MLTFilling) {
                     res.status('500').send({ status: 500, error: 'MLT is filling' });
-                }
-                else if (brewing.StepExecuting) {
-                    res.status('500').send({ status: 500, error: 'Step is executing' });
                 }
                 else {
                     brewing.BOLEmpty = false;
