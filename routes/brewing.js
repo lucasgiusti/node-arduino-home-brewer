@@ -712,6 +712,9 @@ var fillSparge = function (req, res, io) {
                 else if (brewing.HLTFilling) {
                     res.status('500').send({ status: 500, error: 'HLT is filling' });
                 }
+                else if (brewing.StepExecuting) {
+                    res.status('500').send({ status: 500, error: 'Step is executing' });
+                }
                 else {
                     brewing.SpargeEmpty = false;
                     brewing.SpargeExecuting = true;
@@ -800,6 +803,9 @@ var fillBOL = function (req, res, io) {
                 }
                 else if (brewing.MLTFilling) {
                     res.status('500').send({ status: 500, error: 'MLT is filling' });
+                }
+                else if (brewing.StepExecuting) {
+                    res.status('500').send({ status: 500, error: 'Step is executing' });
                 }
                 else {
                     brewing.BOLEmpty = false;
@@ -1051,6 +1057,9 @@ var startStep = function (req, res, io) {
                 }
                 else if (brewing.HermsFilling) {
                     res.status('500').send({ status: 500, error: 'Herms is filling' });
+                }
+                else if (brewing.HermsHeating) {
+                    res.status('500').send({ status: 500, error: 'Herms is heating' });
                 }
                 else {
                     brewing.StepExecuting = true;
