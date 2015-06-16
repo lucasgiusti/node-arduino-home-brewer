@@ -1,7 +1,7 @@
 {
-    "name": "node-restfull-crud",
-    "description": "Node RestFull CRUD",
-    "version": "0.0.1",
+    "name": "node-arduino-home-brewer",
+    "description": "Node Arduino Home Brewer",
+    "version": "1.0.0",
     "private": true,
     "dependencies": {
     "express": "4.9.5",

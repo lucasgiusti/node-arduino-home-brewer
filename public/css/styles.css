@@ -47,3 +47,19 @@ body {
     color: #999;
     border-top: solid 1px #ddd;
 }
+
+
+
+.jumbotron2 {
+  background-color:white
+  }
+
+
+.jumbotron2 font {
+    color: #797979;
+    font-size: 16px;
+    text-align: center;
+    font-weight: 300;
+    position: relative;
+    margin: 0;
+    line-height: normal; }

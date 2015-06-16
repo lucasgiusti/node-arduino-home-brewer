@@ -120,5 +120,5 @@ var application_root = __dirname,
 
 // Launch server
         http.listen(port, function () {
-            console.log('listening on *:3000');
+            console.log('Home Brewer Application listening on *:3000');
         });
