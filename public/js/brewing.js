@@ -1,4 +1,6 @@
 ﻿var version = "1.0.0";
+var footerText = "Node Arduino Home Brewer - " + version;
+var descriptionText = "Node Arduino Home Brewer\nfor Herms System\n\nVersion " + version;
 var socket = io();
 var objBrewing = null;
 var divVisible = 'div-default';
@@ -280,7 +282,7 @@ function CheckPageDisplay(pages) {
 
         if(!isMobile.any){
             $(".div-about-log").show();
-            $(".about-log").html("Node Arduino Home Brewer<br>for Herms System<br><br>Version " + version);
+            $(".about-log").html(descriptionText.split("\n").join("<br>"));
         }
     }
     else if (pages == 'brewing') {
@@ -324,58 +326,15 @@ function CheckPageDisplay(pages) {
 function startLayout() {
     $(".div-page").hide();
     $('.container').removeAttr('style');
-    $(".btn-middle").css("width", "48%");
-    $(".down").css("width", "24%");
-    $(".up").css("width", "24%");
-    $(".txt-value").css("width", "45%");
-    $(".new-brewing").css("height", "196px");
-
-    $(".btn-middle").css("margin-bottom", "5px");
-    $(".btn-middle").css("margin-left", "3px");
-    $(".btn-large").css("margin-bottom", "5px");
-    $(".btn-com-info").css("margin-right", "1px");
-    $(".down").css("float", "left");
-    $(".up").css("margin-right", "5px");
-    $(".up").css("margin-bottom", "5px");
-    $(".txt-value").css("float", "left");
-    $(".txt-value").css("margin-left", "6px");
-    $(".txt-value").css("margin-right", "6px");
-    $(".form-signin-heading").css("text-align", "center");
-    $(".temperature").css("margin-right", "20px");
-    $(".time").css("margin-right", "20px");
-    $(".about").css("margin-top", "30px");
-
-    $(".back-2-buttons").css("margin-top", "180px");
-    $(".back-3-buttons").css("margin-top", "129px");
-    $(".back-5-buttons").css("margin-top", "7px");
-    $(".log-1-button").css("margin-top", "180px");
-    $(".log-1-button-2-info").css("margin-top", "125px");
-    $(".log-2-buttons").css("margin-top", "129px");
-    $(".log-2-buttons-1-info").css("margin-top", "99px");
-    $(".log-2-buttons-2-info").css("margin-top", "74px");
-    $(".log-3-buttons").css("margin-top", "78px");
-    $(".log-3-buttons-1-info").css("margin-top", "48px");
-    $(".log-5-buttons").css("margin-top", "0px");
     $(".div-log").hide();
 
     if(!isMobile.any){
         $(".log").css("visibility", "hidden");
         $(".form-signin").css("margin-left", "0px");
-
-        $(".div-log").css("position", "absolute");
-        $(".div-log").css("top", "125px");
-        $(".div-log").css("right", "40px");
-        $(".div-log").css("padding-top", "40px");
-        $(".div-log").css("left", "450px");
-        $(".div-log").css("min-width", "200px");
-        $(".div-log").css("margin-right", "40px");
-        $(".jumbotron2").css("height", "325px");
-        $(".jumbotron2").css("max-height", "325px");
-        $(".jumbotron2").css("padding", "20px");
-        $(".jumbotron2").css("padding-top", "10px");
-
         $(".about").css("visibility", "hidden");
     }
+
+    $(".footer-text").text(footerText);
 }
 
 socket.on('updateBrewing', function (brewing) {
@@ -568,7 +527,7 @@ $(".log").click(function () {
 });
 
 $(".about").click(function(){
-swal({ title: "", text: "Node Arduino Home Brewer\nfor Herms System\n\nVersion " + version, confirmButtonColor: '#428bca' });    
+swal({ title: "", text: descriptionText, confirmButtonColor: '#428bca' });    
 });
 
 

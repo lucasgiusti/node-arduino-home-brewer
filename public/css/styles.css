@@ -51,7 +51,11 @@ body {
 
 
 .jumbotron2 {
-  background-color:white
+  background-color:white;
+  height: 325px;
+  max-height: 325px;
+  padding: 20px;
+  padding-top: 10px;
   }
 
 
@@ -63,3 +67,116 @@ body {
     position: relative;
     margin: 0;
     line-height: normal; }
+
+.div-log {
+  position: absolute;
+  top: 125px;
+  right: 40px;
+  padding-top: 40px;
+  left: 450px;
+  min-width: 300px;
+  margin-right: 40px;
+}
+
+.btn-middle{
+  width: 48%;
+  margin-bottom: 5px;
+  margin-left: 3px
+}
+
+.down{
+  width: 24%;
+  float: left;
+}
+
+.up{
+  width: 24%;
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+
+.txt-value{
+  width: 45%;
+}
+
+.new-brewing{
+  height: 196px;
+}
+
+.btn-large{
+  margin-bottom: 5px;
+}
+
+.btn-com-info{
+  margin-right: 1px;
+}
+
+.txt-value{
+  float: left;
+  margin-left: 6px;
+  margin-right: 6px;
+}
+
+.form-signin-heading{
+  text-align: center;
+}
+
+.temperature{
+  margin-right: 20px;
+}
+
+.time{
+  margin-right: 20px;
+}
+
+.about{
+  margin-top: 30px;
+}
+
+.back-2-buttons{
+  margin-top: 180px;
+}
+
+.back-3-buttons{
+  margin-top: 129px;
+}
+
+.back-5-buttons{
+  margin-top: 7px;
+}
+
+.log-1-button{
+  margin-top: 180px;
+}
+
+.log-1-button-2-info{
+  margin-top: 125px;
+}
+
+.log-2-buttons{
+  margin-top: 129px;
+}
+
+.log-2-buttons-1-info{
+  margin-top: 99px;
+}
+
+.log-2-buttons-2-info{
+  margin-top: 74px;
+}
+
+.log-3-buttons{
+  margin-top: 78px;
+}
+
+.log-3-buttons-1-info{
+  margin-top: 48px;
+}
+
+.log-5-buttons{
+  margin-top: 0px;
+}
+
+.footer-text{
+  font-size: 10px;
+}
