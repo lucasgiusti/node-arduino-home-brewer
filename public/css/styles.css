@@ -85,16 +85,16 @@ body {
 .down{
   width: 24%;
   float: left;
+  left: 5px
 }
 
 .up{
   width: 24%;
-  margin-right: 5px;
   margin-bottom: 5px;
 }
 
 .txt-value{
-  width: 45%;
+  width: 47%;
 }
 
 .new-brewing{
