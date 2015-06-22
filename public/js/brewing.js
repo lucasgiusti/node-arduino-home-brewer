@@ -10,9 +10,30 @@ var divVisible = 'div-default';
 
 
 
-function signin() {
-    window.location.assign("signin.html");
+
+
+///////////// INITIALS ////////////////////////
+function startLayout() {
+    $(".div-page").hide();
+    $('.container').removeAttr('style');
+    $(".div-log").hide();
+
+    if(!isMobile.any){
+        $(".log").css("visibility", "hidden");
+        $(".form-signin").css("margin-left", "0px");
+        $(".about").css("visibility", "hidden");
+        $(".github-image").css('visibility', 'visible');
+    }
+
+    $(".footer-text").text(footerText);
 }
+
+socket.on('updateBrewing', function (brewing) {
+    objBrewing = brewing;
+
+    var pages = divVisible.split('-')[1];
+    CheckPageDisplay(pages);
+});
 
 $.get("loggedtest", function (data) { })
         .fail(function (error, message) {
@@ -21,6 +42,325 @@ $.get("loggedtest", function (data) { })
                     signin();
                 }
         });
+
+function signin() {
+    window.location.assign("signin.html");
+}
+///////////// INITIALS ////////////////////////
+
+
+
+
+///////////// COMMANDS ////////////////////////
+$(".logout").click(function () {
+$.post("logout", function (data) { signin(); })
+        .fail(function (error, message) {
+            signin();
+        });
+});
+
+$(".new-brewing").click(function () {
+    $.post("new-brewing", function (data) { })
+        .fail(function (error) {
+            sweetAlert("", "Error\n" + $.parseJSON(error.responseText).error, "error");
+            divVisible = 'div-brewing';
+        });
+});
+
+$(".finish-brewing").click(function () {
+    swal({
+        title: "",
+        text: "Finish brewing ?",
+        type: "warning",
+        showCancelButton: true,
+        cancelButtonText: "No",
+        confirmButtonColor: '#428bca',
+        confirmButtonText: 'Yes',
+        closeOnConfirm: true
+    },
+function () {
+    $.post("finish-brewing", function (data) { })
+        .fail(function (error) {
+            sweetAlert("", "Error\n" + $.parseJSON(error.responseText).error, "error");
+            divVisible = 'div-brewing';
+        });
+});
+});
+
+$(".back").click(function () {
+    $(".div-log").hide();
+
+    var classes = $(this).parent().attr("class").split(" ");
+    var pages = classes[classes.length - 1].split("-")[1];
+    $(".div-" + pages).hide();
+
+    divVisible = 'div-brewing';
+    $(".div-brewing").show();
+
+    if(!isMobile.any){
+            $(".div-brewing-log").show();
+            $(".brewing-log").html("");
+    }
+});
+
+$(".item").click(function () {
+    var classes = $(this).attr("class").split(" ");
+    var pages = classes[classes.length - 1];
+    $(".div-brewing").hide();
+
+    CheckPageDisplay(pages);
+});
+
+$(".fill").click(function () {
+    var classes = $(this).parent().attr("class").split(" ");
+    var page = classes[classes.length - 1].split("-")[1];
+    
+    divVisible = 'div-' + page + '-filling';
+
+    $.post("fill" + page, function (data) { })
+        .fail(function (error) {
+            sweetAlert("", "Error\n" + $.parseJSON(error.responseText).error, "error");
+            divVisible = 'div-brewing';
+        });
+});
+
+$(".stop-fill").click(function () {
+    var classes = $(this).parent().attr("class").split(" ");
+    var page = classes[classes.length - 1].split("-")[1];
+    divVisible = 'div-' + page + '-full';
+    $.post("stopfill" + page, function (data) { })
+        .fail(function (error) {
+            sweetAlert("", "Error\n" + $.parseJSON(error.responseText).error, "error");
+            divVisible = 'div-brewing';
+        });
+});
+
+$(".start").click(function () {
+    var classes = $(this).parent().attr("class").split(" ");
+    $("." + classes[1]).hide();
+    $("." + classes[1] + "-heat").show();
+});
+
+$(".stop").click(function () {
+    var classes = $(this).parent().attr("class").split(" ");
+    var page = classes[classes.length - 1].split("-")[1];
+    divVisible = 'div-' + page + '-full';
+
+    $.post("stop" + page, function (data) { })
+        .fail(function (error) {
+            sweetAlert("", "Error\n" + $.parseJSON(error.responseText).error, "error");
+            divVisible = 'div-brewing';
+        });
+});
+
+$(".temperature-start").click(function () {
+    var classes = $(this).parent().attr("class").split(" ");
+    var page = classes[classes.length - 1].split("-")[1];
+    var value = parseInt($(".temperature-" + page).val());
+    
+    divVisible = 'div-' + page + '-heating';
+    
+    $.post("start" + page + "/" + value, function (data) { })
+        .fail(function (error) {
+            sweetAlert("", "Error\n" + $.parseJSON(error.responseText).error, "error");
+            divVisible = 'div-brewing';
+        });
+});
+
+$(".time-start").click(function () {
+    var classes = $(this).parent().attr("class").split(" ");
+    var page = classes[classes.length - 1].split("-")[1];
+    var value = parseInt($(".time-" + page).val());
+
+    divVisible = 'div-' + page + '-heating';
+
+    $.post("start" + page + "/" + value, function (data) { })
+        .fail(function (error) {
+            sweetAlert("", "Error\n" + $.parseJSON(error.responseText).error, "error");
+            divVisible = 'div-brewing';
+        });
+});
+
+$(".temperature-time-start").click(function () {
+    var classes = $(this).parent().attr("class").split(" ");
+    var page = classes[classes.length - 1].split("-")[1];
+    var valueTemperature = parseInt($(".temperature-" + page).val());
+    var valueTime = parseInt($(".time-" + page).val());
+
+    divVisible = 'div-' + page + '-heating';
+
+    $.post("start" + page + "/" + valueTemperature + "/" + valueTime, function (data) { })
+        .fail(function (error) {
+            sweetAlert("", "Error\n" + $.parseJSON(error.responseText).error, "error");
+            divVisible = 'div-brewing';
+        });
+});
+
+$(".log").click(function () {
+    var classes = $(this).parent().attr("class").split(" ");
+    var item = classes[1].replace("div-", "");
+
+    var text = "";
+    switch (item) {
+        case "bol":
+            text = objBrewing.BOLLog;
+            break;
+        case "step":
+            text = objBrewing.StepLog;
+            break;
+        case "hlt":
+            text = objBrewing.HLTLog;
+            break;
+        case "herms":
+            text = objBrewing.HermsLog;
+            break;
+        case "cooling":
+            text = objBrewing.CoolingLog;
+            break;
+        case "mlt":
+            text = objBrewing.MLTLog;
+            break;
+        case "sparge":
+            text = objBrewing.SpargeLog;
+            break;
+        case "whirlpool":
+            text = objBrewing.WhirlpoolLog;
+            break;
+        case "fermenter":
+            text = objBrewing.FermenterLog;
+            break;
+    }
+
+    swal({ title: "", text: text, confirmButtonColor: '#428bca' });
+});
+
+$(".about").click(function(){
+swal({ title: "", text: descriptionText, confirmButtonColor: '#428bca' });    
+});
+
+
+$(".full").click(function () {
+    var classes = $(this).parent().attr("class").split(" ");
+    var page = classes[classes.length - 1].split("-")[1];
+    divVisible = 'div-' + page + '-full';
+
+    $.post(page + "full", function (data) { })
+        .fail(function (error) {
+            sweetAlert("", "Error\n" + $.parseJSON(error.responseText).error, "error");
+            divVisible = 'div-brewing';
+        });
+});
+
+$(".up").click(function () {
+    var objValue = $(this).prev();
+    var classes = $(objValue).attr("class").split(" ");
+    var value = parseInt($(objValue).val()) + 1;
+    if (value < 0)
+        value = 0;
+
+    $("." + classes[1]).each(function (index) {
+        $(this).val(value);
+    })
+});
+
+$(".down").click(function () {
+    var objValue = $(this).next();
+    var classes = $(objValue).attr("class").split(" ");
+    var value = parseInt($(objValue).val()) - 1;
+    if (value < 0)
+        value = 0;
+
+    $("." + classes[1]).each(function (index) {
+        $(this).val(value);
+    })
+});
+
+$(".change-time").click(function () {
+    var classes = $(this).parent().attr("class").split(" ");
+    var page = classes[1];
+
+    divVisible = page + "-change-time";
+
+    $("." + page).hide();
+    $("." + page + "-change-time").show();
+});
+
+$(".change-temperature").click(function () {
+    var classes = $(this).parent().attr("class").split(" ");
+    var page = classes[1];
+
+    divVisible = page + "-change-temperature";
+
+    $("." + page).hide();
+    $("." + page + "-change-temperature").show();
+});
+///////////// COMMANDS ////////////////////////
+
+
+
+
+
+
+///////////// DISPLAY PAGES ////////////////////////
+function CheckPageDisplay(pages) {
+    if (!objBrewing) {
+        divVisible = 'div-default';
+        pages = divVisible.split('-')[1];
+    }
+    else if (objBrewing && divVisible == 'div-default') {
+        divVisible = 'div-brewing';
+        pages = divVisible.split('-')[1];
+    }
+
+    $(".div-log").hide();
+
+
+    if (pages == 'default') {
+        $(".div-page").hide();
+        $('.div-default').show();
+
+        if(!isMobile.any){
+            $(".div-about-log").show();
+            $(".about-log").html(descriptionText.split("\n").join("<br>"));
+        }
+    }
+    else if (pages == 'brewing') {
+        $('.div-default').hide();
+        $('.div-brewing').show();
+
+        if(!isMobile.any){
+            $(".div-brewing-log").show();
+            $(".brewing-log").html("");
+        }
+    }
+    else if (pages == 'hlt') {
+        DisplayPageHLT();
+    }
+    else if (pages == 'herms') {
+        DisplayPageHerms();
+    }
+    else if (pages == 'mlt') {
+        DisplayPageMLT();
+    }
+    else if (pages == 'fermenter') {
+        DisplayPageFermenter();
+    }
+    else if (pages == 'sparge') {
+        DisplayPageSparge();
+    }
+    else if (pages == 'bol') {
+        DisplayPageBOL();
+    }
+    else if (pages == 'step') {
+        DisplayPageStep();
+    }
+    else if (pages == 'cooling') {
+        DisplayPageCooling();
+    }
+    else if (pages == 'whirlpool') {
+        DisplayPageWhirlpool();
+    }
+}
 
 function DisplayPageHLT() {
     $(".div-hlt").hide();
@@ -262,327 +602,4 @@ function DisplayPageWhirlpool() {
         divVisible = 'div-whirlpool-empty';
     }
 }
-
-function CheckPageDisplay(pages) {
-    if (!objBrewing) {
-        divVisible = 'div-default';
-        pages = divVisible.split('-')[1];
-    }
-    else if (objBrewing && divVisible == 'div-default') {
-        divVisible = 'div-brewing';
-        pages = divVisible.split('-')[1];
-    }
-
-    $(".div-log").hide();
-
-
-    if (pages == 'default') {
-        $(".div-page").hide();
-        $('.div-default').show();
-
-        if(!isMobile.any){
-            $(".div-about-log").show();
-            $(".about-log").html(descriptionText.split("\n").join("<br>"));
-        }
-    }
-    else if (pages == 'brewing') {
-        $('.div-default').hide();
-        $('.div-brewing').show();
-
-        if(!isMobile.any){
-            $(".div-brewing-log").show();
-            $(".brewing-log").html("");
-        }
-    }
-    else if (pages == 'hlt') {
-        DisplayPageHLT();
-    }
-    else if (pages == 'herms') {
-        DisplayPageHerms();
-    }
-    else if (pages == 'mlt') {
-        DisplayPageMLT();
-    }
-    else if (pages == 'fermenter') {
-        DisplayPageFermenter();
-    }
-    else if (pages == 'sparge') {
-        DisplayPageSparge();
-    }
-    else if (pages == 'bol') {
-        DisplayPageBOL();
-    }
-    else if (pages == 'step') {
-        DisplayPageStep();
-    }
-    else if (pages == 'cooling') {
-        DisplayPageCooling();
-    }
-    else if (pages == 'whirlpool') {
-        DisplayPageWhirlpool();
-    }
-}
-
-function startLayout() {
-    $(".div-page").hide();
-    $('.container').removeAttr('style');
-    $(".div-log").hide();
-
-    if(!isMobile.any){
-        $(".log").css("visibility", "hidden");
-        $(".form-signin").css("margin-left", "0px");
-        $(".about").css("visibility", "hidden");
-    }
-
-    $(".footer-text").text(footerText);
-}
-
-socket.on('updateBrewing', function (brewing) {
-    objBrewing = brewing;
-
-    var pages = divVisible.split('-')[1];
-    CheckPageDisplay(pages);
-});
-
-$(".new-brewing").click(function () {
-    $.post("new-brewing", function (data) { })
-        .fail(function (error) {
-            sweetAlert("", "Error\n" + $.parseJSON(error.responseText).error, "error");
-            divVisible = 'div-brewing';
-        });
-});
-
-$(".logout").click(function () {
-$.post("logout", function (data) { signin(); })
-        .fail(function (error, message) {
-            signin();
-        });
-});
-
-$(".finish-brewing").click(function () {
-    swal({
-        title: "",
-        text: "Finish brewing ?",
-        type: "warning",
-        showCancelButton: true,
-        cancelButtonText: "No",
-        confirmButtonColor: '#428bca',
-        confirmButtonText: 'Yes',
-        closeOnConfirm: true
-    },
-function () {
-    $.post("finish-brewing", function (data) { })
-        .fail(function (error) {
-            sweetAlert("", "Error\n" + $.parseJSON(error.responseText).error, "error");
-            divVisible = 'div-brewing';
-        });
-});
-});
-
-$(".back").click(function () {
-    $(".div-log").hide();
-
-    var classes = $(this).parent().attr("class").split(" ");
-    var pages = classes[classes.length - 1].split("-")[1];
-    $(".div-" + pages).hide();
-
-    divVisible = 'div-brewing';
-    $(".div-brewing").show();
-
-    if(!isMobile.any){
-            $(".div-brewing-log").show();
-            $(".brewing-log").html("");
-    }
-});
-
-$(".item").click(function () {
-    var classes = $(this).attr("class").split(" ");
-    var pages = classes[classes.length - 1];
-    $(".div-brewing").hide();
-
-    CheckPageDisplay(pages);
-});
-
-$(".fill").click(function () {
-    var classes = $(this).parent().attr("class").split(" ");
-    var page = classes[classes.length - 1].split("-")[1];
-    
-    divVisible = 'div-' + page + '-filling';
-
-    $.post("fill" + page, function (data) { })
-        .fail(function (error) {
-            sweetAlert("", "Error\n" + $.parseJSON(error.responseText).error, "error");
-            divVisible = 'div-brewing';
-        });
-});
-
-$(".stop-fill").click(function () {
-    var classes = $(this).parent().attr("class").split(" ");
-    var page = classes[classes.length - 1].split("-")[1];
-    divVisible = 'div-' + page + '-full';
-    $.post("stopfill" + page, function (data) { })
-        .fail(function (error) {
-            sweetAlert("", "Error\n" + $.parseJSON(error.responseText).error, "error");
-            divVisible = 'div-brewing';
-        });
-});
-
-$(".start").click(function () {
-    var classes = $(this).parent().attr("class").split(" ");
-    $("." + classes[1]).hide();
-    $("." + classes[1] + "-heat").show();
-});
-
-$(".stop").click(function () {
-    var classes = $(this).parent().attr("class").split(" ");
-    var page = classes[classes.length - 1].split("-")[1];
-    divVisible = 'div-' + page + '-full';
-
-    $.post("stop" + page, function (data) { })
-        .fail(function (error) {
-            sweetAlert("", "Error\n" + $.parseJSON(error.responseText).error, "error");
-            divVisible = 'div-brewing';
-        });
-});
-
-$(".temperature-start").click(function () {
-    var classes = $(this).parent().attr("class").split(" ");
-    var page = classes[classes.length - 1].split("-")[1];
-    var value = parseInt($(".temperature-" + page).val());
-    
-    divVisible = 'div-' + page + '-heating';
-    
-    $.post("start" + page + "/" + value, function (data) { })
-        .fail(function (error) {
-            sweetAlert("", "Error\n" + $.parseJSON(error.responseText).error, "error");
-            divVisible = 'div-brewing';
-        });
-});
-
-$(".time-start").click(function () {
-    var classes = $(this).parent().attr("class").split(" ");
-    var page = classes[classes.length - 1].split("-")[1];
-    var value = parseInt($(".time-" + page).val());
-
-    divVisible = 'div-' + page + '-heating';
-
-    $.post("start" + page + "/" + value, function (data) { })
-        .fail(function (error) {
-            sweetAlert("", "Error\n" + $.parseJSON(error.responseText).error, "error");
-            divVisible = 'div-brewing';
-        });
-});
-
-$(".temperature-time-start").click(function () {
-    var classes = $(this).parent().attr("class").split(" ");
-    var page = classes[classes.length - 1].split("-")[1];
-    var valueTemperature = parseInt($(".temperature-" + page).val());
-    var valueTime = parseInt($(".time-" + page).val());
-
-    divVisible = 'div-' + page + '-heating';
-
-    $.post("start" + page + "/" + valueTemperature + "/" + valueTime, function (data) { })
-        .fail(function (error) {
-            sweetAlert("", "Error\n" + $.parseJSON(error.responseText).error, "error");
-            divVisible = 'div-brewing';
-        });
-});
-
-$(".log").click(function () {
-    var classes = $(this).parent().attr("class").split(" ");
-    var item = classes[1].replace("div-", "");
-
-    var text = "";
-    switch (item) {
-        case "bol":
-            text = objBrewing.BOLLog;
-            break;
-        case "step":
-            text = objBrewing.StepLog;
-            break;
-        case "hlt":
-            text = objBrewing.HLTLog;
-            break;
-        case "herms":
-            text = objBrewing.HermsLog;
-            break;
-        case "cooling":
-            text = objBrewing.CoolingLog;
-            break;
-        case "mlt":
-            text = objBrewing.MLTLog;
-            break;
-        case "sparge":
-            text = objBrewing.SpargeLog;
-            break;
-        case "whirlpool":
-            text = objBrewing.WhirlpoolLog;
-            break;
-        case "fermenter":
-            text = objBrewing.FermenterLog;
-            break;
-    }
-
-    swal({ title: "", text: text, confirmButtonColor: '#428bca' });
-});
-
-$(".about").click(function(){
-swal({ title: "", text: descriptionText, confirmButtonColor: '#428bca' });    
-});
-
-
-$(".full").click(function () {
-    var classes = $(this).parent().attr("class").split(" ");
-    var page = classes[classes.length - 1].split("-")[1];
-    divVisible = 'div-' + page + '-full';
-
-    $.post(page + "full", function (data) { })
-        .fail(function (error) {
-            sweetAlert("", "Error\n" + $.parseJSON(error.responseText).error, "error");
-            divVisible = 'div-brewing';
-        });
-});
-
-$(".up").click(function () {
-    var objValue = $(this).prev();
-    var classes = $(objValue).attr("class").split(" ");
-    var value = parseInt($(objValue).val()) + 1;
-    if (value < 0)
-        value = 0;
-
-    $("." + classes[1]).each(function (index) {
-        $(this).val(value);
-    })
-});
-
-$(".down").click(function () {
-    var objValue = $(this).next();
-    var classes = $(objValue).attr("class").split(" ");
-    var value = parseInt($(objValue).val()) - 1;
-    if (value < 0)
-        value = 0;
-
-    $("." + classes[1]).each(function (index) {
-        $(this).val(value);
-    })
-});
-
-$(".change-time").click(function () {
-    var classes = $(this).parent().attr("class").split(" ");
-    var page = classes[1];
-
-    divVisible = page + "-change-time";
-
-    $("." + page).hide();
-    $("." + page + "-change-time").show();
-});
-
-$(".change-temperature").click(function () {
-    var classes = $(this).parent().attr("class").split(" ");
-    var page = classes[1];
-
-    divVisible = page + "-change-temperature";
-
-    $("." + page).hide();
-    $("." + page + "-change-temperature").show();
-});
+///////////// DISPLAY PAGES ////////////////////////
