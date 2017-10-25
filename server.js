@@ -21,8 +21,9 @@ var application_root = __dirname,
 
     accountRoute = require("./routes/account"),
     userRoute = require("./routes/user"),
-    utilRoute = require("./routes/util");
-    brewingRoute = require("./routes/brewing");
+    utilRoute = require("./routes/util"),
+    brewingRoute = require("./routes/brewing"),
+    config = require('./config');
 
 // Config
         app.set('port', process.env.PORT || 3000);
@@ -55,13 +56,9 @@ var application_root = __dirname,
 
 
         //************************************************************
-        var connectionString = require('./models/conn');
-        mongoose.connect(connectionString);
+        mongoose.connect(config.connectionString);
 
         accountRoute.CreateAdmUser();
-
-
-
 
         //************************************************************
         // ACCOUNT
